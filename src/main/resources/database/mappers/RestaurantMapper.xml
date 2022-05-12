@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.mango.restaurant.RestaurantMapper">
+
+	<select id="getList" parameterType="RestaurantVO" resultType="RestaurantVO">
+		SELECT * FROM RESTAURANT WHERE ID=#{id}
+	</select>
+
+	<select id="getDetail" parameterType="RestaurantVO" resultType="RestaurantVO">
+		SELECT * FROM RESTAURANT WHERE RESTAURANTNUM=#{restaurantNum}
+	</select>
+
+
+</mapper>
