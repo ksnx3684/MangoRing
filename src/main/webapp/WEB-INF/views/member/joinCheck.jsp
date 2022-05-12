@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>hi!</h1>
-	<h3>${member.id} 님 환영합니다</h3>
+	<h1>joinCheck Page</h1>
 </body>
 </html>

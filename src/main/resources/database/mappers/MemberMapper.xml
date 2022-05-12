@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.mango.member.MemberMapper">
+	
+	<!-- 로그인 -->
+	<select id="getLogin" parameterType="MemberVO" resultType="MemberVO">
+		SELECT ID, PW FROM MEMBER WHERE ID = #{id} AND PW = #{pw}
+	</select>
+	
+	<!-- 회원 가입 -->
+	<insert id="setAddMember" parameterType="MemberVO">
+		INSERT INTO MEMBER (ID, PW, NAME, EMAIL, PHONE, GENDER, JOINDATE, USERTYPE, BUSINESSNUM, POSTCODE, ADDRESS, DETAILADDRESS, EXTRAADDRESS, BLACKLIST)
+		VALUES(#{id}, #{pw}, #{name}, #{email}, #{phone}, #{gender}, NOW(), #{userType}, #{businessNum}, 
+		#{postCode}, #{address}, #{detailAddress}, #{extraAddress}, #{blackList})
+	</insert>
+	
+</mapper>
