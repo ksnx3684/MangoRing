@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>login</title>
+<title>약관동의</title>
 <c:import url="../template/bootstrap_css.jsp"></c:import>
 <link rel="stylesheet" type="text/css" href="/css/login.css">
 
@@ -59,5 +59,9 @@
 	
 <c:import url="../template/cdn_script.jsp"></c:import>
 </body>
-
+<script type="text/javascript">
+	$('#joinCheck').click(function(){
+		location.href="./joinCheck";
+	});
+</script>
 </html>

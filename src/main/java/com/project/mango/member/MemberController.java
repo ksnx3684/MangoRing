@@ -38,5 +38,11 @@ public class MemberController {
 		return viewPath;
 	}
 	
+	// 약관동의 GET 방식
+	@GetMapping("joinCheck")
+	public String setJoinCheck() throws Exception {
+		
+		return "member/joinCheck";
+	}
 
 }
