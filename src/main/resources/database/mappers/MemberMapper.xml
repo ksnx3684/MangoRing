@@ -11,9 +11,8 @@
 	
 	<!-- 회원 가입 -->
 	<insert id="setAddMember" parameterType="MemberVO">
-		INSERT INTO MEMBER (ID, PW, NAME, EMAIL, PHONE, GENDER, JOINDATE, USERTYPE, BUSINESSNUM, POSTCODE, ADDRESS, DETAILADDRESS, EXTRAADDRESS, BLACKLIST)
-		VALUES(#{id}, #{pw}, #{name}, #{email}, #{phone}, #{gender}, NOW(), #{userType}, #{businessNum}, 
-		#{postCode}, #{address}, #{detailAddress}, #{extraAddress}, #{blackList})
+		INSERT INTO MEMBER (ID, PW, NAME, EMAIL, PHONE, GENDER, JOINDATE, USERTYPE, BLACKLIST)
+		VALUES(#{id}, #{pw}, #{name}, #{email}, #{phone}, #{gender}, NOW(), 1, 0)
 	</insert>
 	
 </mapper>
