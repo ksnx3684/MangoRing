@@ -1,0 +1,33 @@
+
+
+#reviewpicBox{
+	
+ width:1500px;
+ height:500px;
+ color: red;
+ border: solid 2px black;
+ margin: 10px auto 70px auto;
+ display:inline-flex;
+ justify-content: space-between;
+}
+
+.reviewpicTitle{
+	width: 1500px;
+	
+	height: 50px;
+	margin: 70px 0 20px 70px;
+	
+}
+
+.picsBox{
+	width: 350px;
+	height: 350px;
+	border: solid black 2px;
+	border-radius: 20px;
+	display: inline-flex;
+	margin: 80px auto 15px auto;
+}
+
+#btnReview{
+	margin: 50px 700px 0 742px;
+}
