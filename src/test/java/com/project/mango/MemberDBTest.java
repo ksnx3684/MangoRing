@@ -31,7 +31,7 @@ class MemberDBTest {
 	}
 	
 	// 로그인 테스트
-	@Test
+//	@Test
 	void getLogin() throws Exception {
 		MemberVO memberVO = new MemberVO();
 		memberVO.getId();
@@ -40,26 +40,21 @@ class MemberDBTest {
 	}
 	
 	// 회원가입 테스트
+	// 회원가입할 때 1(일반유저), 블랙시스트도 0(정상)으로 초기화
 //	@Test
 	void addTest() throws Exception {
 		MemberVO memberVO = new MemberVO();
 		Calendar cal = new GregorianCalendar();
 		Date date = new Date(cal.getTimeInMillis());
-		memberVO.setId("id1");
-		memberVO.setPw("id1");
-		memberVO.setName("아이디1");
-		memberVO.setEmail("id1@gmail.com");
-		memberVO.setPhone("010-1234-5678");
-		memberVO.setGender(0L);
+		memberVO.setId("id2");
+		memberVO.setPw("id2");
+		memberVO.setName("아이디2");
+		memberVO.setEmail("id2@gmail.com");
+		memberVO.setPhone("010-9012-3456");
+		memberVO.setGender(1L);
 		memberVO.setJoinDate(date);
 		memberVO.setUserType(1L);
-		memberVO.setBusinessNum("1234");
-		memberVO.setPostCode("123-45");
-		memberVO.setAddress("서울특별시 마포구 서교동");
-		memberVO.setDetailAddress("447-5 풍성빌딩");
-		memberVO.setExtraAddress("2,3,4층");
-		memberVO.setBlackList(0L);
-		
+	
 		int result = memberMapper.setAddMember(memberVO);
 		
 		assertEquals(1, result);
