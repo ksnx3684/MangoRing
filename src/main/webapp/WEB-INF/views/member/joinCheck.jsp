@@ -46,7 +46,7 @@
 		<div class="form-check mt-5">
 		  <input class="form-check-input normal" type="checkbox" value="" id="check_3">
 		  <label class="form-check-label" for="flexCheckDefault">
-		    서비스 이용약관 동의 (필수)
+		    위치정보 이용약관 (필수)
 		  </label>
 		</div>
 		<div class="mt-3 mb-3">
@@ -61,6 +61,6 @@
 	</div>
 	
 <c:import url="../template/cdn_script.jsp"></c:import>
-<script type="text/javascript" src="../js/check.js"></script>
+<script type="text/javascript" src="../resources/js/check.js"></script>
 </body>
 </html>

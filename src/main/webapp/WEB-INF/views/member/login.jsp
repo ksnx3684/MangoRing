@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>약관동의</title>
 <c:import url="../template/bootstrap_css.jsp"></c:import>
-<link rel="stylesheet" type="text/css" href="/css/login.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/login.css">
 
     <style>
       .bd-placeholder-img {
@@ -58,10 +58,6 @@
 
 	
 <c:import url="../template/cdn_script.jsp"></c:import>
+<script type="text/javascript" src="../resources/js/login.js"></script>
 </body>
-<script type="text/javascript">
-	$('#joinCheck').click(function(){
-		location.href="./joinCheck";
-	});
-</script>
 </html>
