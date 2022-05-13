@@ -44,5 +44,12 @@ public class MemberController {
 		
 		return "member/joinCheck";
 	}
+	
+	// 회원가입 GET 방식
+	@GetMapping("join")
+	public String setJoin() throws Exception {
+		
+		return "member/join";
+	}
 
 }

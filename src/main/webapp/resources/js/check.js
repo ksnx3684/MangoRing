@@ -28,6 +28,6 @@ $("#join").click(function() {
 		return;
 	}
 	else {
-
+		location.href="./join";
 	}
 });
