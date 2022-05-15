@@ -15,11 +15,15 @@ public class SearchService {
 	@Autowired
 	private SearchMapper searchMapper;
 	
-	public List<RestaurantVO> search(RestaurantVO restaurantVO) throws Exception {
-		return searchMapper.search(restaurantVO);
+	public List<RestaurantVO> search(SearchVO searchVO) throws Exception {
+		return searchMapper.search(searchVO);
 	}
 	
 	public List<RestaurantVO> detailSearch(SearchVO searchVO) throws Exception{
 		return searchMapper.detailSearch(searchVO);
+	}
+	
+	public List<HashtagVO> hashtagList() throws Exception{
+		return searchMapper.hashtagList();
 	}
 }

@@ -10,8 +10,11 @@ import com.project.mango.restaurant.RestaurantVO;
 public interface SearchMapper {
 
 	// search
-	public List<RestaurantVO> search(RestaurantVO restaurantVO) throws Exception;
+	public List<RestaurantVO> search(SearchVO searchVO) throws Exception;
 	
 	// detailSearch
-	public List<RestaurantVO> detailSearch(SearchVO searchVO) throws Exception; 
+	public List<RestaurantVO> detailSearch(SearchVO searchVO) throws Exception;
+	
+	// hashtagList
+	public List<HashtagVO> hashtagList() throws Exception;
 }

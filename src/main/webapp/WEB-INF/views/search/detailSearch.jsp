@@ -20,8 +20,13 @@
  		</select>
  		노키즈존<input type="checkbox" name="kidCheck" value="1">
  		주차가능여부<input type="checkbox" name="parkingCheck" value="1">
+ 		<div>
+ 			<h1>해시태그</h1>
+ 			<c:forEach items="${list}" var="li">
+ 				<input type="checkbox" name="hashtag" value="${li.tagNum}">${li.name}
+ 			</c:forEach>
+ 		</div>
 		<button>검색</button>
 	</form>
-	
 </body>
 </html>

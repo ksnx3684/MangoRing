@@ -12,6 +12,5 @@
 		<h1>가게 이름 : ${v.restaurantName}</h1>
 		<h1>평점 : ${v.reviewVOs[0].star}</h1>
 	</c:forEach>
-
 </body>
 </html>

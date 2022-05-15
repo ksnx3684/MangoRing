@@ -37,18 +37,22 @@
 		</collection>
 	</resultMap>
 	
-	<select id="search" parameterType="RestaurantVO" resultMap="RestaurantVO">
-		SELECT R.*, RF.*  FROM RESTAURANT R
-			LEFT JOIN MENU M
-			ON R.RESTAURANTNUM = M.RESTAURANTNUM
+	<select id="search" parameterType="SearchVO" resultMap="RestaurantVO">
+		SELECT R.*, RF.*, M.NAME AS NAME, AVG(RV.STAR) AS STAR FROM RESTAURANT R
 			LEFT JOIN REST_FILE RF
 			ON R.RESTAURANTNUM = RF.RESTAURANTNUM
-			WHERE R.RESTAURANTNAME = #{restaurantName}
-			OR R.ADDRESS LIKE CONCAT('%',#{address},'%')
+			LEFT JOIN MENU M
+			ON R.RESTAURANTNUM = M.RESTAURANTNUM
+			LEFT JOIN REVIEW RV
+			ON R.RESTAURANTNUM = RV.RESTAURANTNUM
+			GROUP BY R.RESTAURANTNAME
+			HAVING R.RESTAURANTNAME LIKE CONCAT('%',#{name},'%')
+			OR R.ADDRESS LIKE CONCAT('%',#{name},'%')
+			OR R.DETAILADDRESS LIKE CONCAT('%',#{name},'%')
 			OR M.NAME LIKE CONCAT('%',#{name},'%')
 	</select>
 	<select id="detailSearch" parameterType="SearchVO" resultMap="RestaurantVO">
-		SELECT R.*, RF.*, M.NAME AS NAME, AVG(RV.STAR) AS STAR FROM RESTAURANT R
+		SELECT R.*, RF.*, M.NAME AS NAME, AVG(RV.STAR) AS STAR, RT.TAGNUM FROM RESTAURANT R
 			LEFT JOIN REST_FILE RF
 			ON R.RESTAURANTNUM = RF.RESTAURANTNUM
 			LEFT JOIN MENU M
@@ -58,7 +62,8 @@
 			LEFT JOIN REST_TAG RT
 			ON R.RESTAURANTNUM = RT.RESTAURANTNUM
 			GROUP BY R.RESTAURANTNAME
-			HAVING R.ADDRESS LIKE CONCAT('%',#{address},'%')
+			HAVING (R.ADDRESS LIKE CONCAT('%',#{address},'%')
+			OR R.DETAILADDRESS LIKE CONCAT('%',#{detailAddress},'%'))
 			<if test="name != null">
 				AND NAME LIKE CONCAT('%',#{name},'%')
 			</if>
@@ -72,6 +77,8 @@
 				AND R.PARKINGCHECK = 1
 			</if>
 	</select>
-	
+	<select id="hashtagList" resultType="HashtagVO">
+		SELECT * FROM HASHTAG
+	</select>
 
 </mapper>
