@@ -41,6 +41,14 @@ public class MemberController {
 		return viewPath;
 	}
 	
+	// 로그아웃
+	@GetMapping("logout")
+	public String logout(HttpSession session) throws Exception {
+		session.invalidate();
+		
+		return "redirect:/";
+	}
+	
 	// 약관동의 GET 방식
 	@GetMapping("joinCheck")
 	public String setJoinCheck() throws Exception {

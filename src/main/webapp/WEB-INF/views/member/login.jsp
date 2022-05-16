@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>로그인</title>
 <c:import url="../template/bootstrap_css.jsp"></c:import>
+
 <link rel="stylesheet" type="text/css" href="../resources/css/login.css">
 
     <style>
@@ -34,7 +35,7 @@
   <!-- <form action="./login" method="POST"> -->
   	<form:form modelAttribute="memberVO" method="POST">
     <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
-    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+    <h1 class="h3 mb-3 fw-normal">로그인</h1>
 
     <div class="form-floating mb-1">
       <input type="text" class="form-control" id="floatingInput" name="id">
