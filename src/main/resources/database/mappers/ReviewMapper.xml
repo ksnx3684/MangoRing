@@ -3,11 +3,19 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.mango.review.ReviewMapper">
-	<insert id="setAdd" parameterType="ReviewVO">
+	
+	<insert id="setFileAdd" parameterType="ReviewFilesVO">
+		INSERT INTO REVIEW_FILE(FILENUM,REVIEWNUM,FILENAME,ORINAME)
+		VALUES(NULL,#{reviewNum},#{fileName},#{oriName})
+	</insert>
+
+
+
+	<insert id="setAdd" parameterType="ReviewVO" useGeneratedKeys="true" keyProperty="reviewNum">
 
 		INSERT INTO REVIEW
 		(REVIEWNUM,ID,RESTAURANTNUM,RESERVATIONNUM,STAR,REGDATE,REPORTCHECK,CONTENTS)
-		VALUES(NULL,'noID',1,1,#{star},NOW(),0,#{contents})
+		VALUES(#{reviewNum},'noID',1,1,#{star},NOW(),0,#{contents})
 		
 	</insert>
 

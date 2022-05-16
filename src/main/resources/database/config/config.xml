@@ -10,6 +10,8 @@
   
   <typeAlias type="com.project.mango.review.ReviewVO" alias="ReviewVO"/>
   
+   <typeAlias type="com.project.mango.review.ReviewFilesVO" alias="ReviewFilesVO"/>
+  
   </typeAliases>
   	
   </configuration>

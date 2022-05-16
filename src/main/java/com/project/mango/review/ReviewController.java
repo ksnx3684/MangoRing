@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -23,9 +24,9 @@ public class ReviewController {
 	}
 	
 	@PostMapping("add")
-	public ModelAndView setAdd(ReviewVO reviewVO,ModelAndView mv)throws Exception{
+	public ModelAndView setAdd(ReviewVO reviewVO,MultipartFile[] files,ModelAndView mv)throws Exception{
 		
-		int result = reviewService.setAdd(reviewVO);
+		int result = reviewService.setAdd(reviewVO,files);
 		
 		
 		mv.addObject("result",result);
