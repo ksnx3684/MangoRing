@@ -1,11 +1,14 @@
 package com.project.mango.member;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -18,15 +21,15 @@ public class MemberController {
 	
 	// 로그인 GET 방식
 	@GetMapping("login")
-	public String setAddMember(MemberVO memberVO) throws Exception {
+	public String setAddMember(Model model, @ModelAttribute MemberVO memberVO) throws Exception {
 		
 		return "member/login";
 	}
 	
 	// 로그인 POST 방식
 	@PostMapping("login")
-	public String setAddMember(HttpSession session, MemberVO memberVO) throws Exception {
-		
+	public String setAddMember(HttpSession session, @Valid MemberVO memberVO, BindingResult bindingResult) throws Exception {
+			
 		memberVO = memberService.getLogin(memberVO);
 		String viewPath = "member/login";
 		
@@ -47,9 +50,22 @@ public class MemberController {
 	
 	// 회원가입 GET 방식
 	@GetMapping("join")
-	public String setJoin() throws Exception {
+	public String setJoin(@ModelAttribute MemberVO memberVO) throws Exception {
 		
 		return "member/join";
 	}
-
+	
+	// 회원가입 POST 방식
+	@PostMapping("join")
+	public String setJoin(Model model, @Valid MemberVO memberVO, BindingResult bindingResult) throws Exception {
+		
+		if(memberService.memberError(memberVO, bindingResult)) {
+			return "member/join";
+		}
+		
+		int result = memberService.setAddMember(memberVO);
+		model.addAttribute("vo", memberVO);
+		
+		return "redirect:/";
+	}
 }

@@ -56,7 +56,7 @@
 		</div>
 		
 		<div class="d-grid gap-2 col-6 mx-auto mt-3 mb-3">
-		  <button id="join" class="btn btn-primary" type="button">회원가입</button>
+		  <button id="join" class="btn btn-primary" type="button">확인</button>
 		</div>
 	</div>
 	

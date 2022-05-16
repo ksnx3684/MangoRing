@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>약관동의</title>
+<title>로그인</title>
 <c:import url="../template/bootstrap_css.jsp"></c:import>
 <link rel="stylesheet" type="text/css" href="../resources/css/login.css">
 
@@ -30,20 +31,33 @@
 <body class="text-center">
     
 <main class="form-signin">
-  <form action="./login" method="POST">
+  <!-- <form action="./login" method="POST"> -->
+  	<form:form modelAttribute="memberVO" method="POST">
     <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
     <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
     <div class="form-floating mb-1">
       <input type="text" class="form-control" id="floatingInput" name="id">
+      <!-- <form:input path="id" id="floatingInput" cssClass="form-control"/> -->
       <label for="floatingInput">ID</label>
+<!--
+      	<div>
+      		<form:errors path="id"></form:errors>
+      	</div>
+-->
     </div>
     <div class="form-floating">
       <input type="password" class="form-control" id="floatingPassword" name="pw">
+	  <!-- <form:password path="pw" cssClass="form-control" id="floatingPassword"/> -->
       <label for="floatingPassword">Password</label>
+<!-- 
+      	<div>
+      		<form:errors path="pw"></form:errors>
+      	</div>
+ -->
     </div>
 
-    <div class="checkbox mb-3">
+    <div class="checkbox mt-2 mb-3">
       <label>
         <input type="checkbox" value="remember-me"> Remember me
       </label>
@@ -53,7 +67,8 @@
 	  <button id="joinCheck" class="btn btn-success" type="button">회원가입</button>
 	</div>
     <p class="mt-3 mb-3 text-muted">&copy; Mango</p>
-  </form>
+  <!-- </form> -->
+  	</form:form>
 </main>
 
 	

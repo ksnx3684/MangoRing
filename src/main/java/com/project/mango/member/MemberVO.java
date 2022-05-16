@@ -2,6 +2,9 @@ package com.project.mango.member;
 
 import java.sql.Date;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,16 +13,24 @@ import lombok.Setter;
 public class MemberVO {
 
 	// 아이디
+	@NotBlank(message = "아이디를 입력해 주세요")
 	private String id;
 	// 비밀번호
+	@NotBlank(message = "비밀번호를 입력해 주세요")
 	private String pw;
+	// 비밀번호 체크
+	private String checkPw;
 	// 이름
+	@NotBlank(message = "이름을 입력하세요")
 	private String name;
 	// 이메일
+	@NotBlank(message = "이메일을 입력하세요")
 	private String email;
 	// 전화번호
+	@NotBlank(message = "번호를 입력하세요")
 	private String phone;
 	// 성별
+	@NotNull(message = "성별을 선택하세요")
 	private Long gender;
 	// 가입일자
 	private Date joinDate;
