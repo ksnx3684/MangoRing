@@ -8,6 +8,7 @@
 <title>상세검색</title>
 </head>
 <body>
+	<c:import url="../template/header.jsp"></c:import>
 	<form action="./detailSearchResult" method="get">
 		지역<input type="text" name="city" value="">
 		메뉴<input type="text" name="menu">

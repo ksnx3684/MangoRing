@@ -8,7 +8,7 @@
 <title>망고플레이트</title>
 </head>
 <body>
-	<c:import url="./search/search.jsp"></c:import>
+	<c:import url="./template/header.jsp"></c:import>
 	<h1>hi!</h1>
 </body>
 </html>

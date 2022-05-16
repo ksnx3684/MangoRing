@@ -45,14 +45,14 @@
 			ON R.RESTAURANTNUM = M.RESTAURANTNUM
 			LEFT JOIN REVIEW RV
 			ON R.RESTAURANTNUM = RV.RESTAURANTNUM
-			GROUP BY R.RESTAURANTNAME
-			HAVING R.RESTAURANTNAME LIKE CONCAT('%',#{name},'%')
+		WHERE R.RESTAURANTNAME LIKE CONCAT('%',#{name},'%')
 			OR R.ADDRESS LIKE CONCAT('%',#{name},'%')
 			OR R.DETAILADDRESS LIKE CONCAT('%',#{name},'%')
 			OR M.NAME LIKE CONCAT('%',#{name},'%')
+		GROUP BY R.RESTAURANTNAME;
 	</select>
 	<select id="detailSearch" parameterType="SearchVO" resultMap="RestaurantVO">
-		SELECT R.*, RF.*, M.NAME AS NAME, AVG(RV.STAR) AS STAR, RT.TAGNUM FROM RESTAURANT R
+		SELECT R.*, RF.*, M.NAME AS NAME, AVG(RV.STAR) AS STAR FROM RESTAURANT R
 			LEFT JOIN REST_FILE RF
 			ON R.RESTAURANTNUM = RF.RESTAURANTNUM
 			LEFT JOIN MENU M
@@ -61,14 +61,10 @@
 			ON R.RESTAURANTNUM = RV.RESTAURANTNUM
 			LEFT JOIN REST_TAG RT
 			ON R.RESTAURANTNUM = RT.RESTAURANTNUM
-			GROUP BY R.RESTAURANTNAME
-			HAVING (R.ADDRESS LIKE CONCAT('%',#{address},'%')
+		WHERE (R.ADDRESS LIKE CONCAT('%',#{address},'%')
 			OR R.DETAILADDRESS LIKE CONCAT('%',#{detailAddress},'%'))
 			<if test="name != null">
 				AND NAME LIKE CONCAT('%',#{name},'%')
-			</if>
-			<if test="star != 0.0">
-				AND AVG(RV.STAR) >= #{star}
 			</if>
 			<if test="kidCheck == 1">
 				AND R.KIDCHECK = 1
@@ -76,7 +72,12 @@
 			<if test="parkingCheck == 1">
 				AND R.PARKINGCHECK = 1
 			</if>
+		GROUP BY R.RESTAURANTNAME
+		<if test="star != 0.0">
+			HAVING AVG(RV.STAR) >= #{star}
+		</if>
 	</select>
+	
 	<select id="hashtagList" resultType="HashtagVO">
 		SELECT * FROM HASHTAG
 	</select>
