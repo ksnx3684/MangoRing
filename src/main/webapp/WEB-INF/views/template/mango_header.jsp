@@ -29,7 +29,7 @@
           <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
           	<c:choose>
           		<c:when test="${not empty member}">
-          			<li><a class="dropdown-item" href="myPage">My Page</a></li>
+          			<li><a class="dropdown-item" href="/member/myPage">My Page</a></li>
 		            <li><hr class="dropdown-divider"></li>
           			<li><a class="dropdown-item" href="/member/logout">로그아웃</a></li>
           		</c:when>

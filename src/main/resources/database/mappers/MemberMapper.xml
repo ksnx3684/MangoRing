@@ -20,4 +20,11 @@
 		VALUES(#{id}, #{pw}, #{name}, #{email}, #{phone}, #{gender}, NOW(), 1, 0)
 	</insert>
 	
+	<!-- 마이페이지 -->
+	<select id="getMyPage" parameterType="MemberVO" resultType="MemberVO">
+		SELECT NAME, EMAIL, PHONE, GENDER, JOINDATE, USERTYPE, BUSINESSNUM,
+		POSTCODE, ADDRESS, DETAILADDRESS, EXTRAADDRESS, BLACKLIST
+		FROM MEMBER WHERE ID = #{id}
+	</select>
+	
 </mapper>

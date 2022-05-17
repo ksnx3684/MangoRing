@@ -41,6 +41,17 @@ public class MemberController {
 		return viewPath;
 	}
 	
+	// 마이페이지
+	@GetMapping("myPage")
+	public String myPage(HttpSession session, Model model) throws Exception {
+		
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		memberVO = memberService.getMyPage(memberVO);
+		model.addAttribute("vo", memberVO);
+		
+		return "member/myPage";
+	}
+	
 	// 로그아웃
 	@GetMapping("logout")
 	public String logout(HttpSession session) throws Exception {

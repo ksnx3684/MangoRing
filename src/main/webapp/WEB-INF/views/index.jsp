@@ -11,7 +11,6 @@
 </head>
 <body>
 	<h1>hi!</h1>
-	<h3>${member.id} 님 환영합니다</h3>
 	
 <c:import url="./template/cdn_script.jsp"></c:import>
 </body>

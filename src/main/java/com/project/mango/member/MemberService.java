@@ -47,4 +47,8 @@ public class MemberService {
 		
 		return check;
 	}
+	
+	public MemberVO getMyPage(MemberVO memberVO) throws Exception {
+		return memberMapper.getMyPage(memberVO);
+	}
 }
