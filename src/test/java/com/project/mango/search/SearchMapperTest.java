@@ -36,4 +36,11 @@ class SearchMapperTest {
 		assertNotNull(list);
 	}
 	
+	@Test
+	void hashtagList() throws Exception{
+		List<HashtagVO> list = searchMapper.hashtagList();
+		
+		assertNotNull(list);
+	}
+	
 }
