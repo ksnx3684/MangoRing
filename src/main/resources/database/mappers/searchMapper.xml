@@ -45,14 +45,24 @@
 			ON R.RESTAURANTNUM = M.RESTAURANTNUM
 			LEFT JOIN REVIEW RV
 			ON R.RESTAURANTNUM = RV.RESTAURANTNUM
-		WHERE R.RESTAURANTNAME LIKE CONCAT('%',#{name},'%')
-			OR R.ADDRESS LIKE CONCAT('%',#{name},'%')
-			OR R.DETAILADDRESS LIKE CONCAT('%',#{name},'%')
-			OR M.NAME LIKE CONCAT('%',#{name},'%')
+			<choose>
+				<when test="address != '전국'"> <!-- 지역을 선택한 경우 -->
+					WHERE R.ADDRESS LIKE CONCAT('%',#{address},'%')
+						AND (R.RESTAURANTNAME LIKE CONCAT('%',#{name},'%')
+						OR R.DETAILADDRESS LIKE CONCAT('%',#{name},'%')
+						OR M.NAME LIKE CONCAT('%',#{name},'%'))
+				</when>
+				<otherwise> <!-- 전국인 경우 -->
+					WHERE R.RESTAURANTNAME LIKE CONCAT('%',#{name},'%')
+						OR R.ADDRESS LIKE CONCAT('%',#{name},'%')
+						OR R.DETAILADDRESS LIKE CONCAT('%',#{name},'%')
+						OR M.NAME LIKE CONCAT('%',#{name},'%')
+				</otherwise>
+			</choose>
 		GROUP BY R.RESTAURANTNAME;
 	</select>
 	<select id="detailSearch" parameterType="SearchVO" resultMap="RestaurantVO">
-		SELECT R.*, RF.*, M.NAME AS NAME, AVG(RV.STAR) AS STAR FROM RESTAURANT R
+		SELECT R.*, RF.*, M.NAME AS NAME, AVG(RV.STAR) AS STAR, COUNT(DISTINCT(RV.REVIEWNUM)) AS REVIEW FROM RESTAURANT R
 			LEFT JOIN REST_FILE RF
 			ON R.RESTAURANTNUM = RF.RESTAURANTNUM
 			LEFT JOIN MENU M
@@ -72,10 +82,24 @@
 			<if test="parkingCheck == 1">
 				AND R.PARKINGCHECK = 1
 			</if>
+			<if test="tagNum != null">
+				AND TAGNUM IN
+				<foreach collection="tagNum" item="tagNum" open="(" close=")" separator=",">
+					#{tagNum}
+				</foreach>
+			</if>
 		GROUP BY R.RESTAURANTNAME
-		<if test="star != 0.0">
+		<choose>
+			<when test="star == 0">
+				ORDER BY AVG(RV.STAR) DESC
+			</when>
+			<otherwise>
+				ORDER BY REVIEW DESC
+			</otherwise>
+		</choose>
+		<!-- <if test="star != 0.0">
 			HAVING AVG(RV.STAR) >= #{star}
-		</if>
+		</if> -->
 	</select>
 	
 	<select id="hashtagList" resultType="HashtagVO">

@@ -42,13 +42,13 @@ public class SearchController {
 	// detailSearch 기능
 	@GetMapping("detailSearchResult")
 	public String detailSearch(Model model, SearchVO searchVO, String city, String menu,
-			@RequestParam(value="hashtag", required = false) Long[] tagnum) throws Exception{
+			@RequestParam(value="hashtag", required = false) Long[] hashtag) throws Exception{
 		String cities = city;
 		searchVO.setAddress(cities);
 		searchVO.setDetailAddress(cities);
 		searchVO.setName(menu);
 
-		searchVO.setTagNum(tagnum);
+		searchVO.setTagNum(hashtag);
 		
 		
 		List<RestaurantVO> list = searchService.detailSearch(searchVO);

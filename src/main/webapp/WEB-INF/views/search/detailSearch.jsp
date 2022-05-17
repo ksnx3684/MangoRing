@@ -9,25 +9,36 @@
 </head>
 <body>
 	<c:import url="../template/header.jsp"></c:import>
-	<form action="./detailSearchResult" method="get">
-		지역<input type="text" name="city" value="">
-		메뉴<input type="text" name="menu">
- 		평점<select name="star">
- 			<option value="0">선택</option>
- 			<option value="1">1점 이상</option>
- 			<option value="2">2점 이상</option>
- 			<option value="3">3점 이상</option>
- 			<option value="4">4점 이상</option>
- 		</select>
- 		노키즈존<input type="checkbox" name="kidCheck" value="1">
- 		주차가능여부<input type="checkbox" name="parkingCheck" value="1">
- 		<div>
- 			<h1>해시태그</h1>
- 			<c:forEach items="${list}" var="li">
- 				<input type="checkbox" name="hashtag" value="${li.tagNum}">${li.name}
- 			</c:forEach>
- 		</div>
-		<button>검색</button>
-	</form>
+	<div class="container">
+		<h1>조건에 맞는</h1>
+		<h1>맞춤 맛집을 찾아드려요!</h1>
+		<form action="./detailSearchResult" method="get">
+			<div>
+				<input type="text" name="city" value="" placeholder="지역">
+			</div>
+			<div>
+				<input type="text" name="menu" placeholder="메뉴">
+			</div>
+			<div>
+				<select name="star">
+		 			<option value="0">평점 순</option>
+		 			<option value="1">리뷰 순</option>
+	 			</select>
+			</div>
+	 		<div>
+				<input type="checkbox" name="kidCheck" value="1"> 노키즈존
+	 			<input type="checkbox" name="parkingCheck" value="1"> 주차가능여부
+			</div>
+	 		<div>
+	 			<h3>해시태그</h3>
+	 			<c:forEach items="${list}" var="li">
+		 			<label>
+		 				<input type="checkbox" name="hashtag" value="${li.tagNum}"> ${li.name}
+		 			</label>
+	 			</c:forEach>
+	 		</div>
+			<button>검색</button>
+		</form>
+	</div>
 </body>
 </html>
