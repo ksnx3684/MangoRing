@@ -60,5 +60,20 @@ class MemberDBTest {
 		assertEquals(1, result);
 		
 	}
+	
+	// 업데이트 테스트
+	@Test
+	void updateTest() throws Exception {
+		MemberVO memberVO = new MemberVO();
+		memberVO.setId("id1");
+		memberVO.setName("아이디2");
+		memberVO.setEmail("id2@gmail.com");
+		memberVO.setPhone("010-9012-3456");
+		memberVO.setAddress("테스트 주소");
+		
+		int result = memberMapper.setUpdate(memberVO);
+		
+		assertEquals(1, result);
+	}
 
 }
