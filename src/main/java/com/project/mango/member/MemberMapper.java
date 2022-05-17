@@ -8,6 +8,9 @@ public interface MemberMapper {
 	// 회원가입
 	public int setAddMember(MemberVO memberVO) throws Exception;
 	
+	// 회원정보수정
+	public int setUpdate(MemberVO memberVO) throws Exception;
+
 	// 로그인
 	public MemberVO getLogin(MemberVO memberVO) throws Exception;
 	
@@ -16,5 +19,6 @@ public interface MemberMapper {
 	
 	// 마이페이지
 	public MemberVO getMyPage(MemberVO memberVO) throws Exception;
-
+	
+	
 }

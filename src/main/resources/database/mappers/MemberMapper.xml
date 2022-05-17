@@ -27,4 +27,11 @@
 		FROM MEMBER WHERE ID = #{id}
 	</select>
 	
+	<!-- 회원정보 업데이트 -->
+	<update id="setUpdate" parameterType="MemberVO">
+		UPDATE MEMBER SET NAME = #{name}, PHONE = #{phone}, EMAIL = #{email}, ADDRESS = #{address},
+		POSTCODE = #{postCode}, DETAILADDRESS = #{detailAddress}, EXTRAADDRESS = #{extraAddress}
+		WHERE ID = #{id}
+	</update>
+	
 </mapper>

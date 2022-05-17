@@ -17,6 +17,11 @@ public class MemberService {
 		return memberMapper.setAddMember(memberVO);
 	}
 	
+	// 회원정보 수정
+	public int setUpdate(MemberVO memberVO) throws Exception {
+		return memberMapper.setUpdate(memberVO);
+	}
+	
 	// 로그인
 	public MemberVO getLogin(MemberVO memberVO) throws Exception {
 		return memberMapper.getLogin(memberVO);
@@ -48,6 +53,7 @@ public class MemberService {
 		return check;
 	}
 	
+	// 마이페이지
 	public MemberVO getMyPage(MemberVO memberVO) throws Exception {
 		return memberMapper.getMyPage(memberVO);
 	}

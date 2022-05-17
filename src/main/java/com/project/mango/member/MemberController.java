@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("member/*")
@@ -21,14 +22,14 @@ public class MemberController {
 	
 	// 로그인 GET 방식
 	@GetMapping("login")
-	public String setAddMember(Model model, @ModelAttribute MemberVO memberVO) throws Exception {
+	public String getLogin(Model model, @ModelAttribute MemberVO memberVO) throws Exception {
 		
 		return "member/login";
 	}
 	
 	// 로그인 POST 방식
 	@PostMapping("login")
-	public String setAddMember(HttpSession session, @Valid MemberVO memberVO, BindingResult bindingResult) throws Exception {
+	public String getLogin(HttpSession session, @Valid MemberVO memberVO, BindingResult bindingResult) throws Exception {
 			
 		memberVO = memberService.getLogin(memberVO);
 		String viewPath = "member/login";
@@ -43,13 +44,35 @@ public class MemberController {
 	
 	// 마이페이지
 	@GetMapping("myPage")
-	public String myPage(HttpSession session, Model model) throws Exception {
-		
+	public String getMyPage(HttpSession session, Model model) throws Exception {
 		MemberVO memberVO = (MemberVO)session.getAttribute("member");
 		memberVO = memberService.getMyPage(memberVO);
 		model.addAttribute("vo", memberVO);
 		
 		return "member/myPage";
+	}
+	
+	// 회원정보 수정 GET 방식
+	@GetMapping("update")
+	public ModelAndView setUpdate(HttpSession session, MemberVO memberVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		memberVO = (MemberVO)session.getAttribute("member");
+		memberVO = memberService.getMyPage(memberVO);
+		mv.addObject("vo", memberVO);
+		mv.setViewName("member/update");
+	
+		return mv;
+	}
+	
+	// 회원정보 수정 POST 방식
+	@PostMapping("update")
+	public String setUpdate(HttpSession session, Model model, MemberVO memberVO) throws Exception {
+		MemberVO sessionVO = (MemberVO)session.getAttribute("member");
+		// 매개변수로 받은 memberVO에는 id 정보가 없어서 session에서 받아와야 함
+		memberVO.setId(sessionVO.getId());
+		int result = memberService.setUpdate(memberVO);
+		model.addAttribute("vo", memberVO);
+		return "redirect:./myPage";
 	}
 	
 	// 로그아웃

@@ -14,44 +14,44 @@
 	
 	<div class="container">
 		<div class="row">
-		  <div class="col-2 text-truncate">
+		  <div class="col-4 text-truncate">
 		    ID : ${member.id}
 		  </div>
 		</div>
 		<div class="row">
-		  <div class="col-2 text-truncate">
+		  <div class="col-4 text-truncate">
 		    NAME : ${vo.name}
 		  </div>
 		</div>
 		<div class="row">
-		  <div class="col-2 text-truncate">
+		  <div class="col-4 text-truncate">
 		    EMAIL : ${vo.email}
 		  </div>
 		</div>
 		<div class="row">
-		  <div class="col-2 text-truncate">
+		  <div class="col-4 text-truncate">
 		    PHONE : ${vo.phone}
 		  </div>
 		</div>
 		<div class="row">
-		  <div class="col-2 text-truncate">
+		  <div class="col-4 text-truncate">
 			<c:choose>
 				<c:when test="${vo.gender == 0}">
 					GENDER : 남자
 				</c:when>
-				<c:otherwise>
+				<c:when test="${vo.gender == 1}">
 					GENDER : 여자
-				</c:otherwise>
+				</c:when>
 			</c:choose>
 		  </div>
 		</div>
 		<div class="row">
-		  <div class="col-2 text-truncate">
+		  <div class="col-4 text-truncate">
 		    JOINDATE : ${vo.joinDate}
 		  </div>
 		</div>
 		<div class="row">
-		  <div class="col-2 text-truncate">
+		  <div class="col-4 text-truncate">
 		  	<c:choose>
 		  		<c:when test="${vo.userType == 1}">
 		  			USERTYPE : 일반회원
@@ -66,14 +66,14 @@
 		  </div>
 		</div>
 		<div class="row">
-		  <div class="col-2 text-truncate">
+		  <div class="col-4 text-truncate">
 		  	<c:if test="${vo.userType == 2}">
 		    	BUSINESSNUM : ${vo.businessNum}
 		    </c:if>
 		  </div>
 		</div>
 		<div class="row">
-		  <div class="col-2 text-truncate">
+		  <div class="col-4 text-truncate">
 		    POSTCODE : ${vo.postCode}
 		  </div>
 		</div>
@@ -83,24 +83,24 @@
 		  </div>
 		</div>
 		<div class="row">
-		  <div class="col-2 text-truncate">
-		    DETAILADDRESS : ${vo.postCode}
+		  <div class="col-4 text-truncate">
+		    DETAILADDRESS : ${vo.detailAddress}
 		  </div>
 		</div>
 		<div class="row">
-		  <div class="col-2 text-truncate">
+		  <div class="col-4 text-truncate">
 		    EXTRAADDRESS : ${vo.extraAddress}
 		  </div>
 		</div>
 		<div class="row">
-		  <div class="col-2 text-truncate">
+		  <div class="col-4 text-truncate">
 		  	<c:choose>
 		  		<c:when test="${vo.blackList == 0}">
 		  			BLACKLIST : 정상
 		  		</c:when>
-		  		<c:otherwise>
+		  		<c:when test="${vo.blackList == 1}">
 		  			BLACKLIST : 불량회원
-		  		</c:otherwise>
+		  		</c:when>
 		  	</c:choose>
 		  </div>
 		</div>
@@ -126,13 +126,14 @@
 	  <footer class="py-3 my-4 mt-auto">
 	    <ul class="nav justify-content-around border-bottom pb-3 mt-5 mb-3">
 	      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">사업자 신청</a></li>
-	      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">회원정보수정</a></li>
+	      <li class="nav-item"><a href="./update" class="nav-link px-2 text-muted">회원정보수정</a></li>
 	      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">회원탈퇴</a></li>
 	    </ul>
 	    <p class="text-center text-muted">&copy; 2022 Mango</p>
 	  </footer>
 	</div>
-	
+	<!-- KaKaoMap -->
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<c:import url="../template/cdn_script.jsp"></c:import>
 </body>
 </html>
