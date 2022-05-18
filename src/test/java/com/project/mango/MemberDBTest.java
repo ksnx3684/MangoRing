@@ -61,8 +61,8 @@ class MemberDBTest {
 		
 	}
 	
-	// 업데이트 테스트
-	@Test
+	// 회원정보수정 테스트
+//	@Test
 	void updateTest() throws Exception {
 		MemberVO memberVO = new MemberVO();
 		memberVO.setId("id1");
@@ -72,6 +72,18 @@ class MemberDBTest {
 		memberVO.setAddress("테스트 주소");
 		
 		int result = memberMapper.setUpdate(memberVO);
+		
+		assertEquals(1, result);
+	}
+	
+	// 회원정보
+	@Test
+	void deleteTest() throws Exception {
+		MemberVO memberVO = new MemberVO();
+		memberVO.setId("id3");
+		memberVO.setPw("id3");
+		
+		int result = memberMapper.setDelete(memberVO);
 		
 		assertEquals(1, result);
 	}
