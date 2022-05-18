@@ -9,14 +9,14 @@
 </head>
 <body>
 	<form action="/search/searchResult" method="get">
-		<div class="container">
+		<div class="searchContainer" style="display: flex">
 			<input class="site" name="address" value="전국" readonly style="border: none; background: none; width: 110px;">
-		  	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+		  	<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal">
 			    지역 선택
 			</button>
 			<input type="text" placeholder="지역, 메뉴, 점포명 검색" name="name">
 			<input type="hidden" name="star" value="0">
-			<button>검색</button>
+			<button type="submit" class="btn btn-primary" style="margin-left: 10px">검색</button>
 			<div class="modal fade" id="myModal">
 		    	<div class="modal-dialog modal-xl">
 		    		<div class="modal-content">

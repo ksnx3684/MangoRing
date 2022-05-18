@@ -59,7 +59,7 @@
 						OR M.NAME LIKE CONCAT('%',#{name},'%')
 				</otherwise>
 			</choose>
-		GROUP BY R.RESTAURANTNAME;
+		GROUP BY R.RESTAURANTNAME
 	</select>
 	<select id="detailSearch" parameterType="SearchVO" resultMap="RestaurantVO">
 		SELECT R.*, RF.*, M.NAME AS NAME, AVG(RV.STAR) AS STAR, COUNT(DISTINCT(RV.REVIEWNUM)) AS REVIEW FROM RESTAURANT R
