@@ -9,9 +9,10 @@
 </head>
 <body>
 	<c:import url="./template/header.jsp"></c:import>
-	<form action="/search/searchResult" method="get">
+	<form action="/search/result" method="get">
 		<div class="container">
 			<h1>hi!</h1>
+			<input type="hidden" name="address" value="">
 			<input type="text" placeholder="지역, 메뉴, 점포명 검색" name="name">
 			<input type="hidden" name="star" value="0">
 			<button>검색</button>

@@ -1,12 +1,13 @@
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div
     mapOption = {
         center: new kakao.maps.LatLng(37.56646, 126.98121), // 지도의 중심좌표
-        level: 3, // 지도의 확대 레벨
+        level: 4, // 지도의 확대 레벨
         mapTypeId : kakao.maps.MapTypeId.ROADMAP // 지도종류
     };
 
 // 지도를 생성한다
 var map = new kakao.maps.Map(mapContainer, mapOption);
+/*var loca;*/
 
 function locationLoadSuccess(pos){
     // 현재 위치 받아오기
@@ -44,6 +45,8 @@ function locationLoadSuccess(pos){
 	// 법정동 상세 주소 정보를 요청하는 함수를 실행합니다
 	searchDetailAddrFromCoords(currentPos, callback);
     
+/*    loca = currentPos;
+    console.log(loca);*/
 };
 
 function locationLoadError(pos){
@@ -54,3 +57,28 @@ function locationLoadError(pos){
 function getCurrentPosBtn(){
     navigator.geolocation.getCurrentPosition(locationLoadSuccess,locationLoadError);
 };
+
+
+/*// 검색 버튼 클릭시
+function search(){
+	var distance = $("input[name='distance']:checked").val();
+	
+	// 장소 검색 객체를 생성합니다
+    var places = new kakao.maps.services.Places();
+    
+    // 콜백 함수 실행
+    var callback = function(result, status){
+		if (status === kakao.maps.services.Status.OK) {
+        console.log(result);
+		}
+	}
+	
+	// 옵션
+		var searchOption = {
+			location: loca,
+			radius: distance
+		}
+		
+	places.keywordSearch($("#menu"), callback, searchOption);
+
+}*/

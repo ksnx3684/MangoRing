@@ -12,6 +12,9 @@ public interface SearchMapper {
 	// search
 	public List<RestaurantVO> search(SearchVO searchVO) throws Exception;
 	
+	// mainSearch
+	public List<RestaurantVO> mainSearch(SearchVO searchVO) throws Exception;
+	
 	// detailSearch
 	public List<RestaurantVO> detailSearch(SearchVO searchVO) throws Exception;
 	

@@ -15,8 +15,12 @@ public class SearchService {
 	@Autowired
 	private SearchMapper searchMapper;
 	
-	public List<RestaurantVO> search(SearchVO searchVO) throws Exception {
+	public List<RestaurantVO> search(SearchVO searchVO) throws Exception{
 		return searchMapper.search(searchVO);
+	}
+	
+	public List<RestaurantVO> mainSearch(SearchVO searchVO) throws Exception{
+		return searchMapper.mainSearch(searchVO);
 	}
 	
 	public List<RestaurantVO> detailSearch(SearchVO searchVO) throws Exception{

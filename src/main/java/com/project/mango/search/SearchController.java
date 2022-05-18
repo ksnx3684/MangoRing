@@ -31,6 +31,14 @@ public class SearchController {
 		return "search/searchResult";
 	}
 	
+	// mainSearch 기능
+	@GetMapping("result")
+	public String mainSearch(Model model, SearchVO searchVO) throws Exception{
+		List<RestaurantVO> list = searchService.mainSearch(searchVO);
+		model.addAttribute("list", list);
+		return "search/searchResult";
+	}
+	
 	// detailSearch form 이동
 	@GetMapping("detailSearch")
 	public void detailSearch(Model model) throws Exception{

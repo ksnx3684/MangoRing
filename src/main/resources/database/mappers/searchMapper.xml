@@ -60,6 +60,7 @@
 				</otherwise>
 			</choose>
 		GROUP BY R.RESTAURANTNAME
+		ORDER BY STAR DESC
 	</select>
 	<select id="detailSearch" parameterType="SearchVO" resultMap="RestaurantVO">
 		SELECT R.*, RF.*, M.NAME AS NAME, AVG(RV.STAR) AS STAR, COUNT(DISTINCT(RV.REVIEWNUM)) AS REVIEW FROM RESTAURANT R
@@ -91,7 +92,7 @@
 		GROUP BY R.RESTAURANTNAME
 		<choose>
 			<when test="star == 0">
-				ORDER BY AVG(RV.STAR) DESC
+				ORDER BY STAR DESC
 			</when>
 			<otherwise>
 				ORDER BY REVIEW DESC
@@ -100,6 +101,21 @@
 		<!-- <if test="star != 0.0">
 			HAVING AVG(RV.STAR) >= #{star}
 		</if> -->
+	</select>
+	<select id="mainSearch" parameterType="SearchVO" resultMap="RestaurantVO">
+		SELECT R.*, RF.*, M.NAME AS NAME, AVG(RV.STAR) AS STAR FROM RESTAURANT R
+			LEFT JOIN REST_FILE RF
+			ON R.RESTAURANTNUM = RF.RESTAURANTNUM
+			LEFT JOIN MENU M
+			ON R.RESTAURANTNUM = M.RESTAURANTNUM
+			LEFT JOIN REVIEW RV
+			ON R.RESTAURANTNUM = RV.RESTAURANTNUM
+		WHERE R.RESTAURANTNAME LIKE CONCAT('%',#{name},'%')
+			OR R.ADDRESS LIKE CONCAT('%',#{name},'%')
+			OR R.DETAILADDRESS LIKE CONCAT('%',#{name},'%')
+			OR M.NAME LIKE CONCAT('%',#{name},'%')
+		GROUP BY R.RESTAURANTNAME
+		ORDER BY STAR DESC
 	</select>
 	
 	<select id="hashtagList" resultType="HashtagVO">
