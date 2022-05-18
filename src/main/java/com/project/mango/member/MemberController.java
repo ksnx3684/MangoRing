@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("member/*")
@@ -83,6 +84,36 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	// 회원 탈퇴 GET 방식
+	@GetMapping("delete")
+	public String setDelete() throws Exception {
+		
+		return "member/delete";
+	}
+	
+	// 회원 탈퇴 POST 방식
+	@PostMapping("delete")
+	public String setDelete(HttpSession session, MemberVO vo, 
+			RedirectAttributes rttr) throws Exception {
+		
+		// 세션에 있는 member를 가져와 memberVO 변수에 넣어줌
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		// 세션에 있는 비밀번호
+		String sessionPass = memberVO.getPw();
+		// vo로 들어오는 비밀번호
+		String voPass = vo.getPw();
+		
+		if(!(sessionPass.equals(voPass))) {
+			rttr.addFlashAttribute("msg", false);
+			return "redirect:./delete";
+		}
+		
+		int result = memberService.setDelete(memberVO);
+		session.invalidate();
+		return "redirect:/";
+	}
+	
+	
 	// 약관동의 GET 방식
 	@GetMapping("joinCheck")
 	public String setJoinCheck() throws Exception {
@@ -108,6 +139,6 @@ public class MemberController {
 		int result = memberService.setAddMember(memberVO);
 		model.addAttribute("vo", memberVO);
 		
-		return "redirect:/";
+		return "redirect:./login";
 	}
 }

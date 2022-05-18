@@ -20,5 +20,7 @@ public interface MemberMapper {
 	// 마이페이지
 	public MemberVO getMyPage(MemberVO memberVO) throws Exception;
 	
+	// 회원 탈퇴
+	public int setDelete(MemberVO vo) throws Exception;
 	
 }

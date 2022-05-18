@@ -57,4 +57,9 @@ public class MemberService {
 	public MemberVO getMyPage(MemberVO memberVO) throws Exception {
 		return memberMapper.getMyPage(memberVO);
 	}
+	
+	// 회원 탈퇴
+	public int setDelete(MemberVO vo) throws Exception {
+		return memberMapper.setDelete(vo);
+	}
 }

@@ -127,7 +127,7 @@
 	    <ul class="nav justify-content-around border-bottom pb-3 mt-5 mb-3">
 	      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">사업자 신청</a></li>
 	      <li class="nav-item"><a href="./update" class="nav-link px-2 text-muted">회원정보수정</a></li>
-	      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">회원탈퇴</a></li>
+	      <li class="nav-item"><a href="./delete" class="nav-link px-2 text-muted">회원탈퇴</a></li>
 	    </ul>
 	    <p class="text-center text-muted">&copy; 2022 Mango</p>
 	  </footer>

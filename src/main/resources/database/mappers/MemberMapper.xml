@@ -34,4 +34,9 @@
 		WHERE ID = #{id}
 	</update>
 	
+	<!-- 회원 탈퇴 -->
+	<delete id="setDelete" parameterType="MemberVO">
+		DELETE FROM MEMBER WHERE ID = #{id} AND PW = #{pw}
+	</delete>
+	
 </mapper>
