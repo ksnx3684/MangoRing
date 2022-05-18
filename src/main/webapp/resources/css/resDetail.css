@@ -1,0 +1,67 @@
+#respicBox{
+	
+ width:1500px;
+ height:500px;
+ color: red;
+
+ margin: 10px auto 70px auto;
+ display:inline-flex;
+ justify-content: space-between;
+}
+
+.BoxMap{
+	width: 1600px;
+	height: 350px;
+
+	border-radius: 20px;
+	display: inline-flex;
+	justify-content:space-between;
+	margin: 0px auto 15px auto;
+}
+
+.foodPicsBox{
+	width: 350px;
+	height: 350px;
+	border: solid black 2px;
+	border-radius: 20px;
+	display: inline-flex;
+	margin: 80px auto 15px auto;
+}
+
+.infoRes{
+	display: contents;
+}
+
+#edit{
+	text-align: right;
+	margin-right: 500px;
+	
+}
+
+.listBox{
+	width: 1300px;
+	height: 100px;
+	border: solid black 2px;
+	border-radius: 30px;
+	margin-top: 10px;
+	
+}
+.listText{
+	line-height: 100px;
+	text-align: center;
+}
+h5{
+	display: inline;
+}
+
+#reviewTextBox{
+	width:100%;
+	display: inline-flex;
+	justify-content: space-between;
+}
+#totalBox{
+	display: inline;
+}
+#etcBox{
+	display: inline;
+}

@@ -3,21 +3,74 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.mango.review.ReviewMapper">
-	
+
 	<insert id="setFileAdd" parameterType="ReviewFilesVO">
-		INSERT INTO REVIEW_FILE(FILENUM,REVIEWNUM,FILENAME,ORINAME)
+		INSERT INTO
+		REVIEW_FILE(FILENUM,REVIEWNUM,FILENAME,ORINAME)
 		VALUES(NULL,#{reviewNum},#{fileName},#{oriName})
 	</insert>
 
 
 
-	<insert id="setAdd" parameterType="ReviewVO" useGeneratedKeys="true" keyProperty="reviewNum">
+	<insert id="setAdd" parameterType="ReviewVO"
+		useGeneratedKeys="true" keyProperty="reviewNum">
 
 		INSERT INTO REVIEW
 		(REVIEWNUM,ID,RESTAURANTNUM,RESERVATIONNUM,STAR,REGDATE,REPORTCHECK,CONTENTS)
 		VALUES(#{reviewNum},'noID',1,1,#{star},NOW(),0,#{contents})
-		
+
 	</insert>
+
+	<select id="getListReview" parameterType="ReviewVO"
+		resultType="ReviewVO">
+		SELECT * FROM REVIEW WHERE RESTAURANTNUM=#{restaurantNum} <!-- AND STAR BETWEEN 2 AND 3 -->
+	</select>
+
+	<!-- 리뷰 전체 갯수 -->
+	<select id="countReview" parameterType="ReviewVO"
+		resultType="Long">
+		SELECT COUNT(REVIEWNUM) FROM REVIEW WHERE
+		RESTAURANTNUM=#{restaurantNum}
+	</select>
+
+	<!-- 리뷰 맛있어요 갯수 -->
+	<select id="goodCount" parameterType="ReviewVO"
+		resultType="Long">
+		SELECT COUNT(REVIEWNUM) FROM REVIEW WHERE
+		RESTAURANTNUM=#{restaurantNum} AND STAR>=4
+	</select>
+
+	<!-- 리뷰 보통이에요 갯수 -->
+	<select id="normalCount" parameterType="ReviewVO"
+		resultType="Long">
+		SELECT COUNT(REVIEWNUM) FROM REVIEW WHERE RESTAURANTNUM=#{restaurantNum}
+		AND STAR BETWEEN 2
+		AND 3
+	</select>
+
+	<!-- 리뷰 별로에요 갯수 -->	
+	<select id="badCount" parameterType="ReviewVO" resultType="Long">
+		SELECT COUNT(REVIEWNUM) FROM REVIEW WHERE RESTAURANTNUM=#{restaurantNum} AND STAR BETWEEN 0 AND 2
+	</select>
+
+	<!-- <select id="restaurantDetail" parameterType="RestaurantVO" resultMap="restaurantResult"> 
+		SELECT RES.*,REV.* FROM RESTAURANT RES INNER JOIN REVIEW REV USING(RESTAURANTNUM) 
+		WHERE RESTAURANTNUM = #{RESTAURANTNUM} </select> <resultMap type="RestaurantVO" 
+		id="restaurantResult"> <id column="restaurantNum" property="restaurantNum" 
+		/> <result column="id" property="id" /> <result column="restaurantName" property="restaurantName" 
+		/> <result column="restaurantPhone" property="restaurantPhone" /> <result 
+		column="postCode" property="postCode" /> <result column="address" property="address" 
+		/> <result column="detailAddress" property="detailAddress" /> <result column="extraAddress" 
+		property="extraAddress" /> <result column="regDate" property="regDate" /> 
+		<result column="editDate" property="editDate" /> <result column="parkingCheck" 
+		property="parkingCheck" /> <result column="kidCheck" property="kidCheck" 
+		/> <result column="introduction" property="introduction" /> <result column="accountNumber" 
+		property="accountNumber" /> <collection property="reviewVO" javaType="List" 
+		ofType="ReviewVO"> <id column="reviewNum" property="reviewNum" /> <result 
+		column="id" property="id" /> <result column="reservationNum" property="reservationNum" 
+		/> <result column="star" property="star" /> <result column="regDate" property="regDate" 
+		/> <result column="reportCheck" property="reportCheck" /> <result column="contents" 
+		property="contents" /> </collection> </resultMap> -->
 
 
 

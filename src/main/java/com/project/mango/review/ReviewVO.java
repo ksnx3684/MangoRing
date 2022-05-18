@@ -15,5 +15,9 @@ public class ReviewVO {
 	private Date regDate;
 	private Long reportCheck;
 	private String contents;
+	
+	public void makeGood() {
+		
+	}
 
 }

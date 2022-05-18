@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.mango.restaurant.CategoryMapper">
+
+
+
+
+	<select id="getDetail" parameterType="CategoryVO"
+		resultMap="getDetailResult">
+
+		SELECT C.*,RES.*
+		FROM CATEGORY C
+		INNER JOIN
+		RESTAURANT RES
+		USING(CATEGORYNUM)
+		WHERE CATEGORYNUM=1
+
+	</select>
+
+	<resultMap type="CategoryVO" id="getDetailResult">
+		<id column="categoryNum" property="categoryNum" />
+		<result column="categoryName" property="categoryName" />
+
+		<association property="restaurantVO"
+			javaType="RestaurantVO">
+
+			<id column="restaurantNum" property="restaurantNum" />
+			<result column="id" property="id" />
+			<result column="restaurantName" property="restaurantName" />
+			<result column="restaurantPhone" property="restaurantPhone" />
+			<result column="postCode" property="postCode" />
+			<result column="address" property="address" />
+			<result column="detailAddress" property="detailAddress" />
+			<result column="extraAddress" property="extraAddress" />
+			<result column="regDate" property="regDate" />
+			<result column="editDate" property="editDate" />
+			<result column="parkingCheck" property="parkingCheck" />
+			<result column="kidCheck" property="kidCheck" />
+			<result column="introduction" property="introduction" />
+			<result column="accountNumber" property="accountNumber" />
+
+		</association>
+	</resultMap>
+	
+	
+	<!-- <resultMap type="CategoryVO" id="getDetailResult">
+		<id column="categoryNum" property="categoryNum" />
+		<result column="categoryName" property="categoryName" />
+
+		<collection property="reviewVO" javaType="List"
+			ofType="ReviewVO">
+			<id column="reviewNum" property="reviewNum" />
+			<result column="id" property="id" />
+			<result column="reservationNum" property="reservationNum" />
+			<result column="star" property="star" />
+			<result column="regDate" property="regDate" />
+			<result column="reportCheck" property="reportCheck" />
+			<result column="contents" property="contents" />
+		</collection>
+	</resultMap> -->
+</mapper>

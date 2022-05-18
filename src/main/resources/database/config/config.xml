@@ -8,9 +8,14 @@
   
   <typeAliases>
   
-  <typeAlias type="com.project.mango.review.ReviewVO" alias="ReviewVO"/>
+  <typeAlias type="java.util.List" alias="List" />
+  <typeAlias type="java.lang.Long" alias="Long"/>
   
+  <typeAlias type="com.project.mango.review.ReviewVO" alias="ReviewVO"/>
    <typeAlias type="com.project.mango.review.ReviewFilesVO" alias="ReviewFilesVO"/>
+   
+    <typeAlias type="com.project.mango.restaurant.RestaurantVO" alias="RestaurantVO"/>
+  	<typeAlias type="com.project.mango.restaurant.CategoryVO" alias="CategoryVO"/>
   
   </typeAliases>
   	
