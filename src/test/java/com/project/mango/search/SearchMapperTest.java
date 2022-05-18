@@ -19,8 +19,18 @@ class SearchMapperTest {
 	@Test
 	void search() throws Exception{
 		SearchVO searchVO = new SearchVO();
-		searchVO.setName("서울");
+		searchVO.setAddress("서울 마포구");
+		searchVO.setName("파스타");
 		List<RestaurantVO> list = searchMapper.search(searchVO);
+		
+		assertNotNull(list);
+	}
+	
+	@Test
+	void mainSearch() throws Exception{
+		SearchVO searchVO = new SearchVO();
+		searchVO.setName("인천");
+		List<RestaurantVO> list = searchMapper.mainSearch(searchVO);
 		
 		assertNotNull(list);
 	}
