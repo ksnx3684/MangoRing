@@ -6,5 +6,11 @@
   <configuration>
   	<typeAliases>
   		<typeAlias type="com.project.mango.restaurant.RestaurantVO" alias="RestaurantVO"/>
+  		<typeAlias type="com.project.mango.restaurant.RestaurantFileVO" alias="RestaurantFileVO"/>
+  		<typeAlias type="com.project.mango.menu.MenuVO" alias="MenuVO"/>
+  		<typeAlias type="com.project.mango.menu.MenuFileVO" alias="MenuFileVO"/>
+  		<typeAlias type="com.project.mango.hashtag.HashtagVO" alias="HashtagVO"/>
+  		<typeAlias type="java.util.Map" alias="Map"/>
+  		<typeAlias type="java.util.List" alias="List"/>
   	</typeAliases>
   </configuration>

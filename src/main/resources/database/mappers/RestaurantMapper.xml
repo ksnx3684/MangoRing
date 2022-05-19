@@ -8,9 +8,91 @@
 		SELECT * FROM RESTAURANT WHERE ID=#{id}
 	</select>
 
-	<select id="getDetail" parameterType="RestaurantVO" resultType="RestaurantVO">
-		SELECT * FROM RESTAURANT WHERE RESTAURANTNUM=#{restaurantNum}
+	<select id="getDetail" parameterType="RestaurantVO" resultMap="detailResult">
+		SELECT * FROM RESTAURANT R
+			LEFT JOIN REST_FILE RF
+			ON (R.RESTAURANTNUM = RF.RESTAURANTNUM)
+		WHERE R.RESTAURANTNUM = #{restaurantNum}
 	</select>
+	<resultMap type="RestaurantVO" id="detailResult">
+		<id column="restaurantNum" property="restaurantNum"/>
+		<result column="categoryNum" property="categoryNum"/>
+		<result column="id" property="id"/>
+		<result column="restaurantName" property="restaurantName"/>
+		<result column="restaurantPhone" property="restaurantPhone"/>
+		<result column="postCode" property="postCode"/>
+		<result column="address" property="address"/>
+		<result column="detailAddress" property="detailAddress"/>
+		<result column="extraAddress" property="extraAddress"/>
+		<result column="regDate" property="regDate"/>
+		<result column="editDate" property="editDate"/>
+		<result column="parkingCheck" property="parkingCheck"/>
+		<result column="kidCheck" property="kidCheck"/>
+		<result column="introduction" property="introduction"/>
+		<result column="accountNumber" property="accountNumber"/>
+		<collection property="restaurantFileVOs" javaType="List" ofType="RestaurantFileVO">
+			<id column="fileNum" property="fileNum"/>
+			<result column="fileName" property="fileName"/>
+			<result column="oriName" property="oriName"/>
+		</collection>
+	</resultMap>
 
+	<update id="setRegistration" parameterType="RestaurantVO">
+		UPDATE RESTAURANT SET 
+			RESTAURANTPHONE = #{restaurantPhone},
+			INTRODUCTION = #{introduction},
+			EDITDATE = now()
+		WHERE RESTAURANTNUM = #{restaurantNum}
+	</update>
+	
+	<insert id="setFileAdd" parameterType="RestaurantFileVO">
+		INSERT INTO REST_FILE (FILENUM, RESTAURANTNUM, FILENAME, ORINAME)
+		VALUES (NULL, #{restaurantNum}, #{fileName}, #{oriName})
+	</insert>
+	
+	<delete id="setFileDelete" parameterType="RestaurantFileVO">
+		DELETE FROM REST_FILE WHERE FILENUM = #{fileNum}
+	</delete>
+	
+	<select id="getFileDetail" parameterType="RestaurantFileVO" resultType="RestaurantFileVO">
+		SELECT * FROM REST_FILE WHERE FILENUM = #{fileNum}
+	</select>
+	
+	<update id="setUpdate" parameterType="RestaurantVO">
+		UPDATE RESTAURANT SET
+			RESTAURANTNAME = #{restaurantName},
+			RESTAURANTPHONE = #{restaurantPhone},
+			INTRODUCTION = #{introduction},
+			EDITDATE = now()
+		WHERE RESTAURANTNUM = #{restaurantNum}
+	</update>
+	
+	<delete id="setDelete" parameterType="RestaurantVO">
+		DELETE FROM RESTAURANT WHERE RESTAURANTNUM = #{restaurantNum}
+	</delete>
+	
+	<insert id="setRestaurantTag" parameterType="Map">
+		INSERT INTO REST_TAG (RESTAURANTNUM, TAGNUM)
+		VALUES (#{restaurantNum}, #{tagNum})
+	</insert>
+	
+	<select id="getSelectedList" parameterType="RestaurantVO" resultMap="selectedListResult">
+		SELECT * FROM HASHTAG HT
+			NATURAL JOIN
+			REST_TAG RT
+		WHERE RESTAURANTNUM = #{restaurantNum}
+	</select>
+	<resultMap type="RestaurantVO" id="selectedListResult">
+		<id column="restaurantNum" property="restaurantNum"/>
+		<collection property="hashtagVOs" javaType="List" ofType="HashtagVO">
+			<id column="tagNum" property="tagNum"/>
+			<result column="name" property="name"/>
+		</collection>
+	</resultMap>
+	
+	<delete id="setAllTagDelete" parameterType="RestaurantVO">
+		DELETE FROM REST_TAG WHERE RESTAURANTNUM = #{restaurantNum}
+	</delete>
+	
 
 </mapper>

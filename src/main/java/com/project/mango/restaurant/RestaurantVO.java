@@ -1,14 +1,17 @@
 package com.project.mango.restaurant;
 
 import java.sql.Date;
+import java.util.List;
+
+import com.project.mango.hashtag.HashtagVO;
 
 import lombok.Data;
 
 @Data
 public class RestaurantVO {
 
-	private Integer restaurantNum;
-	private Integer categoryNum;
+	private Long restaurantNum;
+	private Long categoryNum;
 	private String id;
 	private String restaurantName;
 	private String restaurantPhone;
@@ -18,7 +21,12 @@ public class RestaurantVO {
 	private String extraAddress;
 	private Date regDate;
 	private Date editDate;
-	private Integer parkingCheck;
-	private Integer kidCheck;
+	private Long parkingCheck;
+	private Long kidCheck;
+	private String introduction;
+	private String accountNumber;
+	
+	private List<RestaurantFileVO> restaurantFileVOs;
+	private List<HashtagVO> hashtagVOs;
 	
 }
