@@ -11,74 +11,76 @@
 	<form action="/search/searchResult" method="get">
 		<div class="searchContainer" style="display: flex">
 			<input class="site" name="address" value="전국" readonly style="border: none; background: none; width: 110px;">
-		  	<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal">
+		  	<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#myModal">
 			    지역 선택
 			</button>
-			<input type="text" placeholder="지역, 메뉴, 점포명 검색" name="name">
+			<input type="text" placeholder="지역, 메뉴, 점포명 검색" name="name" style="margin-left: 5px">
 			<input type="hidden" name="star" value="0">
 			<button type="submit" class="btn btn-primary" style="margin-left: 10px">검색</button>
 			<div class="modal fade" id="myModal">
 		    	<div class="modal-dialog modal-xl">
 		    		<div class="modal-content">
+		    			<!-- Modal Header -->
 		    			<div class="modal-header">
 		    				<h4 class="modal-title">지역 선택</h4>
-		    				<button type="button" class="close" data-dismiss="modal">&times;</button>
+		    				<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 		    			</div>
+		    			<!-- Modal body -->
 		    			<div class="modal-body">
 		    				<ul class="nav nav-tabs">
     							<li class="nav-item">
-      								<a class="nav-link active" data-toggle="tab" href="#전국">전국</a>
+      								<a class="nav-link active" data-bs-toggle="tab" href="#전국">전국</a>
     							</li>
     							<li class="nav-item">
-      								<a class="nav-link" data-toggle="tab" href="#서울">서울</a>
+      								<a class="nav-link" data-bs-toggle="tab" href="#서울">서울</a>
     							</li>
     							<li class="nav-item">
-      								<a class="nav-link" data-toggle="tab" href="#부산">부산</a>
+      								<a class="nav-link" data-bs-toggle="tab" href="#부산">부산</a>
     							</li>
     							<li class="nav-item">
-      								<a class="nav-link" data-toggle="tab" href="#인천">인천</a>
+      								<a class="nav-link" data-bs-toggle="tab" href="#인천">인천</a>
     							</li>
     							<li class="nav-item">
-      								<a class="nav-link" data-toggle="tab" href="#대구">대구</a>
+      								<a class="nav-link" data-bs-toggle="tab" href="#대구">대구</a>
     							</li>
     							<li class="nav-item">
-      								<a class="nav-link" data-toggle="tab" href="#대전">대전</a>
+      								<a class="nav-link" data-bs-toggle="tab" href="#대전">대전</a>
     							</li>
     							<li class="nav-item">
-      								<a class="nav-link" data-toggle="tab" href="#광주">광주</a>
+      								<a class="nav-link" data-bs-toggle="tab" href="#광주">광주</a>
     							</li>
     							<li class="nav-item">
-      								<a class="nav-link" data-toggle="tab" href="#울산">울산</a>
+      								<a class="nav-link" data-bs-toggle="tab" href="#울산">울산</a>
     							</li>
     							<li class="nav-item">
-      								<a class="nav-link" data-toggle="tab" href="#경기">경기</a>
+      								<a class="nav-link" data-bs-toggle="tab" href="#경기">경기</a>
     							</li>
     							<li class="nav-item">
-      								<a class="nav-link" data-toggle="tab" href="#강원">강원</a>
+      								<a class="nav-link" data-bs-toggle="tab" href="#강원">강원</a>
     							</li>
     							<li class="nav-item">
-      								<a class="nav-link" data-toggle="tab" href="#충남">충남</a>
+      								<a class="nav-link" data-bs-toggle="tab" href="#충남">충남</a>
     							</li>
     							<li class="nav-item">
-      								<a class="nav-link" data-toggle="tab" href="#충북">충북</a>
+      								<a class="nav-link" data-bs-toggle="tab" href="#충북">충북</a>
     							</li>
     							<li class="nav-item">
-      								<a class="nav-link" data-toggle="tab" href="#경남">경남</a>
+      								<a class="nav-link" data-bs-toggle="tab" href="#경남">경남</a>
     							</li>
     							<li class="nav-item">
-      								<a class="nav-link" data-toggle="tab" href="#경북">경북</a>
+      								<a class="nav-link" data-bs-toggle="tab" href="#경북">경북</a>
     							</li>
     							<li class="nav-item">
-      								<a class="nav-link" data-toggle="tab" href="#전남">전남</a>
+      								<a class="nav-link" data-bs-toggle="tab" href="#전남">전남</a>
     							</li>
     							<li class="nav-item">
-      								<a class="nav-link" data-toggle="tab" href="#전북">전북</a>
+      								<a class="nav-link" data-bs-toggle="tab" href="#전북">전북</a>
     							</li>
     							<li class="nav-item">
-      								<a class="nav-link" data-toggle="tab" href="#제주">제주</a>
+      								<a class="nav-link" data-bs-toggle="tab" href="#제주">제주</a>
     							</li>
     							<li class="nav-item">
-      								<a class="nav-link" data-toggle="tab" href="#세종">세종</a>
+      								<a class="nav-link" data-bs-toggle="tab" href="#세종">세종</a>
     							</li>
   							</ul>
 							<div class="tab-content">
@@ -383,15 +385,17 @@
 									<button type="button" class="btn btn-outline-primary" value="세종">전체</button>
 								</div>
 							</div>
-		    			</div>    
+		    			</div>
+		    			<!-- Modal footer -->
 		    			<div class="modal-footer">
-		    				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		    				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 		   				 </div>
 		    		</div>
 		    	</div>
 		  	</div>
 		</div>
 	</form>
+	
 	<script>
 		$(document).ready(function(){
 		  $(".btn-outline-primary").click(function(){

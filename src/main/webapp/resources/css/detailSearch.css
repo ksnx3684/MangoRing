@@ -7,3 +7,12 @@
 	display: flex;
 	justify-content: space-between;
 }
+
+.city{
+	width: 50% !important;
+	margin-right: 10px;
+}
+
+.menu, .star{
+	width: 94% !important;
+}

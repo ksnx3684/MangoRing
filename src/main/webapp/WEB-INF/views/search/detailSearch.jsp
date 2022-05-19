@@ -17,8 +17,8 @@
 		<form action="./detailSearchResult" method="get">
 			<div class="sector">
 				<div class="sector-left">
-					<div>
-						<input type="text" class="form-control mb-2 col-sm-6 city" name="city" placeholder="지역" style="display: inline-block">
+					<div style="display: flex">
+						<input type="text" class="form-control city" name="city" placeholder="지역">
 						<button type="button" class="btn btn-info" id="getMyPositionBtn" onclick="getCurrentPosBtn()">내 위치 가져오기</button>
 					</div>
 					<!-- 최대 검색 범위<br>
@@ -33,10 +33,10 @@
 		 			</label> -->
 					<br>
 					<div>
-						<input type="text" class="form-control mb-2 col-sm-6" id="menu" name="menu" placeholder="메뉴">
+						<input type="text" class="form-control menu" id="menu" name="menu" placeholder="메뉴">
 					</div><br>
 					<div>
-						<select class="custom-select col-sm-6" name="star">
+						<select class="form-select star" id="star" name="star">
 				 			<option value="0">평점 순</option>
 				 			<option value="1">리뷰 순</option>
 			 			</select>
@@ -57,14 +57,15 @@
 				</div>
 			</div>
 			<hr>
-	 		<div class="jumbotron">
+	 		<div class="mt-4 p-5 bg-secondary text-black rounded" style="background-color: #e7e7e7!important">
 	 			<h3>#해시태그</h3>
 	 			<c:forEach items="${list}" var="li">
 		 			<label>
-		 				<input type="checkbox" name="hashtag" value="${li.tagNum}"> #${li.name}
+		 				<input type="checkbox" class="mb-3" name="hashtag" value="${li.tagNum}"> #${li.name}
 		 			</label>
 	 			</c:forEach>
 	 		</div>
+	 		<br>
 			<button class="btn btn-outline-primary mb-2" onclick="search()">검색</button>
 		</form>
 	</div>
