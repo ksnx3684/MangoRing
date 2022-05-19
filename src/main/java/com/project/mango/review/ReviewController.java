@@ -34,5 +34,16 @@ public class ReviewController {
 		return mv;
 		
 	}
+	
+	@GetMapping("detail")
+	public ModelAndView getdetailReview(ReviewVO reviewVO)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		reviewVO = reviewService.getDetailReview(reviewVO);
+		
+		mv.addObject("reFilesVo",reviewVO.getReviewFilesVOs());
+		mv.addObject("revo",reviewVO);
+		mv.setViewName("/review/detail");
+		return mv;
+	}
 
 }

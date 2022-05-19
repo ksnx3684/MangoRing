@@ -9,9 +9,7 @@ public class CategoryService {
 	@Autowired
 	private CategoryMapper categoryMapper;
 	
-	public CategoryVO getDetail(CategoryVO categoryVO)throws Exception{
-		return categoryMapper.getDetail(categoryVO); 
-	}
+
 	
 	
 

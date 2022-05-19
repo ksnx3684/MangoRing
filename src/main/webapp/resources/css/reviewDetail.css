@@ -1,0 +1,58 @@
+h1 {
+	display: inline;
+}
+
+.reviewpicTitle {
+	width: 1500px;
+	height: 50px;
+	margin: 70px 0 20px 70px;
+}
+
+#reviewStar {
+	float: right;
+}
+
+#revPicBox {
+	width: 1500px;
+	display: inline-flex;
+}
+
+.revPics {
+	width: 600px;
+	height: 400px;
+	border: solid black 2px;
+	display: inline-flex;
+	margin: 80px auto 15px auto;
+}
+
+#revTextBox{
+	width: 1500px;
+	display: inline-flex;
+}
+
+#revText {
+	width: 1200px;
+	height: 400px;
+	border: solid black 2px;
+	display: inline-flex;
+	margin: 80px auto 15px auto;
+}
+
+
+
+/* 가져온것 */
+.con{
+	width: 150vw;
+	transition:transform 0.5s;
+	
+}
+.inn{
+	width: 50vw;
+	float: left;
+	overflow: hidden;
+}
+
+.inn img{
+	width: 100%;
+	overflow: hidden;
+}

@@ -66,9 +66,12 @@
 					주차 : 주차 불가능<br>
 				</h1>
 			</c:if>
-
+		
 			<h1 class="infoRes">
-				메뉴 조인 필요<br>
+				메뉴 :
+				<c:forEach items="${menu}" var="menus">
+				 ${menus.name} ${menus.price}원<br>
+				</c:forEach>
 			</h1>
 		</div>
 
@@ -102,18 +105,34 @@
 	<h3 id="edit">업데이트 : ${vo1.editDate }</h3>
 	<hr>
 	<div id="reviewTextBox">
-		<div id="totalBox"> <h5>리뷰(${count})</h5> </div> <div id="etcBox"> <h5 class="tasteText"> 맛있어요(${goodCount }) |</h5> <h5 class="tasteText"> 보통이에요(${normalCount }) |</h5><h5 class="tasteText"> 별로에요(${badCount})</h5></div>
+		<div id="totalBox">
+			<h5>리뷰 |</h5>
+			<a href="./detail?rssNum=0&rseNum=5"><h5>전체(${count})</h5></a>
+		</div>
+		<div id="etcBox">
+			<a href="./detail?rssNum=4&rseNum=5">
+				<h5 class="tasteText">맛있어요(${goodCount }) |</h5>
+			</a> <a href="./detail?rssNum=2&rseNum=3">
+				<h5 class="tasteText">보통이에요(${normalCount }) |</h5>
+			</a> <a href="./detail?rssNum=0&rseNum=1">
+				<h5 class="tasteText">별로에요(${badCount})</h5>
+			</a>
+		</div>
 	</div>
 	<c:forEach items="${list}" var="revList">
-		<div class="listBox">
+		<a href="/review/detail?reviewNum=${revList.reviewNum }"> <div class="listBox">
 			<h1 class="listText">[회원 사진/ ID추가] 별점:${revList.star}
 				내용:${revList.contents}</h1>
-				
-		</div>
+
+		</div></a>
 
 	</c:forEach>
 
-
+<!-- Option 1: Bootstrap Bundle with Popper -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+		crossorigin="anonymous"></script>
 
 </body>
 </html>

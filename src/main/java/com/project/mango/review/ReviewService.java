@@ -44,6 +44,10 @@ public class ReviewService {
 		
 	}
 	
+	public ReviewVO getDetailReview(ReviewVO reviewVO)throws Exception{
+		return reviewMapper.getDetailReview(reviewVO);
+	}
+	
 	public List<ReviewVO> getListReview(ReviewVO reviewVO)throws Exception{
 		
 		return reviewMapper.getListReview(reviewVO);

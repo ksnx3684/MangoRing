@@ -2,62 +2,69 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.project.mango.restaurant.CategoryMapper">
+<mapper namespace="com.project.mango.restaurant.RestaurantMapper">
 
-
-
-
-	<select id="getDetail" parameterType="CategoryVO"
+	<select id="getDetail" parameterType="RestaurantVO"
 		resultMap="getDetailResult">
 
-		SELECT C.*,RES.*
-		FROM CATEGORY C
-		INNER JOIN
-		RESTAURANT RES
+		SELECT RES.*,C.*,M.*
+		FROM RESTAURANT RES
+		LEFT JOIN
+		CATEGORY C
 		USING(CATEGORYNUM)
+		LEFT JOIN
+		MENU M
+		USING(RESTAURANTNUM)
 		WHERE CATEGORYNUM=1
+
 
 	</select>
 
-	<resultMap type="CategoryVO" id="getDetailResult">
-		<id column="categoryNum" property="categoryNum" />
-		<result column="categoryName" property="categoryName" />
+	<resultMap type="RestaurantVO" id="getDetailResult">
+		<id column="restaurantNum" property="restaurantNum" />
+		<result column="id" property="id" />
+		<result column="restaurantName" property="restaurantName" />
+		<result column="restaurantPhone" property="restaurantPhone" />
+		<result column="postCode" property="postCode" />
+		<result column="address" property="address" />
+		<result column="detailAddress" property="detailAddress" />
+		<result column="extraAddress" property="extraAddress" />
+		<result column="regDate" property="regDate" />
+		<result column="editDate" property="editDate" />
+		<result column="parkingCheck" property="parkingCheck" />
+		<result column="kidCheck" property="kidCheck" />
+		<result column="introduction" property="introduction" />
+		<result column="accountNumber" property="accountNumber" />
 
-		<association property="restaurantVO"
-			javaType="RestaurantVO">
+		<association property="categoryVO" javaType="CategoryVO">
 
-			<id column="restaurantNum" property="restaurantNum" />
-			<result column="id" property="id" />
-			<result column="restaurantName" property="restaurantName" />
-			<result column="restaurantPhone" property="restaurantPhone" />
-			<result column="postCode" property="postCode" />
-			<result column="address" property="address" />
-			<result column="detailAddress" property="detailAddress" />
-			<result column="extraAddress" property="extraAddress" />
-			<result column="regDate" property="regDate" />
-			<result column="editDate" property="editDate" />
-			<result column="parkingCheck" property="parkingCheck" />
-			<result column="kidCheck" property="kidCheck" />
-			<result column="introduction" property="introduction" />
-			<result column="accountNumber" property="accountNumber" />
 
+			<id column="categoryNum" property="categoryNum" />
+			<result column="categoryName" property="categoryName" />
 		</association>
-	</resultMap>
-	
-	
-	<!-- <resultMap type="CategoryVO" id="getDetailResult">
-		<id column="categoryNum" property="categoryNum" />
-		<result column="categoryName" property="categoryName" />
 
-		<collection property="reviewVO" javaType="List"
-			ofType="ReviewVO">
-			<id column="reviewNum" property="reviewNum" />
-			<result column="id" property="id" />
-			<result column="reservationNum" property="reservationNum" />
-			<result column="star" property="star" />
-			<result column="regDate" property="regDate" />
-			<result column="reportCheck" property="reportCheck" />
-			<result column="contents" property="contents" />
+		<collection property="menuVOs" javaType="List"
+			ofType="MenuVO">
+			<id column="menuNum" property="menuNum" />
+
+			<result column="name" property="name" />
+			<result column="price" property="price" />
+			<result column="detail" property="detail" />
 		</collection>
-	</resultMap> -->
+	</resultMap>
+
+
+	<select id="getList" parameterType="MenuVO" resultType="MenuVO">
+		SELECT * FROM MENU WHERE RESTAURANTNUM =#{restaurantNum}
+	</select>
+
+
+	<!-- <resultMap type="CategoryVO" id="getDetailResult"> <id column="categoryNum" 
+		property="categoryNum" /> <result column="categoryName" property="categoryName" 
+		/> <collection property="reviewVO" javaType="List" ofType="ReviewVO"> <id 
+		column="reviewNum" property="reviewNum" /> <result column="id" property="id" 
+		/> <result column="reservationNum" property="reservationNum" /> <result column="star" 
+		property="star" /> <result column="regDate" property="regDate" /> <result 
+		column="reportCheck" property="reportCheck" /> <result column="contents" 
+		property="contents" /> </collection> </resultMap> -->
 </mapper>

@@ -16,6 +16,8 @@
    
     <typeAlias type="com.project.mango.restaurant.RestaurantVO" alias="RestaurantVO"/>
   	<typeAlias type="com.project.mango.restaurant.CategoryVO" alias="CategoryVO"/>
+  	
+  	<typeAlias type="com.project.mango.menu.MenuVO" alias="MenuVO"/>
   
   </typeAliases>
   	

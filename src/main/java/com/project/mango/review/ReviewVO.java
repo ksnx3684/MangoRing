@@ -1,11 +1,14 @@
 package com.project.mango.review;
 
 import java.sql.Date;
+import java.util.List;
 
 import lombok.Data;
 
 @Data
 public class ReviewVO {
+	
+	private List<ReviewFilesVO> reviewFilesVOs;
 	
 	private Long reviewNum;
 	private String id;
@@ -16,8 +19,21 @@ public class ReviewVO {
 	private Long reportCheck;
 	private String contents;
 	
-	public void makeGood() {
-		
+	private Long rssNum;  //reviewStartNum
+	private Long rseNum;  //reviewEndNum
+	
+	public Long getRssNum() {
+		if(this.rssNum==null) {
+			this.rssNum=0L;
+		}
+		return this.rssNum;
+	}
+	
+	public Long getRseNum() {
+		if(this.rseNum==null) {
+			this.rseNum=5L;
+		}
+		return this.rseNum;
 	}
 
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.project.mango.menu.MenuVO;
 import com.project.mango.review.ReviewService;
 import com.project.mango.review.ReviewVO;
 
@@ -17,26 +18,38 @@ import com.project.mango.review.ReviewVO;
 public class RestaurantController {
 	
 	@Autowired
-	private CategoryService categoryService;
+	private RestaurantService restaurantService;
 	@Autowired
 	private ReviewService reviewService;
 
 	
 	@GetMapping("detail")
-	public ModelAndView getDetail(CategoryVO categoryVO)throws Exception{
+	public ModelAndView getDetail(RestaurantVO restaurantVO,ReviewVO reviewVO,MenuVO menuVO)throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
 		//레스토랑 정보 , 카테고리 종류
-		categoryVO = categoryService.getDetail(categoryVO);
-		System.out.println(categoryVO.getRestaurantVO().getRestaurantName());
-		System.out.println(categoryVO.getCategoryName());
+		restaurantVO = restaurantService.getDetail(restaurantVO);
+		System.out.println(restaurantVO.getRestaurantName());
+		System.out.println(restaurantVO.getCategoryVO().getCategoryName());
+		
+		//MenuVO menuVO = restaurantService.getDetail(restaurantVO.getMenuVO());
+		
 		
 		//리뷰 디테일로 가는 리스트
-		ReviewVO reviewVO =new ReviewVO();
-		reviewVO.setRestaurantNum(categoryVO.getRestaurantVO().getRestaurantNum());
-		
+		//ReviewVO reviewVO =new ReviewVO();
+		reviewVO.setRestaurantNum(restaurantVO.getRestaurantNum());
+		System.out.println(restaurantVO.getRestaurantNum());
+		System.out.println(reviewVO.getRseNum());
+		System.out.println(reviewVO.getRssNum());
 		List<ReviewVO> ar = reviewService.getListReview(reviewVO);
-		System.out.println();
+		
+		
+		System.out.println(menuVO.getMenuNum());
+		
+		menuVO.setRestaurantNum(restaurantVO.getRestaurantNum());
+		List<MenuVO> menuAr = restaurantService.getList(menuVO);
+		
+		
 		
 		//전체 리뷰 카운트
 		long count = reviewService.countReview(reviewVO);
@@ -50,13 +63,15 @@ public class RestaurantController {
 		//별로에요 리뷰 카운트
 		long badCount = reviewService.badCount(reviewVO);
 		
+		
 		mv.addObject("count",count);	
 		mv.addObject("goodCount",goodCount);
 		mv.addObject("normalCount",normalCount);
 		mv.addObject("badCount",badCount);
 		mv.addObject("list",ar);
-		mv.addObject("vo",categoryVO); //카테고리 종류
-		mv.addObject("vo1",categoryVO.getRestaurantVO()); //레스토랑 정보
+		mv.addObject("vo",restaurantVO.getCategoryVO()); //카테고리 종류
+		mv.addObject("vo1",restaurantVO); //레스토랑 정보
+		mv.addObject("menu",menuAr);
 		mv.setViewName("restaurant/detail");
 		return mv;
 		

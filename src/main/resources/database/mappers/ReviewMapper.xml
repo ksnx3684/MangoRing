@@ -21,9 +21,39 @@
 
 	</insert>
 
+	<select id="getDetailReview" parameterType="ReviewVO"
+		resultMap="getReviewDetail">
+		SELECT R.*,RF.*
+		FROM REVIEW R
+		LEFT JOIN
+		REVIEW_FILE RF
+		USING(REVIEWNUM)
+		WHERE REVIEWNUM=#{reviewNum}
+	</select>
+
+	<resultMap type="ReviewVO" id="getReviewDetail">
+		<id column="reviewNum" property="reviewNum" />
+		<result column="id" property="id" />
+		<result column="restaurantNum" property="restaurantNum" />
+		<result column="reservationNum" property="reservationNum" />
+		<result column="star" property="star" />
+		<result column="regDate" property="regDate" />
+		<result column="reportCheck" property="reportCheck" />
+		<result column="contents" property="contents" />
+
+		<collection property="reviewFilesVOs" javaType="List"
+			ofType="ReviewFilesVO">
+			<id column="fileNum" property="fileNum" />
+			<result column="fileName" property="fileName" />
+			<result column="oriName" property="oriName" />
+		</collection>
+	</resultMap>
+
+
 	<select id="getListReview" parameterType="ReviewVO"
 		resultType="ReviewVO">
-		SELECT * FROM REVIEW WHERE RESTAURANTNUM=#{restaurantNum} <!-- AND STAR BETWEEN 2 AND 3 -->
+		SELECT * FROM REVIEW WHERE RESTAURANTNUM=#{restaurantNum} AND STAR
+		BETWEEN #{rssNum} AND #{rseNum} ORDER BY REVIEWNUM DESC  <!-- AND STAR BETWEEN 2 AND 3 -->
 	</select>
 
 	<!-- 리뷰 전체 갯수 -->
@@ -43,14 +73,16 @@
 	<!-- 리뷰 보통이에요 갯수 -->
 	<select id="normalCount" parameterType="ReviewVO"
 		resultType="Long">
-		SELECT COUNT(REVIEWNUM) FROM REVIEW WHERE RESTAURANTNUM=#{restaurantNum}
+		SELECT COUNT(REVIEWNUM) FROM REVIEW WHERE
+		RESTAURANTNUM=#{restaurantNum}
 		AND STAR BETWEEN 2
 		AND 3
 	</select>
 
-	<!-- 리뷰 별로에요 갯수 -->	
+	<!-- 리뷰 별로에요 갯수 -->
 	<select id="badCount" parameterType="ReviewVO" resultType="Long">
-		SELECT COUNT(REVIEWNUM) FROM REVIEW WHERE RESTAURANTNUM=#{restaurantNum} AND STAR BETWEEN 0 AND 2
+		SELECT COUNT(REVIEWNUM) FROM REVIEW WHERE
+		RESTAURANTNUM=#{restaurantNum} AND STAR BETWEEN 0 AND 2
 	</select>
 
 	<!-- <select id="restaurantDetail" parameterType="RestaurantVO" resultMap="restaurantResult"> 
