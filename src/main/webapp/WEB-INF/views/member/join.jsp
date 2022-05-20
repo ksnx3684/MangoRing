@@ -129,11 +129,11 @@
 	              </div>
 	              <div class="col-md-9 pe-5">
 					<!-- <input class="form-check-input" type="checkbox" id="Checkbox1" name="gender" value="0"> -->
-	  				<form:checkbox path="gender" cssClass="form-check-input" value="0"/>
-	  				<label class="form-check-label me-5" for="eCheckbox1">남</label>
+	  				<form:radiobutton path="gender" cssClass="form-check-input" value="0"/>
+	  				<label class="form-check-label me-5" for="Radios0">남</label>
 	  				<!-- <input class="form-check-input" type="checkbox" id="Checkbox2" name="gender" value="1"> -->
-	  				<form:checkbox path="gender" cssClass="form-check-input" value="1"/>
-	  				<label class="form-check-label" for="Checkbox2">여</label>
+	  				<form:radiobutton path="gender" cssClass="form-check-input" value="1"/>
+	  				<label class="form-check-label" for="Radios1">여</label>
 	              </div>
 	               <div class="col-md-3 ps-5 mt-3">
 	               	<form:errors path="gender"></form:errors>
