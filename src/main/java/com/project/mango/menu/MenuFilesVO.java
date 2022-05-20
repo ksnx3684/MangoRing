@@ -1,4 +1,4 @@
-package com.project.mango.restaurant;
+package com.project.mango.menu;
 
 import com.project.mango.util.FileVO;
 
@@ -7,8 +7,8 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class RestFileVO extends FileVO{
+public class MenuFilesVO extends FileVO{
 
-	private Long restaurantNum;
+	private Long menuNum;
 	
 }

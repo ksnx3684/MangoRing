@@ -1,4 +1,6 @@
-package com.project.mango.restaurant;
+package com.project.mango.menu;
+
+import java.util.List;
 
 import lombok.Data;
 
@@ -9,5 +11,8 @@ public class MenuVO {
 	private Long restaurantNum;
 	private String name;
 	private Long price;
+	private String detail;
+	
+	private List<MenuFilesVO> menuFilesVOs;
 	
 }

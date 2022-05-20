@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.mango.cart.CartMapper">
+	<resultMap type="CartVO" id="CartVO">
+		<id column="cartNum" property="cartNum"/>
+		<result column="id" property="id"/>
+		<result column="menuNum" property="menuNum"/>
+		<result column="menuCount" property="menuCount"/>
+		<collection property="menuVOs" javaType="List" ofType="MenuVO">
+			<id column="menuNum" property="menuNum"/>
+			<result column="restaurantNum" property="restaurantNum"/>
+			<result column="name" property="name"/>
+			<result column="price" property="price"/>
+			<result column="detail" property="detail"/>
+		</collection>
+		<collection property="menuFilesVOs" javaType="List" ofType="MenuFilesVO">
+			<id column="fileNum" property="fileNum"/>
+			<result column="restaurantNum" property="restaurantNum"/>
+			<result column="fileName" property="fileName"/>
+			<result column="oriName" property="oriName"/>
+		</collection>
+		<!-- <association property="id" javaType="MemberVO">
+			<id column="id" property="id"/>
+			<result column="pw" property="pw"/>
+			<result column="name" property="name"/>
+			<result column="email" property="email"/>
+			<result column="phone" property="phone"/>
+			<result column="gender" property="gender"/>
+			<result column="joinDate" property="joinDate"/>
+			<result column="userType" property="userType"/>
+			<result column="postCode" property="postCode"/>
+			<result column="address" property="address"/>
+			<result column="detailAddress" property="detailAddress"/>
+			<result column="extraAddress" property="extraAddress"/>
+			<result column="blacklist" property="blacklist"/>
+		</association> -->
+	</resultMap>
+	
+	<select id="cartlist" resultType="CartVO">
+		SELECT * FROM CART C
+		LEFT OUTER JOIN MENU M
+		ON C.MENUNUM = M.MENUNUM
+		LEFT OUTER JOIN MENU_FILE MF
+		ON M.MENUNUM = MF.MENUNUM
+		WHERE C.ID = #{id}
+		ORDER BY CARTNUM
+	</select>
+	<!-- <delete id="cartlistDelete" parameterMap="Long">
+		DELECT FROM CART WHERE CARTNUM = #{cartNum}
+	</delete> -->
+	
+</mapper>

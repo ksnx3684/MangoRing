@@ -3,6 +3,7 @@ package com.project.mango.restaurant;
 import java.sql.Date;
 import java.util.List;
 
+import com.project.mango.menu.MenuVO;
 import com.project.mango.review.ReviewVO;
 
 import lombok.Data;
@@ -28,4 +29,5 @@ public class RestaurantVO {
 	
 	private RestFileVO restFileVO;
 	private List<ReviewVO> reviewVOs;
+	private List<MenuVO> menuVOs;
 }
