@@ -94,7 +94,7 @@ class MemberDBTest {
 	@Test
 	void setBusinessApplication() throws Exception {
 		RestaurantVO restaurantVO = new RestaurantVO();
-		restaurantVO.setId("id3");
+		restaurantVO.setId("id4");
 		restaurantVO.setBusinessNum("111-22-33333");
 		restaurantVO.setAddress("테스트 주소");
 		restaurantVO.setIntroduction("테스트 한줄평");

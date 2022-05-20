@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
+import com.project.mango.restaurant.RestaurantVO;
+
 
 
 @Service
@@ -56,6 +58,16 @@ public class MemberService {
 	// 마이페이지
 	public MemberVO getMyPage(MemberVO memberVO) throws Exception {
 		return memberMapper.getMyPage(memberVO);
+	}
+	
+	// 사업자 등록
+	public int setBusinessApplication(RestaurantVO restaurantVO) throws Exception {
+		return memberMapper.setBusinessApplication(restaurantVO);
+	}
+	
+	// 사업자 등록 후 승인대기
+	public int setBusinessUserType(MemberVO memberVO) throws Exception {
+		return memberMapper.setBusinessUserType(memberVO);
 	}
 	
 	// 회원 탈퇴

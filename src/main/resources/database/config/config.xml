@@ -6,5 +6,7 @@
   <configuration>
   	<typeAliases>
   		<typeAlias type="com.project.mango.member.MemberVO" alias="MemberVO"/>
+  		<typeAlias type="com.project.mango.restaurant.RestaurantVO" alias="RestaurantVO"/>
+  		<typeAlias type="com.project.mango.category.CategoryVO" alias="CategoryVO"/>
   	</typeAliases>
   </configuration>

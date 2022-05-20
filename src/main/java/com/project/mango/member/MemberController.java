@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.project.mango.restaurant.RestaurantVO;
+
 @Controller
 @RequestMapping("member/*")
 public class MemberController {
@@ -23,24 +25,57 @@ public class MemberController {
 	
 	// 로그인 GET 방식
 	@GetMapping("login")
-	public String getLogin(Model model, @ModelAttribute MemberVO memberVO) throws Exception {
+	public String getLogin(@ModelAttribute MemberVO memberVO) throws Exception {
 		
 		return "member/login";
 	}
 	
 	// 로그인 POST 방식
 	@PostMapping("login")
-	public String getLogin(HttpSession session, @Valid MemberVO memberVO, BindingResult bindingResult) throws Exception {
-			
+	public String getLogin(HttpSession session, @Valid MemberVO memberVO, 
+			BindingResult bindingResult, RedirectAttributes rttr) throws Exception {
+		
 		memberVO = memberService.getLogin(memberVO);
 		String viewPath = "member/login";
 		
 		if(memberVO != null) {
 			session.setAttribute("member", memberVO);
-			viewPath = "redirect:../";
+			viewPath = "redirect:/";
+		} else {
+			session.setAttribute("member", null);
+			rttr.addFlashAttribute("msg", false);
+			return "redirect:./login";
 		}
 		
 		return viewPath;
+	}
+	
+	// 약관동의 GET 방식
+	@GetMapping("joinCheck")
+	public String setJoinCheck() throws Exception {
+		
+		return "member/joinCheck";
+	}
+	
+	// 회원가입 GET 방식
+	@GetMapping("join")
+	public String setJoin(@ModelAttribute MemberVO memberVO) throws Exception {
+		
+		return "member/join";
+	}
+	
+	// 회원가입 POST 방식
+	@PostMapping("join")
+	public String setJoin(Model model, @Valid MemberVO memberVO, BindingResult bindingResult) throws Exception {
+		
+		if(memberService.memberError(memberVO, bindingResult)) {
+			return "member/join";
+		}
+		
+		int result = memberService.setAddMember(memberVO);
+		model.addAttribute("vo", memberVO);
+		
+		return "redirect:./login";
 	}
 	
 	// 마이페이지
@@ -76,6 +111,28 @@ public class MemberController {
 		return "redirect:./myPage";
 	}
 	
+	// 사업자 신청 GET 방식
+	@GetMapping("business")
+	public String setBusiness(Model model, RestaurantVO restaurantVO) throws Exception {
+		model.addAttribute("vo", restaurantVO);
+		return "member/business";
+	}
+	
+	// 사업자 신청 POST 방식
+	@PostMapping("business")
+	public String setBusiness(HttpSession session, RestaurantVO restaurantVO) throws Exception {
+		
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		restaurantVO.setId(memberVO.getId());
+		// 사업자 정보 등록
+		int result = memberService.setBusinessApplication(restaurantVO);
+		// 사업자 등록 후 승인 대기로 변경
+		result = memberService.setBusinessUserType(memberVO);
+			
+		return "redirect:../";
+	}
+	
+	
 	// 로그아웃
 	@GetMapping("logout")
 	public String logout(HttpSession session) throws Exception {
@@ -103,6 +160,7 @@ public class MemberController {
 		// vo로 들어오는 비밀번호
 		String voPass = vo.getPw();
 		
+		// 비밀번호가 다를시
 		if(!(sessionPass.equals(voPass))) {
 			rttr.addFlashAttribute("msg", false);
 			return "redirect:./delete";
@@ -111,34 +169,5 @@ public class MemberController {
 		int result = memberService.setDelete(memberVO);
 		session.invalidate();
 		return "redirect:/";
-	}
-	
-	
-	// 약관동의 GET 방식
-	@GetMapping("joinCheck")
-	public String setJoinCheck() throws Exception {
-		
-		return "member/joinCheck";
-	}
-	
-	// 회원가입 GET 방식
-	@GetMapping("join")
-	public String setJoin(@ModelAttribute MemberVO memberVO) throws Exception {
-		
-		return "member/join";
-	}
-	
-	// 회원가입 POST 방식
-	@PostMapping("join")
-	public String setJoin(Model model, @Valid MemberVO memberVO, BindingResult bindingResult) throws Exception {
-		
-		if(memberService.memberError(memberVO, bindingResult)) {
-			return "member/join";
-		}
-		
-		int result = memberService.setAddMember(memberVO);
-		model.addAttribute("vo", memberVO);
-		
-		return "redirect:./login";
 	}
 }

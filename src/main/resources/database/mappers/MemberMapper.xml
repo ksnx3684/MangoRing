@@ -6,7 +6,7 @@
 	
 	<!-- 로그인 -->
 	<select id="getLogin" parameterType="MemberVO" resultType="MemberVO">
-		SELECT ID, PW FROM MEMBER WHERE ID = #{id} AND PW = #{pw}
+		SELECT ID, PW, USERTYPE FROM MEMBER WHERE ID = #{id} AND PW = #{pw}
 	</select>
 	
 	<!-- ID 중복 검사 -->
@@ -22,7 +22,7 @@
 	
 	<!-- 마이페이지 -->
 	<select id="getMyPage" parameterType="MemberVO" resultType="MemberVO">
-		SELECT NAME, EMAIL, PHONE, GENDER, JOINDATE, USERTYPE, BUSINESSNUM,
+		SELECT NAME, EMAIL, PHONE, GENDER, JOINDATE, USERTYPE,
 		POSTCODE, ADDRESS, DETAILADDRESS, EXTRAADDRESS, BLACKLIST
 		FROM MEMBER WHERE ID = #{id}
 	</select>
@@ -32,6 +32,18 @@
 		UPDATE MEMBER SET NAME = #{name}, PHONE = #{phone}, EMAIL = #{email}, ADDRESS = #{address},
 		POSTCODE = #{postCode}, DETAILADDRESS = #{detailAddress}, EXTRAADDRESS = #{extraAddress}
 		WHERE ID = #{id}
+	</update>
+	
+	<!-- 사업자 등록 -->
+	<update id="setBusinessApplication" parameterType="RestaurantVO">
+		UPDATE RESTAURANT SET ID = #{id}, BUSINESSNUM = #{businessNum}, ADDRESS = #{address},
+		POSTCODE = #{postCode}, DETAILADDRESS = #{detailAddress}, EXTRAADDRESS = #{extraAddress},
+		INTRODUCTION = #{introduction}, PARKINGCHECK = #{parkingCheck}, KIDCHECK = #{kidCheck}
+	</update>
+	
+	<!-- 사업자 등록 후 승인처리 -->
+	<update id="setBusinessUserType" parameterType="MemberVO">
+		UPDATE MEMBER SET BUSINESSOK = 1 WHERE ID = #{id}
 	</update>
 	
 	<!-- 회원 탈퇴 -->

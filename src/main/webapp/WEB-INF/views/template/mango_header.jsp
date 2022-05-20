@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-
 <header class="p-3 mb-3 border-bottom">
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -30,6 +28,9 @@
           	<c:choose>
           		<c:when test="${not empty member}">
           			<li><a class="dropdown-item" href="/member/myPage">My Page</a></li>
+          			<c:if test="${member.userType eq 3}">
+          				<li><a class="dropdown-item" href="#">관리자 페이지</a></li>
+          			</c:if>
 		            <li><hr class="dropdown-divider"></li>
           			<li><a class="dropdown-item" href="/member/logout">로그아웃</a></li>
           		</c:when>

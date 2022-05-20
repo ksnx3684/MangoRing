@@ -5,6 +5,8 @@ import java.sql.Date;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import com.project.mango.restaurant.RestaurantVO;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -48,5 +50,10 @@ public class MemberVO {
 	private String extraAddress;
 	// 블랙리스트
 	private Long blackList;
+	// 사업자승인 여부
+	private Long businessOk;
+	
+	// 식당 VO
+	private RestaurantVO restaurantVO;
 	
 }

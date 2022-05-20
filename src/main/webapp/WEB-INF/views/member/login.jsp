@@ -41,28 +41,35 @@
       <input type="text" class="form-control" id="floatingInput" name="id">
       <!-- <form:input path="id" id="floatingInput" cssClass="form-control"/> -->
       <label for="floatingInput">ID</label>
-<!--
+
       	<div>
       		<form:errors path="id"></form:errors>
       	</div>
--->
+
     </div>
     <div class="form-floating">
       <input type="password" class="form-control" id="floatingPassword" name="pw">
 	  <!-- <form:password path="pw" cssClass="form-control" id="floatingPassword"/> -->
       <label for="floatingPassword">Password</label>
-<!-- 
       	<div>
       		<form:errors path="pw"></form:errors>
       	</div>
- -->
     </div>
-
+    <div class="mb-2">
+		<c:if test="${msg == false}">
+			아이디나 비밀번호를 확인해주세요
+		</c:if>
+	</div>
+	
+    
+<!--
     <div class="checkbox mt-2 mb-3">
+  
       <label>
         <input type="checkbox" value="remember-me"> Remember me
       </label>
     </div>
+-->
     <div class="d-grid gap-2 d-md-block">
 	  <button class="btn btn-primary" type="submit">로그인</button>
 	  <button id="joinCheck" class="btn btn-success" type="button">회원가입</button>
