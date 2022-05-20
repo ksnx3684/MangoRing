@@ -1,0 +1,39 @@
+.container{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.title > a{
+    display: inline-block;
+    color: #555;
+}
+a:link {
+  text-decoration: none !important;
+}
+a:visited {
+  text-decoration: none !important;
+}
+a:hover {
+  text-decoration: none !important;
+}
+a:active {
+  text-decoration: none !important;
+}
+
+.star{
+	display: inline-block;
+	color: #ff792a;
+}
+
+.address{
+	color: #9B9B9B;
+}
+
+.sector-left, .sector-right{
+	display: inline-block;
+}
+
+.sector-left-img{
+	width: 300px;
+	height: 300px;
+}

@@ -14,7 +14,9 @@ public class ReviewVO {
 	private String id;
 	private Long restaurantNum;
 	private Long reservationNum;
+
 	private float star;
+
 	private Date regDate;
 	private Long reportCheck;
 	private String contents;

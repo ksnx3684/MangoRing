@@ -4,16 +4,15 @@ import java.sql.Date;
 
 import com.project.mango.menu.MenuVO;
 
-
 import java.util.List;
-
 import com.project.mango.hashtag.HashtagVO;
+import com.project.mango.review.ReviewVO;
+
 
 import lombok.Data;
 
 @Data
-public class RestaurantVO {
-	
+public class RestaurantVO {	
 
 	private CategoryVO categoryVO;
 	private List<MenuVO> menuVOs;
@@ -34,11 +33,12 @@ public class RestaurantVO {
 	private String introduction;
 	private String accountNumber;
 
-
 	private List<RestaurantFileVO> restaurantFileVOs;
 	private List<HashtagVO> hashtagVOs;
 	
 	private String businessNum;
-
+	
+	private RestFileVO restFileVO;
+	private List<ReviewVO> reviewVOs;
 
 }

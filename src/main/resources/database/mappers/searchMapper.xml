@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.mango.search.SearchMapper">
+	<resultMap type="RestaurantVO" id="RestaurantVO">
+		<id column="restaurantNum" property="restaurantNum"/>
+		<result column="categoryNum" property="categoryNum"/>
+		<result column="id" property="id"/>
+		<result column="restaurantName" property="restaurantName"/>
+		<result column="restaurantPhone" property="restaurantPhone"/>
+		<result column="postCode" property="postCode"/>
+		<result column="address" property="address"/>
+		<result column="detailAddress" property="detailAddress"/>
+		<result column="extraAddress" property="extraAddress"/>
+		<result column="regDate" property="regDate"/>
+		<result column="editDate" property="editDate"/>
+		<result column="parkingCheck" property="parkingCheck"/>
+		<result column="kidCheck" property="kidCheck"/>
+		<result column="introduction" property="introduction"/>
+		<result column="accountNumber" property="accountNumber"/>
+		<association property="restFileVO" javaType="RestFileVO">
+			<id column="fileNum" property="fileNum"/>
+			<result column="restaurantNum" property="restaurantNum"/>
+			<result column="fileName" property="fileName"/>
+			<result column="oriName" property="oriName"/>
+		</association>
+		<collection property="reviewVOs" javaType="List" ofType="ReviewVO">
+			<id column="reviewNum" property="reviewNum"/>
+			<result column="id" property="id"/>
+			<result column="restaurantNum" property="restaurantNum"/>
+			<result column="reservationNum" property="reservationNum"/>
+			<result column="star" property="star"/>
+			<result column="regDate" property="regDate"/>
+			<result column="reportCheck" property="reportCheck"/>
+			<result column="contents" property="contents"/>
+		</collection>
+	</resultMap>
+	
+	<select id="search" parameterType="SearchVO" resultMap="RestaurantVO">
+		SELECT R.*, RF.*, M.NAME AS NAME, AVG(RV.STAR) AS STAR FROM RESTAURANT R
+			LEFT JOIN REST_FILE RF
+			ON R.RESTAURANTNUM = RF.RESTAURANTNUM
+			LEFT JOIN MENU M
+			ON R.RESTAURANTNUM = M.RESTAURANTNUM
+			LEFT JOIN REVIEW RV
+			ON R.RESTAURANTNUM = RV.RESTAURANTNUM
+			<choose>
+				<when test="address != '전국'"> <!-- 지역을 선택한 경우 -->
+					WHERE R.ADDRESS LIKE CONCAT('%',#{address},'%')
+						AND (R.RESTAURANTNAME LIKE CONCAT('%',#{name},'%')
+						OR R.DETAILADDRESS LIKE CONCAT('%',#{name},'%')
+						OR M.NAME LIKE CONCAT('%',#{name},'%'))
+				</when>
+				<otherwise> <!-- 전국인 경우 -->
+					WHERE R.RESTAURANTNAME LIKE CONCAT('%',#{name},'%')
+						OR R.ADDRESS LIKE CONCAT('%',#{name},'%')
+						OR R.DETAILADDRESS LIKE CONCAT('%',#{name},'%')
+						OR M.NAME LIKE CONCAT('%',#{name},'%')
+				</otherwise>
+			</choose>
+		GROUP BY R.RESTAURANTNAME
+		ORDER BY STAR DESC
+	</select>
+	<select id="detailSearch" parameterType="SearchVO" resultMap="RestaurantVO">
+		SELECT R.*, RF.*, M.NAME AS NAME, AVG(RV.STAR) AS STAR, COUNT(DISTINCT(RV.REVIEWNUM)) AS REVIEW FROM RESTAURANT R
+			LEFT JOIN REST_FILE RF
+			ON R.RESTAURANTNUM = RF.RESTAURANTNUM
+			LEFT JOIN MENU M
+			ON R.RESTAURANTNUM = M.RESTAURANTNUM
+			LEFT JOIN REVIEW RV
+			ON R.RESTAURANTNUM = RV.RESTAURANTNUM
+			LEFT JOIN REST_TAG RT
+			ON R.RESTAURANTNUM = RT.RESTAURANTNUM
+		WHERE (R.ADDRESS LIKE CONCAT('%',#{address},'%')
+			OR R.DETAILADDRESS LIKE CONCAT('%',#{detailAddress},'%'))
+			<if test="name != null">
+				AND NAME LIKE CONCAT('%',#{name},'%')
+			</if>
+			<if test="kidCheck == 1">
+				AND R.KIDCHECK = 1
+			</if>
+			<if test="parkingCheck == 1">
+				AND R.PARKINGCHECK = 1
+			</if>
+			<if test="tagNum != null">
+				AND TAGNUM IN
+				<foreach collection="tagNum" item="tagNum" open="(" close=")" separator=",">
+					#{tagNum}
+				</foreach>
+			</if>
+		GROUP BY R.RESTAURANTNAME
+		<choose>
+			<when test="star == 0">
+				ORDER BY STAR DESC
+			</when>
+			<otherwise>
+				ORDER BY REVIEW DESC
+			</otherwise>
+		</choose>
+		<!-- <if test="star != 0.0">
+			HAVING AVG(RV.STAR) >= #{star}
+		</if> -->
+	</select>
+	<select id="mainSearch" parameterType="SearchVO" resultMap="RestaurantVO">
+		SELECT R.*, RF.*, M.NAME AS NAME, AVG(RV.STAR) AS STAR FROM RESTAURANT R
+			LEFT JOIN REST_FILE RF
+			ON R.RESTAURANTNUM = RF.RESTAURANTNUM
+			LEFT JOIN MENU M
+			ON R.RESTAURANTNUM = M.RESTAURANTNUM
+			LEFT JOIN REVIEW RV
+			ON R.RESTAURANTNUM = RV.RESTAURANTNUM
+		WHERE R.RESTAURANTNAME LIKE CONCAT('%',#{name},'%')
+			OR R.ADDRESS LIKE CONCAT('%',#{name},'%')
+			OR R.DETAILADDRESS LIKE CONCAT('%',#{name},'%')
+			OR M.NAME LIKE CONCAT('%',#{name},'%')
+		GROUP BY R.RESTAURANTNAME
+		ORDER BY STAR DESC
+	</select>
+	
+	<select id="hashtagList" resultType="HashtagVO">
+		SELECT * FROM HASHTAG
+	</select>
+
+</mapper>

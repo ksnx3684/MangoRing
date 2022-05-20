@@ -1,8 +1,6 @@
 package com.project.mango.menu;
 
-
 import java.util.List;
-
 
 import lombok.Data;
 
@@ -22,5 +20,4 @@ public class MenuVO {
 	
 	private MenuFileVO menuFileVO;
 	
-
 }

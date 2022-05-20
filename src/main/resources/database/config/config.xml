@@ -38,9 +38,17 @@
 			type="com.project.mango.reservation.ReservationVO"
 			alias="ReservationVO" />
 
-	<typeAlias type="com.project.mango.member.MemberVO"
-			alias="MemberVO" />
+		<typeAlias type="com.project.mango.member.MemberVO"
+				alias="MemberVO" />
+			
+		<typeAlias type="com.project.mango.search.SearchVO"
+				alias="SearchVO"/>
+				
+	  	<typeAlias type="com.project.mango.cart.CartVO"
+	  			alias="CartVO"/>
 
 	</typeAliases>
 
 </configuration>
+
+
