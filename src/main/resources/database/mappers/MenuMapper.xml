@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.mango.menu.MenuMapper">
+
+	<select id="getList" parameterType="RestaurantVO" resultMap="listResult">
+		SELECT * FROM MENU M
+			LEFT JOIN MENU_FILE MF
+			ON (M.MENUNUM = MF.MENUNUM)
+		WHERE M.RESTAURANTNUM = #{restaurantNum}
+	</select>
+	<resultMap type="MenuVO" id="listResult">
+		<id column="menuNum" property="menuNum"/>
+		<result column="restaurantNum" property="restaurantNum"/>
+		<result column="name" property="name"/>
+		<result column="price" property="price"/>
+		<result column="detail" property="detail"/>
+		<association property="menuFileVO" javaType="MenuFileVO">
+			<id column="fileNum" property="fileNum"/>
+			<result column="fileName" property="fileName"/>
+			<result column="oriName" property="oriName"/>
+		</association>
+	</resultMap>
+	
+	<insert id="setAdd" parameterType="MenuVO" useGeneratedKeys="true" keyProperty="menuNum">
+		INSERT INTO MENU (MENUNUM, RESTAURANTNUM, NAME, PRICE, DETAIL)
+		VALUES (NULL, #{restaurantNum}, #{name}, #{price}, #{detail})
+	</insert>
+	
+	<insert id="setFileAdd" parameterType="MenuFileVO">
+		INSERT INTO MENU_FILE (FILENUM, MENUNUM, FILENAME, ORINAME)
+		VALUES (NULL, #{menuNum}, #{fileName}, #{oriName})
+	</insert>
+	
+	<delete id="setFileDelete" parameterType="MenuFileVO">
+		DELETE FROM MENU_FILE WHERE FILENUM = #{fileNum}
+	</delete>
+	
+	<select id="getFileDetail" parameterType="MenuFileVO" resultType="MenuFileVO">
+		SELECT * FROM MENU_FILE WHERE FILENUM = #{fileNum}
+	</select>
+	
+	<update id="setUpdate" parameterType="MenuVO">
+		UPDATE MENU SET NAME = #{name}, PRICE = #{price}, DETAIL = #{detail}
+		WHERE MENUNUM = #{menuNum}
+	</update>
+	
+	<delete id="setDelete" parameterType="MenuVO">
+		DELETE FROM MENU WHERE MENUNUM = #{menuNum}
+	</delete>
+
+</mapper>

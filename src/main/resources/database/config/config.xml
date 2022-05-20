@@ -2,23 +2,45 @@
 <!DOCTYPE configuration
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
-  
-  <configuration>
-  
-  
-  <typeAliases>
-  
-  <typeAlias type="java.util.List" alias="List" />
-  <typeAlias type="java.lang.Long" alias="Long"/>
-  
-  <typeAlias type="com.project.mango.review.ReviewVO" alias="ReviewVO"/>
-   <typeAlias type="com.project.mango.review.ReviewFilesVO" alias="ReviewFilesVO"/>
-   
-    <typeAlias type="com.project.mango.restaurant.RestaurantVO" alias="RestaurantVO"/>
-  	<typeAlias type="com.project.mango.restaurant.CategoryVO" alias="CategoryVO"/>
-  	
-  	<typeAlias type="com.project.mango.menu.MenuVO" alias="MenuVO"/>
-  
-  </typeAliases>
-  	
-  </configuration>
+
+<configuration>
+	
+
+
+	<typeAliases>
+
+		<typeAlias type="java.util.List" alias="List" />
+		<typeAlias type="java.lang.Long" alias="Long" />
+		<typeAlias type="java.util.Map" alias="Map" />
+
+		<typeAlias type="com.project.mango.review.ReviewVO"
+			alias="ReviewVO" />
+		<typeAlias type="com.project.mango.review.ReviewFilesVO"
+			alias="ReviewFilesVO" />
+
+		<typeAlias type="com.project.mango.restaurant.RestaurantVO"
+			alias="RestaurantVO" />
+		<typeAlias
+			type="com.project.mango.restaurant.RestaurantFileVO"
+			alias="RestaurantFileVO" />
+
+		<typeAlias type="com.project.mango.restaurant.CategoryVO"
+			alias="CategoryVO" />
+
+		<typeAlias type="com.project.mango.menu.MenuVO"
+			alias="MenuVO" />
+		<typeAlias type="com.project.mango.menu.MenuFileVO"
+			alias="MenuFileVO" />
+
+		<typeAlias type="com.project.mango.hashtag.HashtagVO"
+			alias="HashtagVO" />
+		<typeAlias
+			type="com.project.mango.reservation.ReservationVO"
+			alias="ReservationVO" />
+
+	<typeAlias type="com.project.mango.member.MemberVO"
+			alias="MemberVO" />
+
+	</typeAliases>
+
+</configuration>

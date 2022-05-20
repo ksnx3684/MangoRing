@@ -24,11 +24,11 @@ public class RestaurantController {
 
 	
 	@GetMapping("detail")
-	public ModelAndView getDetail(RestaurantVO restaurantVO,ReviewVO reviewVO,MenuVO menuVO)throws Exception{
+	public ModelAndView getDetailWM(RestaurantVO restaurantVO,ReviewVO reviewVO,MenuVO menuVO)throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
 		//레스토랑 정보 , 카테고리 종류
-		restaurantVO = restaurantService.getDetail(restaurantVO);
+		restaurantVO = restaurantService.getDetailWM(restaurantVO);
 		System.out.println(restaurantVO.getRestaurantName());
 		System.out.println(restaurantVO.getCategoryVO().getCategoryName());
 		
@@ -47,7 +47,7 @@ public class RestaurantController {
 		System.out.println(menuVO.getMenuNum());
 		
 		menuVO.setRestaurantNum(restaurantVO.getRestaurantNum());
-		List<MenuVO> menuAr = restaurantService.getList(menuVO);
+		List<MenuVO> menuAr = restaurantService.getListWM(menuVO);
 		
 		
 		

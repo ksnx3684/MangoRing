@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.mango.member.MemberMapper">
+	
+	<!-- 로그인 -->
+	<select id="getLogin" parameterType="MemberVO" resultType="MemberVO">
+		SELECT ID, PW, USERTYPE FROM MEMBER WHERE ID = #{id} AND PW = #{pw}
+	</select>
+	
+	<!-- ID 중복 검사 -->
+	<select id="getId" parameterType="MemberVO" resultType="MemberVO">
+		SELECT ID FROM MEMBER WHERE ID = #{id}
+	</select>
+	
+	<!-- 회원 가입 -->
+	<insert id="setAddMember" parameterType="MemberVO">
+		INSERT INTO MEMBER (ID, PW, NAME, EMAIL, PHONE, GENDER, JOINDATE, USERTYPE, BLACKLIST)
+		VALUES(#{id}, #{pw}, #{name}, #{email}, #{phone}, #{gender}, NOW(), 1, 0)
+	</insert>
+	
+	<!-- 마이페이지 -->
+	<select id="getMyPage" parameterType="MemberVO" resultType="MemberVO">
+		SELECT NAME, EMAIL, PHONE, GENDER, JOINDATE, USERTYPE,
+		POSTCODE, ADDRESS, DETAILADDRESS, EXTRAADDRESS, BLACKLIST
+		FROM MEMBER WHERE ID = #{id}
+	</select>
+	
+	<!-- 회원정보 업데이트 -->
+	<update id="setUpdate" parameterType="MemberVO">
+		UPDATE MEMBER SET NAME = #{name}, PHONE = #{phone}, EMAIL = #{email}, ADDRESS = #{address},
+		POSTCODE = #{postCode}, DETAILADDRESS = #{detailAddress}, EXTRAADDRESS = #{extraAddress}
+		WHERE ID = #{id}
+	</update>
+	
+	<!-- 사업자 등록 -->
+	<update id="setBusinessApplication" parameterType="RestaurantVO">
+		UPDATE RESTAURANT SET ID = #{id}, BUSINESSNUM = #{businessNum}, ADDRESS = #{address},
+		POSTCODE = #{postCode}, DETAILADDRESS = #{detailAddress}, EXTRAADDRESS = #{extraAddress},
+		INTRODUCTION = #{introduction}, PARKINGCHECK = #{parkingCheck}, KIDCHECK = #{kidCheck}
+	</update>
+	
+	<!-- 사업자 등록 후 승인처리 -->
+	<update id="setBusinessUserType" parameterType="MemberVO">
+		UPDATE MEMBER SET BUSINESSOK = 1 WHERE ID = #{id}
+	</update>
+	
+	<!-- 회원 탈퇴 -->
+	<delete id="setDelete" parameterType="MemberVO">
+		DELETE FROM MEMBER WHERE ID = #{id} AND PW = #{pw}
+	</delete>
+	
+</mapper>
