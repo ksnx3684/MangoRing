@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.mango.notice.restaurant.ResMapper">
+
+	<select id="getList" resultType="ResNoticeVO" parameterType="Pager">
+	SELECT * FROM REST_NOTICE
+	WHERE NUM > 0 AND
+		<choose>
+			<when test="kind == 'col1'">
+				TITLE
+			</when>
+			<when test="kind == 'col2'">
+				CONTENTS
+			</when>
+			<otherwise>
+				ID
+			</otherwise>
+		</choose>
+		LIKE CONCAT('%', #{search},'%')
+		
+		ORDER BY NUM DESC
+		LIMIT #{startRow}, #{perPage}
+	</select>
+	
+	<insert id="setAdd" parameterType="ResNoticeVO" useGeneratedKeys="true" keyProperty="num">
+		INSERT INTO REST_NOTICE (NUM, RESTAURANTNUM, TITLE, ID, CONTENTS, DATE)
+		VALUES(#{num}, #{restaurantNum}, #{title}, #{id}, #{contents}, now())
+	</insert>
+	
+	
+	<update id="setUpdate" parameterType="ResNoticeVO">
+		UPDATE REST_NOTICE SET TITLE=#{title}, CONTENTS=#{contents} WHERE NUM=#{num}
+	</update>
+	
+	<delete id="setDelete" parameterType="ResNoticeVO">
+		DELETE FROM REST_NOTICE WHERE NUM=#{num}
+	</delete>
+
+	<select id="getDetail" parameterType="ResNoticeVO" resultMap="getDetailResult">
+		SELECT N.*, F.*
+		FROM REST_NOTICE N
+			LEFT JOIN
+			REST_NOTICE_FILE F
+			USING(NUM)
+		WHERE NUM=#{num}
+	</select>
+
+	<resultMap type="ResNoticeVO" id="getDetailResult">
+		<id column="num" property="num"/>
+		<result column="restaurantNum" property="restaurantNum"/>
+		<result column="id" property="id"/>
+		<result column="title" property="title"/>
+		<result column="contents" property="contents"/>
+		<result column="date" property="date"/>
+		<collection property="filesVOs" javaType="java.util.List" ofType="ResFilesVO">
+			<id column="fileNum" property="fileNum"/>
+			<result column="fileName" property="fileName"/>
+			<result column="oriName" property="oriName"/>
+		</collection>
+	</resultMap>
+	
+	<select id="getTotalCount" resultType="java.lang.Long" parameterType="Pager">
+		SELECT COUNT(NUM) FROM REST_NOTICE
+		WHERE
+		<choose>
+			<when test="kind == 'col1'">
+				TITLE
+			</when>
+			<when test="kind == 'col2'">
+				CONTENTS
+			</when>
+			<otherwise>
+				ID
+			</otherwise>
+		</choose>
+		LIKE CONCAT('%', #{search}, '%')
+	</select>
+	
+	<select id="getFileList" parameterType="ResNoticeVO" resultType="ResFilesVO">
+		SELECT * FROM REST_NOTICE_FILE WHERE NUM=#{num}
+	</select>
+	
+	<select id="getFileDetail" parameterType="ResFilesVO" resultType="ResFilesVO">
+		SELECT * FROM REST_NOTICE_FILE WHERE FILENUM=#{fileNum}
+	</select>
+	
+	<insert id="setFileAdd" parameterType="ResFilesVO">
+		INSERT INTO REST_NOTICE_FILE (FILENUM, NUM, FILENAME, ORINAME)
+		VALUES (NULL, #{num}, #{fileName}, #{oriName})
+	</insert>
+
+</mapper>

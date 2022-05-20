@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
+
 <configuration>
 	
 
@@ -47,8 +48,15 @@
 	  	<typeAlias type="com.project.mango.cart.CartVO"
 	  			alias="CartVO"/>
 
-	</typeAliases>
+  		<typeAlias type="com.project.mango.notice.NoticeVO" alias="NoticeVO"/>
+  		<typeAlias type="com.project.mango.notice.NoticeFilesVO" alias="NoticeFilesVO"/>
+  		<typeAlias type="com.project.mango.board.BoardVO" alias="BoardVO"/>
+  		<typeAlias type="com.project.mango.notice.restaurant.ResNoticeVO" alias="ResNoticeVO"/>
+  		<typeAlias type="com.project.mango.notice.restaurant.ResFilesVO" alias="ResFilesVO"/>
+  		<typeAlias type="com.project.mango.util.Pager" alias="Pager"/>
 
-</configuration>
+  	</typeAliases>
+  </configuration>
 
+  	
 
