@@ -48,14 +48,25 @@ public class MenuService {
 		//사진 지우기
 		menuFileVO = menuMapper.getFileDetail(menuFileVO);
 		int result = menuMapper.setFileDelete(menuFileVO);
+		
 		if(result > 0) {
 			boolean check = fileManager.fileDelete(menuFileVO.getFileName(), "/resources/upload/menu/");
 		}
+
 		
 		//메뉴정보 삭제
 		result = menuMapper.setDelete(menuVO);
 			
 		return result;
+	}
+	
+	public boolean setFileDeleteOnly(MenuFileVO menuFileVO) throws Exception {
+		boolean check = fileManager.fileDelete(menuFileVO.getFileName(), "/resources/upload/menu/");
+		return check;
+	}
+	
+	public MenuFileVO getFileDetail(MenuFileVO menuFileVO) throws Exception {
+		return menuMapper.getFileDetail(menuFileVO);
 	}
 
 }

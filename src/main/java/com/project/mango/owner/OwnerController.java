@@ -1,5 +1,6 @@
 package com.project.mango.owner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -173,23 +174,35 @@ public class OwnerController {
 	public ModelAndView setDelete(RestaurantVO restaurantVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		int result = 0;
 		
-		//가게 파일 삭제
 		restaurantVO = restaurantService.getDetail(restaurantVO);
+		List<RestaurantFileVO> restFiles = new ArrayList<RestaurantFileVO>();
 		for(RestaurantFileVO restFile : restaurantVO.getRestaurantFileVOs()) {
-			result = restaurantService.setFileDelete(restFile);
+			restFile = restaurantService.getFileDetail(restFile);
+			restFiles.add(restFile);
+		}
+		List<MenuVO> menuVOs = menuService.getList(restaurantVO);
+		List<MenuFileVO> menuFiles = new ArrayList<MenuFileVO>();
+		for(MenuVO menuVO : menuVOs) {
+			MenuFileVO menuFile = menuService.getFileDetail(menuVO.getMenuFileVO());
+			menuFiles.add(menuFile);
 		}
 		
-		//메뉴 파일 삭제
-		List<MenuVO> menuVOs = menuService.getList(restaurantVO);
-		for(MenuVO menuVO : menuVOs) {
-			result = menuService.setDelete(menuVO.getMenuFileVO(), menuVO);	
-		}
+		int result = restaurantService.setDelete(restaurantVO);
 		
 		if(result > 0) {
-			result = restaurantService.setDelete(restaurantVO);
-		}	
+			
+			//가게 파일 삭제
+			for(RestaurantFileVO restFile : restFiles) {
+				boolean check = restaurantService.setFileDeleteOnly(restFile);
+			}
+			
+			//메뉴 파일 삭제
+			for(MenuFileVO menuFile : menuFiles) {
+				boolean check = menuService.setFileDeleteOnly(menuFile);
+			}
+	
+		}
 		
 		mv.setViewName("redirect:../list");
 		return mv;

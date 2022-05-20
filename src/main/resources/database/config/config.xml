@@ -10,6 +10,9 @@
   		<typeAlias type="com.project.mango.menu.MenuVO" alias="MenuVO"/>
   		<typeAlias type="com.project.mango.menu.MenuFileVO" alias="MenuFileVO"/>
   		<typeAlias type="com.project.mango.hashtag.HashtagVO" alias="HashtagVO"/>
+  		<typeAlias type="com.project.mango.reservation.ReservationVO" alias="ReservationVO"/>
+  		
+  		
   		<typeAlias type="java.util.Map" alias="Map"/>
   		<typeAlias type="java.util.List" alias="List"/>
   	</typeAliases>

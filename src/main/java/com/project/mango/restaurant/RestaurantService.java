@@ -89,7 +89,17 @@ public class RestaurantService {
 			boolean check = fileManager.fileDelete(restaurantFileVO.getFileName(), "/resources/upload/restaurant/");
 		}
 		
+		
 		return result;
+	}
+	
+	public boolean setFileDeleteOnly(RestaurantFileVO restaurantFileVO) throws Exception {
+		boolean check = fileManager.fileDelete(restaurantFileVO.getFileName(), "/resources/upload/restaurant/");
+		return check;
+	}
+	
+	public RestaurantFileVO getFileDetail(RestaurantFileVO restaurantFileVO) throws Exception {
+		return restaurantMapper.getFileDetail(restaurantFileVO);
 	}
 	
 	public int setRestuarantTag (RestaurantVO restaurantVO, HashtagVO hashtagVO) throws Exception {

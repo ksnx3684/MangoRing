@@ -8,5 +8,8 @@
 </head>
 <body>
 	<h1>hi!</h1>
+	
+	<a href="./reservation/write?restaurantNum=1">예약하기</a>
+	
 </body>
 </html>
