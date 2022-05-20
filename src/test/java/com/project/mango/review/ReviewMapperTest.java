@@ -25,12 +25,22 @@ class ReviewMapperTest {
 		
 	}
 	
-	@Test
+	//@Test
 	void getListTest()throws Exception{
 		ReviewVO reviewVO = new ReviewVO();
 		reviewVO.setRestaurantNum(1L);
-		List<ReviewVO> ar = reviewMapper.getListReview();
+		List<ReviewVO> ar = reviewMapper.getListReview(reviewVO);
 		assertNotNull(ar);
+	}
+	
+	@Test
+	void setUpdate()throws Exception{
+		ReviewVO reviewVO = new ReviewVO();
+		reviewVO.setReviewNum(4L);
+		reviewVO.setStar(5);
+		reviewVO.setContents("맛있네여");
+		int result = reviewMapper.setUpdate(reviewVO);
+		assertEquals(1, result);
 	}
 
 }

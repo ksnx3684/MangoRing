@@ -15,6 +15,9 @@ public interface ReviewMapper {
 	//add
 	public int setAdd(ReviewVO reviewVO)throws Exception;
 	
+	//update
+	public int setUpdate(ReviewVO reviewVO)throws Exception;
+	
 	//detail
 	public ReviewVO getDetailReview(ReviewVO reviewVO)throws Exception;
 	

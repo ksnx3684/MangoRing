@@ -24,46 +24,83 @@
 		<h1>ID :</h1>
 
 		<c:if test="${revo.star eq '5' }">
-			<h1 id="reviewStar">리뷰 별모양★★★★★</h1>
+			<h1 id="reviewStar">리뷰 ★★★★★</h1>
 		</c:if>
 		<c:if test="${revo.star eq '4' }">
-			<h1 id="reviewStar">리뷰 별모양★★★★☆</h1>
+			<h1 id="reviewStar">리뷰 ★★★★☆</h1>
 		</c:if>
 		<c:if test="${revo.star eq '3' }">
-			<h1 id="reviewStar">리뷰 별모양★★★☆☆</h1>
+			<h1 id="reviewStar">리뷰 ★★★☆☆</h1>
 		</c:if>
 		<c:if test="${revo.star eq '2' }">
-			<h1 id="reviewStar">리뷰 별모양★★☆☆☆</h1>
+			<h1 id="reviewStar">리뷰 ★★☆☆☆</h1>
 		</c:if>
 		<c:if test="${revo.star eq '1' }">
-			<h1 id="reviewStar">리뷰 별모양★☆☆☆☆</h1>
+			<h1 id="reviewStar">리뷰 ★☆☆☆☆</h1>
 		</c:if>
 		<c:if test="${revo.star eq '0' }">
-			<h1 id="reviewStar">리뷰 별모양☆☆☆☆☆</h1>
+			<h1 id="reviewStar">리뷰 ☆☆☆☆☆</h1>
 		</c:if>
 
 	</div>
 
-	<%-- 	 	<div id="revPicBox">
-		<div class="revPics">
-		<c:forEach items="${revo.reviewFilesVOs }" var="rFilesVOS">
-		<img alt="" src="../resources/upload/review/${rFilesVOS.fileName}">
-		</c:forEach>
-		</div>
-	</div>  --%>
 
-	<div style="overflow: hidden">
-		<div class="con">
-			<c:forEach items="${revo.reviewFilesVOs }" var="rFilesVOS">
-				<div class="inn">
-					<img class="pic" alt="" src="../resources/upload/review/${rFilesVOS.fileName}">
+	<div id="carouselExampleControls" class="carousel slide"
+		data-bs-ride="carousel">
+		<div class="carousel-inner">
+		<div id="revPicBox">
+		<div class="revPics">
+			<c:forEach items="${revo.reviewFilesVOs }" varStatus="status" var="rFilesVOS">	
+				<div class="carousel-item <c:if test="${status.index eq 0 }">active </c:if>">   
+				
+					<img onload="resize(this);" src="../resources/upload/review/${rFilesVOS.fileName}"
+						class="d-block" alt="...">
+						
 				</div>
 			</c:forEach>
+			</div>
+			</div>
 		</div>
+		<button class="carousel-control-prev" type="button"
+			data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+			<span class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+				class="visually-hidden">Previous</span>
+		</button>
+		<button class="carousel-control-next" type="button"
+			data-bs-target="#carouselExampleControls" data-bs-slide="next">
+			<span class="carousel-control-next-icon" aria-hidden="true"></span> <span
+				class="visually-hidden">Next</span>
+		</button>
 	</div>
-	<button class="bbtn1">1</button>
-	<button class="bbtn2">2</button>
-	<button class="bbtn3">3</button>
+
+
+
+
+
+
+<%-- 	<div id="revPicBox">
+		<div class="btnBox">
+			<button type="button" class="btnL btn-warning"><</button>
+		</div>
+
+		<div class="revPics">
+			<c:forEach items="${revo.reviewFilesVOs }" var="rFilesVOS">
+				<img class="pics" alt=""
+					src="../resources/upload/review/${rFilesVOS.fileName}"
+					onload="resize(this);">
+			</c:forEach>
+		</div>
+		<div class="btnBox">
+			<button type="button" class="btnR btn-warning">></button>
+		</div>
+	</div> --%>
+
+
+
+
+
+
+
 
 
 	<div id="revTextBox">
@@ -71,11 +108,12 @@
 			<h3>${revo.contents }</h3>
 		</div>
 	</div>
-	<h5>작성일</h5>
+	<h5>작성일 ${revo.regDate }</h5>
 
 	<div id="btnBox">
 		<div>
-			<button type="button">리뷰수정</button>
+			<button class="sUpdate" data-num="${revo.reviewNum }" type="button">리뷰수정</button>
+			<%-- <a href="update?reviewNum=${revo.reviewNum }" role="button">Update</a> --%>
 			<button type="button">리뷰 삭제</button>
 		</div>
 	</div>
@@ -87,15 +125,8 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 		crossorigin="anonymous"></script>
-
-	<script type="text/javascript">
-	const pic= document.querySelectorAll(".pic")
-		document.querySelector('.bbtn2').addEventListener('click',function(){
-			wid=pic.innerWidth;
-			console.log(wid);
-			document.querySelector('.con').style.transform = 'translate(-100vw)';
-		})		
-	</script>
-
+	<script src="../resources/js/reviewDetail.js" type="text/javascript"></script>
+	
+	
 </body>
 </html>

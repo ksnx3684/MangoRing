@@ -18,11 +18,12 @@ h1 {
 }
 
 .revPics {
-	width: 600px;
+	width: 400px;
 	height: 400px;
 	border: solid black 2px;
 	display: inline-flex;
 	margin: 80px auto 15px auto;
+	 overflow: hidden; 
 }
 
 #revTextBox{
@@ -51,8 +52,23 @@ h1 {
 	float: left;
 	overflow: hidden;
 }
-
+/*
 .inn img{
 	width: 100%;
-	overflow: hidden;
+	
 }
+ .btnBox{
+	display: inline-flex;
+	margin: auto auto;
+}
+
+.btnL{
+	width:100px;
+	height:50px;
+	float: left;
+}
+.btnR{
+	width:100px;
+	height:50px;
+	float: right;
+} */

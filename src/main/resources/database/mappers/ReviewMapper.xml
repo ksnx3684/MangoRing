@@ -20,6 +20,13 @@
 		VALUES(#{reviewNum},'noID',1,1,#{star},NOW(),0,#{contents})
 
 	</insert>
+	
+	<update id="setUpdate"  parameterType="ReviewVO">
+	
+		UPDATE REVIEW SET STAR= #{star}, CONTENTS = #{contents} WHERE REVIEWNUM=#{reviewNum}
+	</update>
+	
+	
 
 	<select id="getDetailReview" parameterType="ReviewVO"
 		resultMap="getReviewDetail">

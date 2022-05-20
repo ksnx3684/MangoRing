@@ -22,13 +22,13 @@
 </head>
 <body>
 	<div class="reviewpicTitle">
-		<h1>리뷰 등록</h1>
+		<h1>리뷰 수정</h1>
 	</div>
 
 
 	<div>
 
-		<form action="./add" class="mb-3" name="myform" id="myform"
+		<form action="./update" class="mb-3" name="myform" id="myform"
 			method="post" enctype="multipart/form-data">
 			<div id="reviewpicBox">
 
@@ -45,19 +45,20 @@
 				</div>
 			</div>
 			<hr>
+			<input type="hidden" name="reviewNum" value="${vo.reviewNum }">
 			<fieldset>
-				<span class="text-bold">별점을 선택해주세요</span> <input type="radio"
-					name="star" value="5" id="rate1"><label for="rate1">★</label>
-				<input type="radio" name="star" value="4" id="rate2"><label
-					for="rate2">★</label> <input type="radio" name="star" value="3"
-					id="rate3"><label for="rate3">★</label> <input type="radio"
-					name="star" value="2" id="rate4"><label for="rate4">★</label>
-				<input type="radio" name="star" value="1" id="rate5"><label
+				<span class="text-bold">별점을 선택해주세요</span> <input placeholder="${vo.star }" type="radio"
+					name="star" value="${vo.star }" id="rate1"><label for="rate1">★</label>
+				<input placeholder="${vo.star }" type="radio" name="star" value="${vo.star }" id="rate2"><label
+					for="rate2">★</label> <input placeholder="${vo.star }" type="radio" name="star" value="${vo.star }"
+					id="rate3"><label for="rate3">★</label> <input placeholder="${vo.star }" type="radio"
+					name="star" value="${vo.star }" id="rate4"><label for="rate4">★</label>
+				<input placeholder="${vo.star }" type="radio" name="star" value="${vo.star }" id="rate5"><label
 					for="rate5">★</label>
 			</fieldset>
 			<div>
-				<textarea name="contents" class="col-auto form-control" type="text"
-					id="reviewContents" placeholder="리뷰 내용을 작성해주세요."></textarea>
+				<textarea name="contents" class="col-auto form-control" value="${vo.contents }" type="text"
+					id="reviewContents" placeholder="${vo.contents}"></textarea>
 			</div>
 
 			<button type="submit" id="btnReview">리뷰 등록</button>

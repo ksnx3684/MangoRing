@@ -44,6 +44,27 @@ public class ReviewService {
 		
 	}
 	
+	public int setUpdate(ReviewVO reviewVO,MultipartFile[] multipartFiles)throws Exception{
+		int result =reviewMapper.setUpdate(reviewVO);
+		
+		if(multipartFiles != null)
+			
+			for(MultipartFile multipartFile: multipartFiles) {
+				if(multipartFile.isEmpty()) {
+					continue;
+				}
+				
+				ReviewFilesVO reviewFilesVO = new ReviewFilesVO();
+				
+				String fileName = filemanager.fileSave(multipartFile, "/resources/upload/review/");
+				reviewFilesVO.setFileName(fileName);
+				reviewFilesVO.setOriName(multipartFile.getOriginalFilename());
+				reviewFilesVO.setReviewNum(reviewVO.getReviewNum()); //??
+				result = reviewMapper.setFileAdd(reviewFilesVO);
+			}
+		return result;
+	}
+	
 	public ReviewVO getDetailReview(ReviewVO reviewVO)throws Exception{
 		return reviewMapper.getDetailReview(reviewVO);
 	}

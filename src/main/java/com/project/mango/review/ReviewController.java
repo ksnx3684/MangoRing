@@ -34,6 +34,33 @@ public class ReviewController {
 		return mv;
 		
 	}
+	@GetMapping("update")
+	public ModelAndView setUpdate(ReviewVO reviewVO)throws Exception{
+		ModelAndView mv =new ModelAndView();
+	
+		reviewVO = reviewService.getDetailReview(reviewVO);
+		
+		mv.addObject("vo",reviewVO);
+		mv.setViewName("/review/update");
+		return mv;
+	}
+	
+	@PostMapping("update")
+	public ModelAndView setUpdate(ReviewVO reviewVO,MultipartFile[] files)throws Exception{
+		ModelAndView mv =new ModelAndView();
+		
+		int result = reviewService.setUpdate(reviewVO, files);
+		
+		if(result>0) {
+		
+		mv.setViewName("redirect:../restaurant/detail");
+		}else {
+			mv.setViewName("common/getResult");
+			mv.addObject("msg","Update Fail");
+			mv.addObject("path","./detail?reviewNum="+reviewVO.getReviewNum());
+		}
+		return mv;
+	}
 	
 	@GetMapping("detail")
 	public ModelAndView getdetailReview(ReviewVO reviewVO)throws Exception{
