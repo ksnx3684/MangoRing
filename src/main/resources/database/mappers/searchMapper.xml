@@ -19,7 +19,7 @@
 		<result column="kidCheck" property="kidCheck"/>
 		<result column="introduction" property="introduction"/>
 		<result column="accountNumber" property="accountNumber"/>
-		<association property="restFileVO" javaType="RestFileVO">
+		<association property="restaurantFileVO" javaType="RestaurantFileVO">
 			<id column="fileNum" property="fileNum"/>
 			<result column="restaurantNum" property="restaurantNum"/>
 			<result column="fileName" property="fileName"/>

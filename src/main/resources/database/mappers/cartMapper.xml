@@ -15,7 +15,7 @@
 			<result column="price" property="price"/>
 			<result column="detail" property="detail"/>
 		</collection>
-		<collection property="menuFilesVOs" javaType="List" ofType="MenuFilesVO">
+		<collection property="menuFileVOs" javaType="List" ofType="MenuFileVO">
 			<id column="fileNum" property="fileNum"/>
 			<result column="restaurantNum" property="restaurantNum"/>
 			<result column="fileName" property="fileName"/>

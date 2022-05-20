@@ -18,7 +18,7 @@
 		<c:forEach items="${list}" var="v">
 			<div class="sector">
 				<div class="sector-left">
-					<img class="sector-left-img" src="../resources/upload/restaurant/${v.restFileVO.fileName}">
+					<img class="sector-left-img" src="../resources/upload/restaurant/${v.restaurantFileVO.fileName}">
 				</div>
 				<div class="sector-right">
 					<span class="title">

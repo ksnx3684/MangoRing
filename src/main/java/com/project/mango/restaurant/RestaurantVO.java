@@ -38,7 +38,7 @@ public class RestaurantVO {
 	
 	private String businessNum;
 	
-	private RestFileVO restFileVO;
+	private RestaurantFileVO restaurantFileVO;
 	private List<ReviewVO> reviewVOs;
 
 }
