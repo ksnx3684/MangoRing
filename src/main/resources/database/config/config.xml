@@ -4,5 +4,15 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
   
   <configuration>
-  	
+  	<typeAliases>
+  		<typeAlias type="com.project.mango.notice.NoticeVO" alias="NoticeVO"/>
+  		<typeAlias type="com.project.mango.notice.NoticeFilesVO" alias="NoticeFilesVO"/>
+  		<typeAlias type="com.project.mango.board.BoardVO" alias="BoardVO"/>
+  		<typeAlias type="com.project.mango.notice.restaurant.ResNoticeVO" alias="ResNoticeVO"/>
+  		<typeAlias type="com.project.mango.notice.restaurant.ResFilesVO" alias="ResFilesVO"/>
+  		<typeAlias type="com.project.mango.util.Pager" alias="Pager"/>
+  		
+  		<typeAlias type="java.util.Map" alias="Map"/>
+  		<typeAlias type="java.util.List" alias="List"/>
+  	</typeAliases>
   </configuration>
