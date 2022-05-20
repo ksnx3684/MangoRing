@@ -1,6 +1,7 @@
 package com.project.mango;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.sql.Date;
 import java.util.Calendar;
@@ -14,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.project.mango.member.MemberMapper;
 import com.project.mango.member.MemberVO;
+import com.project.mango.restaurant.RestaurantVO;
 
 @SpringBootTest
 class MemberDBTest {
@@ -76,8 +78,8 @@ class MemberDBTest {
 		assertEquals(1, result);
 	}
 	
-	// 회원정보
-	@Test
+	// 회원정보 삭제
+//	@Test
 	void deleteTest() throws Exception {
 		MemberVO memberVO = new MemberVO();
 		memberVO.setId("id3");
@@ -87,5 +89,21 @@ class MemberDBTest {
 		
 		assertEquals(1, result);
 	}
-
+	
+	// 사업자 신청
+	@Test
+	void setBusinessApplication() throws Exception {
+		RestaurantVO restaurantVO = new RestaurantVO();
+		restaurantVO.setId("id3");
+		restaurantVO.setBusinessNum("111-22-33333");
+		restaurantVO.setAddress("테스트 주소");
+		restaurantVO.setIntroduction("테스트 한줄평");
+		restaurantVO.setParkingCheck(1L);
+		restaurantVO.setKidCheck(1L);
+		
+		int result = memberMapper.setBusinessApplication(restaurantVO);
+		
+		assertEquals(1, result);
+		
+	}
 }
