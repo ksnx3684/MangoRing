@@ -1,0 +1,34 @@
+package com.project.mango.member;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.project.mango.restaurant.RestaurantVO;
+
+@Mapper
+public interface MemberMapper {
+	
+	// 회원가입
+	public int setAddMember(MemberVO memberVO) throws Exception;
+	
+	// 회원정보수정
+	public int setUpdate(MemberVO memberVO) throws Exception;
+
+	// 로그인
+	public MemberVO getLogin(MemberVO memberVO) throws Exception;
+	
+	// 중복 아이디 조회
+	public MemberVO getId(MemberVO memberVO) throws Exception;
+	
+	// 마이페이지
+	public MemberVO getMyPage(MemberVO memberVO) throws Exception;
+	
+	// 사업자 등록
+	public int setBusinessApplication(RestaurantVO restaurantVO) throws Exception;
+	
+	// 사업자 등록 후 승인대기
+	public int setBusinessUserType(MemberVO memberVO) throws Exception;
+	
+	// 회원 탈퇴
+	public int setDelete(MemberVO vo) throws Exception;
+	
+}

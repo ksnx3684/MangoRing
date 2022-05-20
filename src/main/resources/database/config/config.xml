@@ -15,5 +15,9 @@
   		
   		<typeAlias type="java.util.Map" alias="Map"/>
   		<typeAlias type="java.util.List" alias="List"/>
+
+  		<typeAlias type="com.project.mango.member.MemberVO" alias="MemberVO"/>
+  		<typeAlias type="com.project.mango.category.CategoryVO" alias="CategoryVO"/>
+
   	</typeAliases>
   </configuration>
