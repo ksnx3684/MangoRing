@@ -8,19 +8,20 @@
 		<result column="id" property="id"/>
 		<result column="menuNum" property="menuNum"/>
 		<result column="menuCount" property="menuCount"/>
-		<collection property="menuVOs" javaType="List" ofType="MenuVO">
+		<association property="menuVOs" javaType="MenuVO" >
 			<id column="menuNum" property="menuNum"/>
 			<result column="restaurantNum" property="restaurantNum"/>
 			<result column="name" property="name"/>
 			<result column="price" property="price"/>
 			<result column="detail" property="detail"/>
-		</collection>
-		<collection property="menuFileVOs" javaType="List" ofType="MenuFileVO">
-			<id column="fileNum" property="fileNum"/>
-			<result column="restaurantNum" property="restaurantNum"/>
-			<result column="fileName" property="fileName"/>
-			<result column="oriName" property="oriName"/>
-		</collection>
+			<association property="menuFileVO" javaType="MenuFileVO">
+				<id column="fileNum" property="fileNum"/>
+				<result column="menuNum" property="menuNum"/>
+				<result column="fileName" property="fileName"/>
+				<result column="oriName" property="oriName"/>
+			</association>
+		</association>
+		
 		<!-- <association property="id" javaType="MemberVO">
 			<id column="id" property="id"/>
 			<result column="pw" property="pw"/>
@@ -38,7 +39,7 @@
 		</association> -->
 	</resultMap>
 	
-	<select id="cartlist" resultType="CartVO">
+	<select id="cartList" parameterType="CartVO" resultMap="CartVO">
 		SELECT * FROM CART C
 		LEFT OUTER JOIN MENU M
 		ON C.MENUNUM = M.MENUNUM
@@ -47,8 +48,16 @@
 		WHERE C.ID = #{id}
 		ORDER BY CARTNUM
 	</select>
-	<!-- <delete id="cartlistDelete" parameterMap="Long">
-		DELECT FROM CART WHERE CARTNUM = #{cartNum}
-	</delete> -->
+	<delete id="cartListDelete" parameterType="Long">
+		DELETE FROM CART WHERE CARTNUM = #{cartNum}
+	</delete>
+	<select id="cartOrder" parameterType="Long" resultMap="CartVO">
+		SELECT * FROM CART C
+		LEFT OUTER JOIN MENU M
+		ON (C.MENUNUM = M.MENUNUM)
+		LEFT OUTER JOIN MEMBER MB
+		ON (C.ID = MB.ID)
+		WHERE C.CARTNUM = #{cartNum}
+	</select>
 	
 </mapper>

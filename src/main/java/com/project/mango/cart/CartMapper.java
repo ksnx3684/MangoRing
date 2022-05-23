@@ -7,6 +7,12 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface CartMapper {
 
-	// cartlist
-	public List<CartVO> cartlist(CartVO cartVO) throws Exception;
+	// cartList
+	public List<CartVO> cartList(CartVO cartVO) throws Exception;
+	
+	// cartListDelete
+	public int cartListDelete(Long caNum) throws Exception;
+	
+	// cartOrder
+	public CartVO cartOrder(Long cartNum) throws Exception;
 }
