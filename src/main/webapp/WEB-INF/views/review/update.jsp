@@ -35,7 +35,8 @@
 				<!-- 사진 등록 할 박스 -->
 
 				<div class="picsBox">
-					<input class="pics" type="file" name="files">
+				<img alt="" src="../resources/review/${voFile.fileName }">
+					<input class="pics" value="${vo.reviewNum }" type="file" name="files">
 				</div>
 				<div class="picsBox">
 					<input class="pics" type="file" name="files">

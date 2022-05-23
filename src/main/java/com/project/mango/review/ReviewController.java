@@ -25,12 +25,12 @@ public class ReviewController {
 	
 	@PostMapping("add")
 	public ModelAndView setAdd(ReviewVO reviewVO,MultipartFile[] files,ModelAndView mv)throws Exception{
-		
+		System.out.println("파일즈 길이 !!!"+files.length);
 		int result = reviewService.setAdd(reviewVO,files);
 		
 		
 		mv.addObject("result",result);
-		mv.setViewName("/coupon/add");
+		mv.setViewName("redirect:../restaurant/detail");
 		return mv;
 		
 	}
@@ -39,7 +39,7 @@ public class ReviewController {
 		ModelAndView mv =new ModelAndView();
 	
 		reviewVO = reviewService.getDetailReview(reviewVO);
-		
+		mv.addObject("voFile",reviewVO.getReviewFilesVOs());
 		mv.addObject("vo",reviewVO);
 		mv.setViewName("/review/update");
 		return mv;

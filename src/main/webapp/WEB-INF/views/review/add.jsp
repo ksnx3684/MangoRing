@@ -33,16 +33,37 @@
 			<div id="reviewpicBox">
 
 				<!-- 사진 등록 할 박스 -->
+				<button id="clcl" type="button"></button>
+				<div class="fileResult">
+							<input type="file" name="files" class="real-upload" accept="image/*" > 
+				 <div class="upload">upload</div> 
+						
+											<!-- <div class="picsBox">
+												<input class="pics" type="file" name="files">
+											</div> -->
+				</div>
+				
+				<ul class="image-preview"></ul>	
+				<!-- 	<div class="picsBox">
+					<input class="pics" type="file" name="files">
+				</div>	-->
+				<!-- 	<input accept="image/*" class="pics" type="file" name="files" required multiple style="display:none;">
+				<div class="picsBox">
+				</div> 
+				
+					<input accept="image/*" class="pics" type="file" name="files" required multiple style="display:none;">
+				<div class="picsBox">
+				</div> 
+				
+					<input accept="image/*" class="pics" type="file" name="files" required multiple style="display:none;">
+				<div class="picsBox">
+				</div>  -->
 
-				<div class="picsBox">
-					<input class="pics" type="file" name="files">
-				</div>
-				<div class="picsBox">
-					<input class="pics" type="file" name="files">
-				</div>
-				<div class="picsBox">
-					<input class="pics" type="file" name="files">
-				</div>
+
+				
+
+				 
+
 			</div>
 			<hr>
 			<fieldset>
@@ -70,6 +91,9 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 		crossorigin="anonymous"></script>
+
+	<script type="text/javascript" src="../resources/js/reviewAdd.js"></script>
+
 
 </body>
 </html>
