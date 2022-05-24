@@ -59,5 +59,15 @@
 		ON (C.ID = MB.ID)
 		WHERE C.CARTNUM = #{cartNum}
 	</select>
+
+	<insert id="order" parameterType="PaymentVO">
+		INSERT INTO PAYMENT(PAYCHECK, TOTALPRICE, PAYDATE, WAITING, STATUS, PAYTYPE, ID)
+		VALUES(0, #{totalPrice}, NOW(), 30, 0, '무통장입금', #{id})
+	</insert>
+	<insert id="detailOrder" parameterType="PaymentDetailVO">
+		INSERT INTO PAYMENT_DETAIL(PAYNUM, MENUNUM, MENUCOUNT)
+		VALUES((SELECT MAX(PAYNUM) FROM PAYMENT), #{menuNum}, #{menuCount})
+	</insert>
+	
 	
 </mapper>
