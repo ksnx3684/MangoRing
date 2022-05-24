@@ -1,5 +1,7 @@
 package com.project.mango.member;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.project.mango.restaurant.RestaurantVO;
@@ -9,6 +11,12 @@ public interface MemberMapper {
 	
 	// 회원가입
 	public int setAddMember(MemberVO memberVO) throws Exception;
+	
+	// 프로필 사진 등록
+	public int setProfile(MemberFileVO memberFileVO) throws Exception;
+	
+	// 프로필 사진 리스트
+	public List<MemberFileVO> getFileList(MemberVO memberVO) throws Exception;
 	
 	// 회원정보수정
 	public int setUpdate(MemberVO memberVO) throws Exception;

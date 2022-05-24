@@ -1,6 +1,7 @@
 package com.project.mango.member;
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -52,6 +53,9 @@ public class MemberVO {
 	private Long blackList;
 	// 사업자승인 여부
 	private Long businessOk;
+	
+	// 프로필 사진
+	private MemberFileVO memberFileVO;
 	
 	// 식당 VO
 	private RestaurantVO restaurantVO;

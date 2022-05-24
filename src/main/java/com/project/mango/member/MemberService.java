@@ -1,10 +1,14 @@
 package com.project.mango.member;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.project.mango.restaurant.RestaurantVO;
+import com.project.mango.util.FileManager;
 
 
 
@@ -13,10 +17,34 @@ public class MemberService {
 	
 	@Autowired
 	private MemberMapper memberMapper;
+	
+	@Autowired
+	private FileManager fileManager;
 
 	// 회원가입
-	public int setAddMember(MemberVO memberVO) throws Exception {
-		return memberMapper.setAddMember(memberVO);
+	public int setAddMember(MemberVO memberVO, MultipartFile[] file) throws Exception {
+		
+		int result = memberMapper.setAddMember(memberVO);
+		
+		if(file != null) {
+			for(MultipartFile mf : file) {
+				if(mf.isEmpty()) {
+					continue;
+				}
+				
+				// 1. HDD에 파일 저장
+				String fileName = fileManager.fileSave(mf, "/resources/upload/member");
+				System.out.println("프로필 사진 이름 출력 : " + fileName);
+				
+				// 2. DB에 저장
+				MemberFileVO memberFileVO = new MemberFileVO();
+				memberFileVO.setId(memberVO.getId());
+				memberFileVO.setFileName(fileName);
+				memberFileVO.setOriName(mf.getOriginalFilename());
+				result = memberMapper.setProfile(memberFileVO);
+			}
+		}
+		return result;
 	}
 	
 	// 회원정보 수정
@@ -72,6 +100,15 @@ public class MemberService {
 	
 	// 회원 탈퇴
 	public int setDelete(MemberVO vo) throws Exception {
-		return memberMapper.setDelete(vo);
+		
+		List<MemberFileVO> ar = memberMapper.getFileList(vo);
+		int result = memberMapper.setDelete(vo);
+		
+		for(MemberFileVO m : ar) {
+//			MemberFileVO memberFileVO = new MemberFileVO();
+			fileManager.fileDelete(m.getFileName(), "/resources/upload/member");			
+		}
+		
+		return result;
 	}
 }

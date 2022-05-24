@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -66,17 +67,19 @@ public class MemberController {
 	
 	// 회원가입 POST 방식
 	@PostMapping("join")
-	public String setJoin(Model model, @Valid MemberVO memberVO, BindingResult bindingResult) throws Exception {
+	public String setJoin(Model model, MultipartFile[] file, 
+			@Valid MemberVO memberVO, BindingResult bindingResult) throws Exception {
 		
 		if(memberService.memberError(memberVO, bindingResult)) {
 			return "member/join";
 		}
 		
-		int result = memberService.setAddMember(memberVO);
+		int result = memberService.setAddMember(memberVO, file);
 		model.addAttribute("vo", memberVO);
 		
 		return "redirect:./login";
 	}
+	
 	
 	// 마이페이지
 	@GetMapping("myPage")

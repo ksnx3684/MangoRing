@@ -12,10 +12,8 @@
 </head>
 <body>
 	<h1>hi!</h1>
-	
 
 	<a href="./reservation/write?restaurantNum=1">예약하기</a>
-	
 
 <c:import url="./template/cdn_script.jsp"></c:import>
 

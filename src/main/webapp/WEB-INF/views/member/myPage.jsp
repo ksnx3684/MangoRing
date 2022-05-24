@@ -132,8 +132,7 @@
 	    <p class="text-center text-muted">&copy; 2022 Mango</p>
 	  </footer>
 	</div>
-	<!-- KaKaoMap -->
-	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	
 	<c:import url="../template/cdn_script.jsp"></c:import>
 </body>
 </html>
