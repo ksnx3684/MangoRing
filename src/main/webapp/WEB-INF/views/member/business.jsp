@@ -36,20 +36,20 @@
 	              </div>
 	              <div class="col-md-8 pe-3">
 	                <div class="input-group mb-3">
-		                <input type="text" id="address" name="address" class="form-control form-control-lg" value="${vo.address}"
+		                <input type="text" id="address" name="address" class="form-control form-control-lg" 
 		                	readonly="readonly"/>
 		                <button type="button" id="search" class="btn btn-outline-secondary">주소 검색</button>
 	                </div>
 	                
 	                <div class="col-md-10 pe-2 mb-3">
-	                	<input type="text" id="postCode" name="postCode" class="form-control form-control-lg" value="${vo.postCode}"
+	                	<input type="text" id="postCode" name="postCode" class="form-control form-control-lg" 
 	                		readonly="readonly"/>
 	                </div>
 	                <div class="col-md-10 pe-2 mb-3">
 	                	<div class="input-group">
-		                	<input type="text" id="detailAddress" name="detailAddress" class="form-control form-control-lg me-4" value="${vo.detailAddress}"
+		                	<input type="text" id="detailAddress" name="detailAddress" class="form-control form-control-lg me-4" 
 		                		placeholder="상세주소"/>
-		                	<input type="text" id="extraAddress" name="extraAddress" class="form-control form-control-lg" value="${vo.extraAddress}"
+		                	<input type="text" id="extraAddress" name="extraAddress" class="form-control form-control-lg" 
 		                		readonly="readonly"/>
 	                	</div>
 	                </div>
@@ -69,23 +69,7 @@
             </div>
 
             <hr class="mx-n3">
-<!--             
-            <div class="row align-items-center py-3">
-              <div class="col-md-3 ps-5">
-                <h6 class="mb-0">카테고리</h6>
-              </div>
-              <div class="col-md-9 pe-5">
-                <input class="form-check-input" type="checkbox" name="catagoryName" value="한식">
-                <label class="form-check-label me-5" for="eCheckbox1">한식</label>
-                <input class="form-check-input" type="checkbox" name="catagoryName" value="중식">
-                <label class="form-check-label me-5" for="Checkbox2">중식</label>
-                <input class="form-check-input" type="checkbox" name="catagoryName" value="일식">
-                <label class="form-check-label" for="Checkbox2">일식</label>
-              </div>
-            </div>
-
-            <hr class="mx-n3">
--->      
+      
             <div class="row align-items-center py-3">
               <div class="col-md-3 ps-5">
                 <h6 class="mb-0">주차 가능 여부</h6>
@@ -131,4 +115,5 @@
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f0302b66d0992062d842011c6439a7b9&libraries=services"></script>
 </body>
 <script type="text/javascript" src="../resources/js/map_search.js"></script>
+
 </html>

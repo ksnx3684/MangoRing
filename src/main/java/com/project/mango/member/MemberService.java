@@ -92,7 +92,7 @@ public class MemberService {
 	public int setBusinessApplication(RestaurantVO restaurantVO) throws Exception {
 		return memberMapper.setBusinessApplication(restaurantVO);
 	}
-	
+		
 	// 사업자 등록 후 승인대기
 	public int setBusinessUserType(MemberVO memberVO) throws Exception {
 		return memberMapper.setBusinessUserType(memberVO);

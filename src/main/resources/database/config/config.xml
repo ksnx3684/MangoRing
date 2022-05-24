@@ -40,9 +40,9 @@
 		<typeAlias type="com.project.mango.member.MemberVO"
 				alias="MemberVO" />
 		
-		<typeAlias type="com.project.mango.member.MemberFileVO" alias="MemberFileVO"/>
-		
-			
+		<typeAlias type="com.project.mango.member.MemberFileVO"
+				alias="MemberFileVO"/>
+	
 		<typeAlias type="com.project.mango.search.SearchVO"
 				alias="SearchVO"/>
 				

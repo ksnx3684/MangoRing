@@ -32,7 +32,7 @@ public interface MemberMapper {
 	
 	// 사업자 등록
 	public int setBusinessApplication(RestaurantVO restaurantVO) throws Exception;
-	
+		
 	// 사업자 등록 후 승인대기
 	public int setBusinessUserType(MemberVO memberVO) throws Exception;
 	

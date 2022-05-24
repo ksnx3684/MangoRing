@@ -23,7 +23,7 @@
         <div class="dropdown text-end">
           <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
             <c:choose>
-            	<c:when test="${empty member || membermember.memberFileVO eq null}">
+            	<c:when test="${empty member || member.memberFileVO == null}">
             		<img src="/resources/upload/member/default_profile.png" alt="photo" width="32" height="32" class="rounded-circle">
             	</c:when>
 				<c:otherwise>

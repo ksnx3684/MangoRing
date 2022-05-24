@@ -61,12 +61,13 @@
 	</update>
 	
 	<!-- 사업자 등록 -->
-	<update id="setBusinessApplication" parameterType="RestaurantVO">
-		UPDATE RESTAURANT SET ID = #{id}, BUSINESSNUM = #{businessNum}, ADDRESS = #{address},
-		POSTCODE = #{postCode}, DETAILADDRESS = #{detailAddress}, EXTRAADDRESS = #{extraAddress},
-		INTRODUCTION = #{introduction}, PARKINGCHECK = #{parkingCheck}, KIDCHECK = #{kidCheck}
-	</update>
-	
+	<insert id="setBusinessApplication" parameterType="RestaurantVO">
+		INSERT INTO RESTAURANT (ID, BUSINESSNUM, ADDRESS, POSTCODE, DETAILADDRESS,
+		EXTRAADDRESS, INTRODUCTION, PARKINGCHECK, KIDCHECK)
+		VALUES(#{id}, #{businessNum}, #{address}, #{postCode}, #{detailAddress}, 
+		#{extraAddress}, #{introduction}, #{parkingCheck}, #{kidCheck})
+	</insert>
+		
 	<!-- 사업자 등록 후 승인처리 -->
 	<update id="setBusinessUserType" parameterType="MemberVO">
 		UPDATE MEMBER SET BUSINESSOK = 1 WHERE ID = #{id}

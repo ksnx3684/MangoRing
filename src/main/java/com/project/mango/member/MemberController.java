@@ -127,8 +127,10 @@ public class MemberController {
 		
 		MemberVO memberVO = (MemberVO)session.getAttribute("member");
 		restaurantVO.setId(memberVO.getId());
+		
 		// 사업자 정보 등록
 		int result = memberService.setBusinessApplication(restaurantVO);
+		
 		// 사업자 등록 후 승인 대기로 변경
 		result = memberService.setBusinessUserType(memberVO);
 			
