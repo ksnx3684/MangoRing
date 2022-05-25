@@ -14,5 +14,6 @@ public class PaymentVO {
 	private Long waiting;
 	private Long status;
 	private String payType;
+	private String id;
 	
 }

@@ -45,6 +45,11 @@
 				
 	  	<typeAlias type="com.project.mango.cart.CartVO"
 	  			alias="CartVO"/>
+	  			
+	  	<typeAlias type="com.project.mango.order.PaymentVO"
+	  			alias="PaymentVO"/>
+	  	<typeAlias type="com.project.mango.order.PaymentDetailVO"
+	  			alias="PaymentDetailVO"/>
 
   		<typeAlias type="com.project.mango.notice.NoticeVO" alias="NoticeVO"/>
   		<typeAlias type="com.project.mango.notice.NoticeFilesVO" alias="NoticeFilesVO"/>

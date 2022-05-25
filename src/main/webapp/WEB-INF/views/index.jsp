@@ -19,7 +19,7 @@
 
 <c:import url="./template/cdn_script.jsp"></c:import>
 
-	<c:import url="./template/header.jsp"></c:import>
+	<%-- <c:import url="./template/header.jsp"></c:import> --%>
 	<form action="/search/result" method="get">
 		<div class="container">
 			<h1>hi!</h1>
