@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class PaymentVO {
 
-	private Long payNum;
+	private String payNum;
 	private Long payCheck;
 	private Long totalPrice;
 	private Date payDate;

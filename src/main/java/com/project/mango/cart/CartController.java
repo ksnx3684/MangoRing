@@ -1,7 +1,9 @@
 package com.project.mango.cart;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,6 +35,8 @@ public class CartController {
 	
 	List<CartVO> lists = new ArrayList<CartVO>(); // 카트에 담을 수 있는 전역변수 lists
 	int totalsize = 0;
+	PaymentVO data = new PaymentVO();
+	List<PaymentDetailVO> detailDatas = new ArrayList<PaymentDetailVO>();
 
 	// 장바구니 보기 (카트 목록 불러오기)
 	@GetMapping("cartList")
@@ -90,16 +94,42 @@ public class CartController {
 	
 	// 주문 처리
 	@PostMapping("order")
-	public String order(PaymentVO paymentVO, MenuVO menuVO,
+	public String order(Model model, PaymentVO paymentVO, MenuVO menuVO,
 			String payRequest, String[] cartNum, String[] menuNum, String[] menuCount) throws Exception {
+		
+		// 주문번호 생성
+		Date date = new Date();
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd-HHmmssS");
+		String code = simpleDateFormat.format(date);
+		paymentVO.setPayNum(code);
+		
+		// 전역변수 data에 값 집어넣기 (해당 작업은 카카오 및 네이버페이로 인한 결제정보를 DB에 넣어주기 위한 선행작업임)
+		data.setPayNum(code); // 주문번호
+		data.setTotalPrice(paymentVO.getTotalPrice()); // 총 금액
+		data.setId(paymentVO.getId()); // 아이디
 		
 		if(payRequest.equals("kakao")) { // 카카오페이 결제 페이지 이동
 			
-			return "forward:../order/kakaoPay";
+			for(int i = 0; i < lists.size(); i++) {
+				
+				Long caNum = Long.parseLong(cartNum[i]);
+				Long meNum = Long.parseLong(menuNum[i]);
+				Long meCount = Long.parseLong(menuCount[i]);
+				
+				PaymentDetailVO detail = new PaymentDetailVO();
+				detail.setPayNum(code);
+				detail.setMenuNum(meNum);
+				detail.setMenuCount(meCount);
+				
+				detailDatas.add(i, detail);
+			
+			}
+			
+			return "redirect:./kakaoPay";
 			
 		} else if(payRequest.equals("naver")) { // 네이버페이 결제 페이지 이동
 			
-			return "redirect:../order/naverPay";
+			return "redirect:./naverPay";
 		
 		} else { // 무통장입금 결제 진행
 
@@ -112,18 +142,64 @@ public class CartController {
 				Long meCount = Long.parseLong(menuCount[i]);
 				
 				PaymentDetailVO paymentDetailVO = new PaymentDetailVO();
+				paymentDetailVO.setPayNum(code);
 				paymentDetailVO.setMenuNum(meNum);
 				paymentDetailVO.setMenuCount(meCount);
 				
 				cartService.detailOrder(paymentDetailVO); // 주문정보 DB로 전송
 				
-				// cartService.cartListDelete(caNum); // 주문완료된 상품을 카트에서 제거
+				cartService.cartListDelete(caNum); // 주문완료된 상품을 카트에서 제거
 				
 			}
 			
-			return "redirect:../order/orderComplete";
+			return "redirect:./orderComplete";
 			
 		}
+		
+	}
+	
+	// 주문 완료 폼
+	@GetMapping("orderComplete")
+	public void orderComplete() throws Exception{
+	}
+	
+	// 카카오페이 결제 페이지
+	@GetMapping("kakaoPay")
+	public void kakaoPay(Model model, HttpSession httpSession) throws Exception{
+		MemberVO memberVO = (MemberVO)httpSession.getAttribute("member");
+		
+		model.addAttribute("payNum", data.getPayNum());
+		model.addAttribute("totalPrice", data.getTotalPrice());
+		model.addAttribute("id", data.getId());
+	
+	}
+	
+	// 카카오페이 결제 완료 페이지
+	@GetMapping("kakaoPayOrderComplete")
+	public void kakaoPayOrderComplete() throws Exception{
+		
+		cartService.kakaoPayOrderComplete(data);
+		
+		for(int i = 0; i < lists.size(); i++) {
+			
+			cartService.detailOrder(detailDatas.get(i)); // 주문정보 DB로 전송
+			
+			cartService.cartListDelete(caNum); // 주문완료된 상품을 카트에서 제거
+			
+		}
+		
+		detailDatas.clear();
+		
+	}
+	
+	// 네이버페이 결제 페이지
+	@GetMapping("naverPay")
+	public void naverPay() throws Exception{
+	}
+	
+	// 네이버페이 결제 완료 페이지
+	@GetMapping("naverPayOrderComplete")
+	public void naverPayOrderComplete() throws Exception{
 		
 	}
 }
