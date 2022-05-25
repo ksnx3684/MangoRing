@@ -2,6 +2,8 @@ package com.project.mango.reservation;
 
 import java.sql.Timestamp;
 
+import com.project.mango.member.MemberVO;
+
 import lombok.Data;
 
 @Data
@@ -15,4 +17,6 @@ public class ReservationVO {
 	private Timestamp reservationTime;
 	private Integer visitStatus;
 	
+	
+	private MemberVO memberVO;
 }

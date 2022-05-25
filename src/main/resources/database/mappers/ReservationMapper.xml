@@ -11,4 +11,79 @@
 		(NULL, #{restaurantNum}, #{id}, #{count}, now(), #{reservationTime}, 0)
 	</insert>
 
+ 	<select id="getList" parameterType="ReservationPager" resultMap="listResult">
+		SELECT * FROM
+			(SELECT RV.*, M.NAME FROM RESERVATION RV
+				LEFT JOIN MEMBER M
+				ON (RV.ID = M.ID)
+			WHERE RV.RESTAURANTNUM = #{restaurantNum}) R
+		WHERE
+			RESERVATIONTIME BETWEEN #{startDate} AND #{endDate}
+			<choose>
+				<when test="visitStatus != 10">AND VISITSTATUS = #{visitStatus}</when>
+			</choose>
+		ORDER BY VISITSTATUS ASC, RESERVATIONTIME ASC
+		LIMIT #{startRow}, #{perPage}
+	</select>
+	
+	<resultMap type="ReservationVO" id="listResult">
+		<id column="reservationNum" property="reservationNum"/>
+		<result column="restaurantNum" property="restaurantNum"/>
+		<result column="id" property="id"/>
+		<result column="count" property="count"/>
+		<result column="time" property="time"/>
+		<result column="reservationTime" property="reservationTime"/>
+		<result column="visitStatus" property="visitStatus"/>
+		<association property="memberVO" javaType="MemberVO">
+			<id column="id" property="id"/>
+			<result column="name" property="name"/>
+			<result column="blackList" property="blackList"/>
+		</association>
+	</resultMap>
+	
+	<select id="getReportList" parameterType="ReservationPager" resultMap="listResult">
+		SELECT * FROM
+			(SELECT RV.*, M.NAME, M.BLACKLIST FROM RESERVATION RV
+				LEFT JOIN MEMBER M
+				ON (RV.ID = M.ID)
+			WHERE RV.RESTAURANTNUM = #{restaurantNum}) R
+		WHERE 
+		VISITSTATUS = 3 AND
+		RESERVATIONTIME BETWEEN #{startDate} AND #{endDate}
+		ORDER BY BLACKLIST ASC, RESERVATIONTIME ASC
+		LIMIT #{startRow}, #{perPage}
+	</select>
+	
+	<update id="setChangeReservation" parameterType="ReservationVO">
+		UPDATE RESERVATION SET VISITSTATUS = #{visitStatus}
+		WHERE RESERVATIONNUM = ${reservationNum}
+	</update>
+	
+	<update id="setUpdateVisitStatus" parameterType="ReservationVO">
+		UPDATE RESERVATION SET VISITSTATUS = 1
+		WHERE RESERVATIONTIME = #{reservationTime}
+	</update>
+	
+	<select id="getTotalCount" parameterType="ReservationPager" resultType="Long">
+		SELECT COUNT(RESERVATIONNUM) FROM
+			(SELECT RV.*, M.NAME FROM RESERVATION RV
+				LEFT JOIN MEMBER M
+				ON (RV.ID = M.ID)
+			WHERE RV.RESTAURANTNUM = #{restaurantNum}) R
+		WHERE RESERVATIONTIME BETWEEN #{startDate} AND #{endDate}
+		<choose>
+			<when test="visitStatus != 10">AND VISITSTATUS = #{visitStatus}</when>
+		</choose>
+	</select>
+	
+	<select id="getReportCount" parameterType="ReservationPager" resultType="Long">
+		SELECT COUNT(RESERVATIONNUM) FROM
+			(SELECT RV.*, M.NAME, M.BLACKLIST FROM RESERVATION RV
+				LEFT JOIN MEMBER M
+				ON (RV.ID = M.ID)
+			WHERE RV.RESTAURANTNUM = #{restaurantNum}) R
+		WHERE 
+		VISITSTATUS = 3 AND
+		RESERVATIONTIME BETWEEN #{startDate} AND #{endDate}
+	</select>
 </mapper>

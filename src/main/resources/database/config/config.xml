@@ -52,6 +52,8 @@
   		<typeAlias type="com.project.mango.notice.restaurant.ResNoticeVO" alias="ResNoticeVO"/>
   		<typeAlias type="com.project.mango.notice.restaurant.ResFilesVO" alias="ResFilesVO"/>
   		<typeAlias type="com.project.mango.util.Pager" alias="Pager"/>
+  		
+  		<typeAlias type="com.project.mango.util.ReservationPager" alias="ReservationPager"/>
 
   	</typeAliases>
   	
