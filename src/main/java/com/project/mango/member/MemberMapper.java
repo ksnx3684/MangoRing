@@ -12,8 +12,8 @@ public interface MemberMapper {
 	// 회원가입
 	public int setAddMember(MemberVO memberVO) throws Exception;
 	
-	// 프로필 사진 등록
-	public int setProfile(MemberFileVO memberFileVO) throws Exception;
+	// 사진 등록
+	public int setPhoto(MemberFileVO memberFileVO) throws Exception;
 	
 	// 프로필 사진 리스트
 	public List<MemberFileVO> getFileList(MemberVO memberVO) throws Exception;

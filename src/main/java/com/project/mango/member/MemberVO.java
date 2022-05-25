@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import com.project.mango.category.CategoryVO;
 import com.project.mango.restaurant.RestaurantVO;
 
 import lombok.Getter;
@@ -60,4 +61,6 @@ public class MemberVO {
 	// 식당 VO
 	private RestaurantVO restaurantVO;
 	
+	// 카테고리
+	private CategoryVO categoryVO;
 }

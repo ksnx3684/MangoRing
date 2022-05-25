@@ -92,7 +92,7 @@ class MemberDBTest {
 	}
 	
 	// 사업자 신청
-	@Test
+//	@Test
 	void setBusinessApplication() throws Exception {
 		RestaurantVO restaurantVO = new RestaurantVO();
 		restaurantVO.setId("id6");
@@ -115,7 +115,7 @@ class MemberDBTest {
 		memberFileVO.setFileName("파일 테스트");
 		memberFileVO.setOriName("원본 파일 테스트");
 		
-		int result = memberMapper.setProfile(memberFileVO);
+		int result = memberMapper.setPhoto(memberFileVO);
 		
 		assertEquals(1, result);
 	}

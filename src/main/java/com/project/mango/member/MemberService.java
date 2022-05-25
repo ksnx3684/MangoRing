@@ -10,8 +10,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.project.mango.restaurant.RestaurantVO;
 import com.project.mango.util.FileManager;
 
-
-
 @Service
 public class MemberService {
 	
@@ -41,7 +39,7 @@ public class MemberService {
 				memberFileVO.setId(memberVO.getId());
 				memberFileVO.setFileName(fileName);
 				memberFileVO.setOriName(mf.getOriginalFilename());
-				result = memberMapper.setProfile(memberFileVO);
+				result = memberMapper.setPhoto(memberFileVO);
 			}
 		}
 		return result;
@@ -89,8 +87,32 @@ public class MemberService {
 	}
 	
 	// 사업자 등록
-	public int setBusinessApplication(RestaurantVO restaurantVO) throws Exception {
-		return memberMapper.setBusinessApplication(restaurantVO);
+	public int setBusinessApplication(RestaurantVO restaurantVO, MemberVO memberVO,
+			MultipartFile[] file) throws Exception {
+		
+		int result = memberMapper.setBusinessApplication(restaurantVO);
+		
+		System.out.println("setBusinessApplication File Check : " + file);
+		
+		if(file != null) {
+			for(MultipartFile mf : file) {
+				if(mf.isEmpty()) {
+					continue;
+				}
+				
+				// 1. HDD에 파일 저장
+				String fileName = fileManager.fileSave(mf, "/resources/upload/business");
+				System.out.println("사업자 등록 파일 이름 출력 : " + fileName);
+				
+				// 2. DB에 저장
+				MemberFileVO memberFileVO = new MemberFileVO();
+				memberFileVO.setId(memberVO.getId());
+				memberFileVO.setFileName(fileName);
+				memberFileVO.setOriName(mf.getOriginalFilename());
+				result = memberMapper.setPhoto(memberFileVO);
+			}
+		}
+		return result;
 	}
 		
 	// 사업자 등록 후 승인대기
@@ -106,7 +128,8 @@ public class MemberService {
 		
 		for(MemberFileVO m : ar) {
 //			MemberFileVO memberFileVO = new MemberFileVO();
-			fileManager.fileDelete(m.getFileName(), "/resources/upload/member");			
+			fileManager.fileDelete(m.getFileName(), "/resources/upload/member");
+			fileManager.fileDelete(m.getFileName(), "/resources/upload/business");
 		}
 		
 		return result;

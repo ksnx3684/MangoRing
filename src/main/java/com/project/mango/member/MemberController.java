@@ -123,13 +123,14 @@ public class MemberController {
 	
 	// 사업자 신청 POST 방식
 	@PostMapping("business")
-	public String setBusiness(HttpSession session, RestaurantVO restaurantVO) throws Exception {
+	public String setBusiness(HttpSession session, MultipartFile[] file, 
+			MemberVO memberVO, RestaurantVO restaurantVO) throws Exception {
 		
-		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		memberVO = (MemberVO)session.getAttribute("member");
 		restaurantVO.setId(memberVO.getId());
 		
 		// 사업자 정보 등록
-		int result = memberService.setBusinessApplication(restaurantVO);
+		int result = memberService.setBusinessApplication(restaurantVO, memberVO, file);
 		
 		// 사업자 등록 후 승인 대기로 변경
 		result = memberService.setBusinessUserType(memberVO);

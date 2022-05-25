@@ -40,8 +40,8 @@
 		VALUES(#{id}, #{pw}, #{name}, #{email}, #{phone}, #{gender}, NOW(), 1, 0)
 	</insert>
 	
-	<!-- 프로필 사진 업로드 -->
-	<insert id="setProfile" parameterType="MemberFileVO">
+	<!-- 사진 업로드 -->
+	<insert id="setPhoto" parameterType="MemberFileVO">
 		INSERT INTO MEMBER_FILE (FILENUM, ID, FILENAME, ORINAME)
 		VALUES(NULL, #{id}, #{fileName}, #{oriName})
 	</insert>
@@ -62,9 +62,9 @@
 	
 	<!-- 사업자 등록 -->
 	<insert id="setBusinessApplication" parameterType="RestaurantVO">
-		INSERT INTO RESTAURANT (ID, BUSINESSNUM, ADDRESS, POSTCODE, DETAILADDRESS,
+		INSERT INTO RESTAURANT (ID, CATEGORYNUM, BUSINESSNUM, ADDRESS, POSTCODE, DETAILADDRESS,
 		EXTRAADDRESS, INTRODUCTION, PARKINGCHECK, KIDCHECK)
-		VALUES(#{id}, #{businessNum}, #{address}, #{postCode}, #{detailAddress}, 
+		VALUES(#{id}, #{categoryNum}, #{businessNum}, #{address}, #{postCode}, #{detailAddress}, 
 		#{extraAddress}, #{introduction}, #{parkingCheck}, #{kidCheck})
 	</insert>
 		
