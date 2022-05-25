@@ -37,6 +37,7 @@ public class CartController {
 	int totalsize = 0;
 	PaymentVO data = new PaymentVO();
 	List<PaymentDetailVO> detailDatas = new ArrayList<PaymentDetailVO>();
+	List<Long> kacaNum = new ArrayList<Long>();
 
 	// 장바구니 보기 (카트 목록 불러오기)
 	@GetMapping("cartList")
@@ -112,7 +113,7 @@ public class CartController {
 			
 			for(int i = 0; i < lists.size(); i++) {
 				
-				Long caNum = Long.parseLong(cartNum[i]);
+				kacaNum.add(i, Long.parseLong(cartNum[i]));
 				Long meNum = Long.parseLong(menuNum[i]);
 				Long meCount = Long.parseLong(menuCount[i]);
 				
@@ -184,7 +185,7 @@ public class CartController {
 			
 			cartService.detailOrder(detailDatas.get(i)); // 주문정보 DB로 전송
 			
-			cartService.cartListDelete(caNum); // 주문완료된 상품을 카트에서 제거
+			cartService.cartListDelete(kacaNum.get(i)); // 주문완료된 상품을 카트에서 제거
 			
 		}
 		
