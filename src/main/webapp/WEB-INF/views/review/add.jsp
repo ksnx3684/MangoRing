@@ -33,10 +33,9 @@
 			<div id="reviewpicBox">
 
 				<!-- 사진 등록 할 박스 -->
-				<button id="clcl" type="button"></button>
+				<button id="clcl" type="button">사진 추가</button>
 				<div class="fileResult">
-							<input type="file" name="files" class="real-upload" accept="image/*" > 
-				 <div class="upload">upload</div> 
+							
 						
 											<!-- <div class="picsBox">
 												<input class="pics" type="file" name="files">
@@ -93,7 +92,10 @@
 		crossorigin="anonymous"></script>
 
 	<script type="text/javascript" src="../resources/js/reviewAdd.js"></script>
-
+<script type="text/javascript">
+fileAddInit();
+fileDeleteInit();
+</script>
 
 </body>
 </html>

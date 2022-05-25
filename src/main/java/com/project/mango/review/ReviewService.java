@@ -19,6 +19,33 @@ public class ReviewService {
 	private FileManager filemanager;
 	
 	
+	
+	
+	public int setFileDelete(ReviewFilesVO reviewFilesVO)throws Exception{
+		
+		reviewFilesVO = reviewMapper.getFileDetail(reviewFilesVO);
+		
+		int check = reviewMapper.setFileDelete(reviewFilesVO);
+		if(check>0) {
+			boolean result = filemanager.fileDelete(reviewFilesVO.getFileName(), "/resources/upload/review/");
+		}
+		return check;
+	}
+	
+
+	public int setDelete(ReviewVO reviewVO)throws Exception{
+		
+		List<ReviewFilesVO> ar = reviewMapper.getFileList(reviewVO);
+		int result = reviewMapper.setDelete(reviewVO);
+		
+		System.out.println("fileSize:"+ar.size());
+		for(ReviewFilesVO r : ar) {
+			filemanager.fileDelete(r.getFileName(), "resources/upload/review");
+		}
+		return result;
+	}
+	
+	
 	public int setAdd(ReviewVO reviewVO,MultipartFile[] files)throws Exception{
 		int result= reviewMapper.setAdd(reviewVO);
 		

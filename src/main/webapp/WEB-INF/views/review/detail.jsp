@@ -114,7 +114,7 @@
 		<div>
 			<button class="sUpdate" data-num="${revo.reviewNum }" type="button">리뷰수정</button>
 			<%-- <a href="update?reviewNum=${revo.reviewNum }" role="button">Update</a> --%>
-			<button type="button">리뷰 삭제</button>
+			<a href="delete?reviewNum=${revo.reviewNum }" role="button" class="btn-danger mx-1">리뷰 삭제</a>
 		</div>
 	</div>
 

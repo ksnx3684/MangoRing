@@ -15,6 +15,26 @@ public class ReviewController {
 	@Autowired
 	private ReviewService reviewService;
 	
+	@PostMapping("fileDelete")
+	public ModelAndView setFileDelete(ReviewFilesVO reviewFilesVO)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		int result = reviewService.setFileDelete(reviewFilesVO);
+				
+				mv.setViewName("common/ajaxResult");
+		mv.addObject("result",result);
+		return mv;
+	}
+	
+	@GetMapping
+	public ModelAndView setDelete(ReviewVO reviewVO)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		int result = reviewService.setDelete(reviewVO);
+		mv.setViewName("redirect:../restaurant/detail");
+		return mv;
+	}
+	
 	@GetMapping("add")
 	public ModelAndView setAdd(ReviewVO reviewVO)throws Exception{
 		ModelAndView mv = new ModelAndView();
@@ -25,7 +45,7 @@ public class ReviewController {
 	
 	@PostMapping("add")
 	public ModelAndView setAdd(ReviewVO reviewVO,MultipartFile[] files,ModelAndView mv)throws Exception{
-		System.out.println("파일즈 길이 !!!"+files.length);
+		
 		int result = reviewService.setAdd(reviewVO,files);
 		
 		

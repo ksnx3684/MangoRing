@@ -9,8 +9,20 @@ import com.project.mango.restaurant.RestaurantVO;
 @Mapper
 public interface ReviewMapper {
 	
+	//fileDelete
+	public int setFileDelete(ReviewFilesVO reviewFilesVO)throws Exception;
+	
+	//fileDetail
+	public ReviewFilesVO getFileDetail(ReviewFilesVO reviewFilesVO)throws Exception;
+	
 	//fileAdd
 	public int setFileAdd(ReviewFilesVO reviewFilesVO)throws Exception;
+	
+	//fileList
+	public List<ReviewFilesVO> getFileList(ReviewVO reviewVO)throws Exception;
+	
+	//delete
+	public int setDelete(ReviewVO reviewVO)throws Exception;
 	
 	//add
 	public int setAdd(ReviewVO reviewVO)throws Exception;

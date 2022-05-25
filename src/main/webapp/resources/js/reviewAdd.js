@@ -1,6 +1,51 @@
 let count = 0;
 
 
+function fileDeleteInit(){
+
+	$(".del").click(function(){
+		let check = window.confirm("삭제하시겠습니까?");
+		
+		if(!check){
+			return;
+		}
+		
+		let fileNum= $(this).attr("data-num");
+		let selector = $(this);
+		console.log(this);
+		console.log(fileNum);
+		console.log(selector);
+		$.ajax({
+			type:"POST",
+			url:"./fileDelete",
+			data:{
+				fileNum:fileNum
+				
+			},
+			success:function(data){
+				console.log(this);
+				
+				if(data.trim()=='1'){
+					$(".image-preview").find("li").first().remove();
+					$(selector).parent().remove();
+					count--;
+				}else{
+					alert("파일삭제실패 !");
+				}
+			},
+			error:function(){
+				alert("에러발생.삭제실패")
+			}
+		})
+	})
+
+}
+
+	
+	
+function fileAddInit(c){
+count = c;
+
 $("#clcl").click(function() {
 	if (count > 3) {
 		alert('최대 3개의 사진만 업로드 가능합니다.')
@@ -10,15 +55,26 @@ $("#clcl").click(function() {
 	console.log("파파파파파파")
 
 	let result = '';
-//	result = '<div class="uploadBox">	'
+	result = '<ul class="uploadBox">'
 	result = result + '<input type="file" name="files" class="real-upload" accept="image/*" required multiple>';
 
 
-	result = result + ' <div class="upload">uplaodd</div> ';
+	result = result + ' <div class="upload">사진추가하기</div> ';
+	result = result + '<button class="del" type="button">X</button> </ul>'
 	$(".fileResult").append(result);
 	count++;
 })
 
+$(".fileResult").on("click", ".del",function(){
+	console.log("삭제??")
+	$(this).parent().remove();
+	$(".uploadBox").find("li").next().remove();
+	
+	
+	
+	count--;
+})
+}
 
 
  function getImageFiles(e) {
@@ -45,7 +101,9 @@ $("#clcl").click(function() {
           const reader = new FileReader();
           reader.onload = (e) => {
             const preview = createElement(e, file);
-            imagePreview.appendChild(preview);
+            let picCount=1;
+            $(".uploadBox").children().eq(picCount).append(preview);
+            picCount++;
           };
           reader.readAsDataURL(file);
         }
