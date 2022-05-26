@@ -29,6 +29,18 @@
 	</div>
 	
 	
+	<hr class="my-6">
+	    		<h6>첨부파일</h6>
+	    	
+				<ul class="list-group list-group-flush">
+				   	<c:forEach items="${NoticeFilesVO}" var="f">
+				   	<li class="list-group-item">
+				   		<a href="./fileDown?fileNum=${f.fileNum}">${f.oriName}</a>
+				   	</li>
+				   	</c:forEach>
+				</ul>
+	
+	
 
 
 	<div class="container my-4">

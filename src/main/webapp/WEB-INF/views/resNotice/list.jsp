@@ -34,7 +34,7 @@
 			
 		</table>
 	</div>
-				<a href="./list" role="button" class="btn btn-primary mx-1">등록</a>
+				<a href="./add" role="button" class="btn btn-primary mx-1">등록</a>
 	
 	
 		<div class="row">

@@ -21,33 +21,40 @@
 	<h1>Res add page</h1>
 	
 	<div class="container-md">
-	
-	<div class="input-group mb-3">
-	  <span class="input-group-text" id="inputGroup-sizing-default">Title</span>
-	  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-	</div>
-	
-	<div>
-		<form method="post">
-	  <textarea id="resNoticeDetail" name="resNoticeDetail"></textarea>
+		<form action="./add" method="post" enctype="multipart/form-data">
+		<input type="text" name="id" value="${member.id }" hidden="">
+		
+		<div class="input-group mb-3">
+		  <span class="input-group-text" id="inputGroup-sizing-default">Title</span>
+		  <input type="text" name="title" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+		</div>
+		
+		<div>
+		  <textarea id="resNoticeDetail" name="contents"></textarea>
+		</div>
+		
+		
+		<div class="mb-3">
+		  <label for="formFile" class="form-label"></label>
+		  <input class="form-control" type="file" id="formFile">
+		</div>
+		
+		
+		<button type="submit" class="btn btn-primary">등록</button>
+		<button type="button">목록</button>
 		</form>
-	</div>
-	
-	
-	<div class="mb-3">
-	  <label for="formFile" class="form-label"></label>
-	  <input class="form-control" type="file" id="formFile">
-	</div>
-	
-	
-	<button type="button">등록</button>
-	<button type="button">목록</button>
 	
 	</div>
+	
+	<script type="text/javascript" src="../resources/js/fileAdd.js"></script>
+	<script type="text/javascript" src="../resources/js/summernote.js"></script>
 	<script type="text/javascript">
   $('#resNoticeDetail').summernote({
 	  height : 300
 	});
 	</script>
+	<script type="text/javascript">
+	summernotInit("contents", "");
+</script>
 </body>
 </html>

@@ -30,11 +30,11 @@ public class NoticeController {
 	@GetMapping("list")
 	public ModelAndView getList(Pager pager)throws Exception{
 		ModelAndView mv = new ModelAndView();
+		System.out.println("controller 지나감");
 		List<BoardVO> ar = noticeService.getList(pager);
 		mv.setViewName("notice/list");
 		mv.addObject("list", ar);
 		mv.addObject("pager", pager);
-		
 		return mv;
 	}
 	
@@ -49,6 +49,9 @@ public class NoticeController {
 		ModelAndView mv = new ModelAndView();
 		int result = noticeService.setAdd(noticeVO, files);
 		mv.setViewName("redirect:./list");
+		System.out.println("controller id"+noticeVO.getId());
+		System.out.println("cont title"+noticeVO.getTitle());
+		System.out.println("cont contents"+noticeVO.getContents());
 		return mv;
 	}
 	
@@ -95,6 +98,7 @@ public class NoticeController {
 	@GetMapping("fileDown")
 	public ModelAndView getFileDown(NoticeFilesVO noticeFilesVO)throws Exception{
 		ModelAndView mv = new ModelAndView();
+		System.out.println(noticeFilesVO.getFileName());
 		noticeFilesVO = noticeService.getFileDetail(noticeFilesVO);
 		mv.addObject("fileVO", noticeFilesVO);
 		mv.setViewName("fileDown");

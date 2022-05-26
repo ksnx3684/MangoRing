@@ -11,9 +11,6 @@
 <c:import url="./template/mango_header.jsp"></c:import>
 </head>
 <body>
-	<h1>hi!</h1>
-	
-
 	<a href="./reservation/write?restaurantNum=1">예약하기</a>
 	
 
