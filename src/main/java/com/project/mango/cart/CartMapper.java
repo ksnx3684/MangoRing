@@ -13,6 +13,12 @@ public interface CartMapper {
 	// cartList
 	public List<CartVO> cartList(CartVO cartVO) throws Exception;
 	
+	// cartCountPlus
+	public int cartCountPlus(CartVO cartVO) throws Exception;
+	
+	// cartCountMinus
+	public int cartCountMinus(CartVO cartVO) throws Exception;
+	
 	// cartListDelete
 	public int cartListDelete(Long caNum) throws Exception;
 	

@@ -22,21 +22,6 @@
 			</association>
 		</association>
 		
-		<!-- <association property="id" javaType="MemberVO">
-			<id column="id" property="id"/>
-			<result column="pw" property="pw"/>
-			<result column="name" property="name"/>
-			<result column="email" property="email"/>
-			<result column="phone" property="phone"/>
-			<result column="gender" property="gender"/>
-			<result column="joinDate" property="joinDate"/>
-			<result column="userType" property="userType"/>
-			<result column="postCode" property="postCode"/>
-			<result column="address" property="address"/>
-			<result column="detailAddress" property="detailAddress"/>
-			<result column="extraAddress" property="extraAddress"/>
-			<result column="blacklist" property="blacklist"/>
-		</association> -->
 	</resultMap>
 	
 	<select id="cartList" parameterType="CartVO" resultMap="CartVO">
@@ -48,6 +33,12 @@
 		WHERE C.ID = #{id}
 		ORDER BY CARTNUM
 	</select>
+	<update id="cartCountPlus" parameterType="CartVO">
+		UPDATE CART SET MENUCOUNT = MENUCOUNT + 1 WHERE CARTNUM = #{cartNum}
+	</update>
+	<update id="cartCountMinus" parameterType="CartVO">
+		UPDATE CART SET MENUCOUNT = MENUCOUNT - 1 WHERE CARTNUM = #{cartNum}
+	</update>
 	<delete id="cartListDelete" parameterType="Long">
 		DELETE FROM CART WHERE CARTNUM = #{cartNum}
 	</delete>

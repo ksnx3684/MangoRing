@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.project.mango.board.BoardService;
 import com.project.mango.board.BoardVO;
-import com.project.mango.util.FileManger;
+import com.project.mango.util.FileManager;
 import com.project.mango.util.Pager;
 
 @Service
@@ -21,7 +21,7 @@ public class NoticeService implements BoardService{
 	private NoticeMapper noticeMapper;
 	
 	@Autowired
-	private FileManger fileManger;
+	private FileManager fileManager;
 
 	// list
 	public List<BoardVO> getList(Pager pager) throws Exception {
@@ -48,7 +48,7 @@ public class NoticeService implements BoardService{
 		int result = noticeMapper.setDelete(noticeVO);
 		
 		for(NoticeFilesVO f : ar) {
-			fileManger.fileDelete(f.getFileName(), "resources/upload/notice");
+			fileManager.fileDelete(f.getFileName(), "resources/upload/notice");
 		}
 		return result;
 	}
@@ -64,7 +64,7 @@ public class NoticeService implements BoardService{
 				}
 				
 				//1.HDD에 저장
-				String fileName = fileManger.fileSave(mf, "resources/upload/notice/");
+				String fileName = fileManager.fileSave(mf, "resources/upload/notice/");
 				
 				//2. DB에저장
 				NoticeFilesVO noticeFilesVO = new NoticeFilesVO();
@@ -94,14 +94,14 @@ public class NoticeService implements BoardService{
 	
 	//summerNote
 	public String setSummerFileUpload(MultipartFile files) throws Exception {
-		String fileName = fileManger.fileSave(files, "resources/upload/notice");
+		String fileName = fileManager.fileSave(files, "resources/upload/notice");
 		fileName = "/resources/upload/notice/"+fileName;
 		return fileName;
 	}
 	
 	public boolean setSummerFileDelete(String fileName) throws Exception{
 		fileName = fileName.substring(fileName.lastIndexOf("/")+1);
-		return fileManger.fileDelete(fileName, "/resources/upload/notice");
+		return fileManager.fileDelete(fileName, "/resources/upload/notice");
 	}
 
 	@Override

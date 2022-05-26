@@ -32,7 +32,7 @@
                            <c:forEach items="${cartList}" var="dto" varStatus="status">
                              <tr>
                                <td class="cart_product_img">
-                                 <input class="check" name="cartNum" type="checkbox" data-cartNum="${dto.cartNum}" value="${dto.cartNum}">&nbsp;
+                                 <input class="check" id="cartNum" name="cartNum" type="checkbox" data-cartNum="${dto.cartNum}" value="${dto.cartNum}">&nbsp;
                                  <c:if test="${dto.menuVOs.menuFileVO.fileName ne null}">
                                    <a href="../product/detail?menuNum=${dto.menuNum}"><img class="image" src="../resources/upload/product/${dto.menuVOs.menuFileVO.fileName}" alt="Product"></a>
                                  </c:if>
@@ -40,11 +40,13 @@
                                <td class="cart_product_desc">
                                  <h5>${dto.menuVOs.name}</h5>
                                </td>
-                               <td class="count">
-                                 <span>${dto.menuCount}</span>
+                               <td class="cou">
+                                <button type="button" class="minus" data-cartNum="${dto.cartNum}" value="${dto.menuCount}">-</button>
+                                 <span class="count">${dto.menuCount}</span>
+                                 <button type="button" class="plus" data-cartNum="${dto.cartNum}" value="${dto.menuCount}">+</button>
                                </td>
-                               <td class="price">
-                                 <span>${dto.menuVOs.price}</span>
+                               <td>
+                                 <span class="price">${dto.menuVOs.price}</span>
                                </td>
                              </tr>
                            </c:forEach>                                   
@@ -95,12 +97,12 @@
                     checkArr.push($(this).attr("data-cartNum"));
                 });
                 $.ajax({
-                    url: "cartlistDelete",
+                    url: "cartListDelete",
                     type: "post",
-                    data: { checkbox : checkArr},
+                    data: { checkbox : checkArr },
                     traditional : true,
                     success: function () {
-                        location.href = "./cartlist";
+                        location.href = "./cartList";
                     }
                 });
                 const frm = document.getElementsByClassName("frm");
@@ -109,6 +111,51 @@
               //location.reload;
             }
         });
+
+
+       
+        
+        $(".cou").children(".minus").on("click", function(){
+          let cartNum = $(this).attr("data-cartNum");
+          let count = $(this).val();
+        	// console.log(cartNum);
+          // alert(count);
+          if(count < 2){
+            alert("최소 1개 이상 주문 해야합니다")
+          } else{
+            $.ajax({
+              url: "cartCountMinus",
+              type: "post",
+              data: { cartNum : cartNum },
+              success: function(){
+                location.href = "./cartList";
+              }
+        	  });
+          }	
+        });
+
+        $(".cou").children(".plus").on("click", function(){
+          let cartNum = $(this).attr("data-cartNum");
+          let count = $(this).val();
+        	// console.log(cartNum);
+          // alert(count);
+          if(count > 99){
+            alert("최대 100개까지 가능합니다")
+          } else{
+            $.ajax({
+              url: "cartCountPlus",
+              type: "post",
+              data: { cartNum : cartNum },
+              success: function(){
+                location.href = "./cartList";
+              }
+        	  });
+          }	
+        });
+        
+        
+        
+        
       </script>
 
       <script type="text/javascript" src="../resources/js/cart/cartList.js"></script>

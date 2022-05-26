@@ -57,15 +57,15 @@ window.onload = function(){
 // });
 
 
-const btnCheck = document.querySelector(".main-content-wrapper");
-btnCheck.addEventListener("mousemove", function(){
+// const btnCheck = document.querySelector(".main-content-wrapper");
+// btnCheck.addEventListener("mousemove", function(){
     
-    let address = document.querySelector("#address").value;
-    let detailAddress = document.querySelector('#detailAddress').value;
-    let extraAddress = document.querySelector("#extraAddress").value;
+//     let address = document.querySelector("#address").value;
+//     let detailAddress = document.querySelector('#detailAddress').value;
+//     let extraAddress = document.querySelector("#extraAddress").value;
 
-    document.querySelector("#addressDetail2").value = address + detailAddress + extraAddress;
-});
+//     document.querySelector("#addressDetail2").value = address + detailAddress + extraAddress;
+// });
 
 const kakaoPay = document.getElementById("kakaoPay");
 const naverPay = document.getElementById("naverPay");

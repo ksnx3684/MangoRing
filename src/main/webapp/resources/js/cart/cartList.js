@@ -22,6 +22,7 @@ for(let i = 0; i < count.length; i++){
             // price[i] = price.innerText;
             let a = count[i].textContent;
             let b = price[i].textContent;
+            console.log(a);
             const aa = Number(a);
             const bb = Number(b);
             total[i] = aa * bb;

@@ -20,6 +20,14 @@ public class CartService {
 		return cartMapper.cartList(cartVO);
 	}
 	
+	public int cartCountPlus(CartVO cartVO) throws Exception{
+		return cartMapper.cartCountPlus(cartVO);
+	}
+	
+	public int cartCountMinus(CartVO cartVO) throws Exception{
+		return cartMapper.cartCountMinus(cartVO);
+	}
+	
 	public int cartListDelete(Long caNum) throws Exception{
 		return cartMapper.cartListDelete(caNum);
 	}

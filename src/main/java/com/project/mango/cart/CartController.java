@@ -35,9 +35,9 @@ public class CartController {
 	
 	List<CartVO> lists = new ArrayList<CartVO>(); // 카트에 담을 수 있는 전역변수 lists
 	int totalsize = 0;
-	PaymentVO data = new PaymentVO();
-	List<PaymentDetailVO> detailDatas = new ArrayList<PaymentDetailVO>();
-	List<Long> kacaNum = new ArrayList<Long>();
+	PaymentVO data = new PaymentVO(); // 카카오페이 전용 전역변수
+	List<PaymentDetailVO> detailDatas = new ArrayList<PaymentDetailVO>(); // 카카오페이 전용 전역변수
+	List<Long> kacaNum = new ArrayList<Long>(); // 카카오페이 진행 후 카트리스트 삭제를 위한 전역변수
 
 	// 장바구니 보기 (카트 목록 불러오기)
 	@GetMapping("cartList")
@@ -48,6 +48,20 @@ public class CartController {
 		List<CartVO> list = cartService.cartList(cartVO);
 		
 		model.addAttribute("cartList", list);
+	}
+	
+	// 장바구니 수량 증가
+	@PostMapping("cartCountPlus")
+	@ResponseBody
+	public void cartCountPlus(CartVO cartVO) throws Exception{
+		int result = cartService.cartCountPlus(cartVO);
+	}
+	
+	// 장바구니 수량 감소
+	@PostMapping("cartCountMinus")
+	@ResponseBody
+	public void cartCountMinus(CartVO cartVO) throws Exception{
+		int result = cartService.cartCountMinus(cartVO);
 	}
 	
 	// 장바구니에서 선택 상품 제거
@@ -172,6 +186,7 @@ public class CartController {
 		model.addAttribute("payNum", data.getPayNum());
 		model.addAttribute("totalPrice", data.getTotalPrice());
 		model.addAttribute("id", data.getId());
+//		model.addAttribute("name", lists.get(0).getMenuVOs().getRestaurantNum());
 	
 	}
 	
