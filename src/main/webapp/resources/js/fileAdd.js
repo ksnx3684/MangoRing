@@ -1,3 +1,5 @@
+
+
 let count=0;
  
  
@@ -37,9 +39,12 @@ function fileDeleteInit(){
 	   
    });
 }
+$("#fileAdd").click(function() {
+	console.log("hi")
+});
 
 
-function fileAddInit(c){
+ function fileAddInit(c){
    
    count=c;
 
@@ -55,13 +60,15 @@ function fileAddInit(c){
 	   result = result + '<input name="files" type="file" class="form-control files" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">'
 	   result = result + '<button class="btn btn-outline-secondary del" type="button" id="inputGroupFileAddon04">X</button>'
 	   result = result + '</div>';
-	   $("#fileResult").append(result);
+	   $("#ajaxResult").append(result);
 	   count++;
    });
+
+
    
-   $("#fileResult").on("click", ".del", function() {
+   $("#ajaxResult").on("click", ".del", function() {
 	   $(this).parent().remove();
 	   count--;
    } );
 
-}
+ }

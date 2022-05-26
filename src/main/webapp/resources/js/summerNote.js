@@ -1,3 +1,4 @@
+ 
  	function summernoteInit(selector, code){
 	 	//summernote
 	$("#"+selector).summernote({
@@ -31,6 +32,7 @@
 						$("#"+selector).summernote('editor.insertImage', data.trim());
 					}
 					
+					
 				});  
 				
 			},//onImageUpload 끝
@@ -53,4 +55,3 @@
 	
 		$("#"+selector).summernote('code', code);
 	}
- 

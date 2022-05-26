@@ -33,6 +33,7 @@
 		
 		<div>
 		  <textarea id="noticeDetail" name="contents"></textarea>
+		   
 		</div>
 	
 	
@@ -43,12 +44,13 @@
 	
 	<button id="fileAdd" type="button" class="btn btn-primary d-block my-4">파일추가</button>
 	
-	<div id="fileResult">
+	<div id="ajaxResult">
+	
 	</div>
 	
 	
 	<button type="submit" class="btn btn-primary">등록</button>
-	<button type="button">목록</button>
+	<button onclick="location.href='./list'" type="button">목록</button>
 	</form>
 	
 	

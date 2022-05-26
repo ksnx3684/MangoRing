@@ -41,7 +41,7 @@
 		
 		
 		<button type="submit" class="btn btn-primary">등록</button>
-		<button type="button">목록</button>
+		<button onclick="location.href='./list'" type="button">목록</button>
 		</form>
 	
 	</div>
@@ -53,8 +53,5 @@
 	  height : 300
 	});
 	</script>
-	<script type="text/javascript">
-	summernotInit("contents", "");
-</script>
 </body>
 </html>
