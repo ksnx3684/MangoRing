@@ -134,10 +134,6 @@
 	</div>
 	
 	<c:import url="../template/cdn_script.jsp"></c:import>
-	
-		
-	<!-- Option 1: Bootstrap Bundle with Popper -->
-
 </body>
 <script type="text/javascript">
 	$("#wishlist").click(function(){
