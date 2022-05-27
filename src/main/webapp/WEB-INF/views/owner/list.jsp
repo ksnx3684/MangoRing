@@ -22,7 +22,7 @@
 	<a href="./shop/delete?restaurantNum=${restaurantVO.restaurantNum}">삭제</a>
 	
 	<a href="../owner/reservationManage?restaurantNum=${restaurantVO.restaurantNum}">예약 관리</a>
-	
+	<a href="../owner/packageManage?restaurantNum=${restaurantVO.restaurantNum}">포장 관리</a>
 	
 </body>
 </html>

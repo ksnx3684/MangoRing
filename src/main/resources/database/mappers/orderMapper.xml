@@ -3,6 +3,57 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.mango.order.OrderMapper">
+
+	<!-- 주영 추가 -->
+	<select id="getOrderList" parameterType="PackagePager" resultMap="orderListResult">
+		SELECT * FROM 
+			(SELECT pd.PAYDETAILNUM, pd.MENUNUM, pd.MENUCOUNT, p.*, m.NAME, menu.NAME AS MENUNAME FROM PAYMENT_DETAIL pd
+				LEFT JOIN PAYMENT p 
+				ON (pd.PAYNUM = p.PAYNUM)
+				LEFT JOIN MENU menu
+				ON (pd.MENUNUM = menu.MENUNUM)
+				LEFT JOIN MEMBER m 
+				ON (p.ID = m.ID)
+			WHERE pd.MENUNUM IN (SELECT MENUNUM FROM MENU WHERE RESTAURANTNUM = #{restaurantNum})) R
+		ORDER BY STATUS ASC, PAYDATE ASC
+		LIMIT #{startRow}, #{perPage}
+	</select>
 	
+	<resultMap type="PaymentVO" id="orderListResult">
+		<id column="payNum" property="payNum"/>
+		<result column="id" property="id"/>
+		<result column="payCheck" property="payCheck"/>
+		<result column="totalPrice" property="totalPrice"/>
+		<result column="payDate" property="payDate"/>
+		<result column="waiting" property="waiting"/>
+		<result column="status" property="status"/>
+		<result column="payType" property="payType"/>
+		<association property="memberVO" javaType="MemberVO">
+			<id column="id" property="id"/>
+			<result column="name" property="name"/>
+		</association>
+		<collection property="paymentDetailVOs" javaType="List" ofType="PaymentDetailVO">
+			<id column="payDetailNum" property="payDetailNum"/>
+			<result column="payNum" property="payNum"/>
+			<result column="menuNum" property="menuNum"/>
+			<result column="menuCount" property="menuCount"/>
+			<association property="menuVO" javaType="MenuVO">
+				<id column="menuNum" property="menuNum"/>
+				<result column="menuName" property="name"/>
+			</association>
+		</collection>
+	</resultMap>
+	
+	<select id="getOrderListCount" parameterType="PackagePager" resultType="Long">
+		SELECT COUNT(PAYNUM) FROM 
+			(SELECT DISTINCT p.PAYNUM FROM PAYMENT_DETAIL pd
+				LEFT JOIN PAYMENT p 
+				ON (pd.PAYNUM = p.PAYNUM)
+				LEFT JOIN MENU menu
+				ON (pd.MENUNUM = menu.MENUNUM)
+				LEFT JOIN MEMBER m 
+				ON (p.ID = m.ID)
+			WHERE pd.MENUNUM IN (SELECT MENUNUM FROM MENU WHERE RESTAURANTNUM = #{restaurantNum})) R
+	</select>	
 
 </mapper>

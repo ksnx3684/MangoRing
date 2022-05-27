@@ -23,11 +23,14 @@ import com.project.mango.member.MemberVO;
 import com.project.mango.menu.MenuFileVO;
 import com.project.mango.menu.MenuService;
 import com.project.mango.menu.MenuVO;
+import com.project.mango.order.OrderService;
+import com.project.mango.order.PaymentVO;
 import com.project.mango.reservation.ReservationService;
 import com.project.mango.reservation.ReservationVO;
 import com.project.mango.restaurant.RestaurantFileVO;
 import com.project.mango.restaurant.RestaurantService;
 import com.project.mango.restaurant.RestaurantVO;
+import com.project.mango.util.PackagePager;
 import com.project.mango.util.ReservationPager;
 
 @Controller
@@ -42,6 +45,8 @@ public class OwnerController {
 	private HashtagService hashtagService;
 	@Autowired
 	private ReservationService reservationService;
+	@Autowired
+	private OrderService orderService;
 	
 	@GetMapping("list")
 	public ModelAndView getList(HttpSession session) throws Exception {
@@ -135,6 +140,19 @@ public class OwnerController {
 		
 		mv.addObject("result", result);
 		mv.setViewName("common/ajaxResult");
+		return mv;
+	}
+	
+	@GetMapping("packageManage")
+	public ModelAndView packageManage(PackagePager packagePager, String startDate, String endDate) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		List<PaymentVO> packageList = orderService.getOrderList(packagePager);
+		
+		mv.addObject("packageList", packageList);
+		mv.addObject("pager", packagePager);
+		mv.setViewName("owner/packageManage");
+		
 		return mv;
 	}
 	

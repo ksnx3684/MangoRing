@@ -1,7 +1,6 @@
 package com.project.mango.member;
 
 import java.sql.Date;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 

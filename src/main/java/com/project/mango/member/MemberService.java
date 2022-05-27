@@ -74,4 +74,5 @@ public class MemberService {
 	public int setDelete(MemberVO vo) throws Exception {
 		return memberMapper.setDelete(vo);
 	}
+	
 }

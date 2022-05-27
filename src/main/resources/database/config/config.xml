@@ -54,6 +54,9 @@
   		<typeAlias type="com.project.mango.util.Pager" alias="Pager"/>
   		
   		<typeAlias type="com.project.mango.util.ReservationPager" alias="ReservationPager"/>
+  		<typeAlias type="com.project.mango.util.PackagePager" alias="PackagePager"/>
+  		<typeAlias type="com.project.mango.order.PaymentVO" alias="PaymentVO"/>
+  		<typeAlias type="com.project.mango.order.PaymentDetailVO" alias="PaymentDetailVO"/>
 
   	</typeAliases>
   	
