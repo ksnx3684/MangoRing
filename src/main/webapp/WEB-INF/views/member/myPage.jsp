@@ -134,6 +134,8 @@
 	</div>
 	
 	<c:import url="../template/cdn_script.jsp"></c:import>
+	
+	
 </body>
 <script type="text/javascript">
 	$("#wishlist").click(function(){
