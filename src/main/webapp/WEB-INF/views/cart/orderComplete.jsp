@@ -8,6 +8,6 @@
 </head>
 <body>
 	<h2>주문이 완료되었습니다</h2>
-	
+	<button><a href="../">메인으로 돌아가기</a></button>
 </body>
 </html>

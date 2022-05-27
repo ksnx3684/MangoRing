@@ -20,6 +20,12 @@
 				<result column="fileName" property="fileName"/>
 				<result column="oriName" property="oriName"/>
 			</association>
+			<!-- <association property="paymentDetailVO" javaType="PaymentDetailVO">
+				<id column="payDetailNum" property="payDetailNum"/>
+				<result column="payNum" property="payNum"/>
+				<result column="menuNum" property="menuNum"/>
+				<result column="menuCount" property="menuCount"/>
+			</association> -->
 		</association>
 		
 	</resultMap>

@@ -186,6 +186,9 @@ public class CartController {
 		model.addAttribute("payNum", data.getPayNum());
 		model.addAttribute("totalPrice", data.getTotalPrice());
 		model.addAttribute("id", data.getId());
+		
+//		System.out.println(detailDatas.get(0).getMenuVO().getMenuNum());
+		
 //		model.addAttribute("name", lists.get(0).getMenuVOs().getRestaurantNum());
 	
 	}
@@ -208,14 +211,14 @@ public class CartController {
 		
 	}
 	
-	// 네이버페이 결제 페이지
-	@GetMapping("naverPay")
-	public void naverPay() throws Exception{
+	// 토스페이 결제 페이지
+	@GetMapping("tossPay")
+	public void tossPay() throws Exception{
 	}
 	
-	// 네이버페이 결제 완료 페이지
-	@GetMapping("naverPayOrderComplete")
-	public void naverPayOrderComplete() throws Exception{
+	// 토스페이 결제 완료 페이지
+	@GetMapping("tossPayOrderComplete")
+	public void tossPayOrderComplete() throws Exception{
 		
 	}
 }

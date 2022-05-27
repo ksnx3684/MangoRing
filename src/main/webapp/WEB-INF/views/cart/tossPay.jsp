@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>주문 완료</title>
+<title>토스페이 결제</title>
 </head>
 <body>
-	<h2>주문이 완료되었습니다</h2>
 	
+
 </body>
 </html>
