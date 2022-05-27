@@ -1,6 +1,6 @@
 
 
-#couponResult{
+#promotionResult{
 	
  width:1500px;
  height:500px;
@@ -9,7 +9,7 @@
  margin: 10px auto 70px auto
 }
 
-.couponText{
+.promotionText{
 	width: 1500px;
 	
 	height: 50px;

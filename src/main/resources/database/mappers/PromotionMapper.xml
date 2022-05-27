@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.mango.promotion.PromotionMapper">
+
+	<insert id="setPromotionAdd" parameterType="PromotionVO" useGeneratedKeys="true" keyProperty="promotionNum">
+		INSERT INTO PROMOTION
+		VALUES(#{promotionNum},1,#{id},#{promotionName},#{promotionDetail},#{startDate},#{endDate},#{discount})
+	</insert>
+
+
+	<select id="getList" resultType="PromotionVO">
+	SELECT * FROM PROMOTION 
+	</select>
+
+
+</mapper>

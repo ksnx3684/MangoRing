@@ -80,6 +80,7 @@
 					id="reviewContents" placeholder="리뷰 내용을 작성해주세요."></textarea>
 			</div>
 
+			작성자 : <input type="text" value="${member.id }" readonly="readonly" name="id">
 			<button type="submit" id="btnReview">리뷰 등록</button>
 		</form>
 
