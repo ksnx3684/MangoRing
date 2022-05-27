@@ -1,6 +1,9 @@
 package com.project.mango.owner;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -16,12 +19,19 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.project.mango.hashtag.HashtagService;
 import com.project.mango.hashtag.HashtagVO;
+import com.project.mango.member.MemberVO;
 import com.project.mango.menu.MenuFileVO;
 import com.project.mango.menu.MenuService;
 import com.project.mango.menu.MenuVO;
+import com.project.mango.order.OrderService;
+import com.project.mango.order.PaymentVO;
+import com.project.mango.reservation.ReservationService;
+import com.project.mango.reservation.ReservationVO;
 import com.project.mango.restaurant.RestaurantFileVO;
 import com.project.mango.restaurant.RestaurantService;
 import com.project.mango.restaurant.RestaurantVO;
+import com.project.mango.util.PackagePager;
+import com.project.mango.util.ReservationPager;
 
 @Controller
 @RequestMapping(value="owner/*")
@@ -33,6 +43,10 @@ public class OwnerController {
 	private MenuService menuService;
 	@Autowired
 	private HashtagService hashtagService;
+	@Autowired
+	private ReservationService reservationService;
+	@Autowired
+	private OrderService orderService;
 	
 	@GetMapping("list")
 	public ModelAndView getList(HttpSession session) throws Exception {
@@ -40,14 +54,104 @@ public class OwnerController {
 		RestaurantVO restaurantVO = new RestaurantVO();
 		
 		//임시 (로그인 추가되면 수정), Mapper에 parameter도 MemberVO로 바꾸기
-		// MemberVO memberVO = (MemberVO)session.getAttribute("member")
-		//restaurantVO.setID(memberVO.getID());
-		restaurantVO.setId("owner1");
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		restaurantVO.setId(memberVO.getId());
 		
+		//가게 정보
 		restaurantVO = restaurantService.getList(restaurantVO);
-		
+
 		mv.addObject("restaurantVO", restaurantVO);
 		mv.setViewName("owner/list");
+		
+		return mv;
+	}
+	
+	@GetMapping("reservationManage")
+	public ModelAndView reservationManage(ReservationVO reservationVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.addObject("restaurantNum", reservationVO.getRestaurantNum());
+		mv.setViewName("owner/reservationManage");
+		
+		return mv;
+	}
+	
+	@PostMapping("reservationList")
+	public ModelAndView getReservationList(ReservationPager reservationPager, String startDate, String endDate) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		if(startDate != null) {
+			reservationPager.setStartDate(Date.valueOf(startDate));
+		}
+		
+		if(endDate != null) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(sdf.parse(endDate));
+			cal.add(Calendar.DATE, 1);
+			String result = sdf.format(cal.getTime());
+			
+			reservationPager.setEndDate(Date.valueOf(result));
+			
+		}
+		
+		//예약 리스트
+		List<ReservationVO> reservationVOs = reservationService.getList(reservationPager);
+		
+		mv.addObject("reservationVOs", reservationVOs);
+		mv.addObject("pager", reservationPager);
+		mv.setViewName("common/reservationList");
+		
+		return mv;
+	}
+	
+	@PostMapping("reportList")
+	public ModelAndView getReportList(ReservationPager reservationPager, String startDate, String endDate) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		if(startDate != null) {
+			reservationPager.setStartDate(Date.valueOf(startDate));
+		}
+		
+		if(endDate != null) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(sdf.parse(endDate));
+			cal.add(Calendar.DATE, 1);
+			String result = sdf.format(cal.getTime());
+			
+			reservationPager.setEndDate(Date.valueOf(result));
+			
+		}
+		
+		List<ReservationVO> reportList = reservationService.getReportList(reservationPager);
+		
+		mv.addObject("reportList", reportList);
+		mv.addObject("pager2", reservationPager);
+		mv.setViewName("common/reportList");
+		
+		return mv;
+	}
+	
+	@PostMapping("changeReservation")
+	public ModelAndView setChangeReservation(ReservationVO reservationVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		int result = reservationService.setChangeReservation(reservationVO);
+		
+		mv.addObject("result", result);
+		mv.setViewName("common/ajaxResult");
+		return mv;
+	}
+	
+	@GetMapping("packageManage")
+	public ModelAndView packageManage(PackagePager packagePager, String startDate, String endDate) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		List<PaymentVO> packageList = orderService.getOrderList(packagePager);
+		
+		mv.addObject("packageList", packageList);
+		mv.addObject("pager", packagePager);
+		mv.setViewName("owner/packageManage");
 		
 		return mv;
 	}

@@ -46,7 +46,7 @@ $("#rsvBtn").click(function() {
 		return;
 	}
 	
-	let rsvTime = $("#datepicker").val() + " " + $("#timepicker").val();
+	let rsvTime = $("#datepicker").val() + " " + $("#timepicker").val() + ":00";
 	$("#rsvTime").val(rsvTime);
 	
 	$("#rsvFrm").submit();
@@ -94,7 +94,7 @@ function disableSomeDay(date) {
 /* 시간선택 */
 $(function() {
     $("#timepicker").timepicker({
-        timeFormat: 'HH:mm:ss',
+        timeFormat: 'HH:mm',
         interval: 30,
         minTime: '10',
         maxTime: '6:00pm',
