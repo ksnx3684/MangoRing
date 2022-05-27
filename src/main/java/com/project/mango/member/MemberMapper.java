@@ -1,14 +1,23 @@
 package com.project.mango.member;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.project.mango.restaurant.RestaurantVO;
+import com.project.mango.wishlist.WishlistVO;
 
 @Mapper
 public interface MemberMapper {
 	
 	// 회원가입
 	public int setAddMember(MemberVO memberVO) throws Exception;
+	
+	// 사진 등록
+	public int setPhoto(MemberFileVO memberFileVO) throws Exception;
+	
+	// 프로필 사진 리스트
+	public List<MemberFileVO> getFileList(MemberVO memberVO) throws Exception;
 	
 	// 회원정보수정
 	public int setUpdate(MemberVO memberVO) throws Exception;
@@ -24,9 +33,15 @@ public interface MemberMapper {
 	
 	// 사업자 등록
 	public int setBusinessApplication(RestaurantVO restaurantVO) throws Exception;
-	
+		
 	// 사업자 등록 후 승인대기
 	public int setBusinessUserType(MemberVO memberVO) throws Exception;
+	
+	// 위시리스트
+	public int setWishlist(WishlistVO wishlistVO) throws Exception;
+	
+	// 위시리스트 조회
+	public List<WishlistVO> getWishlist(String id) throws Exception;
 	
 	// 회원 탈퇴
 	public int setDelete(MemberVO vo) throws Exception;

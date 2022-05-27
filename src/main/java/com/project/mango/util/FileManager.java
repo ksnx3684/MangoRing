@@ -33,7 +33,7 @@ public class FileManager {
 		//1. 파일을 HDD에 저장하고
 		//2. 저장된 파일명을 리턴(파일명은 중복 X)
 		path = servletContext.getRealPath(path);
-		System.out.println(path);
+		System.out.println("파일 경로 출력 : " + path);
 		
 		File file = new File(path);
 		if(!file.exists()) {

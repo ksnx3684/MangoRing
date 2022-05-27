@@ -13,9 +13,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.project.mango.member.MemberFileVO;
 import com.project.mango.member.MemberMapper;
 import com.project.mango.member.MemberVO;
 import com.project.mango.restaurant.RestaurantVO;
+import com.project.mango.wishlist.WishlistVO;
 
 @SpringBootTest
 class MemberDBTest {
@@ -91,10 +93,10 @@ class MemberDBTest {
 	}
 	
 	// 사업자 신청
-	@Test
+//	@Test
 	void setBusinessApplication() throws Exception {
 		RestaurantVO restaurantVO = new RestaurantVO();
-		restaurantVO.setId("id4");
+		restaurantVO.setId("id6");
 		restaurantVO.setBusinessNum("111-22-33333");
 		restaurantVO.setAddress("테스트 주소");
 		restaurantVO.setIntroduction("테스트 한줄평");
@@ -104,6 +106,31 @@ class MemberDBTest {
 		int result = memberMapper.setBusinessApplication(restaurantVO);
 		
 		assertEquals(1, result);
+	}
+	
+	// 포르필 사진 업로드
+//	@Test
+	void setPhotoTest() throws Exception {
+		MemberFileVO memberFileVO = new MemberFileVO();
+		memberFileVO.setId("id1");
+		memberFileVO.setFileName("파일 테스트");
+		memberFileVO.setOriName("원본 파일 테스트");
 		
+		int result = memberMapper.setPhoto(memberFileVO);
+		
+		assertEquals(1, result);
+	}
+	
+	// 위시리스트 테스트
+	@Test
+	void setWishlist() throws Exception {
+		WishlistVO wishlistVO = new WishlistVO();
+		wishlistVO.setRestaurantNum(1L);
+		wishlistVO.setId("id1");
+		wishlistVO.setCategoryNum(100L);
+		
+		int result = memberMapper.setWishlist(wishlistVO);
+		
+		assertEquals(1, result);
 	}
 }

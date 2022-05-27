@@ -1,5 +1,7 @@
 package com.project.mango.member;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -11,10 +13,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.mango.restaurant.RestaurantVO;
+import com.project.mango.wishlist.WishlistVO;
 
 @Controller
 @RequestMapping("member/*")
@@ -66,17 +71,19 @@ public class MemberController {
 	
 	// 회원가입 POST 방식
 	@PostMapping("join")
-	public String setJoin(Model model, @Valid MemberVO memberVO, BindingResult bindingResult) throws Exception {
+	public String setJoin(Model model, MultipartFile[] file, 
+			@Valid MemberVO memberVO, BindingResult bindingResult) throws Exception {
 		
 		if(memberService.memberError(memberVO, bindingResult)) {
 			return "member/join";
 		}
 		
-		int result = memberService.setAddMember(memberVO);
+		int result = memberService.setAddMember(memberVO, file);
 		model.addAttribute("vo", memberVO);
 		
 		return "redirect:./login";
 	}
+	
 	
 	// 마이페이지
 	@GetMapping("myPage")
@@ -120,16 +127,53 @@ public class MemberController {
 	
 	// 사업자 신청 POST 방식
 	@PostMapping("business")
-	public String setBusiness(HttpSession session, RestaurantVO restaurantVO) throws Exception {
+	public String setBusiness(HttpSession session, MultipartFile[] file, 
+			MemberVO memberVO, RestaurantVO restaurantVO) throws Exception {
 		
-		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		memberVO = (MemberVO)session.getAttribute("member");
 		restaurantVO.setId(memberVO.getId());
+		
 		// 사업자 정보 등록
-		int result = memberService.setBusinessApplication(restaurantVO);
+		int result = memberService.setBusinessApplication(restaurantVO, memberVO, file);
+		
 		// 사업자 등록 후 승인 대기로 변경
 		result = memberService.setBusinessUserType(memberVO);
 			
 		return "redirect:../";
+	}
+	
+	// 위시리스트 GET 방식
+	@GetMapping("wishlist")
+	public String setWishlist(HttpSession session, Model model) throws Exception {
+		
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		String id = (memberVO.getId());
+		
+		List<WishlistVO> wishList = memberService.getWishlist(id);
+		
+		model.addAttribute("wishList", wishList);
+		
+		return "member/wishlist";
+	}
+	
+	// 위시리스트 POST 방식
+	@PostMapping("wishlist")
+	@ResponseBody
+	public int setWishlist(HttpSession session, WishlistVO wishlistVO) throws Exception {
+		
+		// 로그인 체크
+		int result = 0;
+		
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		
+		if(memberVO != null) {
+			wishlistVO.setId(memberVO.getId());
+			memberService.setWishlist(wishlistVO);
+			result = 1;
+			
+		}
+		
+		return result;
 	}
 	
 	

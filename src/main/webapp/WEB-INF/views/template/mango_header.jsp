@@ -22,7 +22,14 @@
 
         <div class="dropdown text-end">
           <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+            <c:choose>
+            	<c:when test="${empty member || member.memberFileVO == null}">
+            		<img src="/resources/upload/member/default_profile.png" alt="photo" width="32" height="32" class="rounded-circle">
+            	</c:when>
+				<c:otherwise>
+					<img src="/resources/upload/member/${member.memberFileVO.fileName}" alt="photo" width="32" height="32" class="rounded-circle">
+				</c:otherwise>
+            </c:choose>
           </a>
           <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
           	<c:choose>

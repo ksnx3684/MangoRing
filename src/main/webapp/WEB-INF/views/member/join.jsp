@@ -18,7 +18,7 @@
 
         <div class="card mt-3" style="border-radius: 15px;">
           <div class="card-body">
-			<form:form modelAttribute="memberVO" method="POST">
+			<form:form modelAttribute="memberVO" method="POST" enctype="multipart/form-data">
 	            <div class="row align-items-center pt-4 pb-3">
 	              <div class="col-md-3 ps-5">
 	                <h6 class="mb-0">아이디</h6>
@@ -106,21 +106,7 @@
 	              	<form:errors path="email"></form:errors>
 	              </div>
 	            </div>
-<!--
-	            <hr class="mx-n3">
-	            <div class="row align-items-center py-3">
-	              <div class="col-md-3 ps-5">
-	                <h6 class="mb-0">Upload CV</h6>
-	              </div>
-	              
-	              <div class="col-md-9 pe-5">
-	                <input class="form-control form-control-lg" id="formFileLg" type="file" />
-	                <div class="small text-muted mt-2">Upload your CV/Resume or any other relevant file. Max file
-	                  size 50 MB</div>
-	              </div>
-	            </div>
--->
-	
+
 				<hr class="mx-n3">
 	            
 	            <div class="row align-items-center py-3">
@@ -135,9 +121,21 @@
 	  				<form:radiobutton path="gender" cssClass="form-check-input" value="1"/>
 	  				<label class="form-check-label" for="Radios1">여</label>
 	              </div>
-	               <div class="col-md-3 ps-5 mt-3">
+	               <div class="col-md-3 ps-5">
 	               	<form:errors path="gender"></form:errors>
 	               </div>
+	            </div>
+	            
+	            <hr class="mx-n3">
+	            <div class="row align-items-center py-3">
+	              <div class="col-md-3 ps-5">
+	                <h6 class="mb-0">프로필 사진</h6>
+	              </div>
+	              
+	              <div class="col-md-9 pe-5">
+	                <input class="form-control form-control-lg" id="formFileLg" name="file" type="file" />
+	                <div class="small text-muted mt-2">10MB 이하 파일을 업로드해주세요</div>
+	              </div>
 	            </div>
 			
             <hr class="mx-n3">
