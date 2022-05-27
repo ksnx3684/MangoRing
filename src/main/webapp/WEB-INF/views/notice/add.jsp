@@ -42,7 +42,7 @@
 	  <input name="setFileAdd" class="form-control" type="file" id="setFileAdd">
 	</div> -->
 	
-	<button id="fileAdd" type="button" class="btn btn-primary d-block my-4">파일추가</button>
+	<button id="fileAdd" type="button" class="btn btn-success d-block my-4">파일추가</button>
 	
 	<div id="ajaxResult">
 	
@@ -50,7 +50,7 @@
 	
 	
 	<button type="submit" class="btn btn-primary">등록</button>
-	<button onclick="location.href='./list'" type="button">목록</button>
+	<button onclick="location.href='./list'" type="button" class="btn btn-primary">목록</button>
 	</form>
 	
 	
