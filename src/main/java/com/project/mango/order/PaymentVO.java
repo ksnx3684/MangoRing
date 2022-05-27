@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class PaymentVO {
 
-	private Long payNum;
+	private String payNum;
 	private String id;
 	private Long payCheck;
 	private Long totalPrice;

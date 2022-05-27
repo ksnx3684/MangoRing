@@ -8,9 +8,9 @@ import lombok.Data;
 public class PaymentDetailVO {
 
 	private Long payDetailNum;
-	private Long payNum;
+	private String payNum;
 	private Long menuNum;
-	private Integer menuCount;
+	private Long menuCount;
 	
 	private MenuVO menuVO;
 	

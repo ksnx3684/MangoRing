@@ -75,7 +75,6 @@
   		<typeAlias type="com.project.mango.order.PaymentDetailVO" alias="PaymentDetailVO"/>
 	</typeAliases>
 
-  		
 
 
 </configuration>
