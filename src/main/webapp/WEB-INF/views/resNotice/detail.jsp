@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,6 +28,16 @@
 	  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" readonly="readonly">${vo.contents }</textarea>
 	</div>
 	
+		<hr class="my-6">
+	    		<h6>첨부파일</h6>
+	    	
+				<ul class="list-group list-group-flush">
+				   	<c:forEach items="${ResFilesVO}" var="f">
+				   	<li class="list-group-item">
+				   		<a href="./fileDown?fileNum=${f.fileNum}">${f.oriName}</a>
+				   	</li>
+				   	</c:forEach>
+				</ul>
 	
 
 

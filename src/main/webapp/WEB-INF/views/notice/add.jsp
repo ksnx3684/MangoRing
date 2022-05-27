@@ -21,33 +21,49 @@
 	
 	<div class="container-md">
 	
-	<div class="input-group mb-3">
-	  <span class="input-group-text" id="inputGroup-sizing-default">Title</span>
-	  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-	</div>
 	
-	<div>
-		<form method="post">
-	  <textarea id="noticeDetail" name="noticeDetail"></textarea>
-		</form>
-	</div>
+	<form action="./add" method="post" enctype="multipart/form-data">
+		
+		<input type="text" name="id" value="${member.id }" hidden="">
+		
+		<div class="input-group mb-3">
+		  <span class="input-group-text" id="inputGroup-sizing-default">Title</span>
+		  <input type="text" name="title" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+		</div>
+		
+		<div>
+		  <textarea id="noticeDetail" name="contents"></textarea>
+		   
+		</div>
 	
 	
-	<div class="mb-3">
+<!-- 	<div class="mb-3">
 	  <label for="formFile" class="form-label"></label>
-	  <input class="form-control" type="file" id="formFile">
+	  <input name="setFileAdd" class="form-control" type="file" id="setFileAdd">
+	</div> -->
+	
+	<button id="fileAdd" type="button" class="btn btn-success d-block my-4">파일추가</button>
+	
+	<div id="ajaxResult">
+	
 	</div>
 	
 	
-	<button id="s" type="submit" class="btn btn-primary">등록</button>
-	<button type="button">목록</button>
+	<button type="submit" class="btn btn-primary">등록</button>
+	<button onclick="location.href='./list'" type="button" class="btn btn-primary">목록</button>
+	</form>
 	
+	
+
 	</div>
 	
+	<script type="text/javascript" src="../resources/js/fileAdd.js"></script>
+	<script type="text/javascript" src="../resources/js/summerNote.js"></script>
 	<script type="text/javascript">
-  $('#noticeDetail').summernote({
-	  height : 300
-	});
+		  $('#noticeDetail').summernote({
+			  height : 300
+			  
+			});
 	</script>
 </body>
 </html>
