@@ -17,6 +17,7 @@ import com.project.mango.member.MemberFileVO;
 import com.project.mango.member.MemberMapper;
 import com.project.mango.member.MemberVO;
 import com.project.mango.restaurant.RestaurantVO;
+import com.project.mango.wishlist.WishlistVO;
 
 @SpringBootTest
 class MemberDBTest {
@@ -116,6 +117,19 @@ class MemberDBTest {
 		memberFileVO.setOriName("원본 파일 테스트");
 		
 		int result = memberMapper.setPhoto(memberFileVO);
+		
+		assertEquals(1, result);
+	}
+	
+	// 위시리스트 테스트
+	@Test
+	void setWishlist() throws Exception {
+		WishlistVO wishlistVO = new WishlistVO();
+		wishlistVO.setRestaurantNum(1L);
+		wishlistVO.setId("id1");
+		wishlistVO.setCategoryNum(100L);
+		
+		int result = memberMapper.setWishlist(wishlistVO);
 		
 		assertEquals(1, result);
 	}

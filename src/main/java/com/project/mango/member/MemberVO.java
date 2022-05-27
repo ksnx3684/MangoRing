@@ -61,6 +61,4 @@ public class MemberVO {
 	// 식당 VO
 	private RestaurantVO restaurantVO;
 	
-	// 카테고리
-	private CategoryVO categoryVO;
 }

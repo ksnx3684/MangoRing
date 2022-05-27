@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.project.mango.board.BoardService;
 import com.project.mango.board.BoardVO;
-import com.project.mango.util.FileManger;
+import com.project.mango.util.FileManager;
 import com.project.mango.util.Pager;
 
 
@@ -22,7 +22,7 @@ public class ResService implements BoardService{
 	private ResMapper resMapper;
 	
 	@Autowired
-	private FileManger fileManger;
+	private FileManager fileManager;
 	
 	
 	//detail
@@ -48,7 +48,7 @@ public class ResService implements BoardService{
 		List<ResFilesVO> ar = resMapper.getFileList(resNoticeVO);
 		int result = resMapper.setDelete(resNoticeVO);
 		for(ResFilesVO f : ar) {
-			fileManger.fileDelete(f.getFileName(), "resources/upload/resNotice");
+			fileManager.fileDelete(f.getFileName(), "resources/upload/resNotice");
 		}
 		return result;
 	}
@@ -63,7 +63,7 @@ public class ResService implements BoardService{
 				}
 				
 				//hdd
-				String fileName = fileManger.fileSave(mf, "resources/upload/resNotice");
+				String fileName = fileManager.fileSave(mf, "resources/upload/resNotice");
 				
 				//DB
 				ResFilesVO resFilesVO = new ResFilesVO();
@@ -88,7 +88,7 @@ public class ResService implements BoardService{
 	
 	//summerNote
 	public String setSummerFileUpload(MultipartFile files) throws Exception {
-		String fileName = fileManger.fileSave(files, "resources/upload/resNotice");
+		String fileName = fileManager.fileSave(files, "resources/upload/resNotice");
 			fileName = "/resources/upload/resNotice"+fileName;
 		return fileName;
 	}
@@ -96,7 +96,7 @@ public class ResService implements BoardService{
 	
 	public boolean setSummerFileDelete(String fileName) throws Exception {
 		fileName = fileName.substring(fileName.lastIndexOf("/")+1);
-		return fileManger.fileDelete(fileName, "/resources/upload/resNotice");
+		return fileManager.fileDelete(fileName, "/resources/upload/resNotice");
 	}
 
 	@Override

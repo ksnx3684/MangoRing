@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.project.mango.restaurant.RestaurantVO;
 import com.project.mango.util.FileManager;
+import com.project.mango.wishlist.WishlistVO;
 
 @Service
 public class MemberService {
@@ -118,6 +119,16 @@ public class MemberService {
 	// 사업자 등록 후 승인대기
 	public int setBusinessUserType(MemberVO memberVO) throws Exception {
 		return memberMapper.setBusinessUserType(memberVO);
+	}
+	
+	// 위시리스트
+	public int setWishlist(WishlistVO wishlistVO) throws Exception {
+		return memberMapper.setWishlist(wishlistVO);
+	}
+	
+	// 위시리스트 조회
+	public List<WishlistVO> getWishlist(String id) throws Exception {
+		return memberMapper.getWishlist(id);
 	}
 	
 	// 회원 탈퇴

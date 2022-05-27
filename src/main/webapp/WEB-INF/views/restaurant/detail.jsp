@@ -23,6 +23,10 @@
 <body>
 	<div class="restaurantTitle">
 		<h1>식 당 Detail</h1>
+		<form role="form" action="/member/wishlist" method="POST">
+			<input type="hidden" id="restNum" name="restaurantNum" value="${vo1.restaurantNum}">
+			<input type="hidden" id="cateNum" name="categoryNum" value="${vo.categoryNum}">	
+		</form>
 	</div>
 
 	<div id="respicBox">
@@ -73,6 +77,8 @@
 				 ${menus.name} ${menus.price}원<br>
 				</c:forEach>
 			</h1>
+			
+			<button type="button" class="btn btn-dark addWishlist_btn">위시리스트</button>
 		</div>
 
 
@@ -127,6 +133,8 @@
 		</div></a>
 
 	</c:forEach>
+	
+	
 
 <!-- Option 1: Bootstrap Bundle with Popper -->
 	<script
@@ -135,4 +143,35 @@
 		crossorigin="anonymous"></script>
 
 </body>
+<script type="text/javascript">
+	$(".addWishlist_btn").click(function(){
+		var restNum = $("#restNum").val();
+		var cateNum = $("#cateNum").val();
+		
+		var data = {
+			restaurantNum : restNum,
+			categoryNum : cateNum
+		};
+		
+		console.log("restaurantNum : " + restNum);
+		console.log("categoryNum : " + cateNum);
+		
+		$.ajax({
+			url : "/member/wishlist",
+			type : "POST",
+			data : data,
+			success : function(result) {
+				if(result == 1) {
+				alert("위시리스트 등록 완료");					
+				} else {
+					alert("로그인을 하셔야 합니다");
+				}
+			},
+			error : function() {
+				alert("등록 실패");
+			}
+			
+		});
+	});
+</script>
 </html>

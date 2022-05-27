@@ -73,6 +73,34 @@
 		UPDATE MEMBER SET BUSINESSOK = 1 WHERE ID = #{id}
 	</update>
 	
+	<!-- 위시리스트 등록 -->
+	<insert id="setWishlist" parameterType="WishlistVO">
+		INSERT INTO WISHLIST (WISHNUM, RESTAURANTNUM, ID, CATEGORYNUM)
+		VALUES (NULL, #{restaurantNum}, #{id}, #{categoryNum})
+	</insert>
+	
+	<!-- 위시리스트 리스트 출력 -->
+	<select id="getWishlist" parameterType="WishlistVO" resultMap="getResultWishlist">
+		SELECT W.ID, W.CATEGORYNUM, R.RESTAURANTNUM, R.ID, R.RESTAURANTNAME, R.ADDRESS
+		FROM 
+			WISHLIST W
+			LEFT OUTER JOIN
+			RESTAURANT R
+			USING (RESTAURANTNUM)
+		WHERE W.ID = #{id} ORDER BY WISHNUM DESC;
+	</select>
+	
+	<resultMap type="WishlistVO" id="getResultWishlist">
+		<result column="id" property="id" />
+		<result column="categoryNum" property="categoryNum" />
+			<collection property="restaurantVOs" javaType="List" ofType="RestaurantVO">
+				<id column="restaurantNum" property="restaurantNum"/>
+				<result column="id" property="id"/>
+				<result column="restaurantName" property="restaurantName"/>
+				<result column="address" property="address"/>
+			</collection>
+	</resultMap>
+	
 	<!-- 회원 탈퇴 -->
 	<delete id="setDelete" parameterType="MemberVO">
 		DELETE FROM MEMBER WHERE ID = #{id} AND PW = #{pw}

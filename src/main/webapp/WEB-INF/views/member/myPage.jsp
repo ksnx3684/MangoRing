@@ -108,7 +108,7 @@
 	
 	
 	<div class="d-grid gap-2 d-md-flex justify-content-md-evenly mt-5">
-	  <button class="btn btn-primary btn-lg" type="button">위시리스트</button>
+	  <button id="wishlist" class="btn btn-primary btn-lg" type="button">위시리스트</button>
 	  <button class="btn btn-primary btn-lg" type="button">내 평점</button>
 	</div>
 	
@@ -135,4 +135,9 @@
 	
 	<c:import url="../template/cdn_script.jsp"></c:import>
 </body>
+<script type="text/javascript">
+	$("#wishlist").click(function(){
+		location.href="./wishlist";
+	});
+</script>
 </html>

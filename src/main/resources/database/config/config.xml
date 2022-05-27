@@ -48,6 +48,9 @@
 				
 	  	<typeAlias type="com.project.mango.cart.CartVO"
 	  			alias="CartVO"/>
+	  			
+	  	<typeAlias type="com.project.mango.wishlist.WishlistVO" 
+	  			alias="WishlistVO"/>
 
   		<typeAlias type="com.project.mango.notice.NoticeVO" alias="NoticeVO"/>
   		<typeAlias type="com.project.mango.notice.NoticeFilesVO" alias="NoticeFilesVO"/>
