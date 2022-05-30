@@ -36,23 +36,31 @@
 		
 		console.log("wishNum : " + wishNum);
 		
-		$.ajax({
-			url : "/member/delWishlist",
-			type : "POST",
-			data : {
-				wishNum : wishNum
-			},
-			success : function(result) {
-				if(result == 1) {
-					location.href = "/member/wishlist";
-				} else {
-					alert("삭제 실패");
+		// 확인을 클릭했을 때
+		if(confirm_val) {
+			
+			$.ajax({
+				url : "/member/delWishlist",
+				type : "POST",
+				data : {
+					wishNum : wishNum
+				},
+				success : function(result) {
+					if(result == 1) {
+						location.href = "/member/wishlist";
+					} else {
+						alert("삭제 실패");
+					}
+				},
+				error : function() {
+					alert("에러 발생");
 				}
-			},
-			error : function() {
-				alert("에러 발생");
-			}
-		});
+			});
+		// 취소를 클릭했을 때
+		} else {
+			location.replace("/member/wishlist");
+		}
+		
 	});
 	
 </script>

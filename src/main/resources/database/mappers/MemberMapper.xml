@@ -67,10 +67,11 @@
 	</insert>
 	
 	<!-- 사업자 등록 -->
-	<insert id="setBusinessApplication" parameterType="RestaurantVO">
-		INSERT INTO RESTAURANT (ID, CATEGORYNUM, BUSINESSNUM, ADDRESS, POSTCODE, DETAILADDRESS,
-		EXTRAADDRESS, INTRODUCTION, PARKINGCHECK, KIDCHECK)
-		VALUES(#{id}, #{categoryNum}, #{businessNum}, #{address}, #{postCode}, #{detailAddress}, 
+	<insert id="setBusinessApplication" parameterType="RestaurantVO" 
+	useGeneratedKeys="true" keyProperty="restaurantNum">
+		INSERT INTO RESTAURANT (RESTAURANTNUM, ID, CATEGORYNUM, BUSINESSNUM, ADDRESS, 
+		POSTCODE, DETAILADDRESS, EXTRAADDRESS, INTRODUCTION, PARKINGCHECK, KIDCHECK)
+		VALUES(#{restaurantNum}, #{id}, #{categoryNum}, #{businessNum}, #{address}, #{postCode}, #{detailAddress}, 
 		#{extraAddress}, #{introduction}, #{parkingCheck}, #{kidCheck})
 	</insert>
 		

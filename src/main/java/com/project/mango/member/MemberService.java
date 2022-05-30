@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.project.mango.restaurant.RestFileVO;
 import com.project.mango.restaurant.RestaurantVO;
 import com.project.mango.util.FileManager;
 import com.project.mango.wishlist.WishlistVO;
@@ -93,8 +94,6 @@ public class MemberService {
 		
 		int result = memberMapper.setBusinessApplication(restaurantVO);
 		
-		System.out.println("setBusinessApplication File Check : " + file);
-		
 		if(file != null) {
 			for(MultipartFile mf : file) {
 				if(mf.isEmpty()) {
@@ -113,6 +112,35 @@ public class MemberService {
 				result = memberMapper.setPhoto(memberFileVO);
 			}
 		}
+		return result;
+	}
+	
+	// 가게 사진 등록
+	public int setRestaurantPhoto(RestaurantVO restaurantVO, MultipartFile[] photo,
+			RestFileVO restFileVO) throws Exception {
+		
+		int result = 0;
+		
+		if(photo != null) {
+			for(MultipartFile mf : photo) {
+				if(mf.isEmpty()) {
+					continue;
+				}
+				
+				// 1. HDD에 파일 저장
+				String fileName = fileManager.fileSave(mf, "/resources/upload/restaurant");
+				System.out.println("가게 사진 파일 이름 출력 : " + fileName);
+				
+				// 2. DB에 저장
+				restFileVO.setRestaurantNum(restaurantVO.getRestaurantNum());
+				restFileVO.setFileName(fileName);
+				restFileVO.setOriName(mf.getOriginalFilename());
+				
+				result = memberMapper.setRestaurantPhoto(restFileVO);
+			}
+			
+		}
+		
 		return result;
 	}
 	
