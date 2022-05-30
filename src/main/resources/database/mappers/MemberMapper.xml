@@ -75,15 +75,13 @@
 	
 	<!-- 위시리스트 등록 -->
 	<insert id="setWishlist" parameterType="WishlistVO">
-	<!-- IGNORE : 중복이 발생하면 삽입하려는 Row를 무시함 -->
-		INSERT IGNORE INTO WISHLIST (WISHNUM, RESTAURANTNUM, ID, CATEGORYNUM)
+		INSERT INTO WISHLIST (WISHNUM, RESTAURANTNUM, ID, CATEGORYNUM)
 		VALUES (NULL, #{restaurantNum}, #{id}, #{categoryNum})
 	</insert>
 	
 	<!-- 위시리스트 리스트 출력 -->
 	<select id="getWishlist" parameterType="WishlistVO" resultMap="getResultWishlist">
-		SELECT W.WISHNUM, W.ID, W.CATEGORYNUM, R.RESTAURANTNUM, R.ID,
-		R.RESTAURANTNAME, R.ADDRESS
+		SELECT W.ID, W.CATEGORYNUM, R.RESTAURANTNUM, R.ID, R.RESTAURANTNAME, R.ADDRESS
 		FROM 
 			WISHLIST W
 			LEFT OUTER JOIN
@@ -93,7 +91,6 @@
 	</select>
 	
 	<resultMap type="WishlistVO" id="getResultWishlist">
-		<id column="wishNum" property="wishNum"/>
 		<result column="id" property="id" />
 		<result column="categoryNum" property="categoryNum" />
 			<collection property="restaurantVOs" javaType="List" ofType="RestaurantVO">
@@ -103,11 +100,6 @@
 				<result column="address" property="address"/>
 			</collection>
 	</resultMap>
-	
-	<!-- 위시리스트 삭제 -->
-	<delete id="setDeleteWishlist">
-		DELETE FROM WISHLIST WHERE WISHNUM = #{wishNum} AND ID = #{id}
-	</delete>
 	
 	<!-- 회원 탈퇴 -->
 	<delete id="setDelete" parameterType="MemberVO">

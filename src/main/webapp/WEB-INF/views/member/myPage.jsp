@@ -12,17 +12,6 @@
 <body>
 	<h1 class="text-center">My Page</h1>
 	
-	<div class="container mb-3">
-		<c:choose>
-	      	<c:when test="${empty member || member.memberFileVO == null}">
-	      		<img src="/resources/upload/member/default_profile.png" alt="photo" width="200" height="200">
-	      	</c:when>
-			<c:otherwise>
-				<img src="/resources/upload/member/${member.memberFileVO.fileName}" alt="photo" width="200" height="200">
-			</c:otherwise>
-	    </c:choose>
-    </div>
-	
 	<div class="container">
 		<div class="row">
 		  <div class="col-4 text-truncate">

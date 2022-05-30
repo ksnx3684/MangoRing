@@ -14,46 +14,17 @@
 	
 	<div class="container">
 		<c:forEach items="${wishList}" var="wish">
-			<span>위시리스트 번호 : ${wish.wishNum}</span><br>
+			<span>위시리스트 사용하는 사람 ID : ${wish.id}</span><br>
 			<c:forEach items="${wish.restaurantVOs}" var="rest">
 				<span>가게 번호 : ${rest.restaurantNum}</span><br>
 				<span>가게 주소 : ${rest.address}</span><br>
 				<span>가게 이름 : ${rest.restaurantName}</span><br>
+				<span>${rest}</span><br>
+				<hr><br>
 			</c:forEach>
-		<button type="button" data-num="${wish.wishNum}"
-				class="mt-3 btn btn-danger delete_btn">삭제</button>
-		<hr><br>
 		</c:forEach>
 	</div>
 	
 	<c:import url="../template/cdn_script.jsp"></c:import>
 </body>
-<script type="text/javascript">
-
-	$('.delete_btn').click(function(){
-		var confirm_val = confirm("삭제하시겠습니까?");
-		var wishNum = $(this).attr("data-num");
-		
-		console.log("wishNum : " + wishNum);
-		
-		$.ajax({
-			url : "/member/delWishlist",
-			type : "POST",
-			data : {
-				wishNum : wishNum
-			},
-			success : function(result) {
-				if(result == 1) {
-					location.href = "/member/wishlist";
-				} else {
-					alert("삭제 실패");
-				}
-			},
-			error : function() {
-				alert("에러 발생");
-			}
-		});
-	});
-	
-</script>
 </html>

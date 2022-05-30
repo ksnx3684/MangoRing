@@ -45,14 +45,7 @@
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
 	        	<li class="nav-item active"><a href="./search/detailSearch" class="nav-link">상세검색</a></li>
-	        	<c:choose>
-	        		<c:when test="${not empty member}">
-	        			<li class="nav-item"><a href="./member/myPage" class="nav-link">마이 페이지</a></li>
-	        		</c:when>
-		        	<c:otherwise>
-		        		<li class="nav-item"><a href="./member/login" class="nav-link">로그인</a></li>
-		        	</c:otherwise>
-	        	</c:choose>
+	        	<li class="nav-item"><a href="./member/login" class="nav-link">로그인</a></li>
 	        	<li class="nav-item"><a href="./member/logout" class="nav-link">로그아웃</a></li>
 	        	<!-- <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
 	          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
