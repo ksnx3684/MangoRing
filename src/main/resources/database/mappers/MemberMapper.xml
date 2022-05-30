@@ -60,6 +60,12 @@
 		WHERE ID = #{id}
 	</update>
 	
+	<!-- 가게 사진 업로드 -->
+	<insert id="setRestaurantPhoto">
+		INSERT INTO REST_FILE(FILENUM, RESTAURANTNUM, FILENAME, ORINAME)
+		VALUES (NULL, #{restaurantNum}, #{fileName}, #{oriName})
+	</insert>
+	
 	<!-- 사업자 등록 -->
 	<insert id="setBusinessApplication" parameterType="RestaurantVO">
 		INSERT INTO RESTAURANT (ID, CATEGORYNUM, BUSINESSNUM, ADDRESS, POSTCODE, DETAILADDRESS,

@@ -115,6 +115,8 @@ public class MemberService {
 		}
 		return result;
 	}
+	
+	
 		
 	// 사업자 등록 후 승인대기
 	public int setBusinessUserType(MemberVO memberVO) throws Exception {

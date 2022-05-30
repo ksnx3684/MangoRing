@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.project.mango.restaurant.RestFileVO;
 import com.project.mango.restaurant.RestaurantVO;
 import com.project.mango.wishlist.WishlistVO;
 
@@ -33,6 +34,9 @@ public interface MemberMapper {
 	
 	// 사업자 등록
 	public int setBusinessApplication(RestaurantVO restaurantVO) throws Exception;
+	
+	// 가게사진 등록
+	public int setRestaurantPhoto(RestFileVO restFileVO) throws Exception;
 		
 	// 사업자 등록 후 승인대기
 	public int setBusinessUserType(MemberVO memberVO) throws Exception;

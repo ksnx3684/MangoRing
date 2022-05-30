@@ -16,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.project.mango.member.MemberFileVO;
 import com.project.mango.member.MemberMapper;
 import com.project.mango.member.MemberVO;
+import com.project.mango.restaurant.RestFileVO;
 import com.project.mango.restaurant.RestaurantVO;
 import com.project.mango.wishlist.WishlistVO;
 
@@ -108,6 +109,19 @@ class MemberDBTest {
 		assertEquals(1, result);
 	}
 	
+	// 가게 사진 업로드
+//	@Test
+	void setRestaurantPhoto() throws Exception {
+		RestFileVO restFileVO = new RestFileVO();
+		restFileVO.setRestaurantNum(32L);
+		restFileVO.setFileName("파일테스트");
+		restFileVO.setOriName("원본이름 테스트");
+		
+		int result = memberMapper.setRestaurantPhoto(restFileVO);
+		
+		assertEquals(1, result);
+	}
+	
 	// 포르필 사진 업로드
 //	@Test
 	void setPhotoTest() throws Exception {
@@ -122,7 +136,7 @@ class MemberDBTest {
 	}
 	
 	// 위시리스트 테스트
-	@Test
+//	@Test
 	void setWishlist() throws Exception {
 		WishlistVO wishlistVO = new WishlistVO();
 		wishlistVO.setRestaurantNum(1L);
