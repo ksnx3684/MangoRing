@@ -131,6 +131,11 @@ public class MemberService {
 		return memberMapper.getWishlist(id);
 	}
 	
+	// 위시리스트 삭제
+	public int setDeleteWishlist(WishlistVO wishlistVO) throws Exception {
+		return memberMapper.setDeleteWishlist(wishlistVO);
+	}
+	
 	// 회원 탈퇴
 	public int setDelete(MemberVO vo) throws Exception {
 		
