@@ -31,7 +31,7 @@ public interface CartMapper {
 	// detailOrder
 	public int detailOrder(PaymentDetailVO paymentDetailVO) throws Exception;
 	
-	// kakaoPayOrderComplete
-	public int kakaoPayOrderComplete(PaymentVO paymentVO) throws Exception;
+	// payOrderComplete
+	public int payOrderComplete(PaymentVO paymentVO) throws Exception;
 	
 }

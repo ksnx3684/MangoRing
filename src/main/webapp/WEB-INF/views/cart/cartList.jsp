@@ -38,7 +38,7 @@
                                  </c:if>
                                </td>
                                <td class="cart_product_desc">
-                                 <h5>${dto.menuVOs.name}</h5>
+                                 <h5>${dto.menuVOs.name}</h5>${dto.menuVOs.restaurantVO.restaurantName}
                                </td>
                                <td class="cou">
                                 <button type="button" class="minus" data-cartNum="${dto.cartNum}" value="${dto.menuCount}">-</button>

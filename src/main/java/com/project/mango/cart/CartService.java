@@ -44,8 +44,8 @@ public class CartService {
 		return cartMapper.detailOrder(paymentDetailVO);
 	}
 	
-	public int kakaoPayOrderComplete(PaymentVO paymentVO) throws Exception{
-		return cartMapper.kakaoPayOrderComplete(paymentVO);
+	public int payOrderComplete(PaymentVO paymentVO) throws Exception{
+		return cartMapper.payOrderComplete(paymentVO);
 	}
 
 }

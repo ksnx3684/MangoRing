@@ -20,7 +20,7 @@
 	      pg: "kakaopay.TC0ONETIME",
 	      pay_method: "card",
 	      merchant_uid: "${payNum}",
-	      name: "TEST",
+	      name: "${name}",
 	      amount: ${totalPrice},
 	      buyer_name: "${id}"
 	  }, function (rsp) { // callback

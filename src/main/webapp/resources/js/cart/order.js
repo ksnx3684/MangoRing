@@ -68,12 +68,12 @@ window.onload = function(){
 // });
 
 const kakaoPay = document.getElementById("kakaoPay");
-const naverPay = document.getElementById("naverPay");
+const tossPay = document.getElementById("tossPay");
 const cashPay = document.getElementById("cashPay");
 kakaoPay.addEventListener("click", function(){
     frm.submit();
 });
-naverPay.addEventListener("click", function(){
+tossPay.addEventListener("click", function(){
     frm.submit();
 });
 cashPay.addEventListener("click", function(){
