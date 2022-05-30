@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -168,9 +169,35 @@ public class MemberController {
 		
 		if(memberVO != null) {
 			wishlistVO.setId(memberVO.getId());
-			memberService.setWishlist(wishlistVO);
 			result = 1;
-			
+			int insertOK = memberService.setWishlist(wishlistVO);
+				if (insertOK == 0) {
+					System.out.println("중복 값");
+					result = 2;
+				}
+		}
+		
+		return result;
+	}
+	
+	// 위시리스트 POST 삭제
+	@PostMapping("delWishlist")
+	@ResponseBody
+	public int setDeleteWishlist(HttpSession session, WishlistVO wishlistVO) 
+			throws Exception {
+		
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		String id = memberVO.getId();
+		
+		int result = 0;
+		
+		if(memberVO != null) {
+			wishlistVO.setId(id);
+				
+			System.out.println("삭제 실행");
+
+			memberService.setDeleteWishlist(wishlistVO);
+			result = 1;
 		}
 		
 		return result;

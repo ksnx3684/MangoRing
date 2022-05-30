@@ -43,6 +43,9 @@ public interface MemberMapper {
 	// 위시리스트 조회
 	public List<WishlistVO> getWishlist(String id) throws Exception;
 	
+	// 위시리스트 삭제
+	public int setDeleteWishlist(WishlistVO wishlistVO) throws Exception;
+	
 	// 회원 탈퇴
 	public int setDelete(MemberVO vo) throws Exception;
 	
