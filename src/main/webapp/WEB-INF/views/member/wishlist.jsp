@@ -10,26 +10,40 @@
 <c:import url="../template/mango_header.jsp"></c:import>
 </head>
 <body>
-	<h1 class="text-center">Wishlist Page</h1>
-	
+	<h1 class="text-center mb-5">Wishlist Page</h1>
+
 	<div class="container">
 		<c:forEach items="${wishList}" var="wish">
-			<span>위시리스트 번호 : ${wish.wishNum}</span><br>
-			<c:forEach items="${wish.restFileVO}" var="wishFile">
-				<span><img alt="가게사진" src="/resources/upload/restaurant/${wishFile.fileName}" width="200" height="200">
-				</span><br>
-			</c:forEach>
-			<c:forEach items="${wish.restaurantVOs}" var="rest">
-				<span>가게 번호 : ${rest.restaurantNum}</span><br>
-				<span>가게 주소 : ${rest.address}</span><br>
-				<span>가게 이름 : ${rest.restaurantName}</span><br>
-			</c:forEach>
-		<button type="button" data-num="${wish.wishNum}"
-				class="mt-3 btn btn-danger delete_btn">삭제</button>
-		<hr><br>
+			<div class="row justify-content-center">
+				<div class="col-md-10">
+					<div class="card flex-md-row mb-4 shadow-sm h-md-250">
+						<c:forEach items="${wish.restFileVO}" var="wishFile">
+							<img class="card-img-right flex-auto d-none d-lg-block"
+								alt="Thumbnail [200x250]"
+								src="/resources/upload/restaurant/${wishFile.fileName}"
+								style="width: 200px; height: 250px;">
+						</c:forEach>
+						<c:forEach items="${wish.restaurantVOs}" var="rest">
+							<div class="card-body d-flex flex-column align-items-start">
+								<div class="mb-1 text-muted small">${rest.address}</div>
+								<h6 class="mb-1">
+									<a class="text-dark" href="#">${rest.restaurantName}</a>
+								</h6>
+								<p class="card-text mb-auto">Test</p>
+								<div class="align-self-end pb-3">
+									<button class="btn btn-outline-danger btn-sm delete_btn"
+										data-num="${wish.wishNum}" type="button">삭제</button>
+								</div>
+							</div>
+						</c:forEach>
+
+					</div>
+				</div>
+			</div>
 		</c:forEach>
 	</div>
-	
+
+
 	<c:import url="../template/cdn_script.jsp"></c:import>
 </body>
 <script type="text/javascript">

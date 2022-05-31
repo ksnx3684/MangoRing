@@ -36,8 +36,8 @@
 	
 	<!-- 회원 가입 -->
 	<insert id="setAddMember" parameterType="MemberVO">
-		INSERT INTO MEMBER (ID, PW, NAME, EMAIL, PHONE, GENDER, JOINDATE, USERTYPE, BLACKLIST)
-		VALUES(#{id}, #{pw}, #{name}, #{email}, #{phone}, #{gender}, NOW(), 1, 0)
+		INSERT INTO MEMBER (ID, PW, NAME, EMAIL, PHONE, GENDER, JOINDATE, USERTYPE, BLACKLIST, BUSINESSOK)
+		VALUES(#{id}, #{pw}, #{name}, #{email}, #{phone}, #{gender}, NOW(), 1, 0, 0)
 	</insert>
 	
 	<!-- 사진 업로드 -->
@@ -69,10 +69,11 @@
 	<!-- 사업자 등록 -->
 	<insert id="setBusinessApplication" parameterType="RestaurantVO" 
 	useGeneratedKeys="true" keyProperty="restaurantNum">
-		INSERT INTO RESTAURANT (RESTAURANTNUM, ID, CATEGORYNUM, BUSINESSNUM, ADDRESS, 
-		POSTCODE, DETAILADDRESS, EXTRAADDRESS, INTRODUCTION, PARKINGCHECK, KIDCHECK)
-		VALUES(#{restaurantNum}, #{id}, #{categoryNum}, #{businessNum}, #{address}, #{postCode}, #{detailAddress}, 
-		#{extraAddress}, #{introduction}, #{parkingCheck}, #{kidCheck})
+		INSERT INTO RESTAURANT (RESTAURANTNUM, RESTAURANTNAME, ID, CATEGORYNUM, BUSINESSNUM, 
+		ADDRESS, POSTCODE, DETAILADDRESS, EXTRAADDRESS, INTRODUCTION, PARKINGCHECK, KIDCHECK)
+		VALUES(#{restaurantNum}, #{restaurantName}, #{id}, #{categoryNum}, #{businessNum}, 
+		#{address}, #{postCode}, #{detailAddress}, #{extraAddress}, #{introduction}, 
+		#{parkingCheck}, #{kidCheck})
 	</insert>
 		
 	<!-- 사업자 등록 후 승인처리 -->
