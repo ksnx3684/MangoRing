@@ -15,6 +15,10 @@
 	<div class="container">
 		<c:forEach items="${wishList}" var="wish">
 			<span>위시리스트 번호 : ${wish.wishNum}</span><br>
+			<c:forEach items="${wish.restFileVO}" var="wishFile">
+				<span><img alt="가게사진" src="/resources/upload/restaurant/${wishFile.fileName}" width="200" height="200">
+				</span><br>
+			</c:forEach>
 			<c:forEach items="${wish.restaurantVOs}" var="rest">
 				<span>가게 번호 : ${rest.restaurantNum}</span><br>
 				<span>가게 주소 : ${rest.address}</span><br>

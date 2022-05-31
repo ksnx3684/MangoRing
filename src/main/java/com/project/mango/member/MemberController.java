@@ -153,7 +153,7 @@ public class MemberController {
 	
 	// 위시리스트 GET 방식
 	@GetMapping("wishlist")
-	public String setWishlist(HttpSession session, Model model) throws Exception {
+	public String setWishlist(HttpSession session, Model model, MultipartFile[] file) throws Exception {
 		
 		MemberVO memberVO = (MemberVO)session.getAttribute("member");
 		String id = (memberVO.getId());
@@ -179,10 +179,11 @@ public class MemberController {
 			wishlistVO.setId(memberVO.getId());
 			result = 1;
 			int insertOK = memberService.setWishlist(wishlistVO);
-				if (insertOK == 0) {
-					System.out.println("중복 값");
-					result = 2;
-				}
+				
+			if (insertOK == 0) {
+				System.out.println("중복 값");
+				result = 2;
+			}
 		}
 		
 		return result;

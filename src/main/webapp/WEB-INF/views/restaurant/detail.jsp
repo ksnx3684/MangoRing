@@ -164,10 +164,9 @@
 								
 				if(result == 1) {
 					alert("위시리스트 등록 완료");
-				} else if (result = 2) {
+				} else if (result == 2) {
 					alert("이미 위시리스트에 있습니다.");
 				}
-				
 				else {
 					alert("로그인을 하셔야 합니다");
 				}
