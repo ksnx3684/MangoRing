@@ -12,7 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.mango.restaurant.RestFileVO;
 import com.project.mango.restaurant.RestaurantVO;
+import com.project.mango.util.Pager;
 import com.project.mango.wishlist.WishlistVO;
 
 @Controller
@@ -153,14 +153,16 @@ public class MemberController {
 	
 	// 위시리스트 GET 방식
 	@GetMapping("wishlist")
-	public String setWishlist(HttpSession session, Model model, MultipartFile[] file) throws Exception {
+	public String setWishlist(HttpSession session, Model model, 
+			Pager pager, MultipartFile[] file) throws Exception {
 		
 		MemberVO memberVO = (MemberVO)session.getAttribute("member");
 		String id = (memberVO.getId());
 		
-		List<WishlistVO> wishList = memberService.getWishlist(id);
+		List<WishlistVO> wishList = memberService.getWishlist(id, pager);
 		
 		model.addAttribute("wishList", wishList);
+		model.addAttribute("pager", pager);
 		
 		return "member/wishlist";
 	}
@@ -179,9 +181,9 @@ public class MemberController {
 			wishlistVO.setId(memberVO.getId());
 			result = 1;
 			int insertOK = memberService.setWishlist(wishlistVO);
-				
+			
+			// 중복값일 떄 처리
 			if (insertOK == 0) {
-				System.out.println("중복 값");
 				result = 2;
 			}
 		}
@@ -202,9 +204,6 @@ public class MemberController {
 		
 		if(memberVO != null) {
 			wishlistVO.setId(id);
-				
-			System.out.println("삭제 실행");
-
 			memberService.setDeleteWishlist(wishlistVO);
 			result = 1;
 		}

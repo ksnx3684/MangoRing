@@ -43,6 +43,26 @@
 		</c:forEach>
 	</div>
 
+	<div class="row">
+		<nav aria-label="Page navigation example">
+			<ul class="pagination justify-content-center">
+				<li class="page-item"><a class="page-link"
+					href="./wishlist?pn=${pager.pre?pager.startNum-1:1}"
+					aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+				</a></li>
+
+				<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+					<li class="page-item"><a class="page-link" href="./wishlist?pn=${i}">${i}</a></li>
+				</c:forEach>
+
+				<li class="page-item"><a class="page-link"
+					href="./wishlist?pn=${pager.next?pager.lastNum+1:pager.lastNum}"
+					aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+				</a></li>
+			</ul>
+		</nav>
+	</div>
+
 
 	<c:import url="../template/cdn_script.jsp"></c:import>
 </body>
@@ -76,7 +96,8 @@
 			});
 		// 취소를 클릭했을 때
 		} else {
-			location.replace("/member/wishlist");
+//			location.replace("/member/wishlist");
+			return;
 		}
 		
 	});

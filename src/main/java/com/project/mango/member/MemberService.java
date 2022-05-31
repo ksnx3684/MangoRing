@@ -2,6 +2,7 @@ package com.project.mango.member;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
@@ -10,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.project.mango.restaurant.RestFileVO;
 import com.project.mango.restaurant.RestaurantVO;
 import com.project.mango.util.FileManager;
+import com.project.mango.util.Pager;
 import com.project.mango.wishlist.WishlistVO;
 
 @Service
@@ -144,8 +146,6 @@ public class MemberService {
 		return result;
 	}
 	
-	
-		
 	// 사업자 등록 후 승인대기
 	public int setBusinessUserType(MemberVO memberVO) throws Exception {
 		return memberMapper.setBusinessUserType(memberVO);
@@ -157,8 +157,17 @@ public class MemberService {
 	}
 	
 	// 위시리스트 조회
-	public List<WishlistVO> getWishlist(String id) throws Exception {
-		return memberMapper.getWishlist(id);
+	public List<WishlistVO> getWishlist(String id, Pager pager) throws Exception {
+		
+		WishlistVO wishlistVO = new WishlistVO();
+		wishlistVO.setId(id);
+		
+		// 한 페이지에 위시리스트 5개씩 출력
+		pager.setPerPage(5);
+		pager.makeRow();
+		pager.makeNum(memberMapper.getTotalCount(wishlistVO));
+		
+		return memberMapper.getWishlist(id, pager);
 	}
 	
 	// 위시리스트 삭제

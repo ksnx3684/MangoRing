@@ -27,7 +27,7 @@ public class Pager {
 	private boolean next;
 	
 	public void makeNum(Long totalCount) {
-		System.out.println(totalCount);
+		System.out.println("전체 리스트 갯수 출력 : " + totalCount);
 		Long totalPage = totalCount/this.getPerPage();
 		
 		if(totalCount%this.getPerPage()!=0) {
