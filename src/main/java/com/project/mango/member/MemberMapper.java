@@ -46,4 +46,6 @@ public interface MemberMapper {
 	// 회원 탈퇴
 	public int setDelete(MemberVO vo) throws Exception;
 	
+	//멤버 리스트 조회
+	public List<MemberVO> getList(MemberVO memberVO) throws Exception;
 }

@@ -87,7 +87,7 @@
 			LEFT OUTER JOIN
 			RESTAURANT R
 			USING (RESTAURANTNUM)
-		WHERE W.ID = #{id} ORDER BY WISHNUM DESC;
+		WHERE W.ID = #{id} ORDER BY WISHNUM DESC
 	</select>
 	
 	<resultMap type="WishlistVO" id="getResultWishlist">
@@ -105,5 +105,11 @@
 	<delete id="setDelete" parameterType="MemberVO">
 		DELETE FROM MEMBER WHERE ID = #{id} AND PW = #{pw}
 	</delete>
+	
+	<!-- 멤버리스트 조회 -->
+	<select id="getList" resultType="MemberVO">
+		SELECT * FROM MEMBER
+	</select>
+	
 	
 </mapper>

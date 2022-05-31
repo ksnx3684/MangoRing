@@ -146,4 +146,8 @@ public class MemberService {
 		return result;
 	}
 	
+	//멤버 리스트조회
+	public List<MemberVO> getList(MemberVO memberVO) throws Exception {
+		return memberMapper.getList(memberVO);
+	}
 }
