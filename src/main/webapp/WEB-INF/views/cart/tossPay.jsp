@@ -18,12 +18,9 @@
 		  orderId: 'FlhL9qMPNv151V7aT8s-m',
 		  orderName: '${name}',
 		  customerName: '${id}',
-		  successUrl: 'http://localhost/cart/tossPayOrderComplete',
+		  successUrl: 'http://localhost/cart/tossPayOrderRequest',
 		  failUrl: 'http://localhost:8080/fail',
 		})
-
 	</script>
-	
-
 </body>
 </html>

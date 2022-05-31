@@ -244,7 +244,7 @@ public class CartController {
 	public void tossPay(Model model, HttpSession httpSession) throws Exception{
 		MemberVO memberVO = (MemberVO)httpSession.getAttribute("member");
 		
-		// model에 담아서 kakaoPay.jsp에서 jstl로 불러오기 위한 작업
+		// model에 담아서 tossPay.jsp에서 jstl로 불러오기 위한 작업
 		model.addAttribute("payNum", data.getPayNum());
 		model.addAttribute("totalPrice", data.getTotalPrice());
 		model.addAttribute("id", data.getId());
@@ -252,19 +252,9 @@ public class CartController {
 		
 	}
 	
-	// 토스페이 결제 완료 페이지
-	@GetMapping("tossPayOrderComplete")
-	public void tossPayOrderComplete() throws Exception{
-		
-		cartService.payOrderComplete(data); // 주문정보 DB로 전송 (결제 테이블)
-		
-		for(int i = 0; i < lists.size(); i++) {
-			
-			cartService.detailOrder(detailDatas.get(i)); // 주문정보 DB로 전송 (결제 상세 테이블)
-			
-			cartService.cartListDelete(kacaNum.get(i)); // 주문완료된 상품을 카트에서 제거
-			
-		}
+	// 토스페이 결제 승인 호출
+	@GetMapping("tossPayOrderRequest")
+	public String tossPayOrderRequest(Model model) throws Exception{
 		
 		// 토스페이먼츠 결제 승인 API 호출 
 		HttpRequest request = HttpRequest.newBuilder()
@@ -276,7 +266,40 @@ public class CartController {
 		HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 		System.out.println(response.body());
 		
+		if(!response.body().equals("{" + '"' + "code" + '"' + ':' + '"' + "NOT_FOUND_PAYMENT_SESSION" + '"' + ','
+		+ '"' + "message" + '"' + ':' + '"' + "결제 시간이 만료되어 결제 진행 데이터가 존재하지 않습니다." + '"' + '}')) {
+			
+			model.addAttribute("message", "잘못된 접근 경로입니다");
+			model.addAttribute("path", "../");
+			
+			String path = "common/result";
+			
+			return path;
+			
+		}
+		
+		cartService.payOrderComplete(data); // 주문정보 DB로 전송 (결제 테이블)
+		
+		for(int i = 0; i < lists.size(); i++) {
+			
+			cartService.detailOrder(detailDatas.get(i)); // 주문정보 DB로 전송 (결제 상세 테이블)
+			
+			cartService.cartListDelete(kacaNum.get(i)); // 주문완료된 상품을 카트에서 제거
+			
+		}
+				
 		detailDatas.clear(); // 초기화
+		
+		return "./cart/tossPayOrderComplete";
+		
+//		System.out.println("{" + '"' + "code" + '"' + ':' + '"' + "NOT_FOUND_PAYMENT_SESSION" + '"' + ','
+//				+ '"' + "message" + '"' + ':' + '"' + "결제 시간이 만료되어 결제 진행 데이터가 존재하지 않습니다." + '"' + '}');
+		
+	}
+	
+	// 토스페이 결제 완료 페이지
+	@GetMapping("tossPayOrderComplete")
+	public void tossPayOrderComplete() throws Exception{
 		
 	}
 }
