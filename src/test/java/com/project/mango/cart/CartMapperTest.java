@@ -20,10 +20,28 @@ class CartMapperTest {
 	// @Test
 	void cartList() throws Exception{
 		CartVO cartVO = new CartVO();
-		cartVO.setCartNum(1L);
+		cartVO.setCartNum(7L);
 		List<CartVO> list = cartMapper.cartList(cartVO);
 		
 		assertNotNull(list);
+	}
+	
+	// @Test
+	void cartCountPlus() throws Exception{
+		CartVO cartVO = new CartVO();
+		cartVO.setCartNum(7L);
+		int result = cartMapper.cartCountPlus(cartVO);
+		
+		assertEquals(1, result);
+	}
+	
+	// @Test
+	void cartCountMinus() throws Exception{
+		CartVO cartVO = new CartVO();
+		cartVO.setCartNum(7L);
+		int result = cartMapper.cartCountMinus(cartVO);
+		
+		assertEquals(1, result);
 	}
 	
 	// @Test
@@ -45,6 +63,7 @@ class CartMapperTest {
 		PaymentVO paymentVO = new PaymentVO();
 		paymentVO.setId("ksnx3684");
 		paymentVO.setTotalPrice(10000L);
+		paymentVO.setPayNum("2222");
 		
 		int result = cartMapper.order(paymentVO);
 		
@@ -62,4 +81,16 @@ class CartMapperTest {
 		assertEquals(1, result);
 	}
 
+	// @Test
+	void payOrderComplete() throws Exception{
+		PaymentVO paymentVO = new PaymentVO();
+		paymentVO.setId("ksnx3684");
+		paymentVO.setTotalPrice(10000L);
+		paymentVO.setPayNum("1111");
+		paymentVO.setPayType("test");
+		
+		int result = cartMapper.payOrderComplete(paymentVO);
+		
+		assertEquals(1, result);
+	}
 }
