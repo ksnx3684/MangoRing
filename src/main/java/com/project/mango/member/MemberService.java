@@ -2,7 +2,6 @@ package com.project.mango.member;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
@@ -10,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.project.mango.restaurant.RestFileVO;
 import com.project.mango.restaurant.RestaurantVO;
+import com.project.mango.review.ReviewVO;
 import com.project.mango.util.FileManager;
 import com.project.mango.util.Pager;
 import com.project.mango.wishlist.WishlistVO;
@@ -173,6 +173,11 @@ public class MemberService {
 	// 위시리스트 삭제
 	public int setDeleteWishlist(WishlistVO wishlistVO) throws Exception {
 		return memberMapper.setDeleteWishlist(wishlistVO);
+	}
+	
+	// 평점 리스트 조회
+	public List<ReviewVO> getRatingList(String id) throws Exception {
+		return memberMapper.getRatingList(id);
 	}
 	
 	// 회원 탈퇴

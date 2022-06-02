@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.mango.restaurant.RestFileVO;
 import com.project.mango.restaurant.RestaurantVO;
+import com.project.mango.review.ReviewVO;
 import com.project.mango.util.Pager;
 import com.project.mango.wishlist.WishlistVO;
 
@@ -211,7 +212,25 @@ public class MemberController {
 		return result;
 	}
 	
+	// 내 평점 GET 방식
+	@GetMapping("rating")
+	public String getMyRating(HttpSession session, Model model,
+			Pager pager, MultipartFile[] file) throws Exception {
+		
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		String id = (memberVO.getId());
+		
+		List<ReviewVO> reviewList = memberService.getRatingList(id);
+		
+//		reviewList.get(0).getReviewFilesVOs().get(0).getFileName();
+//		
+//		reviewList.get(0).getStar();
 	
+		model.addAttribute("reviewList", reviewList);
+		
+		return "member/rating";
+	}
+		
 	// 로그아웃
 	@GetMapping("logout")
 	public String logout(HttpSession session) throws Exception {

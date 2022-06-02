@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.project.mango.restaurant.RestFileVO;
 import com.project.mango.restaurant.RestaurantVO;
+import com.project.mango.review.ReviewVO;
 import com.project.mango.util.Pager;
 import com.project.mango.wishlist.WishlistVO;
 
@@ -54,6 +55,9 @@ public interface MemberMapper {
 	
 	// 위시리스트 삭제
 	public int setDeleteWishlist(WishlistVO wishlistVO) throws Exception;
+	
+	// 평점 리스트 조회
+	public List<ReviewVO> getRatingList(String id) throws Exception;
 	
 	// 회원 탈퇴
 	public int setDelete(MemberVO vo) throws Exception;

@@ -14,7 +14,7 @@ class ReviewMapperTest {
 	@Autowired
 	private ReviewMapper reviewMapper;
 
-	//@Test
+	@Test
 	void setAddTest()throws Exception {
 		ReviewVO reviewVO= new ReviewVO();
 		
@@ -33,7 +33,7 @@ class ReviewMapperTest {
 		assertNotNull(ar);
 	}
 	
-	@Test
+//	@Test
 	void setUpdate()throws Exception{
 		ReviewVO reviewVO = new ReviewVO();
 		reviewVO.setReviewNum(4L);

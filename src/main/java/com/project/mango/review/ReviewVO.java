@@ -3,12 +3,15 @@ package com.project.mango.review;
 import java.sql.Date;
 import java.util.List;
 
+import com.project.mango.restaurant.RestaurantVO;
+
 import lombok.Data;
 
 @Data
 public class ReviewVO {
 	
 	private List<ReviewFilesVO> reviewFilesVOs;
+	private List<RestaurantVO> restaurantVOs;
 	
 	private Long reviewNum;
 	private String id;

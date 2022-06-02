@@ -129,6 +129,37 @@
 		DELETE FROM WISHLIST WHERE WISHNUM = #{wishNum} AND ID = #{id}
 	</delete>
 	
+	<!-- 평점 리스트 -->
+	<select id="getRatingList" parameterType="ReviewVO" resultMap="getResultRatingList">
+		SELECT R.ID, R.REVIEWNUM, R.RESTAURANTNUM, R.STAR, R.CONTENTS, RF.FILENUM, 
+		RF.FILENAME, RR.ADDRESS, RR.RESTAURANTNAME FROM
+			REVIEW R
+			LEFT OUTER JOIN
+			REVIEW_FILE RF
+			USING (REVIEWNUM)
+			LEFT OUTER JOIN
+			RESTAURANT RR
+			USING (RESTAURANTNUM)
+		WHERE R.ID = #{id};
+	</select>
+	
+	<resultMap type="ReviewVO" id="getResultRatingList">
+		<id column="reviewNum" property="reviewNum"/>
+		<result column="id" property="id"/>
+		<result column="restaurantNum" property="restaurantNum"/>
+		<result column="star" property="star"/>
+		<result column="contents" property="contents"/>
+			<collection property="reviewFilesVOs" javaType="List" ofType="ReviewFilesVO">
+				<id column="fileNum" property="fileNum"/>
+				<result column="reviewNum" property="reviewNum"/>
+				<result column="fileName" property="fileName"/>
+			</collection>
+			<collection property="restaurantVOs" javaType="List" ofType="RestaurantVO">
+				<result column="address" property="address"/>
+				<result column="restaurantName" property="restaurantName"/>
+			</collection>
+	</resultMap>
+	
 	<!-- 회원 탈퇴 -->
 	<delete id="setDelete" parameterType="MemberVO">
 		DELETE FROM MEMBER WHERE ID = #{id} AND PW = #{pw}
