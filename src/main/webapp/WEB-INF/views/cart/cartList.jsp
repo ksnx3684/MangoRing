@@ -124,7 +124,8 @@
                            <c:forEach items="${cartlist}">
                              <span class="totalPrice"></span>
                            </c:forEach>
-                           <span class="totalPrice">원</span>
+                           <span class="totalPrice">0</span>
+                           원
                          </span>
                        </li>
                      </ul>

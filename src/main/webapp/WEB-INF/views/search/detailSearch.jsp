@@ -110,7 +110,7 @@
 					    </div>
 					    <div class="custom-control custom-checkbox mb-3">
 					    	<input type="checkbox" class="custom-control-input" id="customCheck2" name="parkingCheck" value="1">
-					    	<label class="custom-control-label" for="customCheck2">주차가능여부</label>
+					    	<label class="custom-control-label" for="customCheck2">주차가능</label>
 					    </div>
 					</div>
 				</div>
@@ -118,6 +118,15 @@
 					<div id="map" style="width:600px;height:300px;"></div>
 				</div>
 			</div>
+			<hr>
+	 		<div class="mt-4 p-5 bg-secondary text-black rounded" style="background-color: #e7e7e7!important">
+	 			<h3>음식 카테고리</h3>
+	 			<c:forEach items="${categoryList}" var="li">
+		 			<label>
+		 				<input type="checkbox" class="mb-3" name="category" value="${li.categoryNum}"> ${li.categoryName}
+		 			</label>
+	 			</c:forEach>
+	 		</div>
 			<hr>
 	 		<div class="mt-4 p-5 bg-secondary text-black rounded" style="background-color: #e7e7e7!important">
 	 			<h3>#해시태그</h3>

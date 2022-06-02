@@ -34,7 +34,7 @@
     <link rel="stylesheet" href="../css/flaticon.css">
     <link rel="stylesheet" href="../css/icomoon.css">
     <link rel="stylesheet" href="../css/style.css">
-
+	
 
 	
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -82,7 +82,7 @@
 				</div>
 				<div class="sector-right">
 					<span class="title">
-						<a href="../restaurant/detail?">
+						<a href="../restaurant/detail?restaurantNum=${v.restaurantNum}">
 							<h2>${v.restaurantName}</h2>
 						</a>
 					</span>
@@ -125,7 +125,7 @@
 					
 					        // 인포윈도우로 장소에 대한 설명을 표시합니다
 					        var infowindow${v.restaurantNum} = new kakao.maps.InfoWindow({
-					            content: '<div style="width:150px;text-align:center;padding:6px 0;">${v.restaurantName}</div>'
+					            content: '<div style="width:150px;text-align:center;padding:6px 0;font-size:14px">${v.restaurantName}</div>'
 					        });
 					        infowindow${v.restaurantNum}.open(map${v.restaurantNum}, marker${v.restaurantNum});
 					

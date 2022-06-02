@@ -23,14 +23,14 @@ window.onload = function(){
         totaling += total[i];
         // console.log(totaling);
     }
-    if(totaling < 30000){
+    /*if(totaling < 30000){
         totaling += 2500;
         const fee = document.createTextNode(" 2500 원");
         deliver[0].appendChild(fee);
     } else{
         const fee = document.createTextNode("Free");
         deliver[0].appendChild(fee);
-    }
+    }*/
     
     const newText1 = document.createTextNode(totaling);
     const newText2 = document.createElement('input');

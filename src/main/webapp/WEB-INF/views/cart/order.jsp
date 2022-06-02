@@ -127,7 +127,7 @@
 	                        <div class="cart-summary">
 	                            <h5>Order Total</h5>
 	                            <ul class="summary-table">
-	                                <li><span>delivery:</span> <span class="deliver"></span></li>
+	                                <!-- <li><span>delivery:</span> <span class="deliver"></span></li> -->
 	                                <li>
 	                                    <span>total:</span>
 	                                    <span>
@@ -408,7 +408,7 @@
 		<script src="../js/bootstrap-datepicker.js"></script>
 		<script src="../js/jquery.timepicker.min.js"></script>
 		<script src="../js/scrollax.min.js"></script>
-		<script src="../js/google-map.js"></script>
+		<!-- <script src="../js/google-map.js"></script> -->
 		<script src="../js/main.js"></script>
 
 

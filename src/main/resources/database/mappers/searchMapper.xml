@@ -83,6 +83,12 @@
 			<if test="parkingCheck == 1">
 				AND R.PARKINGCHECK = 1
 			</if>
+			<if test="categoryNum != null">
+				AND CATEGORYNUM IN
+				<foreach collection="categoryNum" item="categoryNum" open="(" close=")" separator=",">
+					#{categoryNum}
+				</foreach>
+			</if>
 			<if test="tagNum != null">
 				AND TAGNUM IN
 				<foreach collection="tagNum" item="tagNum" open="(" close=")" separator=",">
@@ -118,8 +124,16 @@
 		ORDER BY STAR DESC
 	</select>
 	
+	<select id="categoryList" resultType="CategoryVO">
+		SELECT * FROM CATEGORY
+	</select>
+	
 	<select id="hashtagList" resultType="HashtagVO">
 		SELECT * FROM HASHTAG
 	</select>
+	
+	<!-- <select id="dataKR" resultType="java.lang.String">
+		SELECT SERVICEKEY FROM APIKEY WHERE SERVICENAME = "공공데이터포털 기상청 단기예보"
+	</select> -->
 
 </mapper>
