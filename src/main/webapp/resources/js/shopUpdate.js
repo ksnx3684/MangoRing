@@ -34,6 +34,65 @@
 		});
 });
 
+$("#addBtn").click(function() {
+	
+	//메뉴 등록 빈칸 체크
+	let nameCheck = true;
+	let priceCheck = true;
+	let detailCheck = true;
+	
+	$(".name").each(function(idx, item) {
+		if($(item).val() == "") {
+			nameCheck = false;
+		}
+	})
+	
+	$(".price").each(function(idx, item) {
+		if($(item).val() == "") {
+			priceCheck = false;
+		}
+	})
+	
+	$(".detail").each(function(idx, item) {
+		if($(item).val() == "") {
+			detailCheck = false;
+		}
+	})
+	
+	if($("#restaurantName").val() == "") {
+		alert("가게 이름을 입력해주세요.");
+		return;
+	}
+	if($("#accountNumber").val() == "") {
+		alert("계좌 번호를 입력해주세요.");
+		return;
+	}
+	if($("#restaurantPhone").val() == "") {
+		alert("전화번호를 입력해주세요.");
+		return;
+	}
+	if($("#introduction").val() == "") {
+		alert("가게 소개를 입력해주세요.");
+		return;
+	}
+	if(!nameCheck) {
+		alert("메뉴 이름을 입력해주세요.");
+		return;
+	}
+	if(!priceCheck) {
+		alert("메뉴 가격을 입력해주세요.");
+		return;
+	}
+	if(!detailCheck) {
+		alert("메뉴 설명을 입력해주세요.");
+		return;
+	}
+	
+	
+	$("#updateFrm").submit();
+	
+});
+
 let num = 0
 
 $("#menuBtn").click(function() {

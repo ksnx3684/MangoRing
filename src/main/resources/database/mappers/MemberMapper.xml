@@ -6,7 +6,7 @@
 	
 	<!-- 로그인 -->
 	<select id="getLogin" parameterType="MemberVO" resultMap="getLoginResult">
-		SELECT M.ID, M.PW, MF.FILENUM, MF.FILENAME FROM
+		SELECT M.ID, M.PW, M.USERTYPE, MF.FILENUM, MF.FILENAME FROM
 			MEMBER M
 			LEFT OUTER JOIN
 			MEMBER_FILE MF
@@ -18,6 +18,7 @@
 	<resultMap type="MemberVO" id="getLoginResult">
 		<id column="id" property="id"/>
 		<result column="pw" property="pw"/>
+		<result column="userType" property="userType"/>
 			<association property="memberFileVO" javaType="MemberFileVO">
 				<id column="fileNum" property="fileNum"/>
 				<result column="fileName" property="fileName"/>

@@ -8,7 +8,14 @@
 	<select id="getOrderList" parameterType="PackagePager" resultMap="orderListResult">
 		SELECT * FROM 
 			(SELECT pd.PAYDETAILNUM, pd.MENUNUM, pd.MENUCOUNT, p.*, m.NAME, menu.NAME AS MENUNAME FROM PAYMENT_DETAIL pd
-				LEFT JOIN PAYMENT p 
+				INNER JOIN 
+					(SELECT * FROM PAYMENT
+					<choose>
+						<when test="startDate != null and endDate != null">
+							WHERE PAYDATE BETWEEN #{startDate} AND #{endDate}
+						</when>
+					</choose>
+					LIMIT #{startRow}, #{perPage}) p 
 				ON (pd.PAYNUM = p.PAYNUM)
 				LEFT JOIN MENU menu
 				ON (pd.MENUNUM = menu.MENUNUM)
@@ -16,7 +23,17 @@
 				ON (p.ID = m.ID)
 			WHERE pd.MENUNUM IN (SELECT MENUNUM FROM MENU WHERE RESTAURANTNUM = #{restaurantNum})) R
 		ORDER BY STATUS ASC, PAYDATE ASC
-		LIMIT #{startRow}, #{perPage}
+	</select>
+	
+	<select id="getOrderDetail" parameterType="PaymentVO" resultMap="orderListResult">
+		SELECT pd.PAYDETAILNUM, pd.MENUNUM, pd.MENUCOUNT, p.*, m.NAME, m.PHONE, menu.NAME AS MENUNAME FROM PAYMENT_DETAIL pd 
+			INNER JOIN PAYMENT p 
+			ON (pd.PAYNUM = p.PAYNUM)
+			LEFT JOIN MENU menu
+			ON (pd.MENUNUM = menu.MENUNUM)
+			LEFT JOIN MEMBER m 
+			ON (p.ID = m.ID)
+		WHERE pd.PAYNUM = #{payNum}
 	</select>
 	
 	<resultMap type="PaymentVO" id="orderListResult">
@@ -31,6 +48,7 @@
 		<association property="memberVO" javaType="MemberVO">
 			<id column="id" property="id"/>
 			<result column="name" property="name"/>
+			<result column="phone" property="phone"/>
 		</association>
 		<collection property="paymentDetailVOs" javaType="List" ofType="PaymentDetailVO">
 			<id column="payDetailNum" property="payDetailNum"/>
@@ -47,7 +65,13 @@
 	<select id="getOrderListCount" parameterType="PackagePager" resultType="Long">
 		SELECT COUNT(PAYNUM) FROM 
 			(SELECT DISTINCT p.PAYNUM FROM PAYMENT_DETAIL pd
-				LEFT JOIN PAYMENT p 
+				INNER JOIN 
+					(SELECT * FROM PAYMENT
+					<choose>
+						<when test="startDate != null and endDate != null">
+							WHERE PAYDATE BETWEEN #{startDate} AND #{endDate}
+						</when>
+					</choose>) p 
 				ON (pd.PAYNUM = p.PAYNUM)
 				LEFT JOIN MENU menu
 				ON (pd.MENUNUM = menu.MENUNUM)
@@ -55,5 +79,13 @@
 				ON (p.ID = m.ID)
 			WHERE pd.MENUNUM IN (SELECT MENUNUM FROM MENU WHERE RESTAURANTNUM = #{restaurantNum})) R
 	</select>	
+	
+	<update id="setWaitingUpdate" parameterType="PaymentVO">
+		UPDATE PAYMENT SET WAITING = #{waiting} WHERE PAYNUM = #{payNum}
+	</update>
+	
+	<update id="setVisitUpdate" parameterType="PaymentVO">
+		UPDATE PAYMENT SET STATUS = #{status} WHERE PAYNUM = #{payNum}
+	</update>
 
 </mapper>

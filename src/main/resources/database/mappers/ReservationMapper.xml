@@ -56,7 +56,7 @@
 	
 	<update id="setChangeReservation" parameterType="ReservationVO">
 		UPDATE RESERVATION SET VISITSTATUS = #{visitStatus}
-		WHERE RESERVATIONNUM = ${reservationNum}
+		WHERE RESERVATIONNUM = ${reservationNum} AND VISITSTATUS = 0
 	</update>
 	
 	<update id="setUpdateVisitStatus" parameterType="ReservationVO">

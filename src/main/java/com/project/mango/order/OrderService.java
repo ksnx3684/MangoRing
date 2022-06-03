@@ -24,4 +24,16 @@ public class OrderService {
 		return orderMapper.getOrderList(packagePager);
 	}
 	
+	public PaymentVO getOrderDetail(PaymentVO paymentVO) throws Exception {
+		return orderMapper.getOrderDetail(paymentVO);
+	}
+	
+	public int setWaitingUpdate(PaymentVO paymentVO) throws Exception {
+		return orderMapper.setWaitingUpdate(paymentVO);
+	}
+	
+	public int setVisitUpdate(PaymentVO paymentVO) throws Exception {
+		return orderMapper.setVisitUpdate(paymentVO);
+	}
+	
 }
