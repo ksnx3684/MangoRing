@@ -89,7 +89,7 @@
 					<strong class="star"><h2>${v.reviewVOs[0].star}</h2></strong>
 					<h4 class="address">${v.address} ${v.detailAddress} ${v.extraAddress}</h4>
 				</div>
-				<div id="map${v.restaurantNum}" style="width:600px;height:400px;"></div>
+				<div class="map" id="map${v.restaurantNum}" style="width:600px;height:400px;"></div>
 				<script>
 					var mapContainer${v.restaurantNum} = document.getElementById('map${v.restaurantNum}'), // 지도를 표시할 div 
 					    mapOption${v.restaurantNum}= {

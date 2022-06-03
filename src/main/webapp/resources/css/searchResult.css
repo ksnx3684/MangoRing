@@ -32,7 +32,7 @@ a:active {
 	color: #9B9B9B;
 }
 
-.sector-left, .sector-right{
+.sector-left, .sector-right, .map{
 	display: inline-block;
 }
 
