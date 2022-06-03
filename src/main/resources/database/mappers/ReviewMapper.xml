@@ -4,12 +4,16 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.mango.review.ReviewMapper">
 
+<update id="setReport" parameterType="ReviewVO">
+UPDATE REVIEW SET REPORTCHECK=#{reportCheck}, REPORTOPTION = #{reportOption} WHERE REVIEWNUM=#{reviewNum}
+</update>
+
 	<delete id="setDelete" parameterType="ReviewVO">
 		DELETE FROM REVIEW WHERE REVIEWNUM=#{reviewNum}
 	</delete>
 
 	<select id="getFileDetail" parameterType="ReviewFilesVO" resultType="ReviewFilesVO">
-		SELECT * FROM REVIEW_FILE WHERE FILENUM=#{fileNum}
+		SELECT * FROM REVIEW_FILE WHERE FILENUM=#{fileNum} 
 	</select>
 	
 	<delete id="setFileDelete" parameterType="ReviewFilesVO">

@@ -41,6 +41,8 @@ public class RestaurantController {
 		System.out.println(restaurantVO.getRestaurantNum());
 		System.out.println(reviewVO.getRseNum());
 		System.out.println(reviewVO.getRssNum());
+		
+		
 		List<ReviewVO> ar = reviewService.getListReview(reviewVO);
 		
 		

@@ -20,9 +20,17 @@ public class ReviewVO {
 	private Date regDate;
 	private Long reportCheck;
 	private String contents;
+	private Long reportOption;
 	
 	private Long rssNum;  //reviewStartNum
 	private Long rseNum;  //reviewEndNum
+	
+	public String getId() {
+		if(this.id==null) {
+			this.id="";
+		}
+		return this.id;
+	}
 	
 	public Long getRssNum() {
 		if(this.rssNum==null) {

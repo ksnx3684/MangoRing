@@ -18,7 +18,9 @@ public class ReviewService {
 	@Autowired
 	private FileManager filemanager;
 	
-	
+	public int setReport(ReviewVO reviewVO)throws Exception{
+		return reviewMapper.setReport(reviewVO);
+	}
 	
 	
 	public int setFileDelete(ReviewFilesVO reviewFilesVO)throws Exception{

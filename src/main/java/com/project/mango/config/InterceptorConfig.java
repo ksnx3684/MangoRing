@@ -26,6 +26,7 @@ public class InterceptorConfig implements WebMvcConfigurer{
 		
 		registry.addInterceptor(ownerInterceptor)
 		.addPathPatterns("/owner/*");
+
 		
 	}	
 

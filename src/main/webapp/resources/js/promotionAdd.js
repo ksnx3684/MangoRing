@@ -1,8 +1,8 @@
 
 
-var start_year="2000";// 시작할 년도
+var start_year="2022";// 시작할 년도
  var today = new Date(); 
- var today_year= today.getFullYear(); 
+ var today_year= 2025; 
  var index=0; 
  for(var y=start_year; y<=today_year; y++){ //start_year ~ 현재 년도
  //		$("#select_year").
@@ -39,7 +39,7 @@ var Month=document.getElementById('select_month').value;
 
  var start_yearEnd="2022";// 시작할 년도
  var todayEnd = new Date(); 
- var today_yearEnd= "2025";    //today.getFullYear(); 
+ var today_yearEnd= "2050";    //today.getFullYear(); 
  var indexEnd=0; 
  for(var y=start_yearEnd; y<=today_yearEnd; y++){ //start_year ~ 현재 년도
  	 document.getElementById('select_yearEnd').options[indexEnd] = new Option(y, y); 

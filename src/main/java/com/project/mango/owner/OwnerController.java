@@ -25,11 +25,15 @@ import com.project.mango.menu.MenuService;
 import com.project.mango.menu.MenuVO;
 import com.project.mango.order.OrderService;
 import com.project.mango.order.PaymentVO;
+import com.project.mango.promotion.PromotionService;
+import com.project.mango.promotion.PromotionVO;
 import com.project.mango.reservation.ReservationService;
 import com.project.mango.reservation.ReservationVO;
 import com.project.mango.restaurant.RestaurantFileVO;
 import com.project.mango.restaurant.RestaurantService;
 import com.project.mango.restaurant.RestaurantVO;
+import com.project.mango.review.ReviewService;
+import com.project.mango.review.ReviewVO;
 import com.project.mango.util.PackagePager;
 import com.project.mango.util.ReservationPager;
 
@@ -47,6 +51,10 @@ public class OwnerController {
 	private ReservationService reservationService;
 	@Autowired
 	private OrderService orderService;
+	@Autowired
+	private ReviewService reviewService;
+	@Autowired
+	private PromotionService promotionService;
 	
 	@GetMapping("list")
 	public ModelAndView getList(HttpSession session) throws Exception {
@@ -336,4 +344,71 @@ public class OwnerController {
 		return mv;
 	}
 
+	
+	// -------- ownerPage
+	
+	@GetMapping("shop/ownerPage")
+	public ModelAndView getOwnerPage(HttpSession session,RestaurantVO restaurantVO,ReviewVO reviewVO)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		
+		restaurantVO.setId(memberVO.getId()); //레스토랑 정보 ?
+		restaurantVO= restaurantService.getList(restaurantVO);
+		
+		reviewVO.setRestaurantNum(restaurantVO.getRestaurantNum());
+		reviewVO.setId(memberVO.getId());
+		List<ReviewVO> ar= reviewService.getListReview(reviewVO);
+		
+		List<PromotionVO> arPromo = promotionService.getList();
+		mv.setViewName("owner/shop/ownerPage");
+		mv.addObject("rest",restaurantVO);
+		mv.addObject("list",ar);
+		mv.addObject("listPromo",arPromo);
+		return mv;
+	}
+	
+	/*
+	 * @GetMapping("detail") public ModelAndView getDetailWM(RestaurantVO
+	 * restaurantVO,ReviewVO reviewVO,MenuVO menuVO)throws Exception{ ModelAndView
+	 * mv = new ModelAndView();
+	 * 
+	 * //레스토랑 정보 , 카테고리 종류 restaurantVO =
+	 * restaurantService.getDetailWM(restaurantVO);
+	 * 
+	 * 
+	 * 
+	 * //MenuVO menuVO = restaurantService.getDetail(restaurantVO.getMenuVO());
+	 * 
+	 * 
+	 * //리뷰 디테일로 가는 리스트 //ReviewVO reviewVO =new ReviewVO();
+	 * reviewVO.setRestaurantNum(restaurantVO.getRestaurantNum());
+	 * System.out.println(restaurantVO.getRestaurantNum());
+	 * System.out.println(reviewVO.getRseNum());
+	 * System.out.println(reviewVO.getRssNum()); List<ReviewVO> ar =
+	 * reviewService.getListReview(reviewVO);
+	 * 
+	 * 
+	 * System.out.println(menuVO.getMenuNum());
+	 * 
+	 * menuVO.setRestaurantNum(restaurantVO.getRestaurantNum()); List<MenuVO> menuAr
+	 * = restaurantService.getListWM(menuVO);
+	 * 
+	 * 
+	 * 
+	 * //전체 리뷰 카운트 long count = reviewService.countReview(reviewVO);
+	 * 
+	 * //맛있어요 리뷰 카운트 long goodCount = reviewService.goodCount(reviewVO);
+	 * 
+	 * //보통이에요 리뷰 카운트 long normalCount = reviewService.normalCount(reviewVO);
+	 * 
+	 * //별로에요 리뷰 카운트 long badCount = reviewService.badCount(reviewVO);
+	 * 
+	 * 
+	 * mv.addObject("count",count); mv.addObject("goodCount",goodCount);
+	 * mv.addObject("normalCount",normalCount); mv.addObject("badCount",badCount);
+	 * mv.addObject("list",ar); mv.addObject("vo",restaurantVO.getCategoryVO());
+	 * //카테고리 종류 mv.addObject("vo1",restaurantVO); //레스토랑 정보
+	 * mv.addObject("menu",menuAr); mv.setViewName("restaurant/detail"); return mv;
+	 */
 }

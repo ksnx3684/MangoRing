@@ -48,17 +48,20 @@
 	<div id="carouselExampleControls" class="carousel slide"
 		data-bs-ride="carousel">
 		<div class="carousel-inner">
-		<div id="revPicBox">
-		<div class="revPics">
-			<c:forEach items="${revo.reviewFilesVOs }" varStatus="status" var="rFilesVOS">	
-				<div class="carousel-item <c:if test="${status.index eq 0 }">active </c:if>">   
-				
-					<img onload="resize(this);" src="../resources/upload/review/${rFilesVOS.fileName}"
-						class="d-block" alt="...">
-						
+			<div id="revPicBox">
+				<div class="revPics">
+					<c:forEach items="${revo.reviewFilesVOs }" varStatus="status"
+						var="rFilesVOS">
+						<div
+							class="carousel-item <c:if test="${status.index eq 0 }">active </c:if>">
+
+							<img onload="resize(this);"
+								src="../resources/upload/review/${rFilesVOS.fileName}"
+								class="d-block" alt="...">
+
+						</div>
+					</c:forEach>
 				</div>
-			</c:forEach>
-			</div>
 			</div>
 		</div>
 		<button class="carousel-control-prev" type="button"
@@ -78,7 +81,7 @@
 
 
 
-<%-- 	<div id="revPicBox">
+	<%-- 	<div id="revPicBox">
 		<div class="btnBox">
 			<button type="button" class="btnL btn-warning"><</button>
 		</div>
@@ -114,10 +117,48 @@
 		<div>
 			<button class="sUpdate" data-num="${revo.reviewNum }" type="button">리뷰수정</button>
 			<%-- <a href="update?reviewNum=${revo.reviewNum }" role="button">Update</a> --%>
-			<a href="delete?reviewNum=${revo.reviewNum }" role="button" class="btn-danger mx-1">리뷰 삭제</a>
+			<a href="delete?reviewNum=${revo.reviewNum }" role="button"
+				class="btn-danger mx-1">리뷰 삭제</a>
 		</div>
+	
 	</div>
+	<h1>마지막에 레스토랑넘,id가 일치한 사람,관리자만 보이게 </h1>
 
+<button type="button" class="btn btn-primary btn-lg" id="openModalBtn">
+신고하기
+</button>
+
+<div class="modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">해당 리뷰 신고하기</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">ss</button>
+      </div>
+      <div class="modal-body">
+        <p><div>
+        
+        <form id="frm" action="./report" method="post">
+        <input type="hidden" value="${revo.reviewNum }" name="reviewNum">
+        <input type="hidden" value="1" name="reportCheck">
+				<select name="reportOption">
+					<option value="1">1.욕설</option>
+					<option value="2">2.허위사실유포</option>
+					<option value="3">3.타 식당 음식 사진</option>
+					<option value="4">4.음식과 상관없는 리뷰</option>
+					<option value="5">5.지나친 비하</option>
+				
+				</select>
+		</form>
+			</div></p>
+      </div>
+      <div class="modal-footer">
+        <button id="closeModalBtn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button id="subm" type="button" class="btn btn-primary">신고하기</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 	<!-- Option 1: Bootstrap Bundle with Popper -->
@@ -126,7 +167,20 @@
 		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 		crossorigin="anonymous"></script>
 	<script src="../resources/js/reviewDetail.js" type="text/javascript"></script>
-	
-	
+<script type="text/javascript">
+$("#openModalBtn").on("click",function(){
+	$(".modal").modal("show")
+})
+
+$("#closeModalBtn").on("click",function(){
+	$(".modal").modal("hide");
+})
+
+$("#subm").on("click",function(){
+	if(!confirm('신고하시겠습니까?')) return;
+	$("#frm").submit();
+})
+</script>
+
 </body>
 </html>

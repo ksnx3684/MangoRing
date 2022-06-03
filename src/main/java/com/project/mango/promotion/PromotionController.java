@@ -39,7 +39,7 @@ public class PromotionController {
 	public ModelAndView getAjaxList(HttpSession session)throws Exception{
 		ModelAndView mv = new ModelAndView();
 		System.out.println("AjaxList");
-		MemberVO memberVO =(MemberVO)session.getAttribute("member");
+	//	MemberVO memberVO =(MemberVO)session.getAttribute("member");
 		
 		List<PromotionVO> ar = promotionService.getList();
 		mv.addObject("list",ar);
@@ -85,8 +85,8 @@ public class PromotionController {
 		
 		
 		int result = promotionService.setPromotionAdd(promotionVO);
-		mv.setViewName("redirect:../restaurant/detail");
-		mv.addObject(promotionVO);
+		mv.setViewName("common/ajaxResult");
+		mv.addObject("result",result);
 		return mv;
 		
 	}

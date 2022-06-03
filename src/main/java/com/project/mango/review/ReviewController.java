@@ -1,5 +1,7 @@
 package com.project.mango.review;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,12 +10,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.project.mango.member.MemberVO;
+
 @Controller
 @RequestMapping("/review/*")
 public class ReviewController {
 	
 	@Autowired
 	private ReviewService reviewService;
+	
+	@PostMapping("report")
+	public ModelAndView setReport(ReviewVO reviewVO)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		reviewService.setReport(reviewVO);
+		System.out.println("신고번호"+reviewVO.getReportCheck());
+		System.out.println("리뷰번호"+reviewVO.getReviewNum());
+		System.out.println("신고옵션"+reviewVO.getReportOption());
+		mv.setViewName("redirect:../restaurant/detail");
+		return mv;
+	}
 	
 	@PostMapping("fileDelete")
 	public ModelAndView setFileDelete(ReviewFilesVO reviewFilesVO)throws Exception{
@@ -83,12 +98,13 @@ public class ReviewController {
 	}
 	
 	@GetMapping("detail")
-	public ModelAndView getdetailReview(ReviewVO reviewVO)throws Exception{
+	public ModelAndView getdetailReview(ReviewVO reviewVO,HttpSession session)throws Exception{
 		ModelAndView mv = new ModelAndView();
 		reviewVO = reviewService.getDetailReview(reviewVO);
-		
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
 		mv.addObject("reFilesVo",reviewVO.getReviewFilesVOs());
 		mv.addObject("revo",reviewVO);
+		mv.addObject("member",memberVO);
 		mv.setViewName("/review/detail");
 		return mv;
 	}
