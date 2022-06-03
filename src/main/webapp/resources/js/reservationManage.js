@@ -72,11 +72,11 @@ $("#searchBtn").click(function() {
 	
 	if(startDate == "") {
 		alert("검색을 원하시는 기간의 시작 날짜를 선택해주세요.");
-		return
+		return;
 	}
 	if(endDate == "") {
 		alert("검색을 원하시는 기간의 종료 날짜를 선택해주세요");
-		return
+		return;
 	}
 	
 	getSearchList(rstNum, 0, startDate, endDate);

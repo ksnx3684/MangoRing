@@ -11,6 +11,13 @@ import com.project.mango.util.ReservationPager;
 public interface OrderMapper {
 
 	public List<PaymentVO> getOrderList(PackagePager packagePager) throws Exception;
+	
+	public PaymentVO getOrderDetail(PaymentVO paymentVO) throws Exception;
+	
 	public Long getOrderListCount(PackagePager packagePager) throws Exception;
+	
+	public int setWaitingUpdate(PaymentVO paymentVO) throws Exception;
+	
+	public int setVisitUpdate(PaymentVO paymentVO) throws Exception;
 	
 }

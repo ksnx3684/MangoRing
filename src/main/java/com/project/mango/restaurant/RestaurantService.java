@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.mango.hashtag.HashtagVO;
+import com.project.mango.member.MemberVO;
 import com.project.mango.util.FileManager;
 
 @Service
@@ -128,6 +129,10 @@ public class RestaurantService {
 	public int setAllTagDelete(RestaurantVO restaurantVO) throws Exception {
 		return restaurantMapper.setAllTagDelete(restaurantVO);
 
+	}
+	
+	public RestaurantVO getRestaurantNum(MemberVO memberVO) throws Exception {
+		return restaurantMapper.getRestaurantNum(memberVO);
 	}
 	
 }

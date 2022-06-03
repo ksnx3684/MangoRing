@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.project.mango.member.MemberVO;
 import com.project.mango.menu.MenuVO;
 
 	
@@ -41,5 +42,7 @@ public interface RestaurantMapper {
 	public RestaurantVO getSelectedList(RestaurantVO restaurantVO) throws Exception;
 	
 	public int setAllTagDelete (RestaurantVO restaurantVO) throws Exception;
+	
+	public RestaurantVO getRestaurantNum(MemberVO memberVO) throws Exception;
 
 }

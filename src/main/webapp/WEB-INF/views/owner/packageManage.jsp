@@ -16,6 +16,14 @@
 	<h1>포장 주문 내역</h1>
 	
 	<div class="container">
+		
+		<div>
+			<form action="./packageManage" method="get" id="searchFrm">
+				<input type="date" id="startDate" name="startDate"> ~ <input type="date" id="endDate" name="endDate">
+				<button type="button" id="searchBtn">검색</button>
+			</form>
+		</div>
+		
 		<table class="table table-striped">
 			<tr>
 				<th>번호</th>
@@ -25,6 +33,7 @@
 				<th>메뉴</th>
 				<th>수량</th>
 				<th>상태</th>
+				<th>예상 시간</th>
 				<th></th>
 			</tr>
 			<c:forEach items="${packageList}" var="order" varStatus="status">
@@ -49,12 +58,31 @@
 						<c:choose>
 							<c:when test="${order.status eq 1}">
 								방문 대기
+								<button type="button" class="btn btn-warning visitBtn" data-num="${order.payNum}">방문 완료</button>
+							</c:when>
+							<c:when test="${order.status eq 2}">
+								주문 취소
+							</c:when>
+							<c:when test="${order.status eq 3}">
+								방문 완료
 							</c:when>
 						</c:choose>
 					
 					</td>
 					<td>
-						<a class="btn btn-warning" href="#">상세 보기</a>
+						<c:choose>
+							<c:when test="${order.waiting eq 0}">
+								예상 시간을 설정해주세요.
+							</c:when>
+							<c:otherwise>
+								${order.waiting}분
+							</c:otherwise>
+						</c:choose>
+					</td>
+					<td>
+						<c:if test="${order.status eq 1}">						
+							<a class="btn btn-warning" href="./packageDetail?payNum=${order.payNum}">상세 보기</a>
+						</c:if>
 					</td>
 				</tr>
 			</c:forEach>
@@ -64,26 +92,61 @@
 			<nav aria-label="Page navigation example">
 			  <ul class="pagination">
 			    <li class="page-item">
-			      <a class="page-link" href="./packageManage?pn=${pager.pre?pager.startNum-1:1}&restaurantNum=${pager.restaurantNum}" aria-label="Previous">
-			        <span aria-hidden="true">&laquo;</span>
-			      </a>
+			    <c:choose>
+			    	<c:when test="${empty pager.startDate and empty pager.endDate}">
+			    		<a class="page-link" href="./packageManage?pn=${pager.pre?pager.startNum-1:1}&restaurantNum=${pager.restaurantNum}" aria-label="Previous">
+				    		<span aria-hidden="true">&laquo;</span>
+					    </a>
+			    	</c:when>
+			    	<c:otherwise>
+			    		<a class="page-link" href="./packageManage?pn=${pager.pre?pager.startNum-1:1}&restaurantNum=${pager.restaurantNum}&startDate=${pager.startDate}&endDate=${pager.endDate}" aria-label="Previous">
+					    	<span aria-hidden="true">&laquo;</span>
+					    </a>
+			    	</c:otherwise>
+			    </c:choose>
+
 			    </li>
 			    <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
 			    	<c:choose>
 			    		<c:when test="${pager.pn eq i}">
-			    			<li class="page-item active" aria-current="page">
-						      <a class="page-link" href="./packageManage?pn=${i}&restaurantNum=${pager.restaurantNum}">${i}</a>
-						    </li>
+			    			<c:choose>
+			    				<c:when test="${empty pager.startDate and empty pager.endDate}">
+			    					<li class="page-item active" aria-current="page">
+								      <a class="page-link" href="./packageManage?pn=${i}">${i}</a>
+								    </li>
+			    				</c:when>
+			    				<c:otherwise>
+					    			<li class="page-item active" aria-current="page">
+								      <a class="page-link" href="./packageManage?pn=${i}&startDate=${pager.startDate}&endDate=${pager.endDate}">${i}</a>
+								    </li>
+			    				</c:otherwise>
+			    			</c:choose>
 			    		</c:when>
 			    		<c:otherwise>
-			    			<li class="page-item"><a class="page-link" href="./packageManage?pn=${i}&restaurantNum=${pager.restaurantNum}">${i}</a></li>
+			    			<c:choose>
+						    	<c:when test="${empty pager.startDate and empty pager.endDate}">
+						    		<li class="page-item"><a class="page-link" href="./packageManage?pn=${i}">${i}</a></li>
+						    	</c:when>
+						    	<c:otherwise>
+						    		<li class="page-item"><a class="page-link" href="./packageManage?pn=${i}&startDate=${pager.startDate}&endDate=${pager.endDate}">${i}</a></li>
+						    	</c:otherwise>
+						    </c:choose>
 			    		</c:otherwise>
 			    	</c:choose>
 			    </c:forEach>
 			    <li class="page-item">
-			      <a class="page-link" href="./packageManage?pn=${pager.next?pager.lastNum+1:pager.lastNum}&restaurantNum=${pager.restaurantNum}" aria-label="Next">
-			        <span aria-hidden="true">&raquo;</span>
-			      </a>
+			    	<c:choose>
+			    	<c:when test="${empty pager.startDate and empty pager.endDate}">
+			    		<a class="page-link" href="./packageManage?pn=${pager.next?pager.lastNum+1:pager.lastNum}" aria-label="Previous">
+				    		<span aria-hidden="true">&laquo;</span>
+					    </a>
+			    	</c:when>
+			    	<c:otherwise>
+			    		<a class="page-link" href="./packageManage?pn=${pager.next?pager.lastNum+1:pager.lastNum}&startDate=${pager.startDate}&endDate=${pager.endDate}" aria-label="Previous">
+					    	<span aria-hidden="true">&raquo;</span>
+					    </a>
+			    	</c:otherwise>
+			    </c:choose>
 			    </li>
 			  </ul>
 			</nav>
@@ -96,5 +159,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <!-- Jquery Library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script type="text/javascript" src="../resources/js/packageManage.js"></script>
+
 </body>
 </html>

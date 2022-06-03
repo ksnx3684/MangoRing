@@ -15,11 +15,11 @@
 
 		<h1>가게 정보 수정 페이지</h1>
 		
-		<form action="#" method="post" enctype="multipart/form-data" id="updateFrm">
+		<form action="./update" method="post" enctype="multipart/form-data" id="updateFrm">
 			
 			<input type="hidden" id="restaurantNum" name="restaurantNum" value="${restaurantVO.restaurantNum}">
 			
-			<input type="text" name="restaurantName" value="${restaurantVO.restaurantName}">
+			<input type="text" id="restaurantName" name="restaurantName" value="${restaurantVO.restaurantName}">
 			
 			<h5>사진 추가</h5>
 			<c:forEach items="${restaurantVO.restaurantFileVOs}" var="restFile">
@@ -33,6 +33,9 @@
 			
 			</div>
 			<button type="button" id="fileAdd">사진 추가</button>
+
+			<h5>계좌번호</h5>
+			<input type="text" class="form-control" placeholder="계좌번호를 입력해주세요." id="accountNumber" name="accountNumber" value="${restaurantVO.accountNumber}">	
 
 			<h5>전화번호</h5>
 			<input type="text" class="form-control" placeholder="전화번호를 입력해주세요." id="restaurantPhone" name="restaurantPhone" value="${restaurantVO.restaurantPhone}">
@@ -80,7 +83,7 @@
 			
 			<br>
 			
-			<button type="submit" class="btn btn-warning" id="addBtn">등록</button>
+			<button type="button" class="btn btn-warning" id="addBtn">등록</button>
 		
 		</form>
 

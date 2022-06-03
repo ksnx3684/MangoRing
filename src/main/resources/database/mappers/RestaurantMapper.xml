@@ -103,6 +103,7 @@
 
 	<update id="setRegistration" parameterType="RestaurantVO">
 		UPDATE RESTAURANT SET 
+			ACCOUNTNUMBER = #{accountNumber},
 			RESTAURANTPHONE = #{restaurantPhone},
 			INTRODUCTION = #{introduction},
 			EDITDATE = now()
@@ -124,6 +125,7 @@
 	
 	<update id="setUpdate" parameterType="RestaurantVO">
 		UPDATE RESTAURANT SET
+			ACCOUNTNUMBER = #{accountNumber},
 			RESTAURANTNAME = #{restaurantName},
 			RESTAURANTPHONE = #{restaurantPhone},
 			INTRODUCTION = #{introduction},
@@ -158,5 +160,8 @@
 		DELETE FROM REST_TAG WHERE RESTAURANTNUM = #{restaurantNum}
 	</delete>
 	
+	<select id="getRestaurantNum" parameterType="MemberVO" resultType="RestaurantVO">
+		SELECT RESTAURANTNUM FROM RESTAURANT WHERE ID = #{id}
+	</select>
 
 </mapper>

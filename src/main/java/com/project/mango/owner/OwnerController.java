@@ -144,14 +144,60 @@ public class OwnerController {
 	}
 	
 	@GetMapping("packageManage")
-	public ModelAndView packageManage(PackagePager packagePager, String startDate, String endDate) throws Exception {
+	public ModelAndView packageManage(PackagePager packagePager, String startDate, String endDate, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		RestaurantVO restaurantVO = restaurantService.getRestaurantNum(memberVO);
+		packagePager.setRestaurantNum(restaurantVO.getRestaurantNum());
+		
+		if(startDate != null) {
+			packagePager.setStartDate(Date.valueOf(startDate));
+		}
+		
+		if(endDate != null) {
+			packagePager.setEndDate(Date.valueOf(endDate));
+		}
+
 		List<PaymentVO> packageList = orderService.getOrderList(packagePager);
 		
 		mv.addObject("packageList", packageList);
 		mv.addObject("pager", packagePager);
 		mv.setViewName("owner/packageManage");
+		
+		return mv;
+	}
+	
+	@GetMapping("packageDetail")
+	public ModelAndView packageDetail(PaymentVO paymentVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		paymentVO = orderService.getOrderDetail(paymentVO);
+		
+		mv.addObject("paymentVO", paymentVO);
+		
+		return mv;
+	}
+	
+	@PostMapping("waitingUpdate")
+	public ModelAndView setWaitingUpdate(PaymentVO paymentVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		int result = orderService.setWaitingUpdate(paymentVO);
+		
+		mv.setViewName("redirect:./packageManage");
+		
+		return mv;
+	}
+	
+	@PostMapping("visitUpdate")
+	public ModelAndView setVisitUpdate(PaymentVO paymentVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		int result = orderService.setVisitUpdate(paymentVO);
+		
+		mv.addObject("result", result);
+		mv.setViewName("common/ajaxResult");
 		
 		return mv;
 	}

@@ -12,4 +12,7 @@ public class PackagePager extends Pager {
 	
 	private Long restaurantNum;
 	
+	private Date startDate;
+	private Date endDate;
+	
 }

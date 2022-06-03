@@ -27,7 +27,10 @@
 			
 			</div>
 			<button type="button" id="fileAdd">사진 추가</button>
-
+			
+			<h5>계좌번호</h5>
+			<input type="text" class="form-control" placeholder="계좌번호를 입력해주세요." id="accountNumber" name="accountNumber">
+			
 			<h5>전화번호</h5>
 			<input type="text" class="form-control" placeholder="전화번호를 입력해주세요." id="restaurantPhone" name="restaurantPhone">
 			
@@ -69,7 +72,7 @@
 			
 			<br>
 			
-			<button type="submit" class="btn btn-warning" id="addBtn">등록</button>
+			<button type="button" class="btn btn-warning" id="addBtn">등록</button>
 		
 		</form>
 
