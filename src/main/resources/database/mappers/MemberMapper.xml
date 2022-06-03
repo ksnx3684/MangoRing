@@ -36,8 +36,8 @@
 	
 	<!-- 회원 가입 -->
 	<insert id="setAddMember" parameterType="MemberVO">
-		INSERT INTO MEMBER (ID, PW, NAME, EMAIL, PHONE, GENDER, JOINDATE, USERTYPE, BLACKLIST)
-		VALUES(#{id}, #{pw}, #{name}, #{email}, #{phone}, #{gender}, NOW(), 1, 0)
+		INSERT INTO MEMBER (ID, PW, NAME, EMAIL, PHONE, GENDER, JOINDATE, USERTYPE, BLACKLIST, BUSINESSOK)
+		VALUES(#{id}, #{pw}, #{name}, #{email}, #{phone}, #{gender}, NOW(), 1, 0, 0)
 	</insert>
 	
 	<!-- 사진 업로드 -->
@@ -60,12 +60,20 @@
 		WHERE ID = #{id}
 	</update>
 	
+	<!-- 가게 사진 업로드 -->
+	<insert id="setRestaurantPhoto">
+		INSERT INTO REST_FILE(FILENUM, RESTAURANTNUM, FILENAME, ORINAME)
+		VALUES (NULL, #{restaurantNum}, #{fileName}, #{oriName})
+	</insert>
+	
 	<!-- 사업자 등록 -->
-	<insert id="setBusinessApplication" parameterType="RestaurantVO">
-		INSERT INTO RESTAURANT (ID, CATEGORYNUM, BUSINESSNUM, ADDRESS, POSTCODE, DETAILADDRESS,
-		EXTRAADDRESS, INTRODUCTION, PARKINGCHECK, KIDCHECK)
-		VALUES(#{id}, #{categoryNum}, #{businessNum}, #{address}, #{postCode}, #{detailAddress}, 
-		#{extraAddress}, #{introduction}, #{parkingCheck}, #{kidCheck})
+	<insert id="setBusinessApplication" parameterType="RestaurantVO" 
+	useGeneratedKeys="true" keyProperty="restaurantNum">
+		INSERT INTO RESTAURANT (RESTAURANTNUM, RESTAURANTNAME, ID, CATEGORYNUM, BUSINESSNUM, 
+		ADDRESS, POSTCODE, DETAILADDRESS, EXTRAADDRESS, INTRODUCTION, PARKINGCHECK, KIDCHECK)
+		VALUES(#{restaurantNum}, #{restaurantName}, #{id}, #{categoryNum}, #{businessNum}, 
+		#{address}, #{postCode}, #{detailAddress}, #{extraAddress}, #{introduction}, 
+		#{parkingCheck}, #{kidCheck})
 	</insert>
 		
 	<!-- 사업자 등록 후 승인처리 -->
@@ -75,22 +83,33 @@
 	
 	<!-- 위시리스트 등록 -->
 	<insert id="setWishlist" parameterType="WishlistVO">
-		INSERT INTO WISHLIST (WISHNUM, RESTAURANTNUM, ID, CATEGORYNUM)
+	<!-- IGNORE : 중복이 발생하면 삽입하려는 Row를 무시함 -->
+		INSERT IGNORE INTO WISHLIST (WISHNUM, RESTAURANTNUM, ID, CATEGORYNUM)
 		VALUES (NULL, #{restaurantNum}, #{id}, #{categoryNum})
 	</insert>
 	
+	<!-- 위시리스트 카운트 출력 -->
+	<select id="getTotalWishCount" parameterType="WishlistVO" resultType="Long">
+		SELECT COUNT(WISHNUM) FROM WISHLIST WHERE ID = #{id}
+	</select>
+	
 	<!-- 위시리스트 리스트 출력 -->
 	<select id="getWishlist" parameterType="WishlistVO" resultMap="getResultWishlist">
-		SELECT W.ID, W.CATEGORYNUM, R.RESTAURANTNUM, R.ID, R.RESTAURANTNAME, R.ADDRESS
+		SELECT W.WISHNUM, W.ID, W.CATEGORYNUM, R.RESTAURANTNUM, R.ID,
+		R.RESTAURANTNAME, R.ADDRESS, RF.FILENUM, RF.FILENAME 
 		FROM 
 			WISHLIST W
 			LEFT OUTER JOIN
 			RESTAURANT R
 			USING (RESTAURANTNUM)
-		WHERE W.ID = #{id} ORDER BY WISHNUM DESC;
+			LEFT OUTER JOIN
+			REST_FILE RF
+			USING (RESTAURANTNUM)
+		WHERE W.ID = #{id} ORDER BY WISHNUM DESC LIMIT #{pager.startRow}, #{pager.perPage}
 	</select>
 	
 	<resultMap type="WishlistVO" id="getResultWishlist">
+		<id column="wishNum" property="wishNum"/>
 		<result column="id" property="id" />
 		<result column="categoryNum" property="categoryNum" />
 			<collection property="restaurantVOs" javaType="List" ofType="RestaurantVO">
@@ -98,6 +117,51 @@
 				<result column="id" property="id"/>
 				<result column="restaurantName" property="restaurantName"/>
 				<result column="address" property="address"/>
+			</collection>
+				<collection property="restFileVO" javaType="List" ofType="ResFilesVO">
+					<id column="fileNum" property="fileNum"/>
+					<result column="fileName" property="fileName"/>
+				</collection>
+	</resultMap>
+	
+	<!-- 위시리스트 삭제 -->
+	<delete id="setDeleteWishlist">
+		DELETE FROM WISHLIST WHERE WISHNUM = #{wishNum} AND ID = #{id}
+	</delete>
+	
+	<!-- 평점 카운트 출력 -->
+	<select id="getTotalRatingCount" parameterType="ReviewVO" resultType="Long">
+		SELECT COUNT(REVIEWNUM) FROM REVIEW WHERE ID = #{id}
+	</select>
+	
+	<!-- 평점 리스트 -->
+	<select id="getRatingList" parameterType="ReviewVO" resultMap="getResultRatingList">
+		SELECT R.ID, R.REVIEWNUM, R.RESTAURANTNUM, R.STAR, R.CONTENTS, RF.FILENUM, 
+		RF.FILENAME, RR.ADDRESS, RR.RESTAURANTNAME FROM
+			REVIEW R 
+			LEFT OUTER JOIN
+			REVIEW_FILE RF
+			USING (REVIEWNUM)
+			LEFT OUTER JOIN
+			RESTAURANT RR
+			USING (RESTAURANTNUM)
+		WHERE R.ID = #{id} ORDER BY REVIEWNUM DESC LIMIT #{pager.startRow}, #{pager.perPage}
+	</select>
+	
+	<resultMap type="ReviewVO" id="getResultRatingList">
+		<id column="reviewNum" property="reviewNum"/>
+		<result column="id" property="id"/>
+		<result column="restaurantNum" property="restaurantNum"/>
+		<result column="star" property="star"/>
+		<result column="contents" property="contents"/>
+			<collection property="reviewFilesVOs" javaType="List" ofType="ReviewFilesVO">
+				<id column="fileNum" property="fileNum"/>
+				<result column="reviewNum" property="reviewNum"/>
+				<result column="fileName" property="fileName"/>
+			</collection>
+			<collection property="restaurantVOs" javaType="List" ofType="RestaurantVO">
+				<result column="address" property="address"/>
+				<result column="restaurantName" property="restaurantName"/>
 			</collection>
 	</resultMap>
 	

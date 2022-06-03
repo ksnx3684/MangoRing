@@ -29,6 +29,8 @@ public class RestaurantController {
 		
 		//레스토랑 정보 , 카테고리 종류
 		restaurantVO = restaurantService.getDetailWM(restaurantVO);
+		
+		System.out.println("restaurantVO 출력 테스트 : " + restaurantVO);
 	
 		
 		

@@ -12,6 +12,17 @@
 <body>
 	<h1 class="text-center">My Page</h1>
 	
+	<div class="container mb-3">
+		<c:choose>
+	      	<c:when test="${empty member || member.memberFileVO == null}">
+	      		<img src="/resources/upload/member/default_profile.png" alt="photo" width="200" height="200">
+	      	</c:when>
+			<c:otherwise>
+				<img src="/resources/upload/member/${member.memberFileVO.fileName}" alt="photo" width="200" height="200">
+			</c:otherwise>
+	    </c:choose>
+    </div>
+	
 	<div class="container">
 		<div class="row">
 		  <div class="col-4 text-truncate">
@@ -109,7 +120,7 @@
 	
 	<div class="d-grid gap-2 d-md-flex justify-content-md-evenly mt-5">
 	  <button id="wishlist" class="btn btn-primary btn-lg" type="button">위시리스트</button>
-	  <button class="btn btn-primary btn-lg" type="button">내 평점</button>
+	  <button id="rating" class="btn btn-primary btn-lg" type="button">내 평점</button>
 	</div>
 	
 	<div class="d-grid gap-2 d-md-flex justify-content-md-evenly mt-5">
@@ -119,7 +130,7 @@
 	
 	<div class="d-grid gap-2 d-md-flex justify-content-md-evenly mt-5">
 	  <button class="btn btn-primary btn-lg" type="button">나의 쿠폰</button>
-	  <button class="btn btn-primary btn-lg" type="button">장바구니</button>
+	  <button id="cart" class="btn btn-primary btn-lg" type="button">장바구니</button>
 	</div>
 	
 	<div class="container">
@@ -136,8 +147,18 @@
 	<c:import url="../template/cdn_script.jsp"></c:import>
 </body>
 <script type="text/javascript">
+
 	$("#wishlist").click(function(){
 		location.href="./wishlist";
 	});
+	
+	$("#rating").click(function(){
+		location.href="./rating";
+	});
+	
+	$("#cart").click(function(){
+		location.href="../cart/cartList";
+	});
+	
 </script>
 </html>

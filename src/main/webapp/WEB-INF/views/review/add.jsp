@@ -57,14 +57,9 @@
 					<input accept="image/*" class="pics" type="file" name="files" required multiple style="display:none;">
 				<div class="picsBox">
 				</div>  -->
-
-
-				
-
-				 
-
 			</div>
 			<hr>
+			
 			<fieldset>
 				<span class="text-bold">별점을 선택해주세요</span> <input type="radio"
 					name="star" value="5" id="rate1"><label for="rate1">★</label>

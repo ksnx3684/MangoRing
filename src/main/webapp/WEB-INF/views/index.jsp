@@ -37,7 +37,7 @@
 
   <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="index.html">MangoRing</a>
+	      <a class="navbar-brand" href="/">MangoRing</a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
@@ -45,7 +45,14 @@
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
 	        	<li class="nav-item active"><a href="./search/detailSearch" class="nav-link">상세검색</a></li>
-	        	<li class="nav-item"><a href="./member/login" class="nav-link">로그인</a></li>
+	        	<c:choose>
+	        		<c:when test="${not empty member}">
+	        			<li class="nav-item"><a href="./member/myPage" class="nav-link">마이 페이지</a></li>
+	        		</c:when>
+		        	<c:otherwise>
+		        		<li class="nav-item"><a href="./member/login" class="nav-link">로그인</a></li>
+		        	</c:otherwise>
+	        	</c:choose>
 	        	<li class="nav-item"><a href="./member/logout" class="nav-link">로그아웃</a></li>
 	        	<!-- <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
 	          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>

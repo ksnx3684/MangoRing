@@ -3,8 +3,12 @@ package com.project.mango.member;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
+import com.project.mango.restaurant.RestFileVO;
 import com.project.mango.restaurant.RestaurantVO;
+import com.project.mango.review.ReviewVO;
+import com.project.mango.util.Pager;
 import com.project.mango.wishlist.WishlistVO;
 
 @Mapper
@@ -33,15 +37,30 @@ public interface MemberMapper {
 	
 	// 사업자 등록
 	public int setBusinessApplication(RestaurantVO restaurantVO) throws Exception;
+	
+	// 가게사진 등록
+	public int setRestaurantPhoto(RestFileVO restFileVO) throws Exception;
 		
 	// 사업자 등록 후 승인대기
 	public int setBusinessUserType(MemberVO memberVO) throws Exception;
+	
+	// 위시리스트 갯수
+	public Long getTotalWishCount(WishlistVO wishlistVO) throws Exception;
 	
 	// 위시리스트
 	public int setWishlist(WishlistVO wishlistVO) throws Exception;
 	
 	// 위시리스트 조회
-	public List<WishlistVO> getWishlist(String id) throws Exception;
+	public List<WishlistVO> getWishlist(@Param("id")String id, @Param("pager")Pager pager) throws Exception;
+	
+	// 위시리스트 삭제
+	public int setDeleteWishlist(WishlistVO wishlistVO) throws Exception;
+	
+	// 평점 리스트 조회
+	public List<ReviewVO> getRatingList(@Param("id")String id, @Param("pager")Pager pager) throws Exception;
+	
+	// 평점 리스트 갯수
+	public Long getTotalRatingCount(ReviewVO reviewVO) throws Exception;
 	
 	// 회원 탈퇴
 	public int setDelete(MemberVO vo) throws Exception;

@@ -16,7 +16,8 @@
 		LEFT JOIN
 		MENU M
 		USING(RESTAURANTNUM)
-  		WHERE CATEGORYNUM=1;
+		<!-- 디테일 조회하려면 WHERE절 수정해줘야 함 -->
+  		WHERE CATEGORYNUM=108;
 
 	</select>
 

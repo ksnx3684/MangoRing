@@ -29,6 +29,17 @@
             </div>
             
             <hr class="mx-n3">
+            
+            <div class="row align-items-center pt-4 pb-3">
+              <div class="col-md-3 ps-5">
+                <h6 class="mb-0">상호명</h6>
+              </div>
+              <div class="col-md-9 pe-5">
+                <input type="text" class="form-control form-control-lg" name="restaurantName" />
+              </div>
+            </div>
+            
+            <hr class="mx-n3">
 
             	<div class="row align-items-center py-3">
 	              <div class="col-md-3 ps-5">
@@ -65,6 +76,19 @@
               </div>
               <div class="col-md-9 pe-5">
                 <input type="text" class="form-control form-control-lg" name="introduction"/>
+              </div>
+            </div>
+
+            <hr class="mx-n3">
+            
+            <div class="row align-items-center py-3">
+              <div class="col-md-3 ps-5">
+                <h6 class="mb-0">가게 사진</h6>
+              </div>
+              
+              <div class="col-md-9 pe-5">
+                <input class="form-control form-control-lg" id="RestPhoto" name="photo" type="file" />
+                <div class="small text-muted mt-2">10MB 이하 파일을 업로드해주세요</div>
               </div>
             </div>
 

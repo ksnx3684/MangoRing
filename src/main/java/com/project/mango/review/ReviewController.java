@@ -53,7 +53,7 @@ public class ReviewController {
 	@GetMapping("add")
 	public ModelAndView setAdd(ReviewVO reviewVO)throws Exception{
 		ModelAndView mv = new ModelAndView();
-		
+		mv.addObject("vo", reviewVO);
 		mv.setViewName("review/add");
 		return mv;
 	}

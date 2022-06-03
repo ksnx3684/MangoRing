@@ -7,8 +7,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.project.mango.restaurant.RestFileVO;
 import com.project.mango.restaurant.RestaurantVO;
+import com.project.mango.review.ReviewVO;
 import com.project.mango.util.FileManager;
+import com.project.mango.util.Pager;
 import com.project.mango.wishlist.WishlistVO;
 
 @Service
@@ -93,8 +96,6 @@ public class MemberService {
 		
 		int result = memberMapper.setBusinessApplication(restaurantVO);
 		
-		System.out.println("setBusinessApplication File Check : " + file);
-		
 		if(file != null) {
 			for(MultipartFile mf : file) {
 				if(mf.isEmpty()) {
@@ -115,7 +116,36 @@ public class MemberService {
 		}
 		return result;
 	}
+	
+	// 가게 사진 등록
+	public int setRestaurantPhoto(RestaurantVO restaurantVO, MultipartFile[] photo,
+			RestFileVO restFileVO) throws Exception {
 		
+		int result = 0;
+		
+		if(photo != null) {
+			for(MultipartFile mf : photo) {
+				if(mf.isEmpty()) {
+					continue;
+				}
+				
+				// 1. HDD에 파일 저장
+				String fileName = fileManager.fileSave(mf, "/resources/upload/restaurant");
+				System.out.println("가게 사진 파일 이름 출력 : " + fileName);
+				
+				// 2. DB에 저장
+				restFileVO.setRestaurantNum(restaurantVO.getRestaurantNum());
+				restFileVO.setFileName(fileName);
+				restFileVO.setOriName(mf.getOriginalFilename());
+				
+				result = memberMapper.setRestaurantPhoto(restFileVO);
+			}
+			
+		}
+		
+		return result;
+	}
+	
 	// 사업자 등록 후 승인대기
 	public int setBusinessUserType(MemberVO memberVO) throws Exception {
 		return memberMapper.setBusinessUserType(memberVO);
@@ -127,8 +157,35 @@ public class MemberService {
 	}
 	
 	// 위시리스트 조회
-	public List<WishlistVO> getWishlist(String id) throws Exception {
-		return memberMapper.getWishlist(id);
+	public List<WishlistVO> getWishlist(String id, Pager pager) throws Exception {
+		
+		WishlistVO wishlistVO = new WishlistVO();
+		wishlistVO.setId(id);
+		
+		// 한 페이지에 위시리스트 5개씩 출력
+		pager.setPerPage(5);
+		pager.makeRow();
+		pager.makeNum(memberMapper.getTotalWishCount(wishlistVO));
+		
+		return memberMapper.getWishlist(id, pager);
+	}
+	
+	// 위시리스트 삭제
+	public int setDeleteWishlist(WishlistVO wishlistVO) throws Exception {
+		return memberMapper.setDeleteWishlist(wishlistVO);
+	}
+	
+	// 평점 리스트 조회
+	public List<ReviewVO> getRatingList(String id, Pager pager) throws Exception {
+		
+		ReviewVO reviewVO = new ReviewVO();
+		reviewVO.setId(id);
+		
+		pager.setPerPage(5);
+		pager.makeRow();
+		pager.makeNum(memberMapper.getTotalRatingCount(reviewVO));
+		
+		return memberMapper.getRatingList(id, pager);
 	}
 	
 	// 회원 탈퇴

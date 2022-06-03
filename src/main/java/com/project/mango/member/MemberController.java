@@ -18,7 +18,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.project.mango.restaurant.RestFileVO;
 import com.project.mango.restaurant.RestaurantVO;
+import com.project.mango.review.ReviewVO;
+import com.project.mango.util.Pager;
 import com.project.mango.wishlist.WishlistVO;
 
 @Controller
@@ -127,14 +130,21 @@ public class MemberController {
 	
 	// 사업자 신청 POST 방식
 	@PostMapping("business")
-	public String setBusiness(HttpSession session, MultipartFile[] file, 
-			MemberVO memberVO, RestaurantVO restaurantVO) throws Exception {
+	public String setBusiness(HttpSession session, MultipartFile[] file, MultipartFile[] photo,
+			MemberVO memberVO, RestaurantVO restaurantVO, RestFileVO restFileVO) 
+					throws Exception {
 		
 		memberVO = (MemberVO)session.getAttribute("member");
 		restaurantVO.setId(memberVO.getId());
 		
 		// 사업자 정보 등록
 		int result = memberService.setBusinessApplication(restaurantVO, memberVO, file);
+		
+		restFileVO.setRestaurantNum(restaurantVO.getRestaurantNum());
+		System.out.println("RestaurantNum 출력 : " + restFileVO.getRestaurantNum());
+		
+		// 가게 사진 등록
+		result = memberService.setRestaurantPhoto(restaurantVO, photo, restFileVO);
 		
 		// 사업자 등록 후 승인 대기로 변경
 		result = memberService.setBusinessUserType(memberVO);
@@ -144,14 +154,16 @@ public class MemberController {
 	
 	// 위시리스트 GET 방식
 	@GetMapping("wishlist")
-	public String setWishlist(HttpSession session, Model model) throws Exception {
+	public String setWishlist(HttpSession session, Model model, 
+			Pager pager, MultipartFile[] file) throws Exception {
 		
 		MemberVO memberVO = (MemberVO)session.getAttribute("member");
 		String id = (memberVO.getId());
 		
-		List<WishlistVO> wishList = memberService.getWishlist(id);
+		List<WishlistVO> wishList = memberService.getWishlist(id, pager);
 		
 		model.addAttribute("wishList", wishList);
+		model.addAttribute("pager", pager);
 		
 		return "member/wishlist";
 	}
@@ -168,15 +180,58 @@ public class MemberController {
 		
 		if(memberVO != null) {
 			wishlistVO.setId(memberVO.getId());
-			memberService.setWishlist(wishlistVO);
 			result = 1;
+			int insertOK = memberService.setWishlist(wishlistVO);
 			
+			// 중복값일 떄 처리
+			if (insertOK == 0) {
+				result = 2;
+			}
 		}
 		
 		return result;
 	}
 	
+	// 위시리스트 POST 삭제
+	@PostMapping("delWishlist")
+	@ResponseBody
+	public int setDeleteWishlist(HttpSession session, WishlistVO wishlistVO) 
+			throws Exception {
+		
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		String id = memberVO.getId();
+		
+		int result = 0;
+		
+		if(memberVO != null) {
+			wishlistVO.setId(id);
+			memberService.setDeleteWishlist(wishlistVO);
+			result = 1;
+		}
+		
+		return result;
+	}
 	
+	// 내 평점 GET 방식
+	@GetMapping("rating")
+	public String getMyRating(HttpSession session, Model model,
+			Pager pager, MultipartFile[] file) throws Exception {
+		
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		String id = (memberVO.getId());
+		
+		List<ReviewVO> reviewList = memberService.getRatingList(id, pager);
+		
+//		reviewList.get(0).getReviewFilesVOs().get(0).getFileName();
+//		
+//		reviewList.get(0).getStar();
+	
+		model.addAttribute("reviewList", reviewList);
+		model.addAttribute("pager", pager);
+		
+		return "member/rating";
+	}
+		
 	// 로그아웃
 	@GetMapping("logout")
 	public String logout(HttpSession session) throws Exception {
