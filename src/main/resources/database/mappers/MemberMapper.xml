@@ -89,7 +89,7 @@
 	</insert>
 	
 	<!-- 위시리스트 카운트 출력 -->
-	<select id="getTotalCount" parameterType="WishlistVO" resultType="Long">
+	<select id="getTotalWishCount" parameterType="WishlistVO" resultType="Long">
 		SELECT COUNT(WISHNUM) FROM WISHLIST WHERE ID = #{id}
 	</select>
 	
@@ -129,6 +129,11 @@
 		DELETE FROM WISHLIST WHERE WISHNUM = #{wishNum} AND ID = #{id}
 	</delete>
 	
+	<!-- 평점 카운트 출력 -->
+	<select id="getTotalRatingCount" parameterType="ReviewVO" resultType="Long">
+		SELECT COUNT(REVIEWNUM) FROM REVIEW WHERE ID = #{id}
+	</select>
+	
 	<!-- 평점 리스트 -->
 	<select id="getRatingList" parameterType="ReviewVO" resultMap="getResultRatingList">
 		SELECT R.ID, R.REVIEWNUM, R.RESTAURANTNUM, R.STAR, R.CONTENTS, RF.FILENUM, 
@@ -140,7 +145,7 @@
 			LEFT OUTER JOIN
 			RESTAURANT RR
 			USING (RESTAURANTNUM)
-		WHERE R.ID = #{id};
+		WHERE R.ID = #{id} ORDER BY REVIEWNUM DESC LIMIT #{pager.startRow}, #{pager.perPage}
 	</select>
 	
 	<resultMap type="ReviewVO" id="getResultRatingList">

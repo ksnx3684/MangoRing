@@ -165,7 +165,7 @@ public class MemberService {
 		// 한 페이지에 위시리스트 5개씩 출력
 		pager.setPerPage(5);
 		pager.makeRow();
-		pager.makeNum(memberMapper.getTotalCount(wishlistVO));
+		pager.makeNum(memberMapper.getTotalWishCount(wishlistVO));
 		
 		return memberMapper.getWishlist(id, pager);
 	}
@@ -176,8 +176,16 @@ public class MemberService {
 	}
 	
 	// 평점 리스트 조회
-	public List<ReviewVO> getRatingList(String id) throws Exception {
-		return memberMapper.getRatingList(id);
+	public List<ReviewVO> getRatingList(String id, Pager pager) throws Exception {
+		
+		ReviewVO reviewVO = new ReviewVO();
+		reviewVO.setId(id);
+		
+		pager.setPerPage(5);
+		pager.makeRow();
+		pager.makeNum(memberMapper.getTotalRatingCount(reviewVO));
+		
+		return memberMapper.getRatingList(id, pager);
 	}
 	
 	// 회원 탈퇴

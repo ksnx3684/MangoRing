@@ -45,7 +45,7 @@ public interface MemberMapper {
 	public int setBusinessUserType(MemberVO memberVO) throws Exception;
 	
 	// 위시리스트 갯수
-	public Long getTotalCount(WishlistVO wishlistVO) throws Exception;
+	public Long getTotalWishCount(WishlistVO wishlistVO) throws Exception;
 	
 	// 위시리스트
 	public int setWishlist(WishlistVO wishlistVO) throws Exception;
@@ -57,7 +57,10 @@ public interface MemberMapper {
 	public int setDeleteWishlist(WishlistVO wishlistVO) throws Exception;
 	
 	// 평점 리스트 조회
-	public List<ReviewVO> getRatingList(String id) throws Exception;
+	public List<ReviewVO> getRatingList(@Param("id")String id, @Param("pager")Pager pager) throws Exception;
+	
+	// 평점 리스트 갯수
+	public Long getTotalRatingCount(ReviewVO reviewVO) throws Exception;
 	
 	// 회원 탈퇴
 	public int setDelete(MemberVO vo) throws Exception;

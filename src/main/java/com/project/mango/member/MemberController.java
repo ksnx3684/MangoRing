@@ -220,13 +220,14 @@ public class MemberController {
 		MemberVO memberVO = (MemberVO)session.getAttribute("member");
 		String id = (memberVO.getId());
 		
-		List<ReviewVO> reviewList = memberService.getRatingList(id);
+		List<ReviewVO> reviewList = memberService.getRatingList(id, pager);
 		
 //		reviewList.get(0).getReviewFilesVOs().get(0).getFileName();
 //		
 //		reviewList.get(0).getStar();
 	
 		model.addAttribute("reviewList", reviewList);
+		model.addAttribute("pager", pager);
 		
 		return "member/rating";
 	}
