@@ -74,7 +74,7 @@
 	  <button class="btn btn-primary" type="submit">로그인</button>
 	  <button id="joinCheck" class="btn btn-success" type="button">회원가입</button>
 	</div>
-    <p class="mt-3 mb-3 text-muted">&copy; Mango</p>
+    <p class="mt-3 mb-3 text-muted">&copy; MangoRing</p>
   <!-- </form> -->
   	</form:form>
 </main>

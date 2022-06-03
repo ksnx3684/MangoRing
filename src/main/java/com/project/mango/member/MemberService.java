@@ -82,6 +82,20 @@ public class MemberService {
 			bindingResult.rejectValue("id", "memberjoin.id.overlap");
 		}
 		
+		// 4. 전화번호 중복 검사
+		MemberVO phoneCheck = memberMapper.getPhoneNumber(memberVO);
+		if(phoneCheck != null) {
+			check = true;
+			bindingResult.rejectValue("phone", "memberjoin.number.overlap");
+		}
+		
+		// 5. 이메일 중복 검사
+		MemberVO emailCheck = memberMapper.getEmail(memberVO);
+		if(emailCheck != null) {
+			check = true;
+			bindingResult.rejectValue("email", "memberjoin.email.overlap");
+		}
+		
 		return check;
 	}
 	

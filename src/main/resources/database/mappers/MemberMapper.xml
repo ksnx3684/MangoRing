@@ -35,6 +35,16 @@
 		SELECT ID FROM MEMBER WHERE ID = #{id}
 	</select>
 	
+	<!-- Email 중복 검사 -->
+	<select id="getEmail" parameterType="MemberVO" resultType="MemberVO">
+		SELECT EMAIL FROM MEMBER WHERE EMAIL = #{email}
+	</select>
+	
+	<!-- 전화번호 중복 검사 -->
+	<select id="getPhoneNumber" parameterType="MemberVO" resultType="MemberVO">
+		SELECT PHONE FROM MEMBER WHERE PHONE = #{phone}
+	</select>
+	
 	<!-- 회원 가입 -->
 	<insert id="setAddMember" parameterType="MemberVO">
 		INSERT INTO MEMBER (ID, PW, NAME, EMAIL, PHONE, GENDER, JOINDATE, USERTYPE, BLACKLIST, BUSINESSOK)

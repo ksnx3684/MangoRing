@@ -32,6 +32,12 @@ public interface MemberMapper {
 	// 중복 아이디 조회
 	public MemberVO getId(MemberVO memberVO) throws Exception;
 	
+	// 중복 번호 조회
+	public MemberVO getPhoneNumber(MemberVO memberVO) throws Exception;
+	
+	// 중복 이메일 조회
+	public MemberVO getEmail(MemberVO memberVO) throws Exception;
+	
 	// 마이페이지
 	public MemberVO getMyPage(MemberVO memberVO) throws Exception;
 	
