@@ -49,9 +49,6 @@ public class NoticeController {
 		ModelAndView mv = new ModelAndView();
 		int result = noticeService.setAdd(noticeVO, files);
 		mv.setViewName("redirect:./list");
-		System.out.println("controller id"+noticeVO.getId());
-		System.out.println("cont title"+noticeVO.getTitle());
-		System.out.println("cont contents"+noticeVO.getContents());
 		return mv;
 	}
 	

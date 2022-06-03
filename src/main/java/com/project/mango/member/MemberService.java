@@ -203,4 +203,18 @@ public class MemberService {
 		return result;
 	}
 	
+	//멤버 리스트조회
+	public List<MemberVO> getList(MemberVO memberVO) throws Exception {
+		return memberMapper.getList(memberVO);
+	}
+	
+	// 멤버권한변경요청 리스트
+	public List<MemberVO> getMemberChange(MemberVO memberVO) throws Exception{
+		return memberMapper.getMemberChange(memberVO);
+	}
+	
+	// 멤버권한변경요청 디테일
+	public MemberVO getMemberChangeDetail(MemberVO memberVO) throws Exception{
+		return memberMapper.getMemberChangeDetail(memberVO);
+	}
 }
