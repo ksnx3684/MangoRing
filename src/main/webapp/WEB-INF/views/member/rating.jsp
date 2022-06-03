@@ -13,7 +13,6 @@
 <h1 class="text-center mb-5">My Rate</h1>
 
 <c:forEach items="${reviewList}" var="rv">
-
 		<div class="container-fluid">
 			<section>
 				<div class="row mx-auto justify-content-center">
@@ -23,15 +22,17 @@
 								<div class="d-flex justify-content-between p-md-1">
 									<div class="d-flex flex-row">
 										<div class="align-self-center">
+											${rv.reviewNum}
 											<c:if test="${not empty rv.reviewFilesVOs[0].fileName}">
-												<img alt="메뉴 사진" src="/resources/upload/review/${rv.reviewFilesVOs[0].fileName}" 
-													style="width: 200px; height: 250px;">
+											<img alt="메뉴 사진" src="/resources/upload/review/${rv.reviewFilesVOs[0].fileName}" 
+												style="width: 200px; height: 250px;">
 											</c:if>
 										</div>
 										<div class="ms-3">
 											<c:forEach items="${rv.restaurantVOs}" var="rest">
 												<p class="mb-0">${rest.address}</p>
 												<h4>${rest.restaurantName}</h4>
+							
 											</c:forEach>
 										</div>
 									</div>

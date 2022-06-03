@@ -130,7 +130,7 @@
 	
 	<div class="d-grid gap-2 d-md-flex justify-content-md-evenly mt-5">
 	  <button class="btn btn-primary btn-lg" type="button">나의 쿠폰</button>
-	  <button class="btn btn-primary btn-lg" type="button">장바구니</button>
+	  <button id="cart" class="btn btn-primary btn-lg" type="button">장바구니</button>
 	</div>
 	
 	<div class="container">
@@ -154,6 +154,10 @@
 	
 	$("#rating").click(function(){
 		location.href="./rating";
+	});
+	
+	$("#cart").click(function(){
+		location.href="../cart/cartList";
 	});
 	
 </script>
