@@ -48,4 +48,10 @@ public interface MemberMapper {
 	
 	//멤버 리스트 조회
 	public List<MemberVO> getList(MemberVO memberVO) throws Exception;
+	
+	//멤버 권한변경 조회
+	public List<MemberVO> getMemberChange(MemberVO memberVO) throws Exception;
+	
+	//멤버 권한변경 디테일 조회
+	public MemberVO getMemberChangeDetail(MemberVO memberVO) throws Exception;
 }

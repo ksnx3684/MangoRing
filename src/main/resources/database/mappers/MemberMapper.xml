@@ -111,5 +111,38 @@
 		SELECT * FROM MEMBER
 	</select>
 	
+	<!-- 멤버권한변경 조회 -->
+	<select id="getMemberChange" resultType="MemberVO">
+		SELECT * FROM MEMBER
+	</select>
+	
+	<!-- 멤버권한변경 디테일 조회 -->
+	<select id="getMemberChangeDetail" parameterType="MemberVO" resultMap="getMemberChangeDetailResult">
+		SELECT M.*, F.*
+		FROM MEMBER M
+			LEFT JOIN
+			MEMBER_FILE F
+			USING(ID)
+		WHERE ID=#{id}
+	</select>
+	
+	<resultMap type="MemberVO" id="getMemberChangeDetailResult">
+		<id column="id" property="id"/>
+		<result column="pw" property="pw"/>
+		<result column="name" property="name"/>
+		<result column="email" property="email"/>
+		<result column="phone" property="phone"/>
+		<result column="gender" property="gender"/>
+		<result column="joinDate" property="joinDate"/>
+		<result column="postCode" property="postCode"/>
+		<result column="address" property="address"/>
+		<result column="detailAddress" property="detailAddress"/>
+		<result column="extraAddress" property="extraAddress"/>
+			<association property="memberFileVO" javaType="MemberFileVO">
+				<id column="fileNum" property="fileNum"/>
+				<result column="fileName" property="fileName"/>
+			</association>
+	</resultMap>
+	
 	
 </mapper>

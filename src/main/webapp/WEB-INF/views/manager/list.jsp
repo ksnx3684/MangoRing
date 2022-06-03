@@ -13,6 +13,15 @@
 <body>
 	<h1>manager list</h1>
 	
+		<div>
+			<label>
+				<input type="checkbox" name="all" value="">
+			</label>
+			<label>
+				<input type="checkbox" name="member" value="${member.userType }" >
+			</label>
+		</div>
+	
 		<div class="col-5">
 			<form class="d-flex" action="./list" method="get">
 				<div class="col-4 me-2">

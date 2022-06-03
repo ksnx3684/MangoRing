@@ -21,11 +21,28 @@ public class ManagerController {
 
 	@GetMapping("list")
 	public ModelAndView getList(MemberVO memberVO)throws Exception{
-		System.out.println("여기오니 ?");
 		ModelAndView mv = new ModelAndView();
 		List<MemberVO> ar = memberService.getList(memberVO);
 		mv.addObject("list", ar);
 		mv.setViewName("manager/list");
+		return mv;
+	}
+	
+	@GetMapping("memberChange")
+	public ModelAndView getMemberChange(MemberVO memberVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		List<MemberVO> ar = memberService.getMemberChange(memberVO);
+		mv.addObject("memberChange", ar);
+		mv.setViewName("manager/memberChange");
+		return mv;
+	}
+	
+	@GetMapping("memberChangeDetail")
+	public ModelAndView getMemberChangeDetail(MemberVO memberVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		memberVO = memberService.getMemberChangeDetail(memberVO);
+		mv.addObject("mv", memberVO);
+		mv.setViewName("manager/memberChangeDetail");
 		return mv;
 	}
 }
