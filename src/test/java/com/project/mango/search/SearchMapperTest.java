@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.project.mango.category.CategoryVO;
 import com.project.mango.restaurant.RestaurantVO;
 
 @SpringBootTest
@@ -42,6 +43,13 @@ class SearchMapperTest {
 		searchVO.setDetailAddress("강남구");
 		searchVO.setName("파스타");
 		List<RestaurantVO> list = searchMapper.detailSearch(searchVO);
+		
+		assertNotNull(list);
+	}
+	
+	@Test
+	void categoryList() throws Exception{
+		List<CategoryVO> list = searchMapper.categoryList();
 		
 		assertNotNull(list);
 	}

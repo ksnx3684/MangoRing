@@ -2,6 +2,8 @@ package com.project.mango.menu;
 
 import java.util.List;
 
+import com.project.mango.restaurant.RestaurantVO;
+
 import lombok.Data;
 
 @Data
@@ -20,4 +22,5 @@ public class MenuVO {
 	
 	private MenuFileVO menuFileVO;
 	
+	private RestaurantVO restaurantVO;
 }

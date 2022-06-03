@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<title>Insert title here</title>
+<title>MangoRing</title>
 <c:import url="./template/bootstrap_css.jsp"></c:import>
 <%-- <c:import url="./template/mango_header.jsp"></c:import>
  --%>  <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">

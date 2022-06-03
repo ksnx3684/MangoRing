@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.project.mango.category.CategoryVO;
 import com.project.mango.restaurant.RestaurantVO;
 
 @Service
@@ -27,7 +28,15 @@ public class SearchService {
 		return searchMapper.detailSearch(searchVO);
 	}
 	
+	public List<CategoryVO> categoryList() throws Exception{
+		return searchMapper.categoryList();
+	}
+	
 	public List<HashtagVO> hashtagList() throws Exception{
 		return searchMapper.hashtagList();
 	}
+	
+//	public String dataKR() throws Exception{
+//		return searchMapper.dataKR();
+//	}
 }

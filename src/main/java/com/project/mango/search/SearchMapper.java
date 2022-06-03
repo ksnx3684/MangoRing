@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.project.mango.category.CategoryVO;
 import com.project.mango.restaurant.RestaurantVO;
 
 @Mapper
@@ -18,6 +19,12 @@ public interface SearchMapper {
 	// detailSearch
 	public List<RestaurantVO> detailSearch(SearchVO searchVO) throws Exception;
 	
+	// categoryList
+	public List<CategoryVO> categoryList() throws Exception;
+	
 	// hashtagList
 	public List<HashtagVO> hashtagList() throws Exception;
+	
+//	// dataKR
+//	public String dataKR() throws Exception;
 }

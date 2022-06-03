@@ -20,14 +20,30 @@
 				<result column="fileName" property="fileName"/>
 				<result column="oriName" property="oriName"/>
 			</association>
-			<!-- <association property="paymentDetailVO" javaType="PaymentDetailVO">
-				<id column="payDetailNum" property="payDetailNum"/>
-				<result column="payNum" property="payNum"/>
-				<result column="menuNum" property="menuNum"/>
-				<result column="menuCount" property="menuCount"/>
-			</association> -->
+			<association property="restaurantVO" javaType="RestaurantVO">
+				<id column="restaurantNum" property="restaurantNum"/>
+				<result column="restaurantName" property="restaurantName"/>
+				<result column="accountNumber" property="accountNumber"/>
+			</association>
 		</association>
-		
+	</resultMap>
+	
+	<resultMap type="PaymentVO" id="PaymentVO">
+		<id column="payNum" property="payNum"/>
+		<result column="id" property="id"/>
+		<result column="payCheck" property="payCheck"/>
+		<result column="totalPrice" property="totalPrice"/>
+		<result column="payDate" property="payDate"/>
+		<result column="waiting" property="waiting"/>
+		<result column="status" property="status"/>
+		<result column="payType" property="payType"/>
+		<result column="restaurantNum" property="restaurantNum"/>
+		<collection property="PaymentdetailVOs" javaType="List" ofType="PaymentdetailVO">
+			<id column="payDetailNum" property="payDetailNum"/>
+			<result column="payNum" property="payNum"/>
+			<result column="menuNum" property="menuNum"/>
+			<result column="menuCount" property="menuCount"/>
+		</collection>
 	</resultMap>
 	
 	<select id="cartList" parameterType="CartVO" resultMap="CartVO">
@@ -36,6 +52,8 @@
 		ON C.MENUNUM = M.MENUNUM
 		LEFT OUTER JOIN MENU_FILE MF
 		ON M.MENUNUM = MF.MENUNUM
+		LEFT OUTER JOIN RESTAURANT R
+		ON M.RESTAURANTNUM = R.RESTAURANTNUM
 		WHERE C.ID = #{id}
 		ORDER BY CARTNUM
 	</select>
@@ -51,9 +69,11 @@
 	<select id="cartOrder" parameterType="Long" resultMap="CartVO">
 		SELECT * FROM CART C
 		LEFT OUTER JOIN MENU M
-		ON (C.MENUNUM = M.MENUNUM)
+		ON C.MENUNUM = M.MENUNUM
+		LEFT OUTER JOIN RESTAURANT R
+		ON M.RESTAURANTNUM = R.RESTAURANTNUM
 		LEFT OUTER JOIN MEMBER MB
-		ON (C.ID = MB.ID)
+		ON C.ID = MB.ID
 		WHERE C.CARTNUM = #{cartNum}
 	</select>
 
@@ -66,9 +86,9 @@
 		VALUES(#{payNum}, #{menuNum}, #{menuCount})
 	</insert>
 	
-	<insert id="kakaoPayOrderComplete" parameterType="PaymentVO">
-		INSERT INTO PAYMENT
-		VALUES(#{payNum}, 1, #{totalPrice}, NOW(), 30, 0, '카카오페이', #{id})
+	<insert id="payOrderComplete" parameterType="PaymentVO">
+		INSERT INTO PAYMENT(PAYNUM, PAYCHECK, TOTALPRICE, PAYDATE, WAITING, STATUS, PAYTYPE, ID)
+		VALUES(#{payNum}, 1, #{totalPrice}, NOW(), 30, 0, #{payType}, #{id})
 	</insert>
 	
 	

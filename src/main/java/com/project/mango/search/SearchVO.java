@@ -12,6 +12,7 @@ public class SearchVO {
 	private String name;
 	private Long parkingCheck;
 	private Long kidCheck;
+	private Long[] categoryNum;
 	private Long[] tagNum;
 	
 }

@@ -1,6 +1,7 @@
 package com.project.mango.cart;
 
 import com.project.mango.menu.MenuVO;
+import com.project.mango.restaurant.RestaurantVO;
 
 import lombok.Data;
 
