@@ -11,7 +11,19 @@
 </head>
 <body>
 	<c:import url="../template/header.jsp"></c:import>
-
+	<style>
+		body.modal-open {
+			overflow: auto;
+		}
+		body.modal-open[style] {
+			padding-right: 0px !important;
+		}
+		.container{
+			margin-top: 50px;
+			margin-bottom: 50px;
+		}
+	</style>
+	
 	<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Monoton&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Miss+Fajardose&display=swap" rel="stylesheet">
@@ -30,36 +42,11 @@
     <link rel="stylesheet" href="../css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="../css/jquery.timepicker.css">
 
-    
     <link rel="stylesheet" href="../css/flaticon.css">
     <link rel="stylesheet" href="../css/icomoon.css">
     <link rel="stylesheet" href="../css/style.css">
 
-
-	
-	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-	<div class="container">
-		<a class="navbar-brand" href="../">MangoRing</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="oi oi-menu"></span> Menu
-		</button>
-
-		<div class="collapse navbar-collapse" id="ftco-nav">
-		<ul class="navbar-nav ml-auto">
-			
-			<li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-			<li class="nav-item active"><a href="about.html" class="nav-link">About</a></li>
-			<li class="nav-item"><a href="menu.html" class="nav-link">Menu</a></li>
-			<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-			<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-			<li class="nav-item cta"><a href="reservation.html" class="nav-link">Book a table</a></li>
-		</ul>
-		</div>
-	</div>
-	</nav>
-    <!-- END nav -->
-    
-    <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_3.jpg');" data-stellar-background-ratio="0.5">
+    <section class="hero-wrap hero-wrap-2" style="background-image: url('../images/bg_3.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text align-items-end justify-content-center">
@@ -70,8 +57,6 @@
         </div>
       </div>
     </section>
-
-	
 
 	<div class="container">
 		<h1>조건에 맞는</h1>
@@ -98,7 +83,7 @@
 						<input type="text" class="form-control menu" id="menu" name="menu" placeholder="메뉴">
 					</div><br>
 					<div>
-						<select class="form-select star" id="star" name="star">
+						<select class="form-control star" id="star" name="star">
 				 			<option value="0">평점 순</option>
 				 			<option value="1">리뷰 순</option>
 			 			</select>
@@ -115,7 +100,7 @@
 					</div>
 				</div>
 				<div class="sector-right">
-					<div id="map" style="width:600px;height:300px;"></div>
+					<div id="map" style="width:600px;height:330px;"></div>
 				</div>
 			</div>
 			<hr>
@@ -220,7 +205,7 @@
 	<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
   
   
-	<script src="../js/jquery.min.js"></script>
+	<!-- <script src="../js/jquery.min.js"></script> -->
 	<script src="../js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="../js/popper.min.js"></script>
 	<script src="../js/bootstrap.min.js"></script>

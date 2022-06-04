@@ -9,6 +9,18 @@
 </head>
 <body>
 	<c:import url="../template/header.jsp"></c:import>
+	<style>
+		body.modal-open {
+			overflow: auto;
+		}
+		body.modal-open[style] {
+			padding-right: 0px !important;
+		}
+		.container{
+			margin-top: 50px;
+			margin-bottom: 50px;
+		}
+	</style>
 
 	<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Monoton&display=swap" rel="stylesheet">
@@ -28,34 +40,9 @@
     <link rel="stylesheet" href="../css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="../css/jquery.timepicker.css">
 
-    
     <link rel="stylesheet" href="../css/flaticon.css">
     <link rel="stylesheet" href="../css/icomoon.css">
     <link rel="stylesheet" href="../css/style.css">
-
-
-	
-	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-	<div class="container">
-		<a class="navbar-brand" href="../">MangoRing</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="oi oi-menu"></span> Menu
-		</button>
-
-		<div class="collapse navbar-collapse" id="ftco-nav">
-		<ul class="navbar-nav ml-auto">
-			
-			<li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-			<li class="nav-item active"><a href="about.html" class="nav-link">About</a></li>
-			<li class="nav-item"><a href="menu.html" class="nav-link">Menu</a></li>
-			<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-			<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-			<li class="nav-item cta"><a href="reservation.html" class="nav-link">Book a table</a></li>
-		</ul>
-		</div>
-	</div>
-	</nav>
-    <!-- END nav -->
     
     <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_3.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
@@ -69,7 +56,6 @@
       </div>
     </section>
 
-	
 	<!-- ##### Main Content Wrapper Start ##### -->
     <div class="main-content-wrapper">
 		

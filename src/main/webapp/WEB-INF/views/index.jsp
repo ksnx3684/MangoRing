@@ -9,8 +9,8 @@
 
 <title>MangoRing</title>
 <c:import url="./template/bootstrap_css.jsp"></c:import>
-<%-- <c:import url="./template/mango_header.jsp"></c:import>
- --%>  <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <%-- <c:import url="./template/mango_header.jsp"></c:import> --%>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Monoton&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Miss+Fajardose&display=swap" rel="stylesheet">
 
@@ -36,7 +36,7 @@
 <body>
 
   <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-	    <div class="container">
+	    <div class="container" style="padding-top: 50px; padding-bottom: 50px;">
 	      <a class="navbar-brand" href="/">MangoRing</a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
@@ -47,13 +47,15 @@
 	        	<li class="nav-item active"><a href="./search/detailSearch" class="nav-link">상세검색</a></li>
 	        	<c:choose>
 	        		<c:when test="${not empty member}">
-	        			<li class="nav-item"><a href="./member/myPage" class="nav-link">마이 페이지</a></li>
+                <li class="nav-item"><a href="./cart/cartList" class="nav-link">장바구니</a></li>
+	        			<li class="nav-item"><a href="./member/myPage" class="nav-link">마이페이지</a></li>
+                <li class="nav-item"><a href="./member/logout" class="nav-link">로그아웃</a></li>
 	        		</c:when>
 		        	<c:otherwise>
 		        		<li class="nav-item"><a href="./member/login" class="nav-link">로그인</a></li>
 		        	</c:otherwise>
 	        	</c:choose>
-	        	<li class="nav-item"><a href="./member/logout" class="nav-link">로그아웃</a></li>
+	        	
 	        	<!-- <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
 	          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
 	          <li class="nav-item cta"><a href="reservation.html" class="nav-link">Book a table</a></li> -->
