@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.project.mango.reservation.ReservationVO;
 import com.project.mango.restaurant.RestFileVO;
 import com.project.mango.restaurant.RestaurantVO;
 import com.project.mango.review.ReviewVO;
@@ -200,6 +201,19 @@ public class MemberService {
 		pager.makeNum(memberMapper.getTotalRatingCount(reviewVO));
 		
 		return memberMapper.getRatingList(id, pager);
+	}
+	
+	// 예약 리스트 조회
+	public List<ReservationVO> getMyReservationList(String id, Pager pager) throws Exception {
+		
+		ReservationVO reservationVO = new ReservationVO();
+		reservationVO.setId(id);
+		
+		pager.setPerPage(5);
+		pager.makeRow();
+		pager.makeNum(memberMapper.getTotalReservationCount(reservationVO));
+		
+		return memberMapper.getMyReservationList(id, pager);
 	}
 	
 	// 회원 탈퇴

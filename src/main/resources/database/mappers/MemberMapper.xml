@@ -176,6 +176,39 @@
 			</collection>
 	</resultMap>
 	
+	<!-- 예약 내역 조회 -->
+	<select id="getMyReservationList" parameterType="ReservationVO" resultMap="getResultReservation">
+		SELECT RV.RESERVATIONNUM, RV.RESTAURANTNUM, RV.ID, RV.VISITSTATUS, RA.RESTAURANTNAME, 
+		RA.ADDRESS, RF.FILENUM, RF.FILENAME FROM 
+			RESERVATION RV
+			LEFT OUTER JOIN
+			RESTAURANT RA
+			USING(RESTAURANTNUM)
+			LEFT OUTER JOIN
+			REST_FILE RF
+			USING(RESTAURANTNUM)
+			WHERE RV.ID = #{id} ORDER BY RESERVATIONNUM DESC LIMIT #{pager.startRow}, #{pager.perPage}
+	</select>
+	
+	<resultMap type="ReservationVO" id="getResultReservation">
+		<id column="reservationNum" property="reservationNum"/>
+		<result column="id" property="id"/>
+		<result column="visitStatus" property="visitStatus"/>
+			<association property="restaurantVO" javaType="RestaurantVO">
+				<result column="restaurantName" property="restaurantName"/>
+				<result column="address" property="address"/>
+			</association>
+			<association property="restaurantFileVO" javaType="restaurantFileVO">
+				<id column="fileNum" property="fileNum"/>
+				<result column="fileName" property="fileName"/>
+			</association>
+	</resultMap>
+	
+	<!-- 예약 카운트 조회 -->
+	<select id="getTotalReservationCount" parameterType="ReservationVO" resultType="Long">
+		SELECT COUNT(RESERVATIONNUM) FROM RESERVATION WHERE id = #{id}
+	</select>
+	
 	<!-- 회원 탈퇴 -->
 	<delete id="setDelete" parameterType="MemberVO">
 		DELETE FROM MEMBER WHERE ID = #{id} AND PW = #{pw}

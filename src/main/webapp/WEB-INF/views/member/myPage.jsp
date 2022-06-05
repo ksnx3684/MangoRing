@@ -125,7 +125,7 @@
 	
 	<div class="d-grid gap-2 d-md-flex justify-content-md-evenly mt-5">
 	  <button class="btn btn-primary btn-lg" type="button">결제내역</button>
-	  <button class="btn btn-primary btn-lg" type="button">예약내역</button>
+	  <button id="reservation" class="btn btn-primary btn-lg" type="button">예약내역</button>
 	</div>
 	
 	<div class="d-grid gap-2 d-md-flex justify-content-md-evenly mt-5">
@@ -154,6 +154,10 @@
 	
 	$("#rating").click(function(){
 		location.href="./rating";
+	});
+	
+	$("#reservation").click(function(){
+		location.href="./reservation";
 	});
 	
 	$("#cart").click(function(){

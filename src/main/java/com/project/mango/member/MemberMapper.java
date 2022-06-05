@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.project.mango.reservation.ReservationVO;
 import com.project.mango.restaurant.RestFileVO;
 import com.project.mango.restaurant.RestaurantVO;
 import com.project.mango.review.ReviewVO;
@@ -67,6 +68,12 @@ public interface MemberMapper {
 	
 	// 평점 리스트 갯수
 	public Long getTotalRatingCount(ReviewVO reviewVO) throws Exception;
+	
+	// 예약 내역 조회
+	public List<ReservationVO> getMyReservationList(@Param("id")String id, @Param("pager")Pager pager) throws Exception;
+	
+	// 예약 리스트 갯수
+	public Long getTotalReservationCount(ReservationVO reservationVO) throws Exception;
 	
 	// 회원 탈퇴
 	public int setDelete(MemberVO vo) throws Exception;
