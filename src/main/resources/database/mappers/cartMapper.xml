@@ -46,6 +46,17 @@
 		</collection>
 	</resultMap>
 	
+	<select id="cartCheck" parameterType="CartVO" resultMap="CartVO">
+		SELECT * FROM CART C
+		LEFT OUTER JOIN MENU M
+		ON C.MENUNUM = M.MENUNUM
+		WHERE ID = #{id}
+	</select>
+	
+	<insert id="cartAdd" parameterType="CartVO">
+		INSERT INTO CART(CARTNUM, ID, MENUNUM, MENUCOUNT)
+		VALUES(NULL, #{id}, #{menuNum}, #{menuCount})
+	</insert>
 	<select id="cartList" parameterType="CartVO" resultMap="CartVO">
 		SELECT * FROM CART C
 		LEFT OUTER JOIN MENU M
@@ -76,6 +87,22 @@
 		ON C.ID = MB.ID
 		WHERE C.CARTNUM = #{cartNum}
 	</select>
+	
+	<select id="packingOrder" parameterType="Long" resultMap="CartVO">
+		SELECT * FROM CART C
+		LEFT OUTER JOIN MENU M
+		ON C.MENUNUM = M.MENUNUM
+		LEFT OUTER JOIN RESTAURANT R
+		ON M.RESTAURANTNUM = R.RESTAURANTNUM
+		LEFT OUTER JOIN MEMBER MB
+		ON C.ID = MB.ID
+		WHERE M.MENUNUM = #{menuNum}
+	</select>
+	<delete id="clear" parameterType="MemberVO">
+		DELETE FROM CART
+		WHERE ID = #{id}
+	</delete>
+	
 
 	<insert id="order" parameterType="PaymentVO">
 		INSERT INTO PAYMENT(PAYNUM, PAYCHECK, TOTALPRICE, PAYDATE, WAITING, STATUS, PAYTYPE, ID)

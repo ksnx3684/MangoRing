@@ -81,7 +81,7 @@
 	                                <tbody>
 	                                    <c:forEach items="${order}" var="dto" varStatus="status">
 	                                        <tr class="contents">
-	                                            <input type="hidden" name="cartNum" value="${dto.cartNum}">
+	                                            <%-- <input type="hidden" name="cartNum" value="${dto.cartNum}"> --%>
 	                                            <input type="hidden" name="menuNum" value="${dto.menuNum}">
 	                                            <td class="cart_product_img"><input type="hidden" name="name" value="${dto.menuVOs.name}">
 	                                                <c:if test="${dto.menuVOs.menuFileVO.fileName ne null}">

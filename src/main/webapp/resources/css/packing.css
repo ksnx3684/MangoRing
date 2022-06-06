@@ -1,0 +1,7 @@
+.orderarea .menu .promotion .totalprice{
+	display: flex !important;
+}
+
+.orderarea{
+	justify-content: space-between;
+}

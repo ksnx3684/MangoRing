@@ -1,7 +1,8 @@
 package com.project.mango.cart;
 
+import java.util.List;
+
 import com.project.mango.menu.MenuVO;
-import com.project.mango.restaurant.RestaurantVO;
 
 import lombok.Data;
 
@@ -14,5 +15,5 @@ public class CartVO {
 	private Long menuCount;
 	
 	private MenuVO menuVOs;
-	
+//	private List<MenuVO> menuVOss;
 }

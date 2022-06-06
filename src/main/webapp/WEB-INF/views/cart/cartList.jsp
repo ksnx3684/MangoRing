@@ -57,83 +57,82 @@
     </section>
 
 	<!-- Cart table Area Start -->
-       <div class="cart-table-area section-padding-100">
-         <div class="container-fluid">
-           <form id="frm" action="./cartList" method="post">
-             <div class="row">
-                 <div class="col-12 col-lg-8">
-                     <div class="cart-title mt-50">
-                       <h2>Shopping Cart</h2>
-                     </div>
-                     <div class="cart-table clearfix">
-                       <table class="table table-responsive">
-                         <thead>
-                           <tr>
-                             <th></th>
-                             <th>상품명</th>
-                             <th>갯수</th>
-                             <th>가격</th>
-                           </tr>
-                         </thead>
-                         <tbody>
-                           <c:forEach items="${cartList}" var="dto" varStatus="status">
-                             <tr>
-                               <td class="cart_product_img">
-                                 <input class="check" id="cartNum" name="cartNum" type="checkbox" data-cartNum="${dto.cartNum}" value="${dto.cartNum}">&nbsp;
-                                 <c:if test="${dto.menuVOs.menuFileVO.fileName ne null}">
-                                   <a href="../product/detail?menuNum=${dto.menuNum}"><img class="image" src="../resources/upload/product/${dto.menuVOs.menuFileVO.fileName}" alt="Product"></a>
-                                 </c:if>
-                               </td>
-                               <td class="cart_product_desc">
-                                 <h5>${dto.menuVOs.name}</h5>${dto.menuVOs.restaurantVO.restaurantName}
-                               </td>
-                               <td class="cou">
-                                <button type="button" class="minus" data-cartNum="${dto.cartNum}" value="${dto.menuCount}">-</button>
-                                 <span class="count">${dto.menuCount}</span>
-                                 <button type="button" class="plus" data-cartNum="${dto.cartNum}" value="${dto.menuCount}">+</button>
-                               </td>
-                               <td>
-                                 <span class="price">${dto.menuVOs.price}</span>
-                               </td>
-                             </tr>
-                           </c:forEach>                                   
-                         </tbody>
-                       </table>
-                     </div>
-                 </div>
-                 <div class="col-12 col-lg-4">
-                   <div class="cart-summary">
-                     <h5>Cart Total</h5>
-                     <ul class="summary-table">
-                       <li>
-                         <span>total:</span>
-                         <span>
-                           <c:forEach items="${cartlist}">
-                             <span class="totalPrice"></span>
-                           </c:forEach>
-                           <span class="totalPrice">0</span>
-                           원
-                         </span>
-                       </li>
-                     </ul>
-                     <div class="cart-btn">
-                       <a class="btn amado-btn w-100" id="selectOrder_btn2">
-                         <span class="site-btn clear-btn">주문하기</span>
-                       </a>
-                       <form class="frm" action="./cartListDelete" method="post" style="display: inline;">
-                         <a class="btn amado-btn w-100" id="selectDelete_btn" style="margin-top: 10px;">
-                           <span class="site-btn clear-btn">선택 상품 삭제</span>
-                         </a>
-                       </form>
-                     </div>
-                   </div>
-                 </div>
-             </div>
-           </form>
-         </div>
-       </div>
-     <!-- Cart table Area End -->
-
+    <div class="cart-table-area section-padding-100">
+      <div class="container-fluid">
+        <form id="frm" action="./cartList" method="post">
+          <div class="row">
+              <div class="col-12 col-lg-8">
+                  <div class="cart-title mt-50">
+                    <h2>Shopping Cart</h2>
+                  </div>
+                  <div class="cart-table clearfix">
+                    <table class="table table-responsive">
+                      <thead>
+                        <tr>
+                          <th></th>
+                          <th>상품명</th>
+                          <th>갯수</th>
+                          <th>가격</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <c:forEach items="${cartList}" var="dto" varStatus="status">
+                          <tr>
+                            <td class="cart_product_img">
+                              <input class="check" id="cartNum" name="cartNum" type="checkbox" data-cartNum="${dto.cartNum}" value="${dto.cartNum}">&nbsp;
+                              <c:if test="${dto.menuVOs.menuFileVO.fileName ne null}">
+                                <a href="../product/detail?menuNum=${dto.menuNum}"><img class="image" src="../resources/upload/product/${dto.menuVOs.menuFileVO.fileName}" alt="Product"></a>
+                              </c:if>
+                            </td>
+                            <td class="cart_product_desc">
+                              <h5>${dto.menuVOs.name}</h5>${dto.menuVOs.restaurantVO.restaurantName}
+                            </td>
+                            <td class="cou">
+                             <button type="button" class="minus" data-cartNum="${dto.cartNum}" value="${dto.menuCount}">-</button>
+                              <span class="count">${dto.menuCount}</span>
+                              <button type="button" class="plus" data-cartNum="${dto.cartNum}" value="${dto.menuCount}">+</button>
+                            </td>
+                            <td>
+                              <span class="price">${dto.menuVOs.price}</span>
+                            </td>
+                          </tr>
+                        </c:forEach>                                   
+                      </tbody>
+                    </table>
+                  </div>
+              </div>
+              <div class="col-12 col-lg-4">
+                <div class="cart-summary">
+                  <h5>Cart Total</h5>
+                  <ul class="summary-table">
+                    <li>
+                      <span>total:</span>
+                      <span>
+                        <%-- <c:forEach items="${cartlist}">
+                          <span class="totalPrice"></span>
+                        </c:forEach> --%>
+                        <span class="totalPrice">0</span>
+                        원
+                      </span>
+                    </li>
+                  </ul>
+                  <div class="cart-btn">
+                    <a class="btn amado-btn w-100" id="selectOrder_btn2">
+                      <span class="site-btn clear-btn">주문하기</span>
+                    </a>
+                    <form class="frm" action="./cartListDelete" method="post" style="display: inline;">
+                      <a class="btn amado-btn w-100" id="selectDelete_btn" style="margin-top: 10px;">
+                        <span class="site-btn clear-btn">선택 상품 삭제</span>
+                      </a>
+                    </form>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Cart table Area End -->
 
 	 <script>
         $("#selectDelete_btn").click(function () {
@@ -274,7 +273,7 @@
           </div>
           </div>
         </div>
-        </footer>
+       </footer>
 
 
       <!-- loader -->

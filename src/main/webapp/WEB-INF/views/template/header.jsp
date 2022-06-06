@@ -27,7 +27,7 @@
 			<li class="nav-item active"><a href="/search/detailSearch" class="nav-link">상세검색</a></li>
 			<c:choose>
 				<c:when test="${not empty member}">
-					<li class="nav-item"><a href="/cart/cartList" class="nav-link">장바구니</a></li>
+					<!-- <li class="nav-item"><a href="/cart/cartList" class="nav-link">장바구니</a></li> -->
 					<li class="nav-item"><a href="/member/myPage" class="nav-link">마이페이지</a></li>
 					<li class="nav-item"><a href="/member/logout" class="nav-link">로그아웃</a></li>
 				</c:when>
