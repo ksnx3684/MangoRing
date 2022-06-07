@@ -38,7 +38,7 @@ UPDATE REVIEW SET REPORTCHECK=#{reportCheck}, REPORTOPTION = #{reportOption} WHE
 
 		INSERT INTO REVIEW
 		(REVIEWNUM,ID,RESTAURANTNUM,RESERVATIONNUM,STAR,REGDATE,REPORTCHECK,CONTENTS)
-		VALUES(#{reviewNum},#{id},32,1,#{star},NOW(),0,#{contents})
+		VALUES(#{reviewNum},#{id},#{restaurantNum},1,#{star},NOW(),0,#{contents})
 
 	</insert>
 	

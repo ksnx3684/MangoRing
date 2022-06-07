@@ -81,9 +81,11 @@
 			<button type="button" class="btn btn-dark addWishlist_btn">위시리스트</button>
 		</div>
 
+<a href="../reservation/write?restaurantNum=${vo1.restaurantNum }">예약하기</a>
 
-
-
+		<div>
+		<a href="../resNotice/list">가게 공지사항</a>
+		</div>
 		<div id="map" style="width: 500px; height: 400px;"></div>
 		<script type="text/javascript"
 			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=25a21d9d0fb4d0a44acbb535edeba07e"></script>
@@ -115,6 +117,10 @@
 			<h5>리뷰 |</h5>
 			<a href="./detail?rssNum=0&rseNum=5"><h5>전체(${count})</h5></a>
 		</div>
+		<div>
+		<a href="../review/add?restaurantNum=${vo1.restaurantNum }">리뷰 추가${vo1.restaurantNum }</a>
+		</div>
+		
 		<div id="etcBox">
 			<a href="./detail?rssNum=4&rseNum=5">
 				<h5 class="tasteText">맛있어요(${goodCount }) |</h5>
@@ -126,7 +132,10 @@
 		</div>
 	</div>
 	<c:forEach items="${list}" var="revList">
-		<a href="/review/detail?reviewNum=${revList.reviewNum }"> <div class="listBox">
+			<img onload="resize(this);"
+								src="../resources/upload/review/${rFilesVOS.fileName}"
+								class="d-block" alt="...">
+								 <a href="/review/detail?reviewNum=${revList.reviewNum }"> <div class="listBox">
 			<h1 class="listText">[회원 사진/ ID추가] 별점:${revList.star}
 				내용:${revList.contents}</h1>
 

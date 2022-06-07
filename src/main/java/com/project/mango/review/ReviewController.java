@@ -1,5 +1,8 @@
 package com.project.mango.review;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,10 +10,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.mango.member.MemberVO;
+import com.project.mango.restaurant.RestaurantVO;
 
 @Controller
 @RequestMapping("/review/*")
@@ -53,6 +59,7 @@ public class ReviewController {
 	@GetMapping("add")
 	public ModelAndView setAdd(ReviewVO reviewVO)throws Exception{
 		ModelAndView mv = new ModelAndView();
+		
 		mv.addObject("vo", reviewVO);
 		mv.setViewName("review/add");
 		return mv;
@@ -61,11 +68,17 @@ public class ReviewController {
 	@PostMapping("add")
 	public ModelAndView setAdd(ReviewVO reviewVO,MultipartFile[] files,ModelAndView mv)throws Exception{
 		
+	
 		int result = reviewService.setAdd(reviewVO,files);
+		// ----------------
 		
-		
+//		Map<String, String> map = new HashMap<String,String>();
+//		map.put("reviewVO", params.get("reviewVO"));
+//		redirect.addFlashAttribute("map",map);
+		// ---------------------
+	
 		mv.addObject("result",result);
-		mv.setViewName("redirect:../restaurant/detail");
+		mv.setViewName("redirect:../search/detailSearch");
 		return mv;
 		
 	}
