@@ -27,7 +27,8 @@
     <link href="https://fonts.googleapis.com/css?family=Miss+Fajardose&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="../resources/css/packing.css">
-
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css">
+	
     <link rel="stylesheet" href="../css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="../css/animate.css">
     
@@ -46,7 +47,7 @@
     <link rel="stylesheet" href="../css/icomoon.css">
     <link rel="stylesheet" href="../css/style.css">
 
-    <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_3.jpg');" data-stellar-background-ratio="0.5">
+    <section class="hero-wrap hero-wrap-2" style="background-image: url('../resources/img/caroline-attwood-kC9KUtSiflw-unsplash.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text align-items-end justify-content-center">
@@ -63,7 +64,7 @@
       <div class="container-fluid">
         <form id="frm" action="./packing" method="post">
           <div class="row orderarea">
-              <div class="menu col-12 col-lg-4">
+              <div class="menu col-12 col-lg-5">
                   <div class="menu-title mt-50">
                     <h2>Menu</h2>
                     <input type="hidden" name="restaurantNum" value="${restaurantNum}">
@@ -79,24 +80,28 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <c:forEach items="${list}" var="dto" varStatus="status">
+                        <c:forEach items="${cartList}" var="dto" varStatus="status">
                           <tr>
                             <td class="menu_product_img">
-                              <input class="check" id="menuNum" name="menuNum" type="checkbox" data-menuNum="${dto.menuNum}" value="${dto.menuNum}">&nbsp;
-                              <c:if test="${dto.menuFileVO.fileName ne null}">
-                                <img class="image" src="../resources/upload/menu/${dto.menuFileVO.fileName}" alt="Product"></a>
-                              </c:if>
+                              <input class="check" id="cartNum" name="cartNum" type="checkbox" data-menuNum="${dto.cartNum}" value="${dto.cartNum}">&nbsp;
+                              <div class="imagebox">
+	                              <c:if test="${dto.menuVOs.menuFileVO.fileName ne null}">
+		                              <a href="../resources/upload/menu/${dto.menuVOs.menuFileVO.fileName}" data-fancybox>
+		                                <img class="image" src="../resources/upload/menu/${dto.menuVOs.menuFileVO.fileName}" alt="Product"></a>
+		                              </a>
+	                              </c:if>
+                              </div>
                             </td>
                             <td class="menu_product_desc">
-                              <h5>${dto.name}</h5>
+                              <h5 class="name">${dto.menuVOs.name}</h5>
                             </td>
                             <td class="cou">
-                             <button type="button" class="minus">-</button>
-                              <input type="text" name="menuCount" class="count" value="1" readonly style="width:30px">
-                              <button type="button" class="plus">+</button>
+                             <button type="button" class="minus btn btn-warning" data-cartNum="${dto.cartNum}" value="${dto.menuCount}">-</button>
+                              <input type="text" name="menuCount" class="count" value="${dto.menuCount}" readonly style="width:30px">
+                              <button type="button" class="plus btn btn-warning" data-cartNum="${dto.cartNum}" value="${dto.menuCount}">+</button>
                             </td>
                             <td>
-                              <span class="price">${dto.price}</span>
+                              <span class="price">${dto.menuVOs.price}</span>
                             </td>
                           </tr>
                         </c:forEach>                                   
@@ -105,17 +110,32 @@
                   </div>
               </div>
               
-              <div class="promotion">
-	              <c:forEach items="${prolist}" var="list" varStatus="status">
-	              	${list.promotionName}
-	              	${list.discount}
-	              </c:forEach>
-              </div>
+              <div class="col-12 col-lg-4">
+	              <div class="promotion">
+		              <h2>Promotion</h2>
+		              	<c:if test="${prolist ne null}">
+		              		<button class="btn btn-warning commit" type="button" onclick="commit()">선택 적용</button>
+		              		<button class="btn btn-warning deselect" type="button" onclick="deselect()">선택 해제</button>
+		              		<hr>
+		              	</c:if>
+			              <c:forEach items="${prolist}" var="list" varStatus="status">
+		              		<div>
+		              			<label>
+				              	<input class="promotionCheck" id="promotionNum" name="promotionNum" type="radio" data-promotionNum="${list.discount}" value="${list.promotionNum}">&nbsp;
+				              		${list.promotionName}
+				              	</label><br>
+				              	- ${list.promotionDetail}<br>
+				              	<기간 : ${list.startDate} ~ ${list.endDate}><br>
+				              	${list.discount}
+				          	</div>
+			              </c:forEach>
+	              </div>
+	         </div>
               
               
-              <div class="totalprice col-12 col-lg-4">
+              <div class="totalprice col-12 col-lg-3">
                 <div class="packing-summary">
-                  <h5>Total</h5>
+                  <h2>Total</h2>
                   <ul class="summary-table">
                     <li>
                       <span>total:</span>
@@ -125,8 +145,8 @@
                       </span>
                     </li>
                   </ul>
-                  <div class="cart-btn">
-                    <a class="btn amado-btn w-100" id="selectOrder_btn2">
+                  <div class="packing-btn">
+                    <a class="btn amado-btn w-100" id="selectOrder_btn2" >
                       <span class="site-btn clear-btn">주문하기</span>
                     </a>
                   </div>
@@ -137,6 +157,57 @@
       </div>
     </div>
     <!-- Cart table Area End -->
+    
+    <script>
+	     $(".cou").children(".minus").on("click", function(){
+		  let cartNum = $(this).attr("data-cartNum");
+		  let count = $(this).val();
+			// console.log(cartNum);
+		  // alert(count);
+		  if(count < 2){
+		    alert("최소 1개 이상 주문 해야합니다")
+		  } else{
+		    $.ajax({
+		      url: "cartCountMinus",
+		      type: "post",
+		      data: { cartNum : cartNum },
+		      success: function(){
+		        location.href = "./packing?restaurantNum=${restaurantNum}";
+		      }
+			  });
+		  }	
+		});
+		
+		$(".cou").children(".plus").on("click", function(){
+		  let cartNum = $(this).attr("data-cartNum");
+		  let count = $(this).val();
+			// console.log(cartNum);
+		  // alert(count);
+		  if(count > 99){
+		    alert("최대 100개까지 가능합니다")
+		  } else{
+		    $.ajax({
+		      url: "cartCountPlus",
+		      type: "post",
+		      data: { promotionNum : promotionNum },
+		      success: function(){
+		        location.href = "./packing?restaurantNum=${restaurantNum}";
+		      }
+			  });
+		  }	
+		});
+		
+		function commit(){
+		 $.ajax({
+		      url: "procommit",
+		      type: "post",
+		      data: { promotionNum : promotionNum },
+		      success: function(){
+		        location.href = "./packing?restaurantNum=${restaurantNum}";
+		      }
+			  });
+		}
+	</script>
     
     <footer class="ftco-footer ftco-bg-dark ftco-section">
        <div class="container-fluid px-md-5 px-3">
@@ -232,7 +303,9 @@
      <script src="../js/scrollax.min.js"></script>
      <script src="../js/google-map.js"></script>
      <script src="../js/main.js"></script>
+     
 
 	<script type="text/javascript" src="../resources/js/packing.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
 </body>
 </html>

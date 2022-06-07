@@ -11,6 +11,7 @@ const selectOrder_btn2 = document.getElementById("selectOrder_btn2");
 const frm = document.getElementById("frm");
 	
 
+
 for(let i = 0; i < count.length; i++){
     check[i].addEventListener("click", function(){
         if(check[i].checked){
@@ -119,3 +120,8 @@ $(".cou").children(".plus").on("click", function(){
     $(this.previousSibling.previousSibling).val(count);
   }	
 });
+
+function deselect(){
+	$("input:radio[name='promotionNum']").prop('checked', false);
+}
+

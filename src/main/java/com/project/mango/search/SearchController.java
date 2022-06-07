@@ -89,7 +89,7 @@ public class SearchController {
 //	public void weatherSearch() throws Exception{
 //		
 //		// 인증키 (개인이 받아와야함)
-//    	String key = "ddb1d4df43843433217f1032972bd01f";
+//    	String key = "";
 //
 //    	// 파싱한 데이터를 저장할 변수
 //    	String result = "";

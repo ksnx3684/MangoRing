@@ -26,7 +26,7 @@ public class CartInterceptor implements HandlerInterceptor {
 		}
 		
 		request.setAttribute("message", "먼저 로그인을 해주세요");
-		request.setAttribute("path", "../");
+		request.setAttribute("path", "../member/login");
 		
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/result.jsp");
 		view.forward(request, response);

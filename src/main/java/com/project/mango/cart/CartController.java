@@ -73,19 +73,19 @@ public class CartController {
 //		model.addAttribute("cartList", list);
 //	}
 //	
-//	// 장바구니 수량 증가
-//	@PostMapping("cartCountPlus")
-//	@ResponseBody
-//	public void cartCountPlus(CartVO cartVO) throws Exception{
-//		int result = cartService.cartCountPlus(cartVO);
-//	}
-//	
-//	// 장바구니 수량 감소
-//	@PostMapping("cartCountMinus")
-//	@ResponseBody
-//	public void cartCountMinus(CartVO cartVO) throws Exception{
-//		int result = cartService.cartCountMinus(cartVO);
-//	}
+	// 장바구니 수량 증가
+	@PostMapping("cartCountPlus")
+	@ResponseBody
+	public void cartCountPlus(CartVO cartVO) throws Exception{
+		int result = cartService.cartCountPlus(cartVO);
+	}
+	
+	// 장바구니 수량 감소
+	@PostMapping("cartCountMinus")
+	@ResponseBody
+	public void cartCountMinus(CartVO cartVO) throws Exception{
+		int result = cartService.cartCountMinus(cartVO);
+	}
 //	
 //	// 장바구니에서 선택 상품 제거
 //	@PostMapping("cartListDelete")
@@ -119,57 +119,117 @@ public class CartController {
 //		return "redirect:./order";
 //	}
 	
+	// 카트 테이블에 data를 insert 해주기 위한 선행 작업 메서드
+	@GetMapping("pre")
+	public String pre (Model model, RestaurantVO restaurantVO, HttpSession session) throws Exception{
+		
+		// 접속할 때 cart/pre?restaurantNum=식당번호 로 들어오면 하단의 코드 실행 후 packing으로 리다이렉트
+		
+		List<MenuVO> list = menuService.getList(restaurantVO);
+		CartVO cartVO = new CartVO();
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		String id = "";
+		
+		if(memberVO != null) {
+			id = memberVO.getId();
+		}
+		
+		cartService.clear(memberVO);
+		for(int i = 0; i < list.size(); i++) { // 카트에 임시적으로 해당 매장의 모든 메뉴를 집어넣는다.
+			cartVO.setId(id);
+			cartVO.setMenuNum(list.get(i).getMenuNum());
+			cartVO.setMenuCount(1L);
+			cartService.cartAdd(cartVO);
+		}
+		
+		return "redirect:./packing?restaurantNum=" + list.get(0).getRestaurantNum();
+	}
+	
 	// 포장 주문 페이지
 	@GetMapping("packing")
 	public void packing(Model model, RestaurantVO restaurantVO, HttpSession session) throws Exception{
+		
 		List<MenuVO> list = menuService.getList(restaurantVO);
-		
-		List<PromotionVO> prolist = promotionService.getList();
-		model.addAttribute("prolist", prolist);
-		
+		CartVO cartVO = new CartVO();
 		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		String id = "";
+		
 		if(memberVO != null) {
-			String id = memberVO.getId();
+			id = memberVO.getId();
 			model.addAttribute("id", id);
 		}
+
+//		cartService.clear(memberVO);
+		for(int i = 0; i < list.size(); i++) {
+			cartVO.setId(id);
+			cartVO.setMenuNum(list.get(i).getMenuNum());
+			cartVO.setMenuCount(1L);
+//			cartService.cartAdd(cartVO);
+		}
+
+
+		List<CartVO> lists = cartService.cartList(cartVO);
+		
+		// 프로모션
+		List<PromotionVO> prolist = promotionService.getList();
+		List<PromotionVO> promotion = new ArrayList<PromotionVO>();
+		for(PromotionVO p : prolist) {
+			if(p.getRestaurantNum() == list.get(0).getRestaurantNum()) {
+				promotion.add(p);
+			}
+		}
+		model.addAttribute("prolist", promotion);
+		
 		model.addAttribute("restaurantNum", list.get(0).getRestaurantNum());
-		model.addAttribute("list", list);
+		model.addAttribute("cartList", lists);
+		
+	}
+	
+	// 프로모션 적용
+	@PostMapping("procommit")
+	public void procommit() throws Exception{
 		
 	}
 	
 	// 포장 주문 페이지 > 주문 페이지로 데이터 전송을 해주기 위한 메서드
 	@PostMapping("packing")
-	public String packing(String[] menuNum, String[] menuCount, String restaurantNum, HttpSession session) throws Exception{
+	public String packing(String[] cartNum, String restaurantNum, HttpSession session) throws Exception{
 		
 		CartVO cartVO = new CartVO();
 		int size = 1;
-		size = menuNum.length;
-		
-		MemberVO memberVO = (MemberVO)session.getAttribute("member");
-		String id = memberVO.getId();
+		size = cartNum.length;
 		lists.clear(); // 초기화
-		cartService.clear(memberVO); // 초기화
 		
 		for(int i = 0; i < size; i++) {
-			Long meNum = Long.parseLong(menuNum[i]);
-			Long meCount = Long.parseLong(menuCount[i]);
-			cartVO.setId(id);
-			cartVO.setMenuNum(meNum);
-			cartVO.setMenuCount(meCount);
-			cartService.cartAdd(cartVO);
-			
-			lists.add(cartService.packingOrder(meNum)); // lists에 담아서 주문 폼으로 전송
+			Long result = Long.parseLong(cartNum[i]);
+			lists.add(cartService.cartOrder(result)); // lists에 담아서 주문 폼으로 전송
 		}
+		
+//		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+//		String id = memberVO.getId();
+//		cartService.clear(memberVO); // 초기화
+//		
+//		for(int i = 0; i < size; i++) {
+//			Long meNum = Long.parseLong(menuNum[i]);
+//			Long meCount = Long.parseLong(menuCount[i]);
+//			cartVO.setId(id);
+//			cartVO.setMenuNum(meNum);
+//			cartVO.setMenuCount(meCount);
+//			cartService.cartAdd(cartVO);
+//			
+//			lists.add(cartService.packingOrder(meNum)); // lists에 담아서 주문 폼으로 전송
+//
+//		}
 		
 		return "redirect:./order";
 	}
 	
 	// 주문 폼으로 가기
 	@GetMapping("order")
-	public void order(Model model, HttpSession httpSession) throws Exception {
+	public void order(Model model, RestaurantVO restaurantVO, HttpSession httpSession) throws Exception {
 		
 		MemberVO memberVO = (MemberVO)httpSession.getAttribute("member");
-		
+
 		model.addAttribute("order", lists); // lists에 담긴 data를 order model에 담아서 order.jsp에서 jstl로 사용
 		model.addAttribute("myinfo", memberVO);
 		

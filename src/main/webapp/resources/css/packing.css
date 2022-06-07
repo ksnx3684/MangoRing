@@ -2,6 +2,46 @@
 	display: flex !important;
 }
 
-.orderarea{
+/* .orderarea{
 	justify-content: space-between;
+} */
+
+.menu-table-area{
+	margin-top: 30px;
+	margin-bottom: 30px;
 }
+
+.imagebox{
+	display: inline-block;
+	height: 100px;
+	width: 100px;
+}
+
+.image{
+	height: 100px;
+	width: 100px;
+}
+.packing-btn{
+	background-color: #FFA323;
+	color: white;
+}
+
+.deselect{
+	color: white !important;
+    background-color: #FFA323 !important;
+    border-color: #FFA323 !important;
+}
+
+/* .name{
+	line-height: 100px;
+}
+.cou{
+	position: relative;
+    top: 30px;
+}
+.price{
+	position: relative;
+    top: 30px;
+} */
+
+

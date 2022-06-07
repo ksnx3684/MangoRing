@@ -45,6 +45,7 @@ public class InterceptorConfig implements WebMvcConfigurer{
 				.addPathPatterns("/cart/orderComplete")
 				.addPathPatterns("/cart/kakaoPayOrderComplete")
 				.addPathPatterns("/cart/tossPayOrderComplete");
+		
 	}	
 
 }
