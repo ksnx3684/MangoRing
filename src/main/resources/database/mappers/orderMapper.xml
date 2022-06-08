@@ -21,12 +21,13 @@
 				ON (pd.MENUNUM = menu.MENUNUM)
 				LEFT JOIN MEMBER m 
 				ON (p.ID = m.ID)
-			WHERE pd.MENUNUM IN (SELECT MENUNUM FROM MENU WHERE RESTAURANTNUM = #{restaurantNum})) R
+			WHERE p.RESTAURANTNUM = #{restaurantNum}) R
+			<!-- WHERE pd.MENUNUM IN (SELECT MENUNUM FROM MENU WHERE RESTAURANTNUM = #{restaurantNum})) R -->
 		ORDER BY STATUS ASC, PAYDATE ASC
 	</select>
 	
 	<select id="getOrderDetail" parameterType="PaymentVO" resultMap="orderListResult">
-		SELECT pd.PAYDETAILNUM, pd.MENUNUM, pd.MENUCOUNT, p.*, m.NAME, m.PHONE, menu.NAME AS MENUNAME FROM PAYMENT_DETAIL pd 
+		SELECT pd.PAYDETAILNUM, pd.MENUNUM, pd.MENUCOUNT, p.*, m.NAME, m.PHONE, menu.NAME AS MENUNAME, menu.PRICE FROM PAYMENT_DETAIL pd 
 			INNER JOIN PAYMENT p 
 			ON (pd.PAYNUM = p.PAYNUM)
 			LEFT JOIN MENU menu
@@ -58,6 +59,7 @@
 			<association property="menuVO" javaType="MenuVO">
 				<id column="menuNum" property="menuNum"/>
 				<result column="menuName" property="name"/>
+				<result column="price" property="price"/>
 			</association>
 		</collection>
 	</resultMap>
@@ -77,7 +79,7 @@
 				ON (pd.MENUNUM = menu.MENUNUM)
 				LEFT JOIN MEMBER m 
 				ON (p.ID = m.ID)
-			WHERE pd.MENUNUM IN (SELECT MENUNUM FROM MENU WHERE RESTAURANTNUM = #{restaurantNum})) R
+			WHERE p.RESTAURANTNUM = #{restaurantNum}) R
 	</select>	
 	
 	<update id="setWaitingUpdate" parameterType="PaymentVO">

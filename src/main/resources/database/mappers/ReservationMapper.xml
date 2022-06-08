@@ -56,12 +56,12 @@
 	
 	<update id="setChangeReservation" parameterType="ReservationVO">
 		UPDATE RESERVATION SET VISITSTATUS = #{visitStatus}
-		WHERE RESERVATIONNUM = ${reservationNum} AND VISITSTATUS = 0
+		WHERE RESERVATIONNUM = ${reservationNum}
 	</update>
 	
 	<update id="setUpdateVisitStatus" parameterType="ReservationVO">
 		UPDATE RESERVATION SET VISITSTATUS = 1
-		WHERE RESERVATIONTIME = #{reservationTime}
+		WHERE RESERVATIONTIME = #{reservationTime} AND VISITSTATUS = 0
 	</update>
 	
 	<select id="getTotalCount" parameterType="ReservationPager" resultType="Long">

@@ -225,7 +225,7 @@ public class OwnerController {
 	}
 	
 	@PostMapping("shop/add")
-	public ModelAndView setRegistration(MultipartFile [] files, MultipartFile [] menuFiles, RestaurantVO restaurantVO, MenuVO menuVO, @RequestParam List<String> tagNum) throws Exception {
+	public ModelAndView setRegistration(MultipartFile restFile, MultipartFile [] menuFiles, RestaurantVO restaurantVO, MenuVO menuVO, @RequestParam List<String> tagNum) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 //		for(MultipartFile mf : files) {
@@ -255,7 +255,7 @@ public class OwnerController {
 		
 		// 1. restaurant 테이블에 insert
 		// 2. 가게 사진 저장하고 res_file 테이블에 insert
-		restaurantService.setRegistration(files, restaurantVO);
+		restaurantService.setRegistration(restFile, restaurantVO);
 		// 3. menu 테이블에 insert
 		// 4. 메뉴 사진 저장하고 menu_file 테이블에 insert
 		for(MenuVO menu : menuVO.getMenuVOList()) {
@@ -295,11 +295,17 @@ public class OwnerController {
 	}
 	
 	@PostMapping("shop/update")
-	public ModelAndView setUpdate(MultipartFile [] files, MultipartFile [] menuFiles2, RestaurantVO restaurantVO, MenuVO menuVO, @RequestParam List<String> tagNum) throws Exception {
+	public ModelAndView setUpdate(MultipartFile restFile, MultipartFile [] menuFiles2, RestaurantVO restaurantVO, MenuVO menuVO, @RequestParam List<String> tagNum) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
+		int result = 0;
+		
 		//레스토랑 파일, 정보 업데이트
-		int result = restaurantService.setUpdate(files, restaurantVO);
+		if(restFile != null) {
+			result = restaurantService.setUpdate(restFile, restaurantVO);
+		}else {
+			result = restaurantService.setUpdateNoFile(restaurantVO);
+		}
 		
 		//원래 있던 메뉴 업데이트
 		for(MenuVO menu : menuVO.getMenuVOList()) {	

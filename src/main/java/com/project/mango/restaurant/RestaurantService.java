@@ -37,48 +37,43 @@ public class RestaurantService {
 		return restaurantMapper.getDetail(restaurantVO);
 	}
 	
-	public int setRegistration(MultipartFile [] files, RestaurantVO restaurantVO) throws Exception {
+	public int setRegistration(MultipartFile restFile, RestaurantVO restaurantVO) throws Exception {
 		int result = restaurantMapper.setRegistration(restaurantVO);
 		
-		if(files != null) {
-			for(MultipartFile mf : files) {
-				if(mf.isEmpty()) {
-					continue;
-				}
-				
-				String fileName = fileManager.fileSave(mf, "/resources/upload/restaurant/");
+			if(!restFile.isEmpty()) {
+				String fileName = fileManager.fileSave(restFile, "/resources/upload/restaurant/");
 				
 				RestaurantFileVO restaurantFileVO = new RestaurantFileVO();
 				restaurantFileVO.setRestaurantNum(restaurantVO.getRestaurantNum());
 				restaurantFileVO.setFileName(fileName);
-				restaurantFileVO.setOriName(mf.getOriginalFilename());
+				restaurantFileVO.setOriName(restFile.getOriginalFilename());
 				
 				restaurantMapper.setFileAdd(restaurantFileVO);
 			}
+				
+		
+		return result;
+	}
+	
+	public int setUpdate(MultipartFile restFile, RestaurantVO restaurantVO) throws Exception {
+		int result = restaurantMapper.setUpdate(restaurantVO);
+		
+		if(!restFile.isEmpty()) {
+			String fileName = fileManager.fileSave(restFile, "/resources/upload/restaurant/");
+			
+			RestaurantFileVO restaurantFileVO = new RestaurantFileVO();
+			restaurantFileVO.setRestaurantNum(restaurantVO.getRestaurantNum());
+			restaurantFileVO.setFileName(fileName);
+			restaurantFileVO.setOriName(restFile.getOriginalFilename());
+			
+			restaurantMapper.setFileAdd(restaurantFileVO);
 		}
 		
 		return result;
 	}
 	
-	public int setUpdate(MultipartFile [] files, RestaurantVO restaurantVO) throws Exception {
+	public int setUpdateNoFile(RestaurantVO restaurantVO) throws Exception {
 		int result = restaurantMapper.setUpdate(restaurantVO);
-		
-		if(files != null) {
-			for(MultipartFile mf : files) {
-				if(mf.isEmpty()) {
-					continue;
-				}
-				
-				String fileName = fileManager.fileSave(mf, "/resources/upload/restaurant/");
-				
-				RestaurantFileVO restaurantFileVO = new RestaurantFileVO();
-				restaurantFileVO.setRestaurantNum(restaurantVO.getRestaurantNum());
-				restaurantFileVO.setFileName(fileName);
-				restaurantFileVO.setOriName(mf.getOriginalFilename());
-				
-				restaurantMapper.setFileAdd(restaurantFileVO);
-			}
-		}
 		
 		return result;
 	}

@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<table class="table table-striped">
+<table class="table" style="text-align: center; vertical-align: middle;">
 	<tr>
 		<th>번호</th>
 		<th>예약자</th>
@@ -42,10 +42,10 @@
 			<td>				
 				<c:choose>
 					<c:when test="${vo.visitStatus eq 0}">
-						<button type="button" class="btn btn-warning cancelBtn" data-num="${vo.reservationNum}">예약 취소</button>
+						<button type="button" class="btn btn-primary cancelBtn" data-num="${vo.reservationNum}">예약 취소</button>
 					</c:when>
 					<c:when test="${vo.visitStatus eq 1}">
-						<button type="button" class="btn btn-warning reportBtn" data-num="${vo.reservationNum}">미방문 신고</button>
+						<button type="button" class="btn btn-primary reportBtn" data-num="${vo.reservationNum}">미방문 신고</button>
 					</c:when>
 				</c:choose>
 			</td>
@@ -54,7 +54,7 @@
 </table>
 
 <div class="row mt-5 justify-content-center">
-	<div class="col-3">
+	 <div class="col-3">
 		<nav aria-label="Page navigation example">
 		  <ul class="pagination">
 		    <li class="page-item">

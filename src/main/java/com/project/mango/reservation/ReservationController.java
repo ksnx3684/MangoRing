@@ -75,5 +75,5 @@ public class ReservationController {
 			System.out.println("업데이트 성공");
 		}
 	}
-
+	
 }

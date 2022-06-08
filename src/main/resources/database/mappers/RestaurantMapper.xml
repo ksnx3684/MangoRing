@@ -70,7 +70,7 @@
 		property="contents" /> </collection> </resultMap> -->
 
 	<select id="getList" parameterType="RestaurantVO" resultType="RestaurantVO">
-		SELECT * FROM RESTAURANT WHERE ID=#{id}
+		SELECT * FROM RESTAURANT WHERE ID=#{id} AND BUSINESSOK = 2
 	</select>
 
 	<select id="getDetail" parameterType="RestaurantVO" resultMap="detailResult">
@@ -95,11 +95,12 @@
 		<result column="kidCheck" property="kidCheck"/>
 		<result column="introduction" property="introduction"/>
 		<result column="accountNumber" property="accountNumber"/>
-		<collection property="restaurantFileVOs" javaType="List" ofType="RestaurantFileVO">
+		<result column="businessOk" property="businessOk"/>
+		<association property="restaurantFileVO" javaType="RestaurantFileVO">
 			<id column="fileNum" property="fileNum"/>
 			<result column="fileName" property="fileName"/>
 			<result column="oriName" property="oriName"/>
-		</collection>
+		</association>
 	</resultMap>
 
 	<update id="setRegistration" parameterType="RestaurantVO">

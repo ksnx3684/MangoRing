@@ -33,6 +33,7 @@ public class RestaurantVO {
 	private Long kidCheck;
 	private String introduction;
 	private String accountNumber;
+	private Long businessOk;
 
 	private List<RestaurantFileVO> restaurantFileVOs;
 	private List<HashtagVO> hashtagVOs;

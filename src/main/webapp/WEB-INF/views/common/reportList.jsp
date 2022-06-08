@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<table class="table table-striped">
+<table class="table" style="text-align: center; vertical-align: middle;">
 	<tr>
 		<th>번호</th>
 		<th>예약자</th>
@@ -14,7 +14,7 @@
 	</tr>
 	<c:forEach items="${reportList}" var="vo" varStatus="status">
 		<tr>
-			<td>${fn:length(reservationVOs) - status.index}</td>
+			<td>${fn:length(reportList) - status.index}</td>
 			<td>${vo.memberVO.name}</td>
 			<td>${vo.id}</td>
 			<td>
