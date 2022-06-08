@@ -91,7 +91,7 @@
 	                                                </c:if>
 	                                            </td>
 	                                            <td class="cart_product_desc">
-	                                            	<!-- <input type="hidden" name="restaurantNum" value="${dto.menuVOs.restaurantNum}"> -->
+	                                            	<input type="hidden" name="restaurantNum" value="${dto.menuVOs.restaurantNum}">
 	                                                <h5>${dto.menuVOs.name}</h5>${dto.menuVOs.restaurantVO.restaurantName}
 	                                            </td>
 	                                            <td class="count">

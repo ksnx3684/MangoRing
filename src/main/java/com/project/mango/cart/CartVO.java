@@ -13,6 +13,7 @@ public class CartVO {
 	private String id;
 	private Long menuNum;
 	private Long menuCount;
+	private Long cartPrice;
 	
 	private MenuVO menuVOs;
 //	private List<MenuVO> menuVOss;

@@ -139,6 +139,7 @@ public class CartController {
 			cartVO.setId(id);
 			cartVO.setMenuNum(list.get(i).getMenuNum());
 			cartVO.setMenuCount(1L);
+			cartVO.setCartPrice(list.get(i).getPrice());
 			cartService.cartAdd(cartVO);
 		}
 		
@@ -147,8 +148,8 @@ public class CartController {
 	
 	// 포장 주문 페이지
 	@GetMapping("packing")
-	public void packing(Model model, RestaurantVO restaurantVO, HttpSession session) throws Exception{
-		
+	public void packing(Model model, RestaurantVO restaurantVO, HttpSession session, HttpServletRequest request) throws Exception{
+		System.out.println(request.getHeader("referer"));
 		List<MenuVO> list = menuService.getList(restaurantVO);
 		CartVO cartVO = new CartVO();
 		MemberVO memberVO = (MemberVO)session.getAttribute("member");
@@ -164,6 +165,7 @@ public class CartController {
 			cartVO.setId(id);
 			cartVO.setMenuNum(list.get(i).getMenuNum());
 			cartVO.setMenuCount(1L);
+			cartVO.setCartPrice(list.get(i).getPrice());
 //			cartService.cartAdd(cartVO);
 		}
 
@@ -173,22 +175,37 @@ public class CartController {
 		// 프로모션
 		List<PromotionVO> prolist = promotionService.getList();
 		List<PromotionVO> promotion = new ArrayList<PromotionVO>();
+		
 		for(PromotionVO p : prolist) {
 			if(p.getRestaurantNum() == list.get(0).getRestaurantNum()) {
 				promotion.add(p);
 			}
 		}
-		model.addAttribute("prolist", promotion);
 		
+		List<RestaurantVO> menulist = promotionService.menulist();
+
+		model.addAttribute("prolist", promotion);
+		model.addAttribute("menulist", menulist);
 		model.addAttribute("restaurantNum", list.get(0).getRestaurantNum());
 		model.addAttribute("cartList", lists);
 		
 	}
 	
 	// 프로모션 적용
-	@PostMapping("procommit")
-	public void procommit() throws Exception{
+	@PostMapping("proCommit")
+	public void proCommit(RestaurantVO restaurantVO) throws Exception{
 		
+//		restaurantVO.get
+		
+		int result = promotionService.proCommit(restaurantVO);
+	}
+	
+	// 프로모션 적용 해제
+	@PostMapping("proClear")
+	public void proClear() throws Exception{
+		
+		
+//		int result = promotionService.proClear();
 	}
 	
 	// 포장 주문 페이지 > 주문 페이지로 데이터 전송을 해주기 위한 메서드
@@ -250,7 +267,7 @@ public class CartController {
 		data.setPayNum(code); // 주문번호
 		data.setTotalPrice(paymentVO.getTotalPrice()); // 총 금액
 		data.setId(paymentVO.getId()); // 아이디
-//		data.setRestaurantNum(paymentVO.getRestaurantNum()); // 가게 번호
+		data.setRestaurantNum(paymentVO.getRestaurantNum()); // 가게 번호
 		
 		
 		if(payRequest.equals("kakao")) { // 카카오페이 결제 페이지 이동

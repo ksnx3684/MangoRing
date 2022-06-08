@@ -14,5 +14,99 @@
 	SELECT * FROM PROMOTION 
 	</select>
 
+	<resultMap type="RestaurantVO" id="RestaurantVO">
+		<id column="restaurantNum" property="restaurantNum"/>
+		<result column="categoryNum" property="categoryNum"/>
+		<result column="id" property="id"/>
+		<result column="restaurantName" property="restaurantName"/>
+		<result column="restaurantPhone" property="restaurantPhone"/>
+		<result column="postCode" property="postCode"/>
+		<result column="address" property="address"/>
+		<result column="detailAddress" property="detailAddress"/>
+		<result column="extraAddress" property="extraAddress"/>
+		<result column="regDate" property="regDate"/>
+		<result column="editDate" property="editDate"/>
+		<result column="parkingCheck" property="parkingCheck"/>
+		<result column="kidCheck" property="kidCheck"/>
+		<result column="introduction" property="introduction"/>
+		<result column="accountNumber" property="accountNumber"/>
+		<!-- <result column="businessNum" property="businessNum"/>
+		<result column="businessOk" property="businessOk"/> -->
+		<association property="restaurantFileVO" javaType="RestaurantFileVO">
+			<id column="fileNum" property="fileNum"/>
+			<result column="restaurantNum" property="restaurantNum"/>
+			<result column="fileName" property="fileName"/>
+			<result column="oriName" property="oriName"/>
+		</association>
+		<collection property="promotionVOs" javaType="List" ofType="PromotionVO">
+			<id column="promotionNum" property="promotionNum"/>
+			<result column="restaurantNum" property="restaurantNum"/>
+			<result column="id" property="id"/>
+			<result column="promotionName" property="promotionName"/>
+			<result column="promotionDetail" property="promotionDetail"/>
+			<result column="startDate" property="startDate"/>
+			<result column="endDate" property="endDate"/>
+			<result column="discount" property="discount"/>
+		</collection>
+		<collection property="menuVOs" javaType="List" ofType="MenuVO">
+			<id column="menuNum" property="menuNum"/>
+			<result column="restaurantNum" property="restaurantNum"/>
+			<result column="name" property="name"/>
+			<result column="price" property="price"/>
+			<result column="detail" property="detail"/>
+			<collection property="cartVOs" javaType="List" ofType="CartVO">
+				<id column="cartNum" property="cartNum"/>
+				<result column="id" property="id"/>
+				<result column="menuNum" property="menuNum"/>
+				<result column="menuCount" property="menuCount"/>
+				<result column="cartPrice" property="cartPrice"/>
+			</collection>
+		</collection>
+		<collection property="reviewVOs" javaType="List" ofType="ReviewVO">
+			<id column="reviewNum" property="reviewNum"/>
+			<result column="id" property="id"/>
+			<result column="restaurantNum" property="restaurantNum"/>
+			<result column="reservationNum" property="reservationNum"/>
+			<result column="star" property="star"/>
+			<result column="regDate" property="regDate"/>
+			<result column="reportCheck" property="reportCheck"/>
+			<result column="contents" property="contents"/>
+		</collection>
+	</resultMap>
+
+	<select id="nowPro" parameterType="String" resultMap="RestaurantVO">
+		SELECT *, AVG(RV.STAR) AS STARS FROM PROMOTION P
+			LEFT OUTER JOIN RESTAURANT R
+			ON P.RESTAURANTNUM = R.RESTAURANTNUM
+			LEFT OUTER JOIN REST_FILE RF
+			ON R.RESTAURANTNUM = RF.RESTAURANTNUM
+			LEFT OUTER JOIN REVIEW RV
+			ON R.RESTAURANTNUM  = RV.RESTAURANTNUM
+			WHERE P.PROMOTIONNUM IS NOT NULL
+			AND R.ADDRESS LIKE CONCAT('%',#{address},'%')
+		GROUP BY R.RESTAURANTNUM
+		LIMIT 0,3
+	</select>
+	
+	<!-- <select id="prolist" resultMap="RestaurantVO">
+		SELECT * FROM RESTAURANT R
+		LEFT OUTER JOIN MENU M
+		ON R.RESTAURANTNUM = M. RESTAURANTNUM
+		LEFT OUTER JOIN PROMOTION P
+		ON R.RESTAURANTNUM = P.RESTAURANTNUM
+		GROUP BY PROMOTIONNUM
+	</select> -->
+	
+	<select id="menulist" parameterType="RestaurantVO" resultType="RestaurantVO">
+		SELECT * FROM MENU WHERE RESTAURANTNUM = #{restaurantNum}
+	</select>
+	
+	<update id="proCommit" parameterType="RestaurantVO">
+		UPDATE CART SET CARTPRICE = CARTPRICE - #{discount} WHERE MENUNUM = #{menuNum}
+	</update>
+	
+	<update id="proClear" parameterType="RestaurantVO">
+		UPDATE CART SET CARTPRICE = #{price} WHERE MENUNUM = #{menuNum}
+	</update>
 
 </mapper>

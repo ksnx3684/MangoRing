@@ -121,7 +121,7 @@
 			              <c:forEach items="${prolist}" var="list" varStatus="status">
 		              		<div>
 		              			<label>
-				              	<input class="promotionCheck" id="promotionNum" name="promotionNum" type="radio" data-promotionNum="${list.discount}" value="${list.promotionNum}">&nbsp;
+				              	<input class="promotionCheck" id="promotionNum" name="discount" type="radio" value="${list.discount}">&nbsp;
 				              		${list.promotionName}
 				              	</label><br>
 				              	- ${list.promotionDetail}<br>
@@ -189,7 +189,7 @@
 		    $.ajax({
 		      url: "cartCountPlus",
 		      type: "post",
-		      data: { promotionNum : promotionNum },
+		      data: { cartNum: cartNum },
 		      success: function(){
 		        location.href = "./packing?restaurantNum=${restaurantNum}";
 		      }
@@ -198,10 +198,13 @@
 		});
 		
 		function commit(){
+			let discount = ${"promotionCheck"}.val();
 		 $.ajax({
 		      url: "procommit",
 		      type: "post",
-		      data: { promotionNum : promotionNum },
+		      data: { discount : discount,
+		    	  		cartNum : 
+					},
 		      success: function(){
 		        location.href = "./packing?restaurantNum=${restaurantNum}";
 		      }

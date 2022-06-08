@@ -19,6 +19,8 @@
 		<result column="kidCheck" property="kidCheck"/>
 		<result column="introduction" property="introduction"/>
 		<result column="accountNumber" property="accountNumber"/>
+		<!-- <result column="businessNum" property="businessNum"/>
+		<result column="businessOk" property="businessOk"/> -->
 		<association property="restaurantFileVO" javaType="RestaurantFileVO">
 			<id column="fileNum" property="fileNum"/>
 			<result column="restaurantNum" property="restaurantNum"/>
