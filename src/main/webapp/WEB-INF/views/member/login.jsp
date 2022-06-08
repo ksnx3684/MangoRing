@@ -12,7 +12,6 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/login.css">
 <link rel="stylesheet" href="../css/style.css">
 
-
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -26,6 +25,10 @@
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
         }
+      }
+      
+      label {
+      	font-size: 14px;
       }
     </style>
 

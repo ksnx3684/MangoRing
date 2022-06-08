@@ -5,7 +5,7 @@ import java.sql.Date;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import com.project.mango.category.CategoryVO;
+import com.project.mango.order.PaymentVO;
 import com.project.mango.restaurant.RestaurantVO;
 
 import lombok.Getter;
@@ -59,5 +59,8 @@ public class MemberVO {
 	
 	// 식당 VO
 	private RestaurantVO restaurantVO;
+	
+	// 결졔 VO
+	private PaymentVO paymentVO;
 	
 }

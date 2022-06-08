@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.project.mango.order.PaymentVO;
 import com.project.mango.reservation.ReservationVO;
 import com.project.mango.restaurant.RestFileVO;
 import com.project.mango.restaurant.RestaurantVO;
@@ -255,6 +256,10 @@ public class MemberController {
 		
 		MemberVO memberVO = (MemberVO)session.getAttribute("member");
 		String id = memberVO.getId();
+		
+		List<PaymentVO> paymentList = memberService.getPaymentList(id, pager);
+		
+		model.addAttribute("paymentList", paymentList);
 		
 		return "member/payment";
 	}

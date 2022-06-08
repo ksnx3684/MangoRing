@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.project.mango.order.PaymentVO;
 import com.project.mango.reservation.ReservationVO;
 import com.project.mango.restaurant.RestFileVO;
 import com.project.mango.restaurant.RestaurantVO;
@@ -217,6 +218,17 @@ public class MemberService {
 	}
 	
 	// 결제 리스트 조회
+	public List<PaymentVO> getPaymentList(String id, Pager pager) throws Exception {
+		
+		PaymentVO paymentVO = new PaymentVO();
+		paymentVO.setId(id);
+		
+		pager.setPerPage(5);
+		pager.makeRow();
+		pager.makeNum(memberMapper.getTotalPaymentCount(paymentVO));
+		
+		return memberMapper.getPaymentList(id, pager);
+	}
 	
 	// 회원 탈퇴
 	public int setDelete(MemberVO vo) throws Exception {

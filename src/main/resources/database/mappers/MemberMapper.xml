@@ -59,8 +59,8 @@
 	
 	<!-- 마이페이지 -->
 	<select id="getMyPage" parameterType="MemberVO" resultType="MemberVO">
-		SELECT NAME, EMAIL, PHONE, GENDER, JOINDATE, USERTYPE,
-		POSTCODE, ADDRESS, DETAILADDRESS, EXTRAADDRESS, BLACKLIST
+		SELECT NAME, EMAIL, PHONE, GENDER, JOINDATE, USERTYPE, POSTCODE, ADDRESS, 
+		DETAILADDRESS, EXTRAADDRESS, BLACKLIST, BUSINESSOK
 		FROM MEMBER WHERE ID = #{id}
 	</select>
 	
@@ -209,6 +209,57 @@
 		SELECT COUNT(RESERVATIONNUM) FROM RESERVATION WHERE id = #{id}
 	</select>
 	
+	<!-- 결제 내역 조회 -->
+	<select id="getPaymentList" parameterType="PaymentVO" resultMap="getResultPayment">
+		SELECT P.PAYNUM, P.TOTALPRICE, R.RESTAURANTNUM, R.CATEGORYNUM, 
+			R.ADDRESS, R.RESTAURANTNAME, RF.FILENUM, RF.FILENAME FROM
+				PAYMENT P
+				LEFT OUTER JOIN
+				RESTAURANT R
+				USING (RESTAURANTNUM)
+				LEFT OUTER JOIN
+				REST_FILE RF
+				USING (RESTAURANTNUM)
+		WHERE P.ID = #{id} ORDER BY PAYNUM DESC LIMIT #{pager.startRow}, #{pager.perPage}
+	</select>
+	
+	<!-- 결제내역 카운트 조회 -->
+	<select id="getTotalPaymentCount" parameterType="PaymentVO" resultType="Long">
+		SELECT COUNT(PAYNUM) FROM PAYMENT WHERE id = #{id}
+	</select>
+	
+	<resultMap type="PaymentVO" id="getResultPayment">
+		<id column="payNum" property="payNum"/>
+		<result column="totalPrice" property="totalPrice"/>
+			<association property="restaurantVO" javaType="RestaurantVO">
+				<id column="restaurantNum" property="restaurantNum"/>
+				<result column="categoryNum" property="categoryNum"/>
+				<result column="address" property="address"/>
+				<result column="restaurantName" property="restaurantName"/>
+			</association>
+			<association property="restaurantFileVO" javaType="RestaurantFileVO">
+				<id column="fileNum" property="fileNum"/>
+				<result column="fileName" property="fileName"/>
+			</association>
+	</resultMap>
+
+<!-- 
+	<resultMap type="RestaurantVO" id="getResultPayment">
+		<id column="restaurantNum" property="restaurantNum"/>
+		<result column="categoryNum" property="categoryNum"/>
+		<result column="address" property="address"/>
+		<result column="restaurantName" property="restaurantName"/>
+			<association property="memberFileVO" javaType="MemberFileVO">
+				<id column="fileNum" property="fileNum"/>
+				<result column="oriName" property="oriName"/>
+			</association>
+			<association property="paymentVO" javaType="PaymentVO">
+				<id column="payNum" property="payNum"/>
+				<result column="totalPrice" property="totalPrice"/>
+			</association>
+	</resultMap>
+ -->
+ 
 	<!-- 회원 탈퇴 -->
 	<delete id="setDelete" parameterType="MemberVO">
 		DELETE FROM MEMBER WHERE ID = #{id} AND PW = #{pw}

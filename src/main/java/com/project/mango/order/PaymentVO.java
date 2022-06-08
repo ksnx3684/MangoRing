@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.util.List;
 
 import com.project.mango.member.MemberVO;
+import com.project.mango.restaurant.RestaurantFileVO;
+import com.project.mango.restaurant.RestaurantVO;
 
 import lombok.Data;
 
@@ -21,5 +23,8 @@ public class PaymentVO {
 	
 	private List<PaymentDetailVO> paymentDetailVOs;
 	private MemberVO memberVO;
+	
+	private RestaurantVO restaurantVO;
+	private RestaurantFileVO restaurantFileVO;
 	
 }
