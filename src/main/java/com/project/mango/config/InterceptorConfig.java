@@ -7,6 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.project.mango.interceptor.CartInterceptor;
 import com.project.mango.interceptor.ManagerInterceptor;
+import com.project.mango.interceptor.MemberInterceptor;
 import com.project.mango.interceptor.OrderInterceptor;
 import com.project.mango.interceptor.OwnerInterceptor;
 
@@ -15,6 +16,7 @@ public class InterceptorConfig implements WebMvcConfigurer{
 
 	@Autowired
 	private ManagerInterceptor managerInterceptor;
+	
 	@Autowired
 	private OwnerInterceptor ownerInterceptor;
 	
@@ -24,16 +26,25 @@ public class InterceptorConfig implements WebMvcConfigurer{
 	@Autowired
 	private OrderInterceptor orderInterceptor;
 	
+	@Autowired
+	private MemberInterceptor memberInterceptor;
+	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		//적용할 interceptor 등록
 		registry.addInterceptor(managerInterceptor)
-		//interceptor 사용할url
+		//interceptor 사용할 url
 			.addPathPatterns("/manager/*");
 		
 		registry.addInterceptor(ownerInterceptor)
 		.addPathPatterns("/owner/*");
-
+		
+		registry.addInterceptor(cartInterceptor)
+				.addPathPatterns("/member/myPage")
+				.addPathPatterns("/member/wishlist")
+				.addPathPatterns("/member/payment")
+				.addPathPatterns("/member/raing")
+				.addPathPatterns("/member/reservation");
 		
 		registry.addInterceptor(cartInterceptor)
 				.addPathPatterns("/cart/*");

@@ -216,6 +216,8 @@ public class MemberService {
 		return memberMapper.getMyReservationList(id, pager);
 	}
 	
+	// 결제 리스트 조회
+	
 	// 회원 탈퇴
 	public int setDelete(MemberVO vo) throws Exception {
 		

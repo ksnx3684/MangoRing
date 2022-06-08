@@ -115,6 +115,25 @@
 		  	</c:choose>
 		  </div>
 		</div>
+		<div class="row">
+		  <div class="col-4 text-truncate">
+		  	<c:choose>
+		  		<c:when test="${vo.businessOk eq 0}">
+		  			businessOk : 미신청
+		  		</c:when>
+		  		<c:when test="${vo.businessOk eq 1}">
+		  			businessOk : 승인대기
+		  		</c:when>
+		  		<c:when test="${vo.businessOk eq 2}">
+		  			businessOk : 승인
+		  		</c:when>
+		  		<c:when test="${vo.businessOk eq 4}">
+		  			businessOk : 승인 거절
+		  		</c:when>
+		  	</c:choose>
+		  	
+		  </div>
+		</div>
 	</div>
 	
 	
@@ -124,7 +143,7 @@
 	</div>
 	
 	<div class="d-grid gap-2 d-md-flex justify-content-md-evenly mt-5">
-	  <button class="btn btn-primary btn-lg" type="button">결제내역</button>
+	  <button id="payment" class="btn btn-primary btn-lg" type="button">결제내역</button>
 	  <button id="reservation" class="btn btn-primary btn-lg" type="button">예약내역</button>
 	</div>
 	
@@ -136,11 +155,35 @@
 	<div class="container">
 	  <footer class="py-3 my-4 mt-auto">
 	    <ul class="nav justify-content-around border-bottom pb-3 mt-5 mb-3">
-	      <li class="nav-item"><a href="./business" class="nav-link px-2 text-muted">사업자 신청</a></li>
+	    
+	      
+	      <c:choose>
+	      	<c:when test="${vo.userType eq 1 and vo.businessOk eq 0}">
+	      		<li class="nav-item">
+		      		<a href="./business" class="nav-link px-2 text-muted">사업자 신청</a>
+		      	</li>
+	      	</c:when>
+	      	<c:when test="${vo.userType eq 1 and vo.businessOk eq 1}">
+	      		<li class="nav-item">
+		      		<a class="nav-link px-2 text-muted">사업자 신청 대기</a>
+		      	</li>
+	      	</c:when>
+	      	<c:when test="${vo.userType eq 2}">
+	      		<li class="nav-item">
+		      		<a href="#" class="nav-link px-2 text-muted">음식점 관리 페이지</a>
+		      	</li>
+	      	</c:when>
+	      	<c:when test="${vo.userType eq 3}">
+	      		<li class="nav-item">
+		      		<a href="#" class="nav-link px-2 text-muted">관리자 페이지</a>
+		      	</li>
+	      	</c:when>
+	      </c:choose>
+	      
 	      <li class="nav-item"><a href="./update" class="nav-link px-2 text-muted">회원정보수정</a></li>
 	      <li class="nav-item"><a href="./delete" class="nav-link px-2 text-muted">회원탈퇴</a></li>
 	    </ul>
-	    <p class="text-center text-muted">&copy; 2022 Mango</p>
+	    <p class="text-center text-muted">&copy; 2022 MangoRing</p>
 	  </footer>
 	</div>
 	
@@ -158,6 +201,10 @@
 	
 	$("#reservation").click(function(){
 		location.href="./reservation";
+	});
+	
+	$("#payment").click(function(){
+		location.href="./payment";
 	});
 	
 	$("#cart").click(function(){

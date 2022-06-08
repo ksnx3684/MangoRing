@@ -248,6 +248,16 @@ public class MemberController {
 		
 		return "member/reservation";
 	}
+	
+	// 결제내역 GET 방식
+	@GetMapping("payment")
+	public String getMyPayment(HttpSession session, Model model, Pager pager) throws Exception {
+		
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		String id = memberVO.getId();
+		
+		return "member/payment";
+	}
 		
 	// 로그아웃
 	@GetMapping("logout")
