@@ -57,6 +57,10 @@ public class ManagerController {
 	public ModelAndView getMemberChangeDetail(MemberVO memberVO, RestaurantVO restaurantVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		memberVO = memberService.getMemberChangeDetail(memberVO);
+		
+		restaurantVO = restaurantService.getRestaurantNum(memberVO);
+		restaurantVO.setRestaurantNum(restaurantVO.getRestaurantNum());
+		
 		restaurantVO = restaurantService.getMemberChangeDetail(restaurantVO);
 		mv.addObject("mv", memberVO);
 		mv.addObject("re", restaurantVO);
