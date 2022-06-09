@@ -53,7 +53,7 @@ public class ReservationController {
 		
 		int result = reservationService.setAdd(reservationVO);
 		
-		mv.setViewName("redirect:../");
+		mv.setViewName("redirect:../member/reservation");
 		return mv;
 	}
 	

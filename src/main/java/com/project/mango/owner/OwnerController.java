@@ -270,7 +270,7 @@ public class OwnerController {
 			restaurantService.setRestuarantTag(restaurantVO, hashtagVO);
 		}
 
-		mv.setViewName("redirect:../list");
+		mv.setViewName("redirect:./ownerPage");
 		
 		return mv;
 	}
@@ -330,7 +330,7 @@ public class OwnerController {
 			restaurantService.setRestuarantTag(restaurantVO, hashtagVO);
 		}
 		
-		mv.setViewName("redirect:../list");
+		mv.setViewName("redirect:./ownerPage");
 		return mv;
 	}
 	
