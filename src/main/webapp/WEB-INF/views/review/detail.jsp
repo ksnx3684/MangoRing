@@ -52,6 +52,19 @@
 <link rel="stylesheet" href="../resources/css/reviewDetail.css">
 </head>
 <body>
+<c:import url="../template/header.jsp"></c:import>
+    <style>
+        body.modal-open {
+          overflow: auto;
+        }
+        body.modal-open[style] {
+          padding-right: 0px !important;
+        }
+        .container{
+          margin-top: 50px;
+          margin-bottom: 50px;
+        }
+    </style>
 	<div class="py-1 bg-black top">
 		<div class="container">
 			<div

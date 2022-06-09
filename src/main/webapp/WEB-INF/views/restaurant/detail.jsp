@@ -42,6 +42,19 @@
 <link rel="stylesheet" href="../resources/css/resDetail.css">
 </head>
 <body>
+<c:import url="../template/header.jsp"></c:import>
+    <style>
+        body.modal-open {
+          overflow: auto;
+        }
+        body.modal-open[style] {
+          padding-right: 0px !important;
+        }
+        .container{
+          margin-top: 50px;
+          margin-bottom: 50px;
+        }
+    </style>
 	<div class="py-1 bg-black top">
 		<div class="container">
 			<div
@@ -126,275 +139,319 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 ftco-animate">
-					<h2 class="mb-3">A small river named Duden flows by their
-						place and supplies it with the necessary regelialia.</h2>
-				
-					<h2 class="mb-3 mt-5">#2. Creative WordPress Themes</h2>
-				
-						<img src="images/image_2.jpg" alt="" class="img-fluid">
-					</p>
-				
 					
+
+					<img src="images/image_2.jpg" alt="" class="img-fluid">
+					</p>
+
+
 
 					<div class="about-author d-flex p-4 bg-light">
 						<div class="bio mr-5">
-							<img src="images/person_1.jpg" alt="Image placeholder"
-								class="img-fluid mb-4">
+							<img src="../resources/upload/restaurant/${resFiles.fileName }"
+								alt="" class="">
 						</div>
 						<div class="desc">
-								<div class="BoxMap">
-		<div>
-			<h1 class="infoRes">${vo1.restaurantName }</h1>
+							<div class="BoxMap">
+								<div>
+									<h1 class="infoRes">${vo1.restaurantName }</h1>
 
 
-			<h1 class="infoRes">
-				★${review.star }<br>
-			</h1>
-			<hr>
-			<h1 class="infoRes">
-				주소 : ${vo1.address }<br>
-			</h1>
-			<h1 class="infoRes">
-				음식종류 : ${vo.categoryName }<br>
-			</h1>
-			<!-- 1이면 주차 가능 0 이면 주차 불가능 -->
-			<c:if test="${vo1.parkingCheck eq 1 }">
-				<h1 class="infoRes">
-					주차 : 주차 가능<br>
-				</h1>
-			</c:if>
-			<c:if test="${vo1.parkingCheck eq 0 }">
-				<h1 class="infoRes">
-					주차 : 주차 불가능<br>
-				</h1>
-			</c:if>
-		
-			<h1 class="infoRes">
-				메뉴 :
-				<c:forEach items="${menu}" var="menus">
+									<h1 class="infoRes">
+										★${review.star }<br>
+									</h1>
+									<hr>
+									<h1 class="infoRes">
+										주소 : ${vo1.address }<br>
+									</h1>
+									<h1 class="infoRes">
+										음식종류 : ${vo.categoryName }<br>
+									</h1>
+									<!-- 1이면 주차 가능 0 이면 주차 불가능 -->
+									<c:if test="${vo1.parkingCheck eq 1 }">
+										<h1 class="infoRes">
+											주차 : 주차 가능<br>
+										</h1>
+									</c:if>
+									<c:if test="${vo1.parkingCheck eq 0 }">
+										<h1 class="infoRes">
+											주차 : 주차 불가능<br>
+										</h1>
+									</c:if>
+
+									<h1 class="infoRes">
+										메뉴 :
+										<c:forEach items="${menu}" var="menus">
 				 ${menus.name} ${menus.price}원<br>
-				</c:forEach>
-			</h1>
-			
-			<button type="button" class="btn btn-dark addWishlist_btn">위시리스트 |</button>
-		
-		<a href="../reservation/write?restaurantNum=${vo1.restaurantNum }"
-								class="tag-cloud-link">예약하기 |</a>
-								<a href="../resNotice/list"
-								class="tag-cloud-link">공지사항</a>
-		</div>
+										</c:forEach>
+									</h1>
 
-		</div>
-		<div id="map" style="width: 500px; height: 400px;"></div>
-		<script type="text/javascript"
-			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=25a21d9d0fb4d0a44acbb535edeba07e"></script>
-		<script>
-			var container = document.getElementById('map');
-			var options = {
-				center : new kakao.maps.LatLng(37.556899, 126.919581),
-				level : 3
-			};
+									<button type="button" class="btn btn-dark addWishlist_btn">위시리스트
+										|</button>
 
-			var map = new kakao.maps.Map(container, options);
+									<a
+										href="../reservation/write?restaurantNum=${vo1.restaurantNum }"
+										class="tag-cloud-link">예약하기 |</a> <a href="../resNotice/list"
+										class="tag-cloud-link">공지사항 |</a>
+										<a href="../cart/pre?restaurantNum=${vo1.restaurantNum}"
+										class="tag-cloud-link">포장하기</a>
 
-			var marker = new kakao.maps.Marker({
-				position : new kakao.maps.LatLng(37.556899, 126.919581), // 마커의 좌표
-				map : map
-			// 마커를 표시할 지도 객체
-			});
-			marker.setMap(map);
-		</script>
 
-	</div>
+
+
+								</div>
+
+
+							</div>
+
+
+						</div>
+
+					</div>
+					<div id="map" style="width: 600px; height: 400px;"></div>
+
+
+					<script type="text/javascript"
+						src="//dapi.kakao.com/v2/maps/sdk.js?appkey=25a21d9d0fb4d0a44acbb535edeba07e"></script>
+
+					<script>
+						var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+						mapOption = {
+							center : new kakao.maps.LatLng(37.556899,
+									126.919581), // 지도의 중심좌표
+							level : 3
+						// 지도의 확대 레벨
+						};
+
+						var map = new kakao.maps.Map(mapContainer, mapOption);
+
+						// 마커가 표시될 위치입니다 
+						var markerPosition = new kakao.maps.LatLng(37.556499,
+								126.919581);
+
+						// 마커를 생성합니다
+						var marker = new kakao.maps.Marker({
+							position : markerPosition
+						});
+
+						// 마커가 지도 위에 표시되도록 설정합니다
+						marker.setMap(map);
+
+						var iwContent = '<div style="padding:5px; width:150px;">${vo1.restaurantName} <br><a href="https://map.kakao.com/link/map/${vo1.restaurantName},37.556499, 126.919581" style="color:blue" target="_blank">${vo1.restaurantName}</a> <a href="https://map.kakao.com/link/to/Hello World!,37.556499, 126.919581" style="color:blue" target="_blank"><br>길찾기  </a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+						iwPosition = new kakao.maps.LatLng(37.556499,
+								126.919581); //인포윈도우 표시 위치입니다
+
+						// 지도에 확대 축소 컨트롤을 생성한다
+						var zoomControl = new kakao.maps.ZoomControl();
+
+						// 지도의 우측에 확대 축소 컨트롤을 추가한다
+						map.addControl(zoomControl,
+								kakao.maps.ControlPosition.RIGHT);
+
+						// 인포윈도우를 생성합니다
+						var infowindow = new kakao.maps.InfoWindow({
+							position : iwPosition,
+							content : iwContent
+						});
+
+						// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+						infowindow.open(map, marker);
+					</script>
+				</div>
+				
+
+
+				<div class="pt-5 mt-5" style="width: 1300px; background-color: aliceblue;">
+
+					<div id="reviewTextBox">
+						<div id="totalBox">
+							<h5>리뷰 |</h5>
+							<a
+								href="./detail?restaurantNum=${vo1.restaurantNum }&rssNum=0&rseNum=5"><h5>전체(${count})</h5></a>
+						</div>
+						<div>
+							<a style="background-color: darkcyan;" class="btn-primary py-3 px-5"
+								href="../review/add?restaurantNum=${vo1.restaurantNum }">리뷰
+								추가${vo1.restaurantNum }</a>
+						</div>
+
+						<div id="etcBox">
+							<a
+								href="./detail?restaurantNum=${vo1.restaurantNum }&rssNum=4&rseNum=5">
+								<h5 class="tasteText">맛있어요(${goodCount }) |</h5>
+							</a> <a
+								href="./detail?restaurantNum=${vo1.restaurantNum }&rssNum=2&rseNum=3">
+								<h5 class="tasteText">보통이에요(${normalCount }) |</h5>
+							</a> <a
+								href="./detail?restaurantNum=${vo1.restaurantNum }&rssNum=0&rseNum=1">
+								<h5 class="tasteText">별로에요(${badCount})</h5>
+							</a>
 						</div>
 					</div>
 
+					<c:forEach items="${list}" var="revList">
 
-					<div class="pt-5 mt-5" style="width:1300px;">
-
-<div id="reviewTextBox">
-		<div id="totalBox">
-			<h5>리뷰 |</h5>
-			<a href="./detail?restaurantNum=${vo1.restaurantNum }&rssNum=0&rseNum=5"><h5>전체(${count})</h5></a>
-		</div>
-		<div>
-		<a class="btn-primary py-3 px-5" href="../review/add?restaurantNum=${vo1.restaurantNum }">리뷰 추가${vo1.restaurantNum }</a>
-		</div>
-		
-		<div id="etcBox">
-			<a href="./detail?restaurantNum=${vo1.restaurantNum }&rssNum=4&rseNum=5">
-				<h5 class="tasteText">맛있어요(${goodCount }) |</h5>
-			</a> <a href="./detail?restaurantNum=${vo1.restaurantNum }&rssNum=2&rseNum=3">
-				<h5 class="tasteText">보통이에요(${normalCount }) |</h5>
-			</a> <a href="./detail?restaurantNum=${vo1.restaurantNum }&rssNum=0&rseNum=1">
-				<h5 class="tasteText">별로에요(${badCount})</h5>
-			</a>
-		</div>
-	</div>
-
-						<c:forEach items="${list}" var="revList">
-
-							<%-- <img onload="resize(this);"		사진? 보류중
+						<%-- <img onload="resize(this);"		사진? 보류중
 			
 								src="../resources/upload/review/${rFilesVOS.fileName}"
 								class="d-block" alt="..."> --%>
-							<div class="comment-body">
-								<h3>${revList.id }</h3>
-								<div class="meta mb-2">${revList.regDate }</div>
-								<p>
-									<a href="/review/detail?reviewNum=${revList.reviewNum }">
-										<div class="listBox">
-											<h3 class="listText">[회원 사진/ ID추가] 별점:${revList.star}
-												내용:${revList.contents}</h3>
-
-										</div>
-									</a>
-								</p>
-							</div>
+						<div class="comment-body">
+							<h3>${revList.id } ★:${revList.star}</h3>
+							<div class="meta mb-2">${revList.regDate }</div>
 							<p>
-								<a href="/review/detail?reviewNum=${revList.reviewNum }"
-									class="reply">Detail</a>
+								<a href="/review/detail?reviewNum=${revList.reviewNum }">
+									<div class="listBox">
+										<h3 class="listText"> 
+											${revList.contents}</h3>
+
+									</div>
+								</a>
 							</p>
-							<hr>
-						</c:forEach>
+						</div>
+						<p>
+							<a href="/review/detail?reviewNum=${revList.reviewNum }"
+								class="reply">Detail</a>
+						</p>
+						<hr>
+					</c:forEach>
+				</div>
+
+
+
+
+
+				<!-- END comment-list -->
+
+
+			</div>
+		</div>
+		<!-- .col-md-8 -->
+
+		<div class="col-lg-4 sidebar ftco-animate">
+			<div class="sidebar-box">
+				<form action="#" class="search-form">
+					<div class="form-group">
+						<span class="icon icon-search"></span> <input type="text"
+							class="form-control" placeholder="Type a keyword and hit enter">
 					</div>
+				</form>
+			</div>
+			<div class="sidebar-box ftco-animate">
+				<h3>Category</h3>
+				<ul class="categories">
+					<li><a href="#">Breakfast <span>(6)</span></a></li>
+					<li><a href="#">Lunch <span>(8)</span></a></li>
+					<li><a href="#">Dinner <span>(2)</span></a></li>
+					<li><a href="#">Desserts <span>(2)</span></a></li>
+					<li><a href="#">Drinks <span>(2)</span></a></li>
+					<li><a href="#">Wine <span>(2)</span></a></li>
+				</ul>
+			</div>
 
-
-
-
-
-					<!-- END comment-list -->
-
-
+			<div class="sidebar-box ftco-animate">
+				<h3>Popular Articles</h3>
+				<div class="block-21 mb-4 d-flex">
+					<a class="blog-img mr-4"
+						style="background-image: url(images/image_1.jpg);"></a>
+					<div class="text">
+						<h3 class="heading">
+							<a href="#">Even the all-powerful Pointing has no control
+								about the blind texts</a>
+						</h3>
+						<div class="meta">
+							<div>
+								<a href="#"><span class="icon-calendar"></span> June 25,
+									2019</a>
+							</div>
+							<div>
+								<a href="#"><span class="icon-person"></span> Dave Lewis</a>
+							</div>
+							<div>
+								<a href="#"><span class="icon-chat"></span> 19</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="block-21 mb-4 d-flex">
+					<a class="blog-img mr-4"
+						style="background-image: url(images/image_2.jpg);"></a>
+					<div class="text">
+						<h3 class="heading">
+							<a href="#">Even the all-powerful Pointing has no control
+								about the blind texts</a>
+						</h3>
+						<div class="meta">
+							<div>
+								<a href="#"><span class="icon-calendar"></span> June 25,
+									2019</a>
+							</div>
+							<div>
+								<a href="#"><span class="icon-person"></span> Dave Lewis</a>
+							</div>
+							<div>
+								<a href="#"><span class="icon-chat"></span> 19</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="block-21 mb-4 d-flex">
+					<a class="blog-img mr-4"
+						style="background-image: url(images/image_3.jpg);"></a>
+					<div class="text">
+						<h3 class="heading">
+							<a href="#">Even the all-powerful Pointing has no control
+								about the blind texts</a>
+						</h3>
+						<div class="meta">
+							<div>
+								<a href="#"><span class="icon-calendar"></span> June 25,
+									2019</a>
+							</div>
+							<div>
+								<a href="#"><span class="icon-person"></span> Dave Lewis</a>
+							</div>
+							<div>
+								<a href="#"><span class="icon-chat"></span> 19</a>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-			<!-- .col-md-8 -->
 
-			<div class="col-lg-4 sidebar ftco-animate">
-				<div class="sidebar-box">
-					<form action="#" class="search-form">
-						<div class="form-group">
-							<span class="icon icon-search"></span> <input type="text"
-								class="form-control" placeholder="Type a keyword and hit enter">
-						</div>
-					</form>
-				</div>
-				<div class="sidebar-box ftco-animate">
-					<h3>Category</h3>
-					<ul class="categories">
-						<li><a href="#">Breakfast <span>(6)</span></a></li>
-						<li><a href="#">Lunch <span>(8)</span></a></li>
-						<li><a href="#">Dinner <span>(2)</span></a></li>
-						<li><a href="#">Desserts <span>(2)</span></a></li>
-						<li><a href="#">Drinks <span>(2)</span></a></li>
-						<li><a href="#">Wine <span>(2)</span></a></li>
-					</ul>
-				</div>
-
-				<div class="sidebar-box ftco-animate">
-					<h3>Popular Articles</h3>
-					<div class="block-21 mb-4 d-flex">
-						<a class="blog-img mr-4"
-							style="background-image: url(images/image_1.jpg);"></a>
-						<div class="text">
-							<h3 class="heading">
-								<a href="#">Even the all-powerful Pointing has no control
-									about the blind texts</a>
-							</h3>
-							<div class="meta">
-								<div>
-									<a href="#"><span class="icon-calendar"></span> June 25,
-										2019</a>
-								</div>
-								<div>
-									<a href="#"><span class="icon-person"></span> Dave Lewis</a>
-								</div>
-								<div>
-									<a href="#"><span class="icon-chat"></span> 19</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="block-21 mb-4 d-flex">
-						<a class="blog-img mr-4"
-							style="background-image: url(images/image_2.jpg);"></a>
-						<div class="text">
-							<h3 class="heading">
-								<a href="#">Even the all-powerful Pointing has no control
-									about the blind texts</a>
-							</h3>
-							<div class="meta">
-								<div>
-									<a href="#"><span class="icon-calendar"></span> June 25,
-										2019</a>
-								</div>
-								<div>
-									<a href="#"><span class="icon-person"></span> Dave Lewis</a>
-								</div>
-								<div>
-									<a href="#"><span class="icon-chat"></span> 19</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="block-21 mb-4 d-flex">
-						<a class="blog-img mr-4"
-							style="background-image: url(images/image_3.jpg);"></a>
-						<div class="text">
-							<h3 class="heading">
-								<a href="#">Even the all-powerful Pointing has no control
-									about the blind texts</a>
-							</h3>
-							<div class="meta">
-								<div>
-									<a href="#"><span class="icon-calendar"></span> June 25,
-										2019</a>
-								</div>
-								<div>
-									<a href="#"><span class="icon-person"></span> Dave Lewis</a>
-								</div>
-								<div>
-									<a href="#"><span class="icon-chat"></span> 19</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="sidebar-box ftco-animate">
-					<h3>Tag Cloud</h3>
-					<ul class="tagcloud m-0 p-0">
-						<a href="#" class="tag-cloud-link">Dish</a>
-						<a href="#" class="tag-cloud-link">Food</a>
-						<a href="#" class="tag-cloud-link">Lunch</a>
-						<a href="#" class="tag-cloud-link">Menu</a>
-						<a href="#" class="tag-cloud-link">Dessert</a>
-						<a href="#" class="tag-cloud-link">Drinks</a>
-						<a href="#" class="tag-cloud-link">Sweets</a>
-					</ul>
-				</div>
-
-				<div class="sidebar-box ftco-animate">
-					<h3>Archives</h3>
-					<ul class="categories">
-						<li><a href="#">January 2019 <span>(20)</span></a></li>
-						<li><a href="#">December 2018 <span>(30)</span></a></li>
-						<li><a href="#">Novemmber 2018 <span>(20)</span></a></li>
-						<li><a href="#">September 2018 <span>(6)</span></a></li>
-						<li><a href="#">August 2018 <span>(8)</span></a></li>
-					</ul>
-				</div>
-
-
-				<div class="sidebar-box ftco-animate">
-					<h3>Paragraph</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-						Ducimus itaque, autem necessitatibus voluptate quod mollitia
-						delectus aut, sunt placeat nam vero culpa sapiente consectetur
-						similique, inventore eos fugit cupiditate numquam!</p>
-				</div>
+			<div class="sidebar-box ftco-animate">
+				<h3>Tag Cloud</h3>
+				<ul class="tagcloud m-0 p-0">
+					<a href="#" class="tag-cloud-link">Dish</a>
+					<a href="#" class="tag-cloud-link">Food</a>
+					<a href="#" class="tag-cloud-link">Lunch</a>
+					<a href="#" class="tag-cloud-link">Menu</a>
+					<a href="#" class="tag-cloud-link">Dessert</a>
+					<a href="#" class="tag-cloud-link">Drinks</a>
+					<a href="#" class="tag-cloud-link">Sweets</a>
+				</ul>
 			</div>
-			<!-- END COL -->
+
+			<div class="sidebar-box ftco-animate">
+				<h3>Archives</h3>
+				<ul class="categories">
+					<li><a href="#">January 2019 <span>(20)</span></a></li>
+					<li><a href="#">December 2018 <span>(30)</span></a></li>
+					<li><a href="#">Novemmber 2018 <span>(20)</span></a></li>
+					<li><a href="#">September 2018 <span>(6)</span></a></li>
+					<li><a href="#">August 2018 <span>(8)</span></a></li>
+				</ul>
+			</div>
+
+
+			<div class="sidebar-box ftco-animate">
+				<h3>Paragraph</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+					Ducimus itaque, autem necessitatibus voluptate quod mollitia
+					delectus aut, sunt placeat nam vero culpa sapiente consectetur
+					similique, inventore eos fugit cupiditate numquam!</p>
+			</div>
+		</div>
+		<!-- END COL -->
 		</div>
 		</div>
 	</section>
@@ -521,7 +578,7 @@
 	<script src="/js/scrollax.min.js"></script>
 	<script
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-	<script src="/js/google-map.js"></script>
+	<!-- <script src="/js/google-map.js"></script> -->
 	<script src="/js/main.js"></script>
 
 </body>
