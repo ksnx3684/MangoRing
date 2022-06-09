@@ -6,7 +6,7 @@
 
 	<insert id="setPromotionAdd" parameterType="PromotionVO" useGeneratedKeys="true" keyProperty="promotionNum">
 		INSERT INTO PROMOTION
-		VALUES(#{promotionNum},1,#{id},#{promotionName},#{promotionDetail},#{startDate},#{endDate},#{discount})
+		VALUES(#{promotionNum},#{restaurantNum},#{id},#{promotionName},#{promotionDetail},#{startDate},#{endDate},#{discount})
 	</insert>
 
 

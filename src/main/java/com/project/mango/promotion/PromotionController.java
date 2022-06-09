@@ -51,7 +51,10 @@ public class PromotionController {
 	@GetMapping("add")
 	public ModelAndView setPromotionAdd(PromotionVO promotionVO)throws Exception{
 		ModelAndView mv = new ModelAndView();
+		
+		
 		mv.setViewName("promotion/add");
+		mv.addObject("pVo",promotionVO);
 		return mv;
 	}
 	
