@@ -2,13 +2,21 @@ package com.project.mango.restaurant;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
+import com.project.mango.member.MemberFileVO;
+import com.project.mango.member.MemberService;
+import com.project.mango.member.MemberVO;
 import com.project.mango.menu.MenuVO;
 import com.project.mango.review.ReviewService;
 import com.project.mango.review.ReviewVO;
@@ -21,12 +29,15 @@ public class RestaurantController {
 	private RestaurantService restaurantService;
 	@Autowired
 	private ReviewService reviewService;
+	@Autowired
+	private MemberService memberService;
 
 	
 	@GetMapping("detail")
-	public ModelAndView getDetailWM(RestaurantVO restaurantVO,ReviewVO reviewVO,MenuVO menuVO)throws Exception{
-		ModelAndView mv = new ModelAndView();
+	public ModelAndView getDetailWM(RestaurantVO restaurantVO,ReviewVO reviewVO,MenuVO menuVO,MemberFileVO memberFileVO,ModelAndView mv)throws Exception{
+
 		
+		;
 		//레스토랑 정보 , 카테고리 종류
 		restaurantVO = restaurantService.getDetailWM(restaurantVO);
 		
@@ -43,6 +54,7 @@ public class RestaurantController {
 		System.out.println(restaurantVO.getRestaurantNum());
 		System.out.println(reviewVO.getRseNum());
 		System.out.println(reviewVO.getRssNum());
+		
 		
 		
 		List<ReviewVO> ar = reviewService.getListReview(reviewVO);

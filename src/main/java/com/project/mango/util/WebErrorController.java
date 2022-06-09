@@ -1,3 +1,4 @@
+
 package com.project.mango.util;
 
 import javax.servlet.RequestDispatcher;
@@ -33,4 +34,5 @@ public class WebErrorController implements ErrorController {
     }
 
 }
+
 
