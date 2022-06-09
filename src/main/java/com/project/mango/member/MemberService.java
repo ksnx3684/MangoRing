@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.project.mango.order.PaymentVO;
+import com.project.mango.reservation.ReservationVO;
 import com.project.mango.restaurant.RestFileVO;
 import com.project.mango.restaurant.RestaurantVO;
 import com.project.mango.review.ReviewVO;
@@ -80,6 +82,20 @@ public class MemberService {
 		if(idCheck != null) {
 			check = true;
 			bindingResult.rejectValue("id", "memberjoin.id.overlap");
+		}
+		
+		// 4. 전화번호 중복 검사
+		MemberVO phoneCheck = memberMapper.getPhoneNumber(memberVO);
+		if(phoneCheck != null) {
+			check = true;
+			bindingResult.rejectValue("phone", "memberjoin.number.overlap");
+		}
+		
+		// 5. 이메일 중복 검사
+		MemberVO emailCheck = memberMapper.getEmail(memberVO);
+		if(emailCheck != null) {
+			check = true;
+			bindingResult.rejectValue("email", "memberjoin.email.overlap");
 		}
 		
 		return check;
@@ -186,6 +202,32 @@ public class MemberService {
 		pager.makeNum(memberMapper.getTotalRatingCount(reviewVO));
 		
 		return memberMapper.getRatingList(id, pager);
+	}
+	
+	// 예약 리스트 조회
+	public List<ReservationVO> getMyReservationList(String id, Pager pager) throws Exception {
+		
+		ReservationVO reservationVO = new ReservationVO();
+		reservationVO.setId(id);
+		
+		pager.setPerPage(5);
+		pager.makeRow();
+		pager.makeNum(memberMapper.getTotalReservationCount(reservationVO));
+		
+		return memberMapper.getMyReservationList(id, pager);
+	}
+	
+	// 결제 리스트 조회
+	public List<PaymentVO> getPaymentList(String id, Pager pager) throws Exception {
+		
+		PaymentVO paymentVO = new PaymentVO();
+		paymentVO.setId(id);
+		
+		pager.setPerPage(5);
+		pager.makeRow();
+		pager.makeNum(memberMapper.getTotalPaymentCount(paymentVO));
+		
+		return memberMapper.getPaymentList(id, pager);
 	}
 	
 	// 회원 탈퇴

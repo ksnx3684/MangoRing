@@ -10,6 +10,7 @@
 <c:import url="../template/bootstrap_css.jsp"></c:import>
 
 <link rel="stylesheet" type="text/css" href="../resources/css/login.css">
+<link rel="stylesheet" href="../css/style.css">
 
     <style>
       .bd-placeholder-img {
@@ -25,6 +26,10 @@
           font-size: 3.5rem;
         }
       }
+      
+      label {
+      	font-size: 14px;
+      }
     </style>
 
 </head>
@@ -34,8 +39,9 @@
 <main class="form-signin">
   <!-- <form action="./login" method="POST"> -->
   	<form:form modelAttribute="memberVO" method="POST">
-    <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
-    <h1 class="h3 mb-3 fw-normal">로그인</h1>
+    <img class="mb-4" src="https://cdn-icons.flaticon.com/png/512/2578/premium/2578942.png?token=exp=1654622603~hmac=6bfd44a33c0788aa6c6cec6e1498b5df" 
+    	alt="망고" width="100" height="85">
+    <h1 class="h3 mb-3 fw-normal">Login</h1>
 
     <div class="form-floating mb-1">
       <input type="text" class="form-control" id="floatingInput" name="id">
@@ -72,9 +78,9 @@
 -->
     <div class="d-grid gap-2 d-md-block">
 	  <button class="btn btn-primary" type="submit">로그인</button>
-	  <button id="joinCheck" class="btn btn-success" type="button">회원가입</button>
+	  <button id="joinCheck" class="btn btn-info" type="button">회원가입</button>
 	</div>
-    <p class="mt-3 mb-3 text-muted">&copy; Mango</p>
+    <p class="mt-3 mb-3 text-muted">&copy; MangoRing</p>
   <!-- </form> -->
   	</form:form>
 </main>

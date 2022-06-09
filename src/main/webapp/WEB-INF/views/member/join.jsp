@@ -8,9 +8,10 @@
 <meta charset="UTF-8">
 <title>회원가입</title>
 <c:import url="../template/bootstrap_css.jsp"></c:import>
+<link rel="stylesheet" href="../css/style.css"/>
 </head>
 <body>
-<h1 class="text-center mt-3">SignUp Page</h1>
+<h1 class="text-center mt-3">회원가입 페이지</h1>
 
 <div class="container h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -28,7 +29,7 @@
 	                <form:input path="id" cssClass="form-control form-control-lg" />
 	              </div>
 	              <div class="col-md-3 ps-5">
-	              	<form:errors path="id"></form:errors>
+	              	<form:errors path="id" cssStyle="color:red; font-size:12px;" ></form:errors>
 	              </div>
 	            </div>
 	
@@ -43,7 +44,7 @@
 	                <form:password path="pw" cssClass="form-control form-control-lg"/>
 	              </div>
 	              <div class="col-md-3 ps-5">
-	              	<form:errors path="pw"></form:errors>
+	              	<form:errors path="pw" cssStyle="color:red; font-size:12px;"></form:errors>
 	              </div>
 	            </div>
 	
@@ -58,7 +59,7 @@
 	                <form:password path="checkPw" cssClass="form-control form-control-lg"/>
 	              </div>
 	              	<div class="col-md-3 ps-5">
-	              		<form:errors path="checkPw"></form:errors>
+	              		<form:errors path="checkPw" cssStyle="color:red; font-size:12px;"></form:errors>
 	              	</div>
 	            </div>
 	
@@ -73,7 +74,7 @@
 	                <form:input path="name" cssClass="form-control form-control-lg"/>
 	              </div>
 	              	<div class="col-md-3 ps-5">
-	              		<form:errors path="name"></form:errors>
+	              		<form:errors path="name" cssStyle="color:red; font-size:12px;"></form:errors>
 	              	</div>
 	            </div>
 	
@@ -88,7 +89,7 @@
 	              	<form:input path="phone" cssClass="form-control form-control-lg"/>
 	              </div>
 	              <div class="col-md-3 ps-5">
-	              	<form:errors path="phone"></form:errors>
+	              	<form:errors path="phone" cssStyle="color:red; font-size:12px;"></form:errors>
 	              </div>
 	            </div>
 	
@@ -103,7 +104,7 @@
 	                <form:input path="email" cssClass="form-control form-control-lg"/>
 	              </div>
 	              <div class="col-md-3 ps-5">
-	              	<form:errors path="email"></form:errors>
+	              	<form:errors path="email" cssStyle="color:red; font-size:12px;"></form:errors>
 	              </div>
 	            </div>
 
@@ -113,7 +114,7 @@
 	              <div class="col-md-3 ps-5">
 	                <h6 class="mb-0">성별</h6>
 	              </div>
-	              <div class="col-md-9 pe-5">
+	              <div class="col-md-9 ps-5 mt-3 pe-5">
 					<!-- <input class="form-check-input" type="checkbox" id="Checkbox1" name="gender" value="0"> -->
 	  				<form:radiobutton path="gender" cssClass="form-check-input" value="0"/>
 	  				<label class="form-check-label me-5" for="Radios0">남</label>
@@ -122,7 +123,7 @@
 	  				<label class="form-check-label" for="Radios1">여</label>
 	              </div>
 	               <div class="col-md-3 ps-5">
-	               	<form:errors path="gender"></form:errors>
+	               	<form:errors path="gender" cssStyle="color:red; font-size:12px;"></form:errors>
 	               </div>
 	            </div>
 	            

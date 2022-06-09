@@ -18,6 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.project.mango.order.PaymentVO;
+import com.project.mango.reservation.ReservationVO;
 import com.project.mango.restaurant.RestFileVO;
 import com.project.mango.restaurant.RestaurantVO;
 import com.project.mango.review.ReviewVO;
@@ -214,11 +216,10 @@ public class MemberController {
 	
 	// 내 평점 GET 방식
 	@GetMapping("rating")
-	public String getMyRating(HttpSession session, Model model,
-			Pager pager, MultipartFile[] file) throws Exception {
+	public String getMyRating(HttpSession session, Model model, Pager pager) throws Exception {
 		
 		MemberVO memberVO = (MemberVO)session.getAttribute("member");
-		String id = (memberVO.getId());
+		String id = memberVO.getId();
 		
 		List<ReviewVO> reviewList = memberService.getRatingList(id, pager);
 		
@@ -230,6 +231,37 @@ public class MemberController {
 		model.addAttribute("pager", pager);
 		
 		return "member/rating";
+	}
+	
+	// 예약내역 GET 방식
+	@GetMapping("reservation")
+	public String getMyReservationList(HttpSession session, Model model, 
+			Pager pager) throws Exception {
+		
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		String id = memberVO.getId();
+		
+		List<ReservationVO> reserList = memberService.getMyReservationList(id, pager);
+		
+		model.addAttribute("reserList", reserList);
+		model.addAttribute("pager", pager);
+		
+		
+		return "member/reservation";
+	}
+	
+	// 결제내역 GET 방식
+	@GetMapping("payment")
+	public String getMyPayment(HttpSession session, Model model, Pager pager) throws Exception {
+		
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		String id = memberVO.getId();
+		
+		List<PaymentVO> paymentList = memberService.getPaymentList(id, pager);
+		
+		model.addAttribute("paymentList", paymentList);
+		
+		return "member/payment";
 	}
 		
 	// 로그아웃
