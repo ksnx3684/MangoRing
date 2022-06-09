@@ -120,5 +120,8 @@
 		VALUES(#{payNum}, 1, #{totalPrice}, NOW(), 0, 1, #{payType}, #{id}, #{restaurantNum})
 	</insert>
 	
+	<select id="accountnum" parameterType="Long" resultType="String">
+		SELECT ACCOUNTNUMBER FROM RESTAURANT WHERE RESTAURANTNUM = #{restaurantNum}
+	</select>
 	
 </mapper>

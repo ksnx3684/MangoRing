@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.project.mango.member.MemberVO;
 import com.project.mango.order.PaymentDetailVO;
 import com.project.mango.order.PaymentVO;
+import com.project.mango.restaurant.RestaurantVO;
 
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -65,4 +66,7 @@ public class CartService {
 		return cartMapper.payOrderComplete(paymentVO);
 	}
 
+	public String accountnum(Long l) throws Exception{
+		return cartMapper.accountnum(l);
+	}
 }

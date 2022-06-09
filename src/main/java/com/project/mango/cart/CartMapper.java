@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.project.mango.member.MemberVO;
 import com.project.mango.order.PaymentDetailVO;
 import com.project.mango.order.PaymentVO;
+import com.project.mango.restaurant.RestaurantVO;
 
 @Mapper
 public interface CartMapper {
@@ -47,4 +48,6 @@ public interface CartMapper {
 	// payOrderComplete
 	public int payOrderComplete(PaymentVO paymentVO) throws Exception;
 	
+	// accountnum
+	public String accountnum(Long l) throws Exception;
 }

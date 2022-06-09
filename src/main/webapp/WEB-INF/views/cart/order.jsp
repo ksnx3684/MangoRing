@@ -157,7 +157,7 @@
 	                                    <input type="hidden" name="cardName" id="cash" value="무통장입금" disabled>
 	                                    <input type="hidden" name="cardNum" id="cardNum3" value="2" disabled>
 	                                    <input type="hidden" name="cardExp" id="cardExp3" value="2022/01/01" disabled>
-	                                    <div>입금계좌 : 신한은행 홍길동 111-111111-11-111</div>
+	                                    <div>입금계좌 : XX은행 홍길동 ${accountnumber}</div>
 	                                </div>
 	                                <br>
 	                                <div>전자상거래법 제 8조 제2항에 동의하고 결제합니다.</div>

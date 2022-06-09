@@ -251,7 +251,12 @@ public class CartController {
 	public void order(Model model, RestaurantVO restaurantVO, HttpSession httpSession) throws Exception {
 		
 		MemberVO memberVO = (MemberVO)httpSession.getAttribute("member");
-
+		
+		Long num = lists.get(0).getMenuNum();
+		System.out.println(num);
+		String r = cartService.accountnum(num);
+		
+		model.addAttribute("accountnumber", r);
 		model.addAttribute("order", lists); // lists에 담긴 data를 order model에 담아서 order.jsp에서 jstl로 사용
 		model.addAttribute("myinfo", memberVO);
 		
