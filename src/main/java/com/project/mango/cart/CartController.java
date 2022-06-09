@@ -8,7 +8,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -182,7 +184,9 @@ public class CartController {
 			}
 		}
 		
-		List<RestaurantVO> menulist = promotionService.menulist();
+		MenuVO menuVO = new MenuVO();
+		menuVO.setRestaurantNum(list.get(0).getRestaurantNum());
+		List<MenuVO> menulist = promotionService.menulist(menuVO);
 
 		model.addAttribute("prolist", promotion);
 		model.addAttribute("menulist", menulist);
@@ -193,11 +197,12 @@ public class CartController {
 	
 	// 프로모션 적용
 	@PostMapping("proCommit")
-	public void proCommit(RestaurantVO restaurantVO) throws Exception{
-		
-//		restaurantVO.get
-		
-		int result = promotionService.proCommit(restaurantVO);
+	@ResponseBody
+	public void proCommit(String discount, String menuNum) throws Exception{
+		Map<String, Object> map = new HashMap<>();
+		map.put(discount, Integer.parseInt(discount));
+		map.put(menuNum, Integer.parseInt(menuNum));
+		int result = promotionService.proCommit(map);
 	}
 	
 	// 프로모션 적용 해제

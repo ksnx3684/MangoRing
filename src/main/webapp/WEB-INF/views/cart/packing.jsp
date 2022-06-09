@@ -114,14 +114,14 @@
 	              <div class="promotion">
 		              <h2>Promotion</h2>
 		              	<c:if test="${prolist ne null}">
-		              		<button class="btn btn-warning commit" type="button" onclick="commit()">선택 적용</button>
+		              		<button class="btn btn-warning commit" type="button">선택 적용</button>
 		              		<button class="btn btn-warning deselect" type="button" onclick="deselect()">선택 해제</button>
 		              		<hr>
 		              	</c:if>
 			              <c:forEach items="${prolist}" var="list" varStatus="status">
 		              		<div>
 		              			<label>
-				              	<input class="promotionCheck" id="promotionNum" name="discount" type="radio" value="${list.discount}">&nbsp;
+				              	<input class="promotionCheck" id="promotionNum" name="discount" type="radio" data-menuNum="${menulist[0].menuNum}" value="${list.discount}">&nbsp;
 				              		${list.promotionName}
 				              	</label><br>
 				              	- ${list.promotionDetail}<br>
@@ -197,19 +197,20 @@
 		  }	
 		});
 		
-		function commit(){
-			let discount = ${"promotionCheck"}.val();
+		$(".commit").on("click", function(){
+			let discount = $(".promotionCheck").val();
+			let menuNum = $(".promotionCheck").attr("data-menuNum");
 		 $.ajax({
-		      url: "procommit",
+		      url: "proCommit",
 		      type: "post",
 		      data: { discount : discount,
-		    	  		cartNum : 
+		    	  		menuNum : menuNum
 					},
 		      success: function(){
 		        location.href = "./packing?restaurantNum=${restaurantNum}";
 		      }
 			  });
-		}
+		});
 	</script>
     
     <footer class="ftco-footer ftco-bg-dark ftco-section">

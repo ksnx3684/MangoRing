@@ -1,10 +1,12 @@
 package com.project.mango.promotion;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.mango.menu.MenuVO;
 import com.project.mango.restaurant.RestaurantVO;
 import com.project.mango.util.Pager;
 
@@ -27,16 +29,12 @@ public class PromotionService {
 		return promotionMapper.nowPro(site);
 	}
 	
-//	public List<RestaurantVO> prolist() throws Exception{
-//		return promotionMapper.prolist();
-//	}
-	
-	public List<RestaurantVO> menulist() throws Exception{
-		return promotionMapper.menulist();
+	public List<MenuVO> menulist(MenuVO menuVO) throws Exception{
+		return promotionMapper.menulist(menuVO);
 	}
 	
-	public int proCommit(RestaurantVO restaurantVO) throws Exception{
-		return promotionMapper.proCommit(restaurantVO);
+	public int proCommit(Map<String, Object> map) throws Exception{
+		return promotionMapper.proCommit(map);
 	}
 	
 	public int proClear(RestaurantVO restaurantVO) throws Exception{

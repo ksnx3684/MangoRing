@@ -88,20 +88,11 @@
 		LIMIT 0,3
 	</select>
 	
-	<!-- <select id="prolist" resultMap="RestaurantVO">
-		SELECT * FROM RESTAURANT R
-		LEFT OUTER JOIN MENU M
-		ON R.RESTAURANTNUM = M. RESTAURANTNUM
-		LEFT OUTER JOIN PROMOTION P
-		ON R.RESTAURANTNUM = P.RESTAURANTNUM
-		GROUP BY PROMOTIONNUM
-	</select> -->
-	
-	<select id="menulist" parameterType="RestaurantVO" resultType="RestaurantVO">
+	<select id="menulist" parameterType="MenuVO" resultType="MenuVO">
 		SELECT * FROM MENU WHERE RESTAURANTNUM = #{restaurantNum}
 	</select>
 	
-	<update id="proCommit" parameterType="RestaurantVO">
+	<update id="proCommit" parameterType="Map">
 		UPDATE CART SET CARTPRICE = CARTPRICE - #{discount} WHERE MENUNUM = #{menuNum}
 	</update>
 	

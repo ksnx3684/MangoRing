@@ -1,9 +1,11 @@
 package com.project.mango.promotion;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.project.mango.menu.MenuVO;
 import com.project.mango.restaurant.RestaurantVO;
 import com.project.mango.util.Pager;
 
@@ -16,11 +18,9 @@ public interface PromotionMapper {
 	
 	public List<RestaurantVO> nowPro(String site) throws Exception;
 	
-//	public List<RestaurantVO> prolist() throws Exception;
+	public List<MenuVO> menulist(MenuVO menuVO) throws Exception;
 	
-	public List<RestaurantVO> menulist() throws Exception;
-	
-	public int proCommit(RestaurantVO restaurantVO) throws Exception;
+	public int proCommit(Map<String, Object> map) throws Exception;
 	
 	public int proClear(RestaurantVO restaurantVO) throws Exception;
 }

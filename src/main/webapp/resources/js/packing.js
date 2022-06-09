@@ -122,6 +122,6 @@ $(".cou").children(".plus").on("click", function(){
 });
 
 function deselect(){
-	$("input:radio[name='promotionNum']").prop('checked', false);
+	$("input:radio[name='discount']").prop('checked', false);
 }
 

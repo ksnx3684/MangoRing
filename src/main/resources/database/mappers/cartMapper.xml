@@ -71,10 +71,10 @@
 		ORDER BY CARTNUM
 	</select>
 	<update id="cartCountPlus" parameterType="CartVO">
-		UPDATE CART SET MENUCOUNT = MENUCOUNT + 1, PRICE = PRICE + PRICE WHERE CARTNUM = #{cartNum}
+		UPDATE CART SET MENUCOUNT = MENUCOUNT + 1, CARTPRICE = CARTPRICE + CARTPRICE WHERE CARTNUM = #{cartNum}
 	</update>
 	<update id="cartCountMinus" parameterType="CartVO">
-		UPDATE CART SET MENUCOUNT = MENUCOUNT - 1, PRICE = PRICE - PRICE WHERE CARTNUM = #{cartNum}
+		UPDATE CART SET MENUCOUNT = MENUCOUNT - 1, CARTPRICE = CARTPRICE - CARTPRICE WHERE CARTNUM = #{cartNum}
 	</update>
 	<delete id="cartListDelete" parameterType="Long">
 		DELETE FROM CART WHERE CARTNUM = #{cartNum}

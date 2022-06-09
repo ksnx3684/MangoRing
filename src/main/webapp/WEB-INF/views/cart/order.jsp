@@ -139,8 +139,8 @@
 	                        <div class="cart-summary">
 	                            <h2>Payment</h2>
 	                            <ul class="summary-table">
-	                                <label><input type="radio" name="payment" id="kakaobtn" onclick="payDisplayView('0')" value="kakao" checked>&nbsp;<img src="../resources/img/payment_icon_yellow_medium.png" style="width:60px; height:25px">&nbsp;카카오페이</label><br><br>
-	                                <label><input type="radio" name="payment" id="tossbtn" onclick="payDisplayView('1')" value="toss">&nbsp;<img src="../resources/img/tosspay.png" style="width:74px; height:18px">&nbsp;토스페이</label><br><br>
+	                                <label><input type="radio" name="payment" id="kakaobtn" onclick="payDisplayView('0')" value="kakao" checked>&nbsp;<img src="../resources/img/카카오페이_CI_logotype.png" style="width:20%; height:20%">&nbsp;카카오페이</label><br><br>
+	                                <label><input type="radio" name="payment" id="tossbtn" onclick="payDisplayView('1')" value="toss">&nbsp;<img src="../resources/img/logo-toss-blue.png" style="width:20%; height:20%">&nbsp;토스페이</label><br><br>
 	                                <label><input type="radio" name="payment" id="cashbtn" onclick="payDisplayView('2')" value="cash">&nbsp;무통장입금</label>
 	                                
 	                                <div id="kakaopay">
