@@ -58,8 +58,8 @@ public class ManagerController {
 	@GetMapping("memberChangeDetail")
 	public ModelAndView getMemberChangeDetail(MemberVO memberVO, RestaurantVO restaurantVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		memberVO = memberService.getMemberChangeDetail(memberVO);
-		restaurantVO = restaurantService.getMemberChangeDetail(restaurantVO);
+//		memberVO = memberService.getMemberChangeDetail(memberVO);
+		restaurantVO = restaurantService.getMemberChangeDetail(memberVO);
 		mv.addObject("mv", memberVO);
 		mv.addObject("re", restaurantVO);
 		mv.setViewName("manager/memberChangeDetail");

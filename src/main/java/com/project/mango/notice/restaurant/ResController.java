@@ -11,9 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.project.mango.board.BoardVO;
-import com.project.mango.restaurant.RestaurantVO;
-import com.project.mango.util.Pager;
 
 @Controller
 @RequestMapping("/resNotice/*")
@@ -22,22 +19,15 @@ public class ResController {
 	@Autowired
 	private ResService resService;
 	
-	@ModelAttribute("board")
-	public String getBoard() {
-		return "resNotice";
-	}
 	
 	
 	//list
 	@GetMapping("list")
-	public ModelAndView getList(Pager pager, RestaurantVO restaurantVO) throws Exception {
+	public ModelAndView getList(ResNoticeVO resNoticeVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		List<BoardVO> ar = resService.getList(pager);
+		List<ResNoticeVO> ar = resService.getList(resNoticeVO);
 		mv.setViewName("resNotice/list");
 		mv.addObject("list", ar);
-		mv.addObject("pager", pager);
-		mv.addObject("num", restaurantVO);
-		
 		return mv;
 	}
 	

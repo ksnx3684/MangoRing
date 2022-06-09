@@ -131,8 +131,8 @@ public class RestaurantService {
 	}
 	
 	// 멤버권한요청 디테일
-	public RestaurantVO getMemberChangeDetail(RestaurantVO restaurantVO) throws Exception {
-		return restaurantMapper.getMemberChangeDetail(restaurantVO);
+	public RestaurantVO getMemberChangeDetail(MemberVO memberVO) throws Exception {
+		return restaurantMapper.getMemberChangeDetail(memberVO);
 	}
 	//가게 리스트 출력
 	public List<RestaurantVO> getResList(RestaurantVO restaurantVO) throws Exception {
