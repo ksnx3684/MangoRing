@@ -3,13 +3,15 @@
 #reviewpicBox{
 	
  width:1500px;
- height:500px;
+ height:300px;
  color: red;
 /*  border: solid 2px black; */
  margin: 10px auto 70px auto;
  display:inline-flex;
  justify-content: space-between;
 }
+
+
 
 .reviewpicTitle{
 	width: 1500px;
@@ -30,13 +32,13 @@
 
 
 #clcl{
-	width: 300px;
+	width: 200px;
 	height: 200px;
 }
 
 
 #btnReview{
-	margin: 50px 700px 0 742px;
+	margin: 50px 700px 0 300px;
 }
 
 -- 사진 업로드
@@ -57,13 +59,17 @@
     .upload {
       width: 200px;
       height: 200px;
-      background-color: antiquewhite;
+      display: flex;
+    /*   background-color: antiquewhite; */
     }
 
     .image-preview {
       width: 1300px;
       height: 200px;
-      background-color: aquamarine;
+   /*    background-color: aquamarine; */
       display: flex;
       gap: 20px;
+    }
+    .fileResult{
+    display: flex;
     }

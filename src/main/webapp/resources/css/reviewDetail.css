@@ -5,7 +5,7 @@ h1 {
 .reviewpicTitle {
 	width: 1500px;
 	height: 50px;
-	margin: 70px 0 20px 70px;
+	margin: 70px 0 20px -500px;
 }
 
 #reviewStar {
@@ -13,7 +13,7 @@ h1 {
 }
 
 #revPicBox {
-	width: 1500px;
+	width: 900px;
 	display: inline-flex;
 }
 

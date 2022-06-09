@@ -32,7 +32,7 @@ public class ReviewController {
 		System.out.println("신고번호"+reviewVO.getReportCheck());
 		System.out.println("리뷰번호"+reviewVO.getReviewNum());
 		System.out.println("신고옵션"+reviewVO.getReportOption());
-		mv.setViewName("redirect:../restaurant/detail");
+		mv.setViewName("redirect:../restaurant/detail?restaurantNum="+reviewVO.getRestaurantNum());
 		return mv;
 	}
 	
@@ -68,7 +68,9 @@ public class ReviewController {
 	@PostMapping("add")
 	public ModelAndView setAdd(ReviewVO reviewVO,MultipartFile[] files,ModelAndView mv)throws Exception{
 		
-	
+		System.out.println("레스토랑넘 진짜"+reviewVO.getRestaurantNum());
+		long num= reviewVO.getRestaurantNum();
+		
 		int result = reviewService.setAdd(reviewVO,files);
 		// ----------------
 		
@@ -78,10 +80,11 @@ public class ReviewController {
 		// ---------------------
 	
 		mv.addObject("result",result);
-		mv.setViewName("redirect:../search/detailSearch");
+		mv.setViewName("redirect:../restaurant/detail?restaurantNum="+num);
 		return mv;
 		
 	}
+	
 	@GetMapping("update")
 	public ModelAndView setUpdate(ReviewVO reviewVO)throws Exception{
 		ModelAndView mv =new ModelAndView();
@@ -101,7 +104,7 @@ public class ReviewController {
 		
 		if(result>0) {
 		
-		mv.setViewName("redirect:../restaurant/detail");
+		mv.setViewName("redirect:./detail?reviewNum="+reviewVO.getReviewNum());
 		}else {
 			mv.setViewName("common/getResult");
 			mv.addObject("msg","Update Fail");

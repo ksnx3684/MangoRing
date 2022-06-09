@@ -45,9 +45,12 @@ function fileDeleteInit(){
 	
 function fileAddInit(c){
 count = c;
+if(c==null){
+	count=0;
+}
 
 $("#clcl").click(function() {
-	if (count > 3) {
+	if (count > 2) {
 		alert('최대 3개의 사진만 업로드 가능합니다.')
 		return;
 	}
@@ -83,8 +86,8 @@ $(".fileResult").on("click", ".del",function(){
       const imagePreview = document.querySelector('.image-preview');
       const docFrag = new DocumentFragment();
 
-      if ([...files].length >= 7) {
-        alert('이미지는 최대 6개 까지 업로드가 가능합니다.');
+      if ([...files].length >= 3) {
+        alert('이미지는 최대 3개 까지 업로드가 가능합니다.');
         return;
       }
 
@@ -96,7 +99,7 @@ $(".fileResult").on("click", ".del",function(){
         }
 
         // 파일 갯수 검사
-        if ([...files].length < 7) {
+        if ([...files].length < 3) {
           uploadFiles.push(file);
           const reader = new FileReader();
           reader.onload = (e) => {
