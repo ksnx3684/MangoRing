@@ -16,7 +16,7 @@
 <body style="margin-top: -50px;">
 	<nav class="navbar navbar-expand-lg navbar-light ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	<div class="container">
-		<a class="navbar-brand" href="../">MangoRing</a>
+		<a class="navbar-brand" href="/">MangoRing</a>
 		<li class="nav-item searchbar" style="margin-top: 4px; list-style: none;"><c:import url="/WEB-INF/views/template/search.jsp"></c:import></li>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="oi oi-menu"></span> Menu
