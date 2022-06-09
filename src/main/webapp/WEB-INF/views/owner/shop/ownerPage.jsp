@@ -146,16 +146,27 @@
 						<div class="BoxMap">
 							<div>
 								<h1>나의 가게</h1>
+								
 								<div class="bigBox">
 									<div id="resName">
 										<div>상호명${rest.restaurantName}</div>
 										<div id="change">수정</div>
 									</div>
 									<div id="reserPackBox">
-										<a href="#" class="tag-cloud-link">예약관리 |</a> <a href="#"
-											class="tag-cloud-link">포장관리</a>
+										<c:choose>
+											<c:when test="${not empty rest.restaurantPhone}">
+												<a href="../shop/update?restaurantNum=${rest.restaurantNum}">수정 |</a>
+											</c:when>
+											<c:otherwise>
+												<a href="../shop/add?restaurantNum=${rest.restaurantNum}">가게 정보 등록 |</a>
+											</c:otherwise>
+										</c:choose>
+										<a href="../shop/delete?restaurantNum=${rest.restaurantNum}">삭제 |</a>
+										<a href="../../owner/reservationManage?restaurantNum=${restaurantVO.restaurantNum}" class="tag-cloud-link">예약관리 |</a>
+										<a href="../../owner/packageManage" class="tag-cloud-link">포장관리</a>
 									</div>
 								</div>
+								
 
 
 
