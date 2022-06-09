@@ -52,7 +52,9 @@ public class ReviewController {
 		ModelAndView mv = new ModelAndView();
 		
 		int result = reviewService.setDelete(reviewVO);
-		mv.setViewName("redirect:../restaurant/detail");
+		
+		long num= reviewVO.getRestaurantNum();
+		mv.setViewName("redirect:../restaurant/detail?restaurantNum="+num);
 		return mv;
 	}
 	
