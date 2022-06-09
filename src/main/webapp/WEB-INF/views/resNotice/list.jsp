@@ -83,7 +83,7 @@
 			
 		</table>
 	</div>
-				<a href="./add?restaurantNum=${s.restaurantNum}" role="button" class="btn btn-primary mx-1">등록</a>
+				<a href="./add?restaurantNum=${resNum}" role="button" class="btn btn-primary mx-1">등록</a>
 	
 	<%-- <h1>restaurantNum : ${list.restaurantNum}</h1> --%>
 	

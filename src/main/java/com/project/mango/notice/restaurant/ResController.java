@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,21 +25,30 @@ public class ResController {
 	public ModelAndView getList(ResNoticeVO resNoticeVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		List<ResNoticeVO> ar = resService.getList(resNoticeVO);
+		Long resNum =ar.get(0).getRestaurantNum();
 		mv.setViewName("resNotice/list");
 		mv.addObject("list", ar);
+		mv.addObject("resNum",resNum);
 		return mv;
 	}
 	
 	//add이동
 	@GetMapping("add")
-	public void setAdd() throws Exception{}
+	public ModelAndView setAdd(ResNoticeVO resNoticeVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		System.out.println("?????????/"+resNoticeVO.getRestaurantNum());
+		mv.addObject("resNum", resNoticeVO.getRestaurantNum());
+		mv.setViewName("resNotice/add");
+		return mv;
+		
+	}
 	
 	//add입력
 	@PostMapping("add")
 	public ModelAndView setAdd(ResNoticeVO resNoticeVO, MultipartFile[] files) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		int result = resService.setAdd(resNoticeVO, files);
-		mv.setViewName("redirect:./list");
+		mv.setViewName("redirect:/");
 		mv.addObject("add", mv);
 		return mv;
 	}

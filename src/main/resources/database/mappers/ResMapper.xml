@@ -6,7 +6,7 @@
 
 	<select id="getList" resultType="ResNoticeVO" parameterType="ResNoticeVO">
 	SELECT * FROM REST_NOTICE
-	WHERE RESTAURANTNUM = #{restaurantNum}
+	WHERE RESTAURANTNUM = 3
 	</select>
 	
 	<insert id="setAdd" parameterType="ResNoticeVO" useGeneratedKeys="true" keyProperty="num">
