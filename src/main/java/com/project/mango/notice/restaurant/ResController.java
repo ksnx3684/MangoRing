@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.mango.board.BoardVO;
+import com.project.mango.restaurant.RestaurantVO;
 import com.project.mango.util.Pager;
 
 @Controller
@@ -29,12 +30,13 @@ public class ResController {
 	
 	//list
 	@GetMapping("list")
-	public ModelAndView getList(Pager pager) throws Exception {
+	public ModelAndView getList(Pager pager, RestaurantVO restaurantVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		List<BoardVO> ar = resService.getList(pager);
 		mv.setViewName("resNotice/list");
 		mv.addObject("list", ar);
 		mv.addObject("pager", pager);
+		mv.addObject("num", restaurantVO);
 		
 		return mv;
 	}
@@ -49,6 +51,7 @@ public class ResController {
 		ModelAndView mv = new ModelAndView();
 		int result = resService.setAdd(resNoticeVO, files);
 		mv.setViewName("redirect:./list");
+		mv.addObject("add", mv);
 		return mv;
 	}
 	

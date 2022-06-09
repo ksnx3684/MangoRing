@@ -58,6 +58,7 @@
       </div>
     </section>
     
+    
 	<h1>res list page</h1>
 	
 		<div class="container-md">
@@ -82,7 +83,7 @@
 			
 		</table>
 	</div>
-				<a href="./add" role="button" class="btn btn-primary mx-1">등록</a>
+				<a href="./add?restaurantNum=${num.restaurantNum}" role="button" class="btn btn-primary mx-1">등록</a>
 	
 	
 		<div class="row">
