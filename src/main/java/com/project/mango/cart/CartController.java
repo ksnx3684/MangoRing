@@ -252,7 +252,7 @@ public class CartController {
 		
 		MemberVO memberVO = (MemberVO)httpSession.getAttribute("member");
 		
-		Long num = lists.get(0).getMenuNum();
+		Long num = lists.get(0).getMenuVOs().getRestaurantNum();
 		System.out.println(num);
 		String r = cartService.accountnum(num);
 		
