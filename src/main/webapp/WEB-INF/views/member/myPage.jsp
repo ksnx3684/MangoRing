@@ -8,6 +8,7 @@
 <title>마이 페이지</title>
 <c:import url="../template/bootstrap_css.jsp"></c:import>
 <c:import url="../template/mango_header.jsp"></c:import>
+<link rel="stylesheet" href="../css/style.css"/>
 </head>
 <body>
 	<h1 class="text-center">My Page</h1>

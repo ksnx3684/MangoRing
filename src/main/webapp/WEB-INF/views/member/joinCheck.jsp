@@ -23,8 +23,7 @@
 		<div class="form-check mt-5">
 		  <input class="form-check-input" type="checkbox" value="" id="check_all">
 		  <label class="form-check-label" for="check_all">
-		    서비스 이용약관, 개인정보 수집 및 이용 동의, 위치정보 이용 약관에<br>
-		    모두 동의합니다.
+		    서비스 이용약관, 개인정보 수집 및 이용 동의, 위치정보 이용 약관에 모두 동의합니다.
 		  </label>
 		</div>
 		
