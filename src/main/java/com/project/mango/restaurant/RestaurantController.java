@@ -37,7 +37,8 @@ public class RestaurantController {
 	public ModelAndView getDetailWM(RestaurantVO restaurantVO,ReviewVO reviewVO,MenuVO menuVO,MemberFileVO memberFileVO,ModelAndView mv)throws Exception{
 
 		
-		;
+		
+		
 		//레스토랑 정보 , 카테고리 종류
 		restaurantVO = restaurantService.getDetailWM(restaurantVO);
 		
@@ -79,7 +80,7 @@ public class RestaurantController {
 		//별로에요 리뷰 카운트
 		long badCount = reviewService.badCount(reviewVO);
 		
-		
+		mv.addObject("resFiles",restaurantVO.getRestaurantFileVO());
 		mv.addObject("count",count);	
 		mv.addObject("goodCount",goodCount);
 		mv.addObject("normalCount",normalCount);

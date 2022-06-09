@@ -8,8 +8,11 @@
 	<select id="getDetailWM" parameterType="RestaurantVO"
 		resultMap="getDetailResult">
 
-		SELECT RES.*,C.*,M.*
+		SELECT RES.*,RESF.*,C.*,M.*
 		FROM RESTAURANT RES
+		LEFT JOIN
+		REST_FILE RESF
+		USING(RESTAURANTNUM)
 		LEFT JOIN
 		CATEGORY C
 		USING(CATEGORYNUM)
@@ -37,6 +40,12 @@
 		<result column="kidCheck" property="kidCheck" />
 		<result column="introduction" property="introduction" />
 		<result column="accountNumber" property="accountNumber" />
+		
+		<association property="restaurantFileVO" javaType="RestaurantFileVO">
+			<id column="fileNum" property="fileNum"/>
+			<result column="fileName" property="fileName"/>
+			<result column="oriName" property="oriName"/>
+		</association>
 
 		<association property="categoryVO" javaType="CategoryVO">
 
