@@ -39,7 +39,7 @@
 <main class="form-signin">
   <!-- <form action="./login" method="POST"> -->
   	<form:form modelAttribute="memberVO" method="POST">
-    <img class="mb-4" src="https://cdn-icons.flaticon.com/png/512/2578/premium/2578942.png?token=exp=1654622603~hmac=6bfd44a33c0788aa6c6cec6e1498b5df" 
+    <img class="mb-4" src="../resources/img/mango.png" 
     	alt="망고" width="100" height="85">
     <h1 class="h3 mb-3 fw-normal">Login</h1>
 
