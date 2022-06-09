@@ -24,7 +24,7 @@
 .picsBox{
 	width: 350px;
 	height: 350px;
- 	border: solid black 2px; 
+ 	border: solid black 2px;
 	border-radius: 20px;
 	display: inline-flex;
 	margin: 80px auto 15px auto;
