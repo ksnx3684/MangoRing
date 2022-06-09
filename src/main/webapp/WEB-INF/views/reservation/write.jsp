@@ -50,7 +50,6 @@
 	display: flex;
 	justify-content: center;
 }
-
 </style>
 
 </head>
@@ -166,7 +165,6 @@
 	
 	// 지도에 확대 축소 컨트롤을 생성한다
 	var zoomControl = new kakao.maps.ZoomControl();
-
 	// 지도의 우측에 확대 축소 컨트롤을 추가한다
 	map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 	
@@ -218,7 +216,6 @@
 
 
 <script type="text/javascript">
-
 $("#rsvBtn").click(function() {
 	if($("#datepicker").val() == "") {
 		alert("날짜를 선택해주세요.");
@@ -235,7 +232,6 @@ $("#rsvBtn").click(function() {
 	$("#rsvFrm").submit();
 	
 });
-
 /* 한국어 설정 */
 $.datepicker.setDefaults({
   dateFormat: 'yy-mm-dd',
@@ -250,17 +246,14 @@ $.datepicker.setDefaults({
   yearSuffix: '년',
   /* beforeShowDay: disableSomeDay */
 });
-
 /* 달력띄우기 */
 $(function () {
   $('#datepicker').datepicker({
 	  minDate: 0
   });
 });
-
 /* 날짜 선택 막기 */
 /* let disabledDays = ["2022-5-25", "2022-6-1"];
-
 function disableSomeDay(date) {
 	let m = date.getMonth(), d = date.getDate(), y = date.getFullYear();
     for (i = 0; i < disabledDays.length; i++) {
@@ -268,12 +261,9 @@ function disableSomeDay(date) {
             return [false];
         }
     }
-
 	let noWeekend = jQuery.datepicker.noWeekends(date);
 	return noWeekend[0] ? [true] : noWeekend;
 } */
-
-
 /* 시간선택 */
 $(function() {
     $("#timepicker").timepicker({
@@ -288,8 +278,6 @@ $(function() {
         scrollbar: true        
     });
 });
-
-
 </script>
 </body>
 </html>
