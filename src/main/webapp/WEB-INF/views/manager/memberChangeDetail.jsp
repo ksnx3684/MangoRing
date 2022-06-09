@@ -117,7 +117,7 @@
 				번호</label>
 			<div class="col-sm-10">
 				<input type="text" class="form-control" id="colFormLabel"
-					value="${re.restaurantVO.businessNum}" readonly="readonly">
+					value="${re.businessNum}" readonly="readonly">
 			</div>
 
 			<div class="row mb-3">
