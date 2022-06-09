@@ -67,6 +67,8 @@
 			<div class="row">
 				<div class="col-lg-8 ftco-animate">
 					
+					<input type="hidden" id="restNum" name="restaurantNum" value="${vo1.restaurantNum}">
+					<input type="hidden" id="cateNum" name="categoryNum" value="${vo.categoryNum}">
 
 					<img src="images/image_2.jpg" alt="" class="img-fluid">
 					</p>
@@ -382,4 +384,39 @@
 	<script src="/js/main.js"></script>
 
 </body>
+<script type="text/javascript">
+  $(".addWishlist_btn").click(function(){
+     var restNum = $("#restNum").val();
+     var cateNum = $("#cateNum").val();
+     
+     var data = {
+        restaurantNum : restNum,
+        categoryNum : cateNum
+     };
+     
+     console.log("restaurantNum : " + restNum);
+     console.log("categoryNum : " + cateNum);
+     
+     $.ajax({
+        url : "/member/wishlist",
+        type : "POST",
+        data : data,
+        success : function(result) {
+                       
+           if(result == 1) {
+              alert("위시리스트 등록 완료");
+           } else if (result == 2) {
+              alert("이미 위시리스트에 있습니다.");
+           }
+           else {
+              alert("로그인을 하셔야 합니다");
+           }
+        },
+        error : function() {
+           alert("등록 실패");
+        }
+        
+     });
+  });
+</script>
 </html>

@@ -104,7 +104,7 @@
 											</c:otherwise>
 										</c:choose>
 										<a href="../shop/delete?restaurantNum=${rest.restaurantNum}">삭제 |</a>
-										<a href="../../owner/reservationManage?restaurantNum=${restaurantVO.restaurantNum}" class="tag-cloud-link">예약관리 |</a>
+										<a href="../../owner/reservationManage?restaurantNum=${rest.restaurantNum}" class="tag-cloud-link">예약관리 |</a>
 										<a href="../../owner/packageManage" class="tag-cloud-link">포장관리</a>
 									</div>
 								</div>
