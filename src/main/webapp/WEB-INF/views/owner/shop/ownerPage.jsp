@@ -69,31 +69,22 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 ftco-animate">
-					<h2 class="mb-3">A small river named Duden flows by their
-						place and supplies it with the necessary regelialia.</h2>
-
-					<h2 class="mb-3 mt-5">#2. Creative WordPress Themes</h2>
-
-					<img src="images/image_2.jpg" alt="" class="img-fluid">
+					
 					</p>
 
 
 
 
 					<div class="bio mr-5">
-						<img src="images/person_1.jpg" alt="Image placeholder"
-							class="img-fluid mb-4">
+						
 					</div>
 					<div class="desc">
 						<div class="BoxMap">
 							<div>
-								<h1>나의 가게</h1>
+								<h1>나의 가게 / 상호명: ${rest.restaurantName}</h1>
 								
-								<div class="bigBox">
-									<div id="resName">
-										<div>상호명${rest.restaurantName}</div>
-										<div id="change">수정</div>
-									</div>
+								
+									
 									<div id="reserPackBox">
 										<c:choose>
 											<c:when test="${not empty rest.restaurantPhone}">
@@ -107,7 +98,7 @@
 										<a href="../../owner/reservationManage?restaurantNum=${rest.restaurantNum}" class="tag-cloud-link">예약관리 |</a>
 										<a href="../../owner/packageManage" class="tag-cloud-link">포장관리</a>
 									</div>
-								</div>
+								
 								
 
 
