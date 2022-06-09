@@ -69,42 +69,42 @@
 
  
     <section class="home-slider owl-carousel js-fullheight">
-      <div class="slider-item js-fullheight" style="background-image: url(images/bg_1.jpg);">
+      <div class="slider-item js-fullheight" style="background-image: url(images/KakaoTalk_20220609_152501189.png);">
       	<div class="overlay"></div>
         <div class="container">
           <div class="row slider-text js-fullheight justify-content-center align-items-center" data-scrollax-parent="true">
 
             <div class="col-md-12 col-sm-12 text-center ftco-animate">
-              <h1 class="mb-4 mt-5"> yuum </h1>
-              <p><a href="#" class="btn btn-primary p-3 px-xl-4 py-xl-3">Order Now</a> <a href="#" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">View Menu</a></p>
+              <!-- <h1 class="mb-4 mt-5"> yuum </h1>
+              <p><a href="#" class="btn btn-primary p-3 px-xl-4 py-xl-3">Order Now</a> <a href="#" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">View Menu</a></p> -->
             </div>
 
           </div>
         </div>
       </div>
 
-      <div class="slider-item js-fullheight" style="background-image: url(images/bg_2.jpg);">
+      <div class="slider-item js-fullheight" style="background-image: url(images/KakaoTalk_20220609_151544556.png);">
       	<div class="overlay"></div>
         <div class="container">
           <div class="row slider-text js-fullheight justify-content-center align-items-center" data-scrollax-parent="true">
 
             <div class="col-md-12 col-sm-12 text-center ftco-animate">
-              <h1 class="mb-4 mt-5">The Best Place to Kick of Your Day</h1>
-              <p><a href="#" class="btn btn-primary p-3 px-xl-4 py-xl-3">Order Now</a> <a href="#" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">View Menu</a></p>
+              <!-- <h1 class="mb-4 mt-5">The Best Place to Kick of Your Day</h1>
+              <p><a href="#" class="btn btn-primary p-3 px-xl-4 py-xl-3">Order Now</a> <a href="#" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">View Menu</a></p> -->
             </div>
 
           </div>
         </div>
       </div>
 
-      <div class="slider-item js-fullheight" style="background-image: url(images/bg_3.jpg);">
+      <div class="slider-item js-fullheight" style="background-image: url(images/KakaoTalk_20220609_152038276.png);">
       	<div class="overlay"></div>
         <div class="container">
           <div class="row slider-text js-fullheight justify-content-center align-items-center" data-scrollax-parent="true">
 
             <div class="col-md-12 col-sm-12 text-center ftco-animate">
-              <h1 class="mb-4 mt-5">Creamy Hot and Ready to Serve</h1>
-              <p><a href="#" class="btn btn-primary p-3 px-xl-4 py-xl-3">Order Now</a> <a href="#" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">View Menu</a></p>
+              <!-- <h1 class="mb-4 mt-5">Creamy Hot and Ready to Serve</h1>
+              <p><a href="#" class="btn btn-primary p-3 px-xl-4 py-xl-3">Order Now</a> <a href="#" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">View Menu</a></p> -->
             </div>
 
           </div>
@@ -123,6 +123,7 @@
 				</div>
 			</form>
 			<!-- <a href="../cart/pre?restaurantNum=1">aa</a> -->
+			<!-- <button type="button" onclick="pop();">dd</button> -->
 		</div>
 	</div>
 
@@ -366,6 +367,24 @@
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
+	<!-- <script>
+		function pop(){
+			
+			//창 크기 지정
+			var width = 1280;
+			var height = 720;
+			
+			//pc화면기준 가운데 정렬
+			var left = (window.screen.width / 2) - (width/2);
+			var top = (window.screen.height / 4);
+			
+		    	//윈도우 속성 지정
+			var windowStatus = 'width='+width+', height='+height+', left='+left+', top='+top+', scrollbars=yes, status=yes, resizable=yes, titlebar=yes';
+		
+			
+			window.open("http://localhost/reservation/write?restaurantNum=5", "TEST", windowStatus);
+		}
+	</script> -->
 
   <script src="js/jquery.min.js"></script>
   <script src="js/jquery-migrate-3.0.1.min.js"></script>
