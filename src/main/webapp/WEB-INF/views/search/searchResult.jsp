@@ -11,7 +11,19 @@
 </head>
 <body>
 	<c:import url="../template/header.jsp"></c:import>
-
+	<style>
+		body.modal-open {
+			overflow: auto;
+		}
+		body.modal-open[style] {
+			padding-right: 0px !important;
+		}
+		.container{
+			margin-top: 50px;
+			margin-bottom: 50px;
+		}
+	</style>
+	
 	<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Monoton&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Miss+Fajardose&display=swap" rel="stylesheet">
@@ -29,37 +41,12 @@
 
     <link rel="stylesheet" href="../css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="../css/jquery.timepicker.css">
-
-    
+ 
     <link rel="stylesheet" href="../css/flaticon.css">
     <link rel="stylesheet" href="../css/icomoon.css">
     <link rel="stylesheet" href="../css/style.css">
-	
-
-	
-	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-	<div class="container">
-		<a class="navbar-brand" href="../">MangoRing</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="oi oi-menu"></span> Menu
-		</button>
-
-		<div class="collapse navbar-collapse" id="ftco-nav">
-		<ul class="navbar-nav ml-auto">
-			
-			<li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-			<li class="nav-item active"><a href="about.html" class="nav-link">About</a></li>
-			<li class="nav-item"><a href="menu.html" class="nav-link">Menu</a></li>
-			<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-			<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-			<li class="nav-item cta"><a href="reservation.html" class="nav-link">Book a table</a></li>
-		</ul>
-		</div>
-	</div>
-	</nav>
-    <!-- END nav -->
     
-    <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_3.jpg');" data-stellar-background-ratio="0.5">
+    <section class="hero-wrap hero-wrap-2" style="background-image: url('../images/bg_2.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text align-items-end justify-content-center">
@@ -79,17 +66,17 @@
 			<div class="sector">
 				<div class="sector-left">
 					<img class="sector-left-img" src="../resources/upload/restaurant/${v.restaurantFileVO.fileName}">
+					<br><br>
+					<div class="title">
+						<a href="../restaurant/detail?restaurantNum=${v.restaurantNum}">
+							<h2>${v.restaurantName}<strong class="star">&nbsp;${v.reviewVOs[0].star}</strong></h2>
+						</a>
+					</div>
+					<h5 class="address">${v.address} ${v.detailAddress} ${v.extraAddress}</h5>
 				</div>
 				<div class="sector-right">
-					<span class="title">
-						<a href="../restaurant/detail?restaurantNum=${v.restaurantNum}">
-							<h2>${v.restaurantName}</h2>
-						</a>
-					</span>
-					<strong class="star"><h2>${v.reviewVOs[0].star}</h2></strong>
-					<h4 class="address">${v.address} ${v.detailAddress} ${v.extraAddress}</h4>
+					<div class="map" id="map${v.restaurantNum}" style="width:500px;height:410px;"></div>
 				</div>
-				<div class="map" id="map${v.restaurantNum}" style="width:600px;height:400px;"></div>
 				<script>
 					var mapContainer${v.restaurantNum} = document.getElementById('map${v.restaurantNum}'), // 지도를 표시할 div 
 					    mapOption${v.restaurantNum}= {
@@ -134,8 +121,8 @@
 					    } 
 					}); 
 				</script>
-				<hr>
 			</div>
+			<hr>
 		</c:forEach>
 	</div>
 

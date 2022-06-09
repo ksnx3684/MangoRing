@@ -8,6 +8,7 @@
 		<result column="id" property="id"/>
 		<result column="menuNum" property="menuNum"/>
 		<result column="menuCount" property="menuCount"/>
+		<result column="cartPrice" property="cartPrice"/>
 		<association property="menuVOs" javaType="MenuVO" >
 			<id column="menuNum" property="menuNum"/>
 			<result column="restaurantNum" property="restaurantNum"/>
@@ -31,6 +32,7 @@
 	<resultMap type="PaymentVO" id="PaymentVO">
 		<id column="payNum" property="payNum"/>
 		<result column="id" property="id"/>
+		<result column="restaurantNum" property="restaurantNum"/>
 		<result column="payCheck" property="payCheck"/>
 		<result column="totalPrice" property="totalPrice"/>
 		<result column="payDate" property="payDate"/>
@@ -46,6 +48,17 @@
 		</collection>
 	</resultMap>
 	
+	<select id="cartCheck" parameterType="CartVO" resultMap="CartVO">
+		SELECT * FROM CART C
+		LEFT OUTER JOIN MENU M
+		ON C.MENUNUM = M.MENUNUM
+		WHERE ID = #{id}
+	</select>
+	
+	<insert id="cartAdd" parameterType="CartVO">
+		INSERT INTO CART(CARTNUM, ID, MENUNUM, MENUCOUNT, CARTPRICE)
+		VALUES(NULL, #{id}, #{menuNum}, #{menuCount}, #{cartPrice})
+	</insert>
 	<select id="cartList" parameterType="CartVO" resultMap="CartVO">
 		SELECT * FROM CART C
 		LEFT OUTER JOIN MENU M
@@ -58,10 +71,10 @@
 		ORDER BY CARTNUM
 	</select>
 	<update id="cartCountPlus" parameterType="CartVO">
-		UPDATE CART SET MENUCOUNT = MENUCOUNT + 1 WHERE CARTNUM = #{cartNum}
+		UPDATE CART SET MENUCOUNT = MENUCOUNT + 1, CARTPRICE = CARTPRICE + CARTPRICE WHERE CARTNUM = #{cartNum}
 	</update>
 	<update id="cartCountMinus" parameterType="CartVO">
-		UPDATE CART SET MENUCOUNT = MENUCOUNT - 1 WHERE CARTNUM = #{cartNum}
+		UPDATE CART SET MENUCOUNT = MENUCOUNT - 1, CARTPRICE = CARTPRICE - CARTPRICE WHERE CARTNUM = #{cartNum}
 	</update>
 	<delete id="cartListDelete" parameterType="Long">
 		DELETE FROM CART WHERE CARTNUM = #{cartNum}
@@ -76,10 +89,26 @@
 		ON C.ID = MB.ID
 		WHERE C.CARTNUM = #{cartNum}
 	</select>
+	
+	<select id="packingOrder" parameterType="Long" resultMap="CartVO">
+		SELECT * FROM CART C
+		LEFT OUTER JOIN MENU M
+		ON C.MENUNUM = M.MENUNUM
+		LEFT OUTER JOIN RESTAURANT R
+		ON M.RESTAURANTNUM = R.RESTAURANTNUM
+		LEFT OUTER JOIN MEMBER MB
+		ON C.ID = MB.ID
+		WHERE M.MENUNUM = #{menuNum}
+	</select>
+	<delete id="clear" parameterType="MemberVO">
+		DELETE FROM CART
+		WHERE ID = #{id}
+	</delete>
+	
 
 	<insert id="order" parameterType="PaymentVO">
-		INSERT INTO PAYMENT(PAYNUM, PAYCHECK, TOTALPRICE, PAYDATE, WAITING, STATUS, PAYTYPE, ID)
-		VALUES(#{payNum}, 0, #{totalPrice}, NOW(), 30, 0, '무통장입금', #{id})
+		INSERT INTO PAYMENT(PAYNUM, PAYCHECK, TOTALPRICE, PAYDATE, WAITING, STATUS, PAYTYPE, ID, RESTAURANTNUM)
+		VALUES(#{payNum}, 0, #{totalPrice}, NOW(), 30, 0, '무통장입금', #{id}, #{restaurantNum})
 	</insert>
 	<insert id="detailOrder" parameterType="PaymentDetailVO">
 		INSERT INTO PAYMENT_DETAIL(PAYNUM, MENUNUM, MENUCOUNT)
@@ -87,8 +116,8 @@
 	</insert>
 	
 	<insert id="payOrderComplete" parameterType="PaymentVO">
-		INSERT INTO PAYMENT(PAYNUM, PAYCHECK, TOTALPRICE, PAYDATE, WAITING, STATUS, PAYTYPE, ID)
-		VALUES(#{payNum}, 1, #{totalPrice}, NOW(), 30, 0, #{payType}, #{id})
+		INSERT INTO PAYMENT(PAYNUM, PAYCHECK, TOTALPRICE, PAYDATE, WAITING, STATUS, PAYTYPE, ID, RESTAURANTNUM)
+		VALUES(#{payNum}, 1, #{totalPrice}, NOW(), 30, 0, #{payType}, #{id}, #{restaurantNum})
 	</insert>
 	
 	

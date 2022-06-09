@@ -9,10 +9,24 @@
 </head>
 <body>
 	<c:import url="../template/header.jsp"></c:import>
+	<style>
+		body.modal-open {
+			overflow: auto;
+		}
+		body.modal-open[style] {
+			padding-right: 0px !important;
+		}
+		.container{
+			margin-top: 50px;
+			margin-bottom: 50px;
+		}
+	</style>
 
 	<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Monoton&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Miss+Fajardose&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../resources/css/order.css">
 
 	<link rel="stylesheet" href="../css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="../css/animate.css">
@@ -28,36 +42,11 @@
     <link rel="stylesheet" href="../css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="../css/jquery.timepicker.css">
 
-    
     <link rel="stylesheet" href="../css/flaticon.css">
     <link rel="stylesheet" href="../css/icomoon.css">
     <link rel="stylesheet" href="../css/style.css">
-
-
-	
-	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-	<div class="container">
-		<a class="navbar-brand" href="../">MangoRing</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="oi oi-menu"></span> Menu
-		</button>
-
-		<div class="collapse navbar-collapse" id="ftco-nav">
-		<ul class="navbar-nav ml-auto">
-			
-			<li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-			<li class="nav-item active"><a href="about.html" class="nav-link">About</a></li>
-			<li class="nav-item"><a href="menu.html" class="nav-link">Menu</a></li>
-			<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-			<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-			<li class="nav-item cta"><a href="reservation.html" class="nav-link">Book a table</a></li>
-		</ul>
-		</div>
-	</div>
-	</nav>
-    <!-- END nav -->
     
-    <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_3.jpg');" data-stellar-background-ratio="0.5">
+    <section class="hero-wrap hero-wrap-2" style="background-image: url('../resources/img/alexander-schimmeck-H_KabGs8FMw-unsplash.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text align-items-end justify-content-center">
@@ -69,20 +58,19 @@
       </div>
     </section>
 
-	
 	<!-- ##### Main Content Wrapper Start ##### -->
     <div class="main-content-wrapper">
 		
 		<!-- Order table Area Start -->
-		<div class="cart-table-area section-padding-100">
+		<div class="order-table-area section-padding-100">
 	        <div class="container-fluid">
 	            <form id="frm" action="./order" method="post" enctype="multipart/form-data">
 	                <div class="row">
-	                    <div class="col-12 col-lg-8">
+	                    <div class="col-12 col-lg-5">
 	                        <div class="cart-title mt-50">
 	                            <h2>Order</h2>
 	                        </div>
-	                        <div class="cart-table clearfix">
+	                        <div class="order-table clearfix">
 	                            <table class="table table-responsive">
 	                                <thead>
 	                                    <tr>
@@ -95,7 +83,7 @@
 	                                <tbody>
 	                                    <c:forEach items="${order}" var="dto" varStatus="status">
 	                                        <tr class="contents">
-	                                            <input type="hidden" name="cartNum" value="${dto.cartNum}">
+	                                            <%-- <input type="hidden" name="cartNum" value="${dto.cartNum}"> --%>
 	                                            <input type="hidden" name="menuNum" value="${dto.menuNum}">
 	                                            <td class="cart_product_img"><input type="hidden" name="name" value="${dto.menuVOs.name}">
 	                                                <c:if test="${dto.menuVOs.menuFileVO.fileName ne null}">
@@ -103,7 +91,7 @@
 	                                                </c:if>
 	                                            </td>
 	                                            <td class="cart_product_desc">
-	                                            	<!-- <input type="hidden" name="restaurantNum" value="${dto.menuVOs.restaurantNum}"> -->
+	                                            	<input type="hidden" name="restaurantNum" value="${dto.menuVOs.restaurantNum}">
 	                                                <h5>${dto.menuVOs.name}</h5>${dto.menuVOs.restaurantVO.restaurantName}
 	                                            </td>
 	                                            <td class="count">
@@ -123,9 +111,10 @@
 	                            <input type="hidden" name="payCheck" id="payCheck" value="0" readonly>
 	                        </div>
 	                    </div>
-	                    <div class="col-12 col-lg-4">
+	                    
+	                    <div class="col-12 col-lg-3">
 	                        <div class="cart-summary">
-	                            <h5>Order Total</h5>
+	                            <h2>Order Total</h2>
 	                            <ul class="summary-table">
 	                                <!-- <li><span>delivery:</span> <span class="deliver"></span></li> -->
 	                                <li>
@@ -139,17 +128,19 @@
 	                                </li>
 	                            </ul>
 	                            <div class="cart-btn">
-	                                <a href="./cartList" class="btn amado-btn w-100" id="cart">
-	                                    <span class="site-btn clear-btn">카트로 돌아가기</span>
+	                                <a href="./packing?restaurantNum=${order[0].menuVOs.restaurantNum}" class="btn amado-btn w-100" id="cart" style="color: white">
+	                                    <span class="site-btn clear-btn">이전 단계</span>
 	                                </a>
 	                            </div>
 	                        </div>
-	                        
-	                        <div class="cart-summary" style="margin-top: 30px;">
-	                            <h5>결제수단</h5>
+	                   	</div>
+	                   	
+	                    <div class="col-12 col-lg-4">
+	                        <div class="cart-summary">
+	                            <h2>Payment</h2>
 	                            <ul class="summary-table">
-	                                <label><input type="radio" name="payment" id="kakaobtn" onclick="payDisplayView('0')" value="kakao" checked>&nbsp;<img src="../resources/img/payment_icon_yellow_medium.png" style="width:60px; height:25px">&nbsp;카카오페이</label><br><br>
-	                                <label><input type="radio" name="payment" id="tossbtn" onclick="payDisplayView('1')" value="toss">&nbsp;<img src="../resources/img/tosspay.png" style="width:74px; height:18px">&nbsp;토스페이</label><br><br>
+	                                <label><input type="radio" name="payment" id="kakaobtn" onclick="payDisplayView('0')" value="kakao" checked>&nbsp;<img src="../resources/img/카카오페이_CI_logotype.png" style="width:20%; height:20%">&nbsp;카카오페이</label><br><br>
+	                                <label><input type="radio" name="payment" id="tossbtn" onclick="payDisplayView('1')" value="toss">&nbsp;<img src="../resources/img/logo-toss-blue.png" style="width:20%; height:20%">&nbsp;토스페이</label><br><br>
 	                                <label><input type="radio" name="payment" id="cashbtn" onclick="payDisplayView('2')" value="cash">&nbsp;무통장입금</label>
 	                                
 	                                <div id="kakaopay">
@@ -166,7 +157,7 @@
 	                                    <input type="hidden" name="cardName" id="cash" value="무통장입금" disabled>
 	                                    <input type="hidden" name="cardNum" id="cardNum3" value="2" disabled>
 	                                    <input type="hidden" name="cardExp" id="cardExp3" value="2022/01/01" disabled>
-	                                    <div>입금계좌 : 신한은행 이병훈 111-111111-11-111</div>
+	                                    <div>입금계좌 : 신한은행 홍길동 111-111111-11-111</div>
 	                                </div>
 	                                <br>
 	                                <div>전자상거래법 제 8조 제2항에 동의하고 결제합니다.</div>
@@ -176,7 +167,7 @@
 	                                    <!-- <button id="kakaoPay" class="btn btn-primary">결제하기</button> -->
 	                                    <div class="cart-btn">
 	                                        <a id="kakaoPay" class="btn amado-btn w-100">
-	                                            <span class="site-btn clear-btn">주문하기</span>
+	                                            <span class="site-btn clear-btn">결제하기</span>
 	                                        </a>
 	                                    </div>
 	                                </div>
@@ -185,7 +176,7 @@
 	                                    <!-- <button id="tossPay" class="btn btn-primary">결제하기</button> -->
 	                                    <div class="cart-btn">
 	                                        <a id="tossPay" class="btn amado-btn w-100">
-	                                            <span class="site-btn clear-btn">주문하기</span>
+	                                            <span class="site-btn clear-btn">결제하기</span>
 	                                        </a>
 	                                    </div>
 	                                </div>
@@ -195,7 +186,7 @@
 	                                    <!-- <button id="cashPay" class="btn btn-primary">결제하기</button> -->
 	                                    <div class="cart-btn">
 	                                        <a id="cashPay" class="btn amado-btn w-100">
-	                                            <span class="site-btn clear-btn">주문하기</span>
+	                                            <span class="site-btn clear-btn">결제하기</span>
 	                                        </a>
 	                                    </div>
 	                                </div>
@@ -207,6 +198,7 @@
 	                            </div> -->
 	                        </div>
 	                    </div>
+	                    
 	                </div>
 	            </form>
 	        </div>

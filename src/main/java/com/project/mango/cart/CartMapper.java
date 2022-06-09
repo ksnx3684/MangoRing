@@ -4,12 +4,19 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.project.mango.member.MemberVO;
 import com.project.mango.order.PaymentDetailVO;
 import com.project.mango.order.PaymentVO;
 
 @Mapper
 public interface CartMapper {
 
+	// cartCheck
+	public List<CartVO> cartCheck(CartVO cartVO) throws Exception;
+	
+	// cartAdd
+	public int cartAdd(CartVO cartVO) throws Exception;
+	
 	// cartList
 	public List<CartVO> cartList(CartVO cartVO) throws Exception;
 	
@@ -24,6 +31,12 @@ public interface CartMapper {
 	
 	// cartOrder
 	public CartVO cartOrder(Long cartNum) throws Exception;
+
+	// packingOrder
+	public CartVO packingOrder(Long menuNum) throws Exception;
+	
+	// clear
+	public int clear(MemberVO memberVO) throws Exception;
 	
 	// order
 	public int order(PaymentVO paymentVO) throws Exception;

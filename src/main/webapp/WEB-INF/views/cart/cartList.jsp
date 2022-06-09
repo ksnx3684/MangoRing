@@ -9,6 +9,18 @@
 </head>
 <body>
     <c:import url="../template/header.jsp"></c:import>
+    <style>
+        body.modal-open {
+          overflow: auto;
+        }
+        body.modal-open[style] {
+          padding-right: 0px !important;
+        }
+        .container{
+          margin-top: 50px;
+          margin-bottom: 50px;
+        }
+    </style>
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Monoton&display=swap" rel="stylesheet">
@@ -28,35 +40,10 @@
     <link rel="stylesheet" href="../css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="../css/jquery.timepicker.css">
 
-    
     <link rel="stylesheet" href="../css/flaticon.css">
     <link rel="stylesheet" href="../css/icomoon.css">
     <link rel="stylesheet" href="../css/style.css">
 
-
-    
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-    <div class="container">
-        <a class="navbar-brand" href="../">MangoRing</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="oi oi-menu"></span> Menu
-        </button>
-
-        <div class="collapse navbar-collapse" id="ftco-nav">
-        <ul class="navbar-nav ml-auto">
-          
-            <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-            <li class="nav-item active"><a href="about.html" class="nav-link">About</a></li>
-            <li class="nav-item"><a href="menu.html" class="nav-link">Menu</a></li>
-            <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-            <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-            <li class="nav-item cta"><a href="reservation.html" class="nav-link">Book a table</a></li>
-        </ul>
-        </div>
-    </div>
-    </nav>
-    <!-- END nav -->
-    
     <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_3.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
@@ -70,83 +57,82 @@
     </section>
 
 	<!-- Cart table Area Start -->
-       <div class="cart-table-area section-padding-100">
-         <div class="container-fluid">
-           <form id="frm" action="./cartList" method="post">
-             <div class="row">
-                 <div class="col-12 col-lg-8">
-                     <div class="cart-title mt-50">
-                       <h2>Shopping Cart</h2>
-                     </div>
-                     <div class="cart-table clearfix">
-                       <table class="table table-responsive">
-                         <thead>
-                           <tr>
-                             <th></th>
-                             <th>상품명</th>
-                             <th>갯수</th>
-                             <th>가격</th>
-                           </tr>
-                         </thead>
-                         <tbody>
-                           <c:forEach items="${cartList}" var="dto" varStatus="status">
-                             <tr>
-                               <td class="cart_product_img">
-                                 <input class="check" id="cartNum" name="cartNum" type="checkbox" data-cartNum="${dto.cartNum}" value="${dto.cartNum}">&nbsp;
-                                 <c:if test="${dto.menuVOs.menuFileVO.fileName ne null}">
-                                   <a href="../product/detail?menuNum=${dto.menuNum}"><img class="image" src="../resources/upload/product/${dto.menuVOs.menuFileVO.fileName}" alt="Product"></a>
-                                 </c:if>
-                               </td>
-                               <td class="cart_product_desc">
-                                 <h5>${dto.menuVOs.name}</h5>${dto.menuVOs.restaurantVO.restaurantName}
-                               </td>
-                               <td class="cou">
-                                <button type="button" class="minus" data-cartNum="${dto.cartNum}" value="${dto.menuCount}">-</button>
-                                 <span class="count">${dto.menuCount}</span>
-                                 <button type="button" class="plus" data-cartNum="${dto.cartNum}" value="${dto.menuCount}">+</button>
-                               </td>
-                               <td>
-                                 <span class="price">${dto.menuVOs.price}</span>
-                               </td>
-                             </tr>
-                           </c:forEach>                                   
-                         </tbody>
-                       </table>
-                     </div>
-                 </div>
-                 <div class="col-12 col-lg-4">
-                   <div class="cart-summary">
-                     <h5>Cart Total</h5>
-                     <ul class="summary-table">
-                       <li>
-                         <span>total:</span>
-                         <span>
-                           <c:forEach items="${cartlist}">
-                             <span class="totalPrice"></span>
-                           </c:forEach>
-                           <span class="totalPrice">0</span>
-                           원
-                         </span>
-                       </li>
-                     </ul>
-                     <div class="cart-btn">
-                       <a class="btn amado-btn w-100" id="selectOrder_btn2">
-                         <span class="site-btn clear-btn">주문하기</span>
-                       </a>
-                       <form class="frm" action="./cartListDelete" method="post" style="display: inline;">
-                         <a class="btn amado-btn w-100" id="selectDelete_btn" style="margin-top: 10px;">
-                           <span class="site-btn clear-btn">선택 상품 삭제</span>
-                         </a>
-                       </form>
-                     </div>
-                   </div>
-                 </div>
-             </div>
-           </form>
-         </div>
-       </div>
-     <!-- Cart table Area End -->
-
+    <div class="cart-table-area section-padding-100">
+      <div class="container-fluid">
+        <form id="frm" action="./cartList" method="post">
+          <div class="row">
+              <div class="col-12 col-lg-8">
+                  <div class="cart-title mt-50">
+                    <h2>Shopping Cart</h2>
+                  </div>
+                  <div class="cart-table clearfix">
+                    <table class="table table-responsive">
+                      <thead>
+                        <tr>
+                          <th></th>
+                          <th>상품명</th>
+                          <th>갯수</th>
+                          <th>가격</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <c:forEach items="${cartList}" var="dto" varStatus="status">
+                          <tr>
+                            <td class="cart_product_img">
+                              <input class="check" id="cartNum" name="cartNum" type="checkbox" data-cartNum="${dto.cartNum}" value="${dto.cartNum}">&nbsp;
+                              <c:if test="${dto.menuVOs.menuFileVO.fileName ne null}">
+                                <a href="../product/detail?menuNum=${dto.menuNum}"><img class="image" src="../resources/upload/product/${dto.menuVOs.menuFileVO.fileName}" alt="Product"></a>
+                              </c:if>
+                            </td>
+                            <td class="cart_product_desc">
+                              <h5>${dto.menuVOs.name}</h5>${dto.menuVOs.restaurantVO.restaurantName}
+                            </td>
+                            <td class="cou">
+                             <button type="button" class="minus" data-cartNum="${dto.cartNum}" value="${dto.menuCount}">-</button>
+                              <span class="count">${dto.menuCount}</span>
+                              <button type="button" class="plus" data-cartNum="${dto.cartNum}" value="${dto.menuCount}">+</button>
+                            </td>
+                            <td>
+                              <span class="price">${dto.menuVOs.price}</span>
+                            </td>
+                          </tr>
+                        </c:forEach>                                   
+                      </tbody>
+                    </table>
+                  </div>
+              </div>
+              <div class="col-12 col-lg-4">
+                <div class="cart-summary">
+                  <h5>Cart Total</h5>
+                  <ul class="summary-table">
+                    <li>
+                      <span>total:</span>
+                      <span>
+                        <%-- <c:forEach items="${cartlist}">
+                          <span class="totalPrice"></span>
+                        </c:forEach> --%>
+                        <span class="totalPrice">0</span>
+                        원
+                      </span>
+                    </li>
+                  </ul>
+                  <div class="cart-btn">
+                    <a class="btn amado-btn w-100" id="selectOrder_btn2">
+                      <span class="site-btn clear-btn">주문하기</span>
+                    </a>
+                    <form class="frm" action="./cartListDelete" method="post" style="display: inline;">
+                      <a class="btn amado-btn w-100" id="selectDelete_btn" style="margin-top: 10px;">
+                        <span class="site-btn clear-btn">선택 상품 삭제</span>
+                      </a>
+                    </form>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Cart table Area End -->
 
 	 <script>
         $("#selectDelete_btn").click(function () {
@@ -287,7 +273,7 @@
           </div>
           </div>
         </div>
-        </footer>
+       </footer>
 
 
       <!-- loader -->

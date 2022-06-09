@@ -10,6 +10,7 @@ import com.project.mango.interceptor.ManagerInterceptor;
 import com.project.mango.interceptor.MemberInterceptor;
 import com.project.mango.interceptor.OrderInterceptor;
 import com.project.mango.interceptor.OwnerInterceptor;
+import com.project.mango.interceptor.PackingInterceptor;
 
 @Configuration
 public class InterceptorConfig implements WebMvcConfigurer{
@@ -28,6 +29,10 @@ public class InterceptorConfig implements WebMvcConfigurer{
 	
 	@Autowired
 	private MemberInterceptor memberInterceptor;
+	
+	@Autowired
+	private PackingInterceptor packingInterceptor;
+
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
@@ -56,6 +61,11 @@ public class InterceptorConfig implements WebMvcConfigurer{
 				.addPathPatterns("/cart/orderComplete")
 				.addPathPatterns("/cart/kakaoPayOrderComplete")
 				.addPathPatterns("/cart/tossPayOrderComplete");
+		
+//		registry.addInterceptor(packingInterceptor)
+//				.addPathPatterns("/cart/pre")
+//				.addPathPatterns("/cart/packing");
+		
 	}	
 
 }

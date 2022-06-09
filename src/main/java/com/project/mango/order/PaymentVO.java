@@ -14,6 +14,7 @@ public class PaymentVO {
 
 	private String payNum;
 	private String id;
+	private Long restaurantNum;
 	private Long payCheck;
 	private Long totalPrice;
 	private Date payDate;

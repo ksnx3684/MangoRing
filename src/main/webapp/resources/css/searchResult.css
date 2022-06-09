@@ -1,7 +1,7 @@
-.container{
+/* .container{
     margin-top: 50px;
     margin-bottom: 50px;
-}
+} */
 
 .title > a{
     display: inline-block;
@@ -22,14 +22,24 @@ a:active {
 
 .star{
 	display: inline-block;
-}
-
-.star > h2{
-	color: #ff792a;
+  color: #ff792a;
 }
 
 .address{
 	color: #9B9B9B;
+}
+
+.sector{
+  display: flex;
+  justify-content: space-between;
+}
+
+.sector-left{
+  padding-left: 50px;
+}
+
+.sector-right{
+  padding-right: 50px;
 }
 
 .sector-left, .sector-right, .map{

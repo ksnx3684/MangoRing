@@ -9,10 +9,12 @@
 
 <title>MangoRing</title>
 <c:import url="./template/bootstrap_css.jsp"></c:import>
-<%-- <c:import url="./template/mango_header.jsp"></c:import>
- --%>  <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <%-- <c:import url="./template/mango_header.jsp"></c:import> --%>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Monoton&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Miss+Fajardose&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../resources/css/index.css">
 
     <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.css">
@@ -36,7 +38,7 @@
 <body>
 
   <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-	    <div class="container">
+	    <div class="container" style="padding-top: 50px; padding-bottom: 50px;">
 	      <a class="navbar-brand" href="/">MangoRing</a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
@@ -47,13 +49,15 @@
 	        	<li class="nav-item active"><a href="./search/detailSearch" class="nav-link">상세검색</a></li>
 	        	<c:choose>
 	        		<c:when test="${not empty member}">
-	        			<li class="nav-item"><a href="./member/myPage" class="nav-link">마이 페이지</a></li>
+                		<!-- <li class="nav-item"><a href="./cart/cartList" class="nav-link">장바구니</a></li> -->
+	        			<li class="nav-item"><a href="./member/myPage" class="nav-link">마이페이지</a></li>
+                		<li class="nav-item"><a href="./member/logout" class="nav-link">로그아웃</a></li>
 	        		</c:when>
 		        	<c:otherwise>
 		        		<li class="nav-item"><a href="./member/login" class="nav-link">로그인</a></li>
 		        	</c:otherwise>
 	        	</c:choose>
-	        	<li class="nav-item"><a href="./member/logout" class="nav-link">로그아웃</a></li>
+	        	
 	        	<!-- <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
 	          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
 	          <li class="nav-item cta"><a href="reservation.html" class="nav-link">Book a table</a></li> -->
@@ -96,7 +100,7 @@
       <div class="slider-item js-fullheight" style="background-image: url(images/bg_3.jpg);">
       	<div class="overlay"></div>
         <div class="container">
-          <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
+          <div class="row slider-text js-fullheight justify-content-center align-items-center" data-scrollax-parent="true">
 
             <div class="col-md-12 col-sm-12 text-center ftco-animate">
               <h1 class="mb-4 mt-5">Creamy Hot and Ready to Serve</h1>
@@ -107,12 +111,189 @@
         </div>
       </div>
     </section>
+    
+    <div class="row d-flex justify-content-center mt-100">
+	    <div class="col-md-4">
+		    <form class="flex-nowrap col ml-auto footer-subscribe p-0" action="/search/result" method="get">
+				<div class="container mainSearch">
+					<input type="hidden" name="address" value="">
+					<input type="text" class="form-control searchBox" placeholder="원하는 키워드로 검색해 보세요!" name="name">
+					<input type="hidden" name="star" value="0">
+					<button class="btn search">검색</button>
+				</div>
+			</form>
+			<a href="../cart/pre?restaurantNum=1">aa</a>
+		</div>
+	</div>
+
+		<c:forEach items="${prolist}" var="list">
+			${list.restaurantName}
+		</c:forEach>
+
+    <section class="ftco-section">
+    	<div class="container-fluid px-4">
+    		<div class="row justify-content-center mb-5 pb-2">
+          <div class="col-md-7 text-center heading-section ftco-animate">
+          	<span class="subheading">Specialties</span>
+            <h2 class="mb-4">Promotion</h2>
+          </div>
+        </div>
+        <div class="row">
+        	<div class="col-md-6 col-lg-4 menu-wrap">
+        		<div class="heading-menu text-center ftco-animate">
+        			<h3>Seoul</h3>
+        		</div>
+        		<c:forEach items="${seoul}" var="list">
+        			<a href="./restaurant/detail?restaurantNum=${list.restaurantNum}">
+		        		<div class="menus d-flex ftco-animate">
+			              <div class="menu-img img" style="background-image: url(images/breakfast-1.jpg);"></div>
+			              <div class="text">
+			              	<div class="d-flex">
+				                <div class="one-half">
+				                  <h3>${list.restaurantName}</h3>
+				                </div>
+				                <div class="one-forth">
+				                  <span class="price">${list.reviewVOs[0].star}</span>
+				                </div>
+				              </div>
+				              <p><span>${list.address}</span></p>
+			              </div>
+			            </div>
+		            </a>
+	            </c:forEach> 
+	        </div>
+	
+        	<div class="col-md-6 col-lg-4 menu-wrap">
+        		<div class="heading-menu text-center ftco-animate">
+        			<h3>Busan</h3>
+        		</div>
+        		<c:forEach items="${busan}" var="list">
+        			<a href="./restaurant/detail?restaurantNum=${list.restaurantNum}">
+		        		<div class="menus d-flex ftco-animate">
+			              <div class="menu-img img" style="background-image: url(images/lunch-1.jpg);"></div>
+			              <div class="text">
+			              	<div class="d-flex">
+				                <div class="one-half">
+				                  <h3>${list.restaurantName}</h3>
+				                </div>
+				                <div class="one-forth">
+				                  <span class="price">${list.reviewVOs[0].star}</span>
+				                </div>
+				              </div>
+				              <p><span>${list.address}</span></p>
+			              </div>
+			            </div>
+		            </a>
+	            </c:forEach>
+        	</div>
+	
+        	<div class="col-md-6 col-lg-4 menu-wrap">
+        		<div class="heading-menu text-center ftco-animate">
+        			<h3>Incheon</h3>
+        		</div>
+        		<c:forEach items="${incheon}" var="list">
+        			<a href="./restaurant/detail?restaurantNum=${list.restaurantNum}">
+		        		<div class="menus d-flex ftco-animate">
+			              <div class="menu-img img" style="background-image: url(images/dinner-1.jpg);"></div>
+			              <div class="text">
+			              	<div class="d-flex">
+				                <div class="one-half">
+				                  <h3>${list.restaurantName}</h3>
+				                </div>
+				                <div class="one-forth">
+				                  <span class="price">${list.reviewVOs[0].star}</span>
+				                </div>
+				              </div>
+				              <p><span>${list.address}</span></p>
+			              </div>
+		            	</div>
+	            	</a>
+            	</c:forEach>
+        	</div>
+	
+	        	<!--  -->
+        	<div class="col-md-6 col-lg-4 menu-wrap">
+        		<div class="heading-menu text-center ftco-animate">
+        			<h3>Daegu</h3>
+        		</div>
+        		<c:forEach items="${daegu}" var="list">
+        			<a href="./restaurant/detail?restaurantNum=${list.restaurantNum}">
+		        		<div class="menus d-flex ftco-animate">
+			              <div class="menu-img img" style="background-image: url(images/dessert-1.jpg);"></div>
+			              <div class="text">
+			              	<div class="d-flex">
+				                <div class="one-half">
+				                  <h3>${list.restaurantName}</h3>
+				                </div>
+				                <div class="one-forth">
+				                  <span class="price">${list.reviewVOs[0].star}</span>
+				                </div>
+				              </div>
+				              <p><span>${list.address}</span></p>
+			              </div>
+			            </div>
+		            </a>
+            	</c:forEach>
+        	</div>
+        	
+        	<div class="col-md-6 col-lg-4 menu-wrap">
+        		<div class="heading-menu text-center ftco-animate">
+        			<h3>Daejeon</h3>
+        		</div>
+        		<c:forEach items="${daejeon}" var="list">
+        			<a href="./restaurant/detail?restaurantNum=${list.restaurantNum}">
+		        		<div class="menus d-flex ftco-animate">
+			              <div class="menu-img img" style="background-image: url(images/wine-1.jpg);"></div>
+			              <div class="text">
+			              	<div class="d-flex">
+				                <div class="one-half">
+				                  <h3>${list.restaurantName}</h3>
+				                </div>
+				                <div class="one-forth">
+				                  <span class="price">${list.reviewVOs[0].star}</span>
+				                </div>
+				              </div>
+				              <p><span>${list.address}</span></p>
+			              </div>
+			            </div>
+		            </a>
+            	</c:forEach>
+        	</div>
+
+        	<div class="col-md-6 col-lg-4 menu-wrap">
+        		<div class="heading-menu text-center ftco-animate">
+        			<h3>Gwangju</h3>
+        		</div>
+        		<c:forEach items="${gwangju}" var="list">
+        			<a href="./restaurant/detail?restaurantNum=${list.restaurantNum}">
+	        			<div class="menus d-flex ftco-animate">
+			              <div class="menu-img img" style="background-image: url(images/drink-1.jpg);"></div>
+			              <div class="text">
+			              	<div class="d-flex">
+				                <div class="one-half">
+				                  <h3>${list.restaurantName}</h3>
+				                </div>
+				                <div class="one-forth">
+				                  <span class="price">${list.reviewVOs[0].star}</span>
+				                </div>
+				              </div>
+				              <p><span>${list.address}</span></p>
+			              </div>
+			            </div>
+		            </a>
+	            </c:forEach>
+	        	</div>
+	        </div>
+	    	</div>
+	   </section>
+    
+    
 <footer class="ftco-footer ftco-bg-dark ftco-section">
       <div class="container-fluid px-md-5 px-3">
         <div class="row mb-5">
           <div class="col-md-6 col-lg-3">
             <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Appetizer</h2>
+              <h2 class="ftco-heading-2">MangoRing</h2>
               <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
               <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-3">
                 <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
@@ -123,15 +304,16 @@
           </div>
           <div class="col-md-6 col-lg-3">
             <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Open Hours</h2>
+              <h2 class="ftco-heading-2">Notice</h2>
               <ul class="list-unstyled open-hours">
-                <li class="d-flex"><span>Monday</span><span>9:00 - 24:00</span></li>
-                <li class="d-flex"><span>Tuesday</span><span>9:00 - 24:00</span></li>
-                <li class="d-flex"><span>Wednesday</span><span>9:00 - 24:00</span></li>
-                <li class="d-flex"><span>Thursday</span><span>9:00 - 24:00</span></li>
-                <li class="d-flex"><span>Friday</span><span>9:00 - 02:00</span></li>
-                <li class="d-flex"><span>Saturday</span><span>9:00 - 02:00</span></li>
-                <li class="d-flex"><span>Sunday</span><span> 9:00 - 02:00</span></li>
+              	<li class="d-flex"><a href="./notice/list"><span>공지사항</span></a></li>
+              	<li class="d-flex"><span>회사 소개</span></li>
+              	<li class="d-flex"><span>광고 문의</span></li>
+              	<li class="d-flex"><span>투자 정보</span></li>
+                <li class="d-flex"><span>이용약관</span></li>
+                <li class="d-flex"><span>개인정보처리방침</span></li>
+                <li class="d-flex"><span>위치기반서비스 이용약관</span></li>
+                <li class="d-flex"><span>커뮤니티 가이드라인</span></li>
               </ul>
             </div>
           </div>
