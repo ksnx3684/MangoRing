@@ -217,4 +217,9 @@ public class MemberService {
 	public MemberVO getMemberChangeDetail(MemberVO memberVO) throws Exception{
 		return memberMapper.getMemberChangeDetail(memberVO);
 	}
+	
+	//블랙리스트 조회
+	public List<MemberVO> getBlackList(MemberVO memberVO) throws Exception {
+		return memberMapper.getBlackList(memberVO);
+	}
 }

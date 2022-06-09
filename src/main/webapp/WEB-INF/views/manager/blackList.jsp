@@ -7,11 +7,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
-<title>resList Page</title>
+<title>BlackList Page</title>
 </head>
 <body>
-
 
 	<div class="row">
 
@@ -21,25 +19,26 @@
 		</div>
 		
 	<div class="col-md-8">
-	<h1>가게 관리</h1>
+	<h1>블랙리스트 관리</h1>
 	
-	<table class="table res-list">
+	<table class="table blackList">
 		<tr>
-			<td>가게번호</td>
-			<td>카테고리 번호</td>
-			<td>아이디</td>
-			<td>가게이름</td>
+			<td>ID</td>
+			<td>이름</td>
+			<td>이메일</td>
+			<td>전화번호</td>
 		</tr>
-		<c:forEach items="${resList}" var="r">
+		<c:forEach items="${blackList}" var="b">
+		<c:if test="${b.blackList eq 1 }">
 			<tr>
-				<td>${r.restaurantNum}</td>
-				<td>${r.categoryNum }</td>
-				<td>${r.id }</td>
-				<td>${r.restaurantName }</td>
+				<td>${b.id }</td>
+				<td>${b.name }</td>
+				<td>${b.email }</td>
+				<td>${b.phone}</td>
 			</tr>
+		</c:if>
 		</c:forEach>
 	</table>
-	
 	</div>
 	</div>
 	

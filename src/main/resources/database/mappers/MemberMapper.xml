@@ -209,5 +209,10 @@
 			</association>
 	</resultMap>
 	
+	<!-- 블랙리스트 조회 -->
+	<select id="getBlackList" resultType="MemberVO">
+		SELECT * FROM MEMBER
+	</select>
+	
 	
 </mapper>

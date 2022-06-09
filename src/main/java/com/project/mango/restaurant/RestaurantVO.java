@@ -42,5 +42,7 @@ public class RestaurantVO {
 	private RestaurantFileVO restaurantFileVO;
 	private List<ReviewVO> reviewVOs;
 	
+	private Long businessOk;
+	
 
 }
