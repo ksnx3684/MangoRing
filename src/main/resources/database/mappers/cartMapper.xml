@@ -108,7 +108,7 @@
 
 	<insert id="order" parameterType="PaymentVO">
 		INSERT INTO PAYMENT(PAYNUM, PAYCHECK, TOTALPRICE, PAYDATE, WAITING, STATUS, PAYTYPE, ID, RESTAURANTNUM)
-		VALUES(#{payNum}, 0, #{totalPrice}, NOW(), 30, 0, '무통장입금', #{id}, #{restaurantNum})
+		VALUES(#{payNum}, 0, #{totalPrice}, NOW(), 0, 1, '무통장입금', #{id}, #{restaurantNum})
 	</insert>
 	<insert id="detailOrder" parameterType="PaymentDetailVO">
 		INSERT INTO PAYMENT_DETAIL(PAYNUM, MENUNUM, MENUCOUNT)
@@ -117,7 +117,7 @@
 	
 	<insert id="payOrderComplete" parameterType="PaymentVO">
 		INSERT INTO PAYMENT(PAYNUM, PAYCHECK, TOTALPRICE, PAYDATE, WAITING, STATUS, PAYTYPE, ID, RESTAURANTNUM)
-		VALUES(#{payNum}, 1, #{totalPrice}, NOW(), 30, 0, #{payType}, #{id}, #{restaurantNum})
+		VALUES(#{payNum}, 1, #{totalPrice}, NOW(), 0, 1, #{payType}, #{id}, #{restaurantNum})
 	</insert>
 	
 	
