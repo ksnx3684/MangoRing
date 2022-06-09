@@ -1,13 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<title>BlackList Page</title>
+<title>Notice List Page</title>
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
@@ -51,43 +49,14 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-end justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-            <h1 class="mb-2 bread">DetailSearch</h1>
+            <h1 class="mb-2 bread">공지사항 관리</h1>
             <p class="breadcrumbs"><span class="mr-2"><a href="../">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>DetailSearch <i class="ion-ios-arrow-forward"></i></span></p>
           </div>
         </div>
       </div>
     </section>
-
-	<div class="row">
-
-
-			<c:import url="../template/managerSide.jsp"></c:import>
+	<h1>Notice List Page</h1>
 	
-	<div class="col-md-8">
-	<h1>블랙리스트 관리</h1>
-	
-	<table class="table blackList">
-		<tr>
-			<td>ID</td>
-			<td>이름</td>
-			<td>이메일</td>
-			<td>전화번호</td>
-		</tr>
-		<c:forEach items="${blackList}" var="b">
-		<c:if test="${b.blackList eq 1 }">
-			<tr>
-				<td>${b.id }</td>
-				<td>${b.name }</td>
-				<td>${b.email }</td>
-				<td>${b.phone}</td>
-			</tr>
-		</c:if>
-		</c:forEach>
-	</table>
-	</div>
-	</div>
-	
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <!-- <script src="../js/jquery.min.js"></script> -->
    <script src="../js/jquery-migrate-3.0.1.min.js"></script>
    <script src="../js/popper.min.js"></script>

@@ -8,12 +8,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.project.mango.board.BoardVO;
 import com.project.mango.member.MemberService;
 import com.project.mango.member.MemberVO;
+import com.project.mango.notice.NoticeService;
+import com.project.mango.notice.NoticeVO;
 import com.project.mango.restaurant.RestaurantService;
 import com.project.mango.restaurant.RestaurantVO;
 import com.project.mango.review.ReviewService;
 import com.project.mango.review.ReviewVO;
+import com.project.mango.util.Pager;
 
 @Controller
 @RequestMapping("/manager/*")
@@ -28,6 +32,8 @@ public class ManagerController {
 	@Autowired
 	private ReviewService reviewService;
 	
+	@Autowired
+	private NoticeService noticeService;
 
 	@GetMapping("list")
 	public ModelAndView getList(MemberVO memberVO)throws Exception{
@@ -95,6 +101,16 @@ public class ManagerController {
 		List<MemberVO> ar = memberService.getBlackList(memberVO);
 		mv.addObject("blackList", ar);
 		mv.setViewName("manager/blackList");
+		return mv;
+	}
+	
+	//공지사항 조회
+	@GetMapping("noticeList")
+	public ModelAndView getNoticeList(NoticeVO noticeVO, Pager pager) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		List<BoardVO> ar = noticeService.getList(pager);
+		mv.addObject("noticeList", ar);
+		mv.setViewName("manager/noticeList");
 		return mv;
 	}
 	

@@ -21,9 +21,8 @@
 </head>
 <body>	
 
-<div class="manager-1">
 
-  <div class="flex-shrink-0 p-3 bg-white col-md-4" style="width: 280px;">
+  <div class="flex-shrink-0 p-3 bg-white" style="width: 280px;">
     <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
       <svg class="bi me-2" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
       <span class="fs-5 fw-semibold">MANGORING</span>
@@ -62,15 +61,14 @@
         <div class="collapse" id="orders-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
             <li><a href="#" class="link-dark rounded">해시태그관리</a></li>
-            <li><a href="#" class="link-dark rounded">공지사항관리</a></li>
+            <li><a href="../manager/noticeList" class="link-dark rounded">공지사항관리</a></li>
           </ul>
         </div>
       </li>
       
     </ul>
   </div>
-   
-</div>
+
       <script src="../resources/js/managerSide.js"></script>
 </body>
 </html>
