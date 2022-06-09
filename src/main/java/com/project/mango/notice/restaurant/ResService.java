@@ -15,8 +15,7 @@ import com.project.mango.util.Pager;
 
 
 @Service
-@Transactional(rollbackFor = Exception.class)
-public class ResService implements BoardService{
+public class ResService{
 	
 	@Autowired
 	private ResMapper resMapper;
@@ -26,15 +25,13 @@ public class ResService implements BoardService{
 	
 	
 	//detail
-	public BoardVO getDetail(ResNoticeVO resNoticeVO)throws Exception {
+	public ResNoticeVO getDetail(ResNoticeVO resNoticeVO)throws Exception {
 		return resMapper.getDetail(resNoticeVO);
 	}
 	
 	//list
-	public List<BoardVO> getList(Pager pager) throws Exception {
-		pager.makeRow();
-		pager.makeNum(resMapper.getTotalCount(pager));
-	return resMapper.getList(pager);
+	public List<ResNoticeVO> getList(ResNoticeVO resNoticeVO) throws Exception {
+	return resMapper.getList();
 	}
 	
 	
@@ -98,37 +95,6 @@ public class ResService implements BoardService{
 		fileName = fileName.substring(fileName.lastIndexOf("/")+1);
 		return fileManager.fileDelete(fileName, "/resources/upload/resNotice");
 	}
-
-	@Override
-	public BoardVO getDetail(BoardVO boardVO) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int setAdd(BoardVO boardVO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int setUpdate(BoardVO boardVO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int setDelete(BoardVO boardVO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public Long getTotalCount(Pager pager) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 
 
 }

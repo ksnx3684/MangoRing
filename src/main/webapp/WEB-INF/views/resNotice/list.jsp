@@ -58,6 +58,7 @@
       </div>
     </section>
     
+    
 	<h1>res list page</h1>
 	
 		<div class="container-md">
@@ -82,10 +83,11 @@
 			
 		</table>
 	</div>
-				<a href="./add" role="button" class="btn btn-primary mx-1">등록</a>
+				<a href="./add?restaurantNum=${resNum}" role="button" class="btn btn-primary mx-1">등록</a>
 	
+	<%-- <h1>restaurantNum : ${list.restaurantNum}</h1> --%>
 	
-		<div class="row">
+	<%-- 	<div class="row">
 		<nav aria-label="Page navigation example">
 		  <ul class="pagination">
 		    <li class="page-item">
@@ -106,7 +108,7 @@
 		  </ul>
 		</nav>
 	
-	</div>
+	</div> --%>
 	</div>
 	
 	

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -43,6 +44,7 @@ public class ManagerController {
 		mv.setViewName("manager/list");
 		return mv;
 	}
+
 	
 	@GetMapping("memberChange")
 	public ModelAndView getMemberChange(MemberVO memberVO) throws Exception{
@@ -56,12 +58,14 @@ public class ManagerController {
 	@GetMapping("memberChangeDetail")
 	public ModelAndView getMemberChangeDetail(MemberVO memberVO, RestaurantVO restaurantVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
+
 		memberVO = memberService.getMemberChangeDetail(memberVO);
 		
 		restaurantVO = restaurantService.getRestaurantNum(memberVO);
 		restaurantVO.setRestaurantNum(restaurantVO.getRestaurantNum());
 		
 		restaurantVO = restaurantService.getMemberChangeDetail(restaurantVO);
+
 		mv.addObject("mv", memberVO);
 		mv.addObject("re", restaurantVO);
 		mv.setViewName("manager/memberChangeDetail");
@@ -85,8 +89,8 @@ public class ManagerController {
 		mv.addObject("resList", ar);
 		mv.setViewName("manager/resList");
 		return mv;
-		 
 	}
+
 	
 	//리뷰 신고건 보기
 	@GetMapping("reviewList")

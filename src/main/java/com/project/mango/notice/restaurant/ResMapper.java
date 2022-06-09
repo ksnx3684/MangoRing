@@ -4,13 +4,28 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.project.mango.board.BoardMapper;
-import com.project.mango.util.Pager;
 
 
 @Mapper
-public interface ResMapper extends BoardMapper{
+public interface ResMapper{
 		
+		//list
+		public List<ResNoticeVO> getList() throws Exception;
+		
+		//detail
+		public ResNoticeVO getDetail(ResNoticeVO resNoticeVO) throws Exception;
+		
+		//add
+		public int setAdd(ResNoticeVO resNoticeVO) throws Exception;
+		
+		//update
+		public int setUpdate(ResNoticeVO resNoticeVO)throws Exception;
+		
+		//delete
+		public int setDelete (ResNoticeVO resNoticeVO) throws Exception;
+		
+//		//totalCount
+//		public Long getTotalCount(Pager pager) throws Exception;
 		
 		//file
 		//insert - setFileAdd
@@ -24,4 +39,6 @@ public interface ResMapper extends BoardMapper{
 		
 		//list - getFileList
 		public List<ResFilesVO> getFileList(ResNoticeVO resNoticeVO) throws Exception;
+
+		
 }

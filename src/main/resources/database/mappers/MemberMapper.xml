@@ -277,12 +277,15 @@
 	
 	<!-- 멤버권한변경 디테일 조회 -->
 	<select id="getMemberChangeDetail" parameterType="MemberVO" resultMap="getMemberChangeDetailResult">
-		SELECT M.*, F.*
+		SELECT M.*, F.*, R.*
 		FROM MEMBER M
 			LEFT JOIN
 			MEMBER_FILE F
 			USING(ID)
-		WHERE ID=#{id}
+			LEFT JOIN
+			RESTAURANT R
+			USING(ID)
+		WHERE M.ID=#{id}
 	</select>
 	
 	<resultMap type="MemberVO" id="getMemberChangeDetailResult">
@@ -301,12 +304,31 @@
 				<id column="fileNum" property="fileNum"/>
 				<result column="fileName" property="fileName"/>
 			</association>
+			<association property="restaurantVO" javaType="RestaurantVO">
+				<id column="restaurantNum" property="restaurantNum" />
+				<result column="id" property="id" />
+				<result column="restaurantName" property="restaurantName" />
+				<result column="restaurantPhone" property="restaurantPhone" />
+				<result column="postCode" property="postCode" />
+				<result column="address" property="address" />
+				<result column="detailAddress" property="detailAddress" />
+				<result column="extraAddress" property="extraAddress" />
+				<result column="regDate" property="regDate" />
+				<result column="editDate" property="editDate" />
+				<result column="parkingCheck" property="parkingCheck" />
+				<result column="kidCheck" property="kidCheck" />
+				<result column="introduction" property="introduction" />
+				<result column="accountNumber" property="accountNumber" />
+				<result column="businessNum" property="businessNum"/>
+			</association>
 	</resultMap>
 	
 	<!-- 블랙리스트 조회 -->
 	<select id="getBlackList" resultType="MemberVO">
 		SELECT * FROM MEMBER
 	</select>
+	
+	<!--  -->
 	
 	
 </mapper>

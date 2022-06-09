@@ -4,24 +4,9 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.mango.notice.restaurant.ResMapper">
 
-	<select id="getList" resultType="ResNoticeVO" parameterType="Pager">
+	<select id="getList" resultType="ResNoticeVO" parameterType="ResNoticeVO">
 	SELECT * FROM REST_NOTICE
-	WHERE NUM > 0 AND
-		<choose>
-			<when test="kind == 'col1'">
-				TITLE
-			</when>
-			<when test="kind == 'col2'">
-				CONTENTS
-			</when>
-			<otherwise>
-				ID
-			</otherwise>
-		</choose>
-		LIKE CONCAT('%', #{search},'%')
-		
-		ORDER BY NUM DESC
-		LIMIT #{startRow}, #{perPage}
+	WHERE RESTAURANTNUM = 3
 	</select>
 	
 	<insert id="setAdd" parameterType="ResNoticeVO" useGeneratedKeys="true" keyProperty="num">

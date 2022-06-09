@@ -120,7 +120,7 @@
 
 									<a
 										href="../reservation/write?restaurantNum=${vo1.restaurantNum }"
-										class="tag-cloud-link">예약하기 |</a> <a href="../resNotice/list"
+										class="tag-cloud-link">예약하기 |</a> <a href="../resNotice/list?restaurantNum=${vo1.restaurantNum }"
 										class="tag-cloud-link">공지사항 |</a>
 										<a href="../cart/pre?restaurantNum=${vo1.restaurantNum}"
 										class="tag-cloud-link">포장하기</a>
