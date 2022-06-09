@@ -10,6 +10,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.project.mango.member.MemberService;
 import com.project.mango.member.MemberVO;
+import com.project.mango.restaurant.RestaurantService;
+import com.project.mango.restaurant.RestaurantVO;
+import com.project.mango.review.ReviewService;
+import com.project.mango.review.ReviewVO;
 
 @Controller
 @RequestMapping("/manager/*")
@@ -17,6 +21,12 @@ public class ManagerController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private RestaurantService restaurantService;
+	
+	@Autowired
+	private ReviewService reviewService;
 	
 
 	@GetMapping("list")
@@ -38,11 +48,56 @@ public class ManagerController {
 	}
 	
 	@GetMapping("memberChangeDetail")
-	public ModelAndView getMemberChangeDetail(MemberVO memberVO) throws Exception{
+	public ModelAndView getMemberChangeDetail(MemberVO memberVO, RestaurantVO restaurantVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		memberVO = memberService.getMemberChangeDetail(memberVO);
+		restaurantVO = restaurantService.getMemberChangeDetail(restaurantVO);
 		mv.addObject("mv", memberVO);
+		mv.addObject("re", restaurantVO);
 		mv.setViewName("manager/memberChangeDetail");
 		return mv;
 	}
+	
+//	@GetMapping("memberChangeDetail")
+//	public ModelAndView getMemberChangeDetail(RestaurantVO restaurantVO) throws Exception {
+//		ModelAndView mv = new ModelAndView();
+//		restaurantVO = restaurantService.getMemberChangeDetail(restaurantVO);
+//		mv.addObject("re", restaurantVO);
+//		mv.setViewName("manager/memberChangeDetail");
+//		return mv;
+//	}
+
+	//가게 리스트출력
+	@GetMapping("resList")
+	public ModelAndView getResList (RestaurantVO restaurantVO)throws Exception {
+		ModelAndView mv = new ModelAndView();
+		List<RestaurantVO> ar = restaurantService.getResList(restaurantVO);
+		mv.addObject("resList", ar);
+		mv.setViewName("manager/resList");
+		return mv;
+		 
+	}
+	
+	//리뷰 신고건 보기
+	@GetMapping("reviewList")
+	public ModelAndView getReview(ReviewVO reviewVO)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		List<ReviewVO> ar = reviewService.getListReview(reviewVO);
+		mv.addObject("review", ar);
+		mv.setViewName("manager/reviewList");
+		return mv;
+	}
+	
+	//블랙리스트 조회
+	@GetMapping("blackList")
+	public ModelAndView getBlackList(MemberVO memberVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		List<MemberVO> ar = memberService.getBlackList(memberVO);
+		mv.addObject("blackList", ar);
+		mv.setViewName("manager/blackList");
+		return mv;
+	}
+	
+	
+	
 }

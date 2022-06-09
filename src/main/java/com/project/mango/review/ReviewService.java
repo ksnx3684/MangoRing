@@ -99,7 +99,6 @@ public class ReviewService {
 	}
 	
 	public List<ReviewVO> getListReview(ReviewVO reviewVO)throws Exception{
-		
 		return reviewMapper.getListReview(reviewVO);
 		
 	}
@@ -121,4 +120,6 @@ public class ReviewService {
 	public Long badCount(ReviewVO reviewVO)throws Exception{
 		return reviewMapper.badCount(reviewVO);
 	}
+	
+
 }

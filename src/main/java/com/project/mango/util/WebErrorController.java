@@ -35,4 +35,3 @@ public class WebErrorController implements ErrorController {
 
 }
 
-

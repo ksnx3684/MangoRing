@@ -166,5 +166,45 @@
 	<select id="getRestaurantNum" parameterType="MemberVO" resultType="RestaurantVO">
 		SELECT RESTAURANTNUM FROM RESTAURANT WHERE ID = #{id}
 	</select>
+	
+	
+	<!-- 가게 리스트 조회 -->
+	<select id="getResList" resultType="RestaurantVO">
+		SELECT * FROM RESTAURANT
+	</select>
+	
+	<!-- 상세정보 조회 -->
+	<select id="getMemberChangeDetail" parameterType="RestaurantVO" resultMap="getMemberChangeDetailResult">
+		SELECT R.*, F.*
+		FROM RESTAURANT R
+			LEFT JOIN
+			REST_FILE F
+			USING(RESTAURANTNUM)
+		WHERE RESTAURANTNUM=#{restaurantNum}
+	</select>
+	
+	<resultMap type="RestaurantVO" id="getMemberChangeDetailResult">
+		<id column="restaurantNum" property="restaurantNum"/>
+		<result column="categoryNum" property="categoryNum"/>
+		<result column="id" property="id"/>
+		<result column="restaurantName" property="restaurantName"/>
+		<result column="restaurantPhone" property="restaurantPhone"/>
+		<result column="postCode" property="postCode"/>
+		<result column="address" property="address"/>
+		<result column="detailAddress" property="detailAddress"/>
+		<result column="extraAddress" property="extraAddress"/>
+		<result column="regDate" property="regDate"/>
+		<result column="editDate" property="editDate"/>
+		<result column="parkingCheck" property="parkingCheck"/>
+		<result column="kidCheck" property="kidCheck"/>
+		<result column="introduction" property="introduction"/>
+		<result column="accountNumbe" property="accountNumbe"/>
+		<result column="businessNum" property="businessNum"/>
+		<result column="businessOk" property="businessOk"/>
+		<association property="restaurantFileVO" javaType="restaurantFileVO">
+			<id column="restaurantNum" property="restaurantNum"/>
+			<result column="fileName" property="fileName"/>
+		</association>
+	</resultMap>
 
 </mapper>

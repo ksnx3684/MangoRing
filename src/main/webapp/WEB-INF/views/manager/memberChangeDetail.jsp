@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +16,16 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+	<div class="row">
+
+
+		<div class="col-md-4">
+			<c:import url="../template/managerSide.jsp"></c:import>
+		</div>
+		
+	<div class="col-md-8">
+	
 	<h1>MemberChange Detail</h1>
 
 	<div class="member-info">
@@ -58,7 +70,7 @@
 				번호</label>
 			<div class="col-sm-10">
 				<input type="text" class="form-control" id="colFormLabel"
-					value="${mv.name}" readonly="readonly">
+					value="${re.businessNum}" readonly="readonly">
 			</div>
 
 			<div class="row mb-3">
@@ -66,7 +78,7 @@
 					</label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" id="colFormLabel"
-						value="${member.name}" readonly="readonly">
+						value="${re.address}" readonly="readonly">
 				</div>
 
 				<div class="row mb-3">
@@ -74,7 +86,7 @@
 						</label>
 					<div class="col-sm-10">
 						<input type="text" class="form-control" id="colFormLabel"
-							value="${member.name}" readonly="readonly">
+							value="${re.categoryNum}" readonly="readonly">
 					</div>
 				</div>
 				<div class="row mb-3">
@@ -82,7 +94,7 @@
 						</label>
 					<div class="col-sm-10">
 						<input type="text" class="form-control" id="colFormLabel"
-							value="${member.name}" readonly="readonly">
+							value="${re.parkingCheck}" readonly="readonly">
 					</div>
 				</div>
 				<div class="row mb-3">
@@ -90,11 +102,14 @@
 						</label>
 					<div class="col-sm-10">
 						<input type="text" class="form-control" id="colFormLabel"
-							value="${member.name}" readonly="readonly">
+							value="${re.kidCheck}" readonly="readonly">
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
+	
+	</div>
 	</div>
 
 	<script

@@ -50,4 +50,6 @@ public interface ReviewMapper {
 	
 	//리뷰 별로에요 갯수
 	public Long badCount(ReviewVO reviewVO)throws Exception;
+	
+
 }

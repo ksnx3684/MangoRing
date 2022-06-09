@@ -132,6 +132,9 @@ UPDATE REVIEW SET REPORTCHECK=#{reportCheck}, REPORTOPTION = #{reportOption} WHE
 		/> <result column="reportCheck" property="reportCheck" /> <result column="contents" 
 		property="contents" /> </collection> </resultMap> -->
 
-
+	<!-- 리뷰 신고목록 가져오기 -->
+	<select id="reviewList" resultType="ReviewVO">
+		SELECT * FROM REVIEW
+	</select>
 
 </mapper>

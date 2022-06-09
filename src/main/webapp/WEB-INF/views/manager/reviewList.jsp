@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-<title>resList Page</title>
+<title>Review List</title>
 </head>
 <body>
 
@@ -21,23 +21,29 @@
 		</div>
 		
 	<div class="col-md-8">
-	<h1>가게 관리</h1>
-	
-	<table class="table res-list">
+	<h1>리뷰 관리</h1>
+
+	<table class="table review-list">
 		<tr>
+			<td>리뷰번호</td>
 			<td>가게번호</td>
-			<td>카테고리 번호</td>
 			<td>아이디</td>
-			<td>가게이름</td>
+			<td>별점</td>
+			<td>리뷰내용</td>
 		</tr>
-		<c:forEach items="${resList}" var="r">
-			<tr>
-				<td>${r.restaurantNum}</td>
-				<td>${r.categoryNum }</td>
-				<td>${r.id }</td>
-				<td>${r.restaurantName }</td>
-			</tr>
+		
+		<c:forEach items="${review}" var="r">
+			<c:if test="${r.reportcheck eq 1}">
+				<tr>
+					<td>${r.reviewNum}</td>
+					<td>${r.restaurantNum }</td>
+					<td>${r.id }</td>
+					<td>${r.star }</td>
+					<td>${r.contents }</td>
+				</tr>
+			</c:if>
 		</c:forEach>
+	
 	</table>
 	
 	</div>

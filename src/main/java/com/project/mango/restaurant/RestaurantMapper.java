@@ -44,5 +44,11 @@ public interface RestaurantMapper {
 	public int setAllTagDelete (RestaurantVO restaurantVO) throws Exception;
 	
 	public RestaurantVO getRestaurantNum(MemberVO memberVO) throws Exception;
+	
+	//권한변경 디테일 조회
+	public RestaurantVO getMemberChangeDetail(RestaurantVO restaurantVO) throws Exception;
+	
+	//리스트출력
+	public List<RestaurantVO> getResList(RestaurantVO restaurantVO) throws Exception;
 
 }
