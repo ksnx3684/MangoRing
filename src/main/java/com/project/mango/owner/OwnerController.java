@@ -405,8 +405,10 @@ public class OwnerController {
 		
 		MemberVO memberVO = (MemberVO)session.getAttribute("member");
 		
+		System.out.println("hhhhhhhhhhhhh"+restaurantVO.getRestaurantNum());
 		restaurantVO.setId(memberVO.getId()); //레스토랑 정보 ?
 		restaurantVO= restaurantService.getList(restaurantVO);
+		System.out.println("hhhhhhhhhhhhh"+restaurantVO.getRestaurantNum());
 		
 		reviewVO.setRestaurantNum(restaurantVO.getRestaurantNum());
 		reviewVO.setId(memberVO.getId());
@@ -417,6 +419,7 @@ public class OwnerController {
 		mv.addObject("rest",restaurantVO);
 		mv.addObject("list",ar);
 		mv.addObject("listPromo",arPromo);
+		
 		return mv;
 	}
 	

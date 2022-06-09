@@ -34,7 +34,7 @@
 
 	<form action="./add" method="post">
 		<div class="input-group mb-3">
-
+<input type="hidden" name="restaurantNum" value="${pVo.restaurantNum }" id="restaurantNum">
 			<input type="hidden" name="promotionNum"> <span
 				class="input-group-text" id="basic-addon1">쿠폰이름</span> <input
 				id="promotionName" type="text" name="promotionName"
@@ -103,7 +103,7 @@
 		$("#add").click(function() {
 			
 							let promotionResult = $("#promotionResult")
-
+							let restaurantNum = $("#restaurantNum").val();
 							let promotionName = $("#promotionName").val();
 							let promotionDetail = $("#promotionDetail").val();
 							let discount = $("#discount").val();
@@ -142,6 +142,7 @@
 								url : "./add",
 								
 								data : {
+									restaurantNum : restaurantNum,
 									promotionName : promotionName,
 									promotionDetail : promotionDetail,
 									discount : discount,
@@ -162,6 +163,7 @@
 										alert("상품 등록 완료");
 										
 										getList();
+										$("#restaurantNum").val("");
 										$("#promotionName").val("");
 										$("#promotionDetail").val("");
 										$("#discount").val("");
