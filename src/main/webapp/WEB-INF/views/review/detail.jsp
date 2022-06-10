@@ -25,7 +25,7 @@
 <link rel="stylesheet" href="../resources/css/reviewDetail.css">
 </head>
 <body>
-<c:import url="../template/header.jsp"></c:import>
+<%-- <c:import url="../template/header.jsp"></c:import> --%>
     <style>
         body.modal-open {
           overflow: auto;
