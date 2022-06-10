@@ -80,7 +80,7 @@
 
 		<div class="col-md-8">
 
-
+<!-- 
 			<div class="mt-5 col-5 mb-5">
 				<form class="d-flex" action="./list" method="get">
 					<div class="col-4 me-2">
@@ -98,7 +98,7 @@
 						<button class="btn btn-outline-success" type="submit">Search</button>
 					</div>
 				</form>
-			</div>
+			</div> -->
 
 
 			<table class="table member-list">
@@ -112,7 +112,16 @@
 					<tr>
 						<td>${m.id}</td>
 						<td>${m.name}</td>
-						<td>${m.userType }</td>
+						<c:if test="${m.userType eq 1 }">
+							<td>일반회원</td>
+						</c:if>
+						<c:if test="${m.userType eq 2 }">
+							<td>사장</td>
+						</c:if>
+						<c:if test="${m.userType eq 3 }">
+							<td>관리자</td>
+						</c:if>
+						
 						<td>${m.joinDate}</td>
 					</tr>
 				</c:forEach>

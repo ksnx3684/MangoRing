@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.project.mango.member.MemberVO;
 import com.project.mango.restaurant.RestaurantVO;
 
 @Mapper
@@ -50,6 +51,19 @@ public interface ReviewMapper {
 	
 	//리뷰 별로에요 갯수
 	public Long badCount(ReviewVO reviewVO)throws Exception;
+	
+	//리뷰 리스트 조회
+	public List<ReviewVO> reviewList() throws Exception;
+
+	//조회
+	public int approval(MemberVO memberVO) throws Exception;
+	
+	public int napproval(MemberVO memberVO) throws Exception;
+	//조회
+	public int rapproval(MemberVO memberVO) throws Exception;
+	
+	public int rnapproval(MemberVO memberVO) throws Exception;
+	
 	
 
 }

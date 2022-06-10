@@ -136,5 +136,27 @@ UPDATE REVIEW SET REPORTCHECK=#{reportCheck}, REPORTOPTION = #{reportOption} WHE
 	<select id="reviewList" resultType="ReviewVO">
 		SELECT * FROM REVIEW
 	</select>
+	
+	<!-- 신고 업데이트 -->
+	<update id="approval" parameterType="MemberVO">
+		UPDATE MEMBER SET BUSINESSOK = 2
+		WHERE ID = #{id}
+	</update>
+	
+	<update id="napproval" parameterType="MemberVO">
+		UPDATE MEMBER SET BUSINESSOK = 3
+		WHERE ID = #{id}
+	</update>
+	
+		<!-- 신고 업데이트 -->
+	<update id="rapproval" parameterType="MemberVO">
+		UPDATE RESTAURANT SET BUSINESSOK = 2
+		WHERE ID = #{id}
+	</update>
+	
+	<update id="rnapproval" parameterType="MemberVO">
+		UPDATE RESTAURANT SET BUSINESSOK = 3
+		WHERE ID = #{id}
+	</update>
 
 </mapper>

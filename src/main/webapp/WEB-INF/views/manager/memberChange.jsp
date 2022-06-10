@@ -53,7 +53,7 @@
         <div class="row no-gutters slider-text align-items-end justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
             <h1 class="mb-2 bread">회원변경 관리</h1>
-            <p class="breadcrumbs"><span class="mr-2"><a href="../">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>DetailSearch <i class="ion-ios-arrow-forward"></i></span></p>
+            <p class="breadcrumbs"><span class="mr-2"><a href="../">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Member Change <i class="ion-ios-arrow-forward"></i></span></p>
           </div>
         </div>
       </div>
@@ -70,7 +70,7 @@
 	
 	<table class="table memberChange-list">
 		<tr>
-			<td>아이디</td>
+			<td>ID</td>
 			<td>이름</td>
 			<td>상태</td>
 		</tr>
@@ -78,7 +78,18 @@
 			<tr>
 				<td>${m.id }</td>
 				<td><a class="link-dark text-decoration-none" href="./memberChangeDetail?id=${m.id}">${m.name}</a></td>
-				<td>${m.businessOk}</td>
+				<c:if test="${m.businessOk eq 0}">
+					<td>미신청</td>
+				</c:if>
+				<c:if test="${m.businessOk eq 1}">
+					<td>승인대기</td>
+				</c:if>
+				<c:if test="${m.businessOk eq 2}">
+					<td>승인</td>
+				</c:if>
+				<c:if test="${m.businessOk eq 3}">
+					<td>승인 거절</td>
+				</c:if>
 			</tr>
 		</c:forEach>
 	</table>

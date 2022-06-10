@@ -72,14 +72,43 @@
 	<table class="table res-list">
 		<tr>
 			<td>가게번호</td>
-			<td>카테고리 번호</td>
+			<td>카테고리 이름</td>
 			<td>아이디</td>
 			<td>가게이름</td>
 		</tr>
 		<c:forEach items="${resList}" var="r">
 			<tr>
 				<td>${r.restaurantNum}</td>
-				<td>${r.categoryNum }</td>
+				<c:if test="${r.categoryNum eq 100}">
+					<td>한식</td>
+				</c:if>
+				<c:if test="${r.categoryNum eq 101}">
+					<td>양식</td>
+				</c:if>
+				<c:if test="${r.categoryNum eq 102}">
+					<td>중식</td>
+				</c:if>
+				<c:if test="${r.categoryNum eq 103}">
+					<td>일식</td>
+				</c:if>
+				<c:if test="${r.categoryNum eq 104}">
+					<td>치킨</td>
+				</c:if>
+				<c:if test="${r.categoryNum eq 105}">
+					<td>피자</td>
+				</c:if>
+				<c:if test="${r.categoryNum eq 106}">
+					<td>햄버거</td>
+				</c:if>
+				<c:if test="${r.categoryNum eq 107}">
+					<td>파스타</td>
+				</c:if>
+				<c:if test="${r.categoryNum eq 108}">
+					<td>돈가스</td>
+				</c:if>
+				<c:if test="${r.categoryNum eq 109}">
+					<td>족발</td>
+				</c:if>
 				<td>${r.id }</td>
 				<td>${r.restaurantName }</td>
 			</tr>

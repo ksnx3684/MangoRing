@@ -51,8 +51,8 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-end justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-            <h1 class="mb-2 bread">DetailSearch</h1>
-            <p class="breadcrumbs"><span class="mr-2"><a href="../">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>DetailSearch <i class="ion-ios-arrow-forward"></i></span></p>
+            <h1 class="mb-2 bread">블랙리스트 관리</h1>
+            <p class="breadcrumbs"><span class="mr-2"><a href="../">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>BlackList<i class="ion-ios-arrow-forward"></i></span></p>
           </div>
         </div>
       </div>
@@ -64,7 +64,6 @@
 			<c:import url="../template/managerSide.jsp"></c:import>
 	
 	<div class="col-md-8">
-	<h1>블랙리스트 관리</h1>
 	
 	<table class="table blackList">
 		<tr>

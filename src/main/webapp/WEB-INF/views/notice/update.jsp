@@ -52,13 +52,13 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-end justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-            <h1 class="mb-2 bread">DetailSearch</h1>
-            <p class="breadcrumbs"><span class="mr-2"><a href="../">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>DetailSearch <i class="ion-ios-arrow-forward"></i></span></p>
+            <h1 class="mb-2 bread">공지사항</h1>
+            <p class="breadcrumbs"><span class="mr-2"><a href="../">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Notice Update <i class="ion-ios-arrow-forward"></i></span></p>
           </div>
         </div>
       </div>
     </section>
-	<h1>update page</h1>
+
 	
 		<div class="container-md row mt-4">
 		<form action="update" method="post" enctype="multipart/form-data">
@@ -83,14 +83,6 @@
 		      <input type="file" name="files" class="form-control" id="files">
 		    </div>
 		  </div>
-		  
-		  <div class="row mb-3">
-		    <label for="files" class="col-sm-2 col-form-label">File</label>
-		    <div class="col-sm-10">
-		      <input type="file" name="files" class="form-control" id="files">
-		    </div>
-		  </div>
-		  
 		  
 		  
 		 

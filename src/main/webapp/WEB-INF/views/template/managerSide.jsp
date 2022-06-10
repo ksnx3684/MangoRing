@@ -54,7 +54,7 @@
         </div>
       </li>
       
-      <li class="mb-1">
+     <!--  <li class="mb-1">
         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
          일반
         </button>
@@ -64,7 +64,7 @@
             <li><a href="../manager/noticeList" class="link-dark rounded">공지사항관리</a></li>
           </ul>
         </div>
-      </li>
+      </li> -->
       
     </ul>
   </div>

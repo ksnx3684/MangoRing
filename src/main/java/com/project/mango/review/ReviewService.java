@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.project.mango.member.MemberVO;
 import com.project.mango.restaurant.RestaurantVO;
 import com.project.mango.util.FileManager;
 
@@ -121,5 +122,25 @@ public class ReviewService {
 		return reviewMapper.badCount(reviewVO);
 	}
 	
+	//리뷰 주회
+	public List<ReviewVO> reviewList() throws Exception{
+		return reviewMapper.reviewList();
+	}
+	
+	public int approval(MemberVO memberVO) throws Exception {
+		return reviewMapper.approval(memberVO);
+	}
+	
+	public int napproval(MemberVO memberVO) throws Exception {
+		return reviewMapper.napproval(memberVO);
+	}
+	
+	public int rapproval(MemberVO memberVO) throws Exception {
+		return reviewMapper.rapproval(memberVO);
+	}
+	
+	public int rnapproval(MemberVO memberVO) throws Exception {
+		return reviewMapper.rnapproval(memberVO);
+	}
 
 }

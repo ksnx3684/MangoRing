@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.mango.board.BoardVO;
@@ -94,9 +95,9 @@ public class ManagerController {
 	
 	//리뷰 신고건 보기
 	@GetMapping("reviewList")
-	public ModelAndView getReview(ReviewVO reviewVO)throws Exception{
+	public ModelAndView reviewList(ReviewVO reviewVO)throws Exception{
 		ModelAndView mv = new ModelAndView();
-		List<ReviewVO> ar = reviewService.getListReview(reviewVO);
+		List<ReviewVO> ar = reviewService.reviewList();
 		mv.addObject("review", ar);
 		mv.setViewName("manager/reviewList");
 		return mv;
@@ -120,6 +121,20 @@ public class ManagerController {
 		mv.addObject("noticeList", ar);
 		mv.setViewName("manager/noticeList");
 		return mv;
+	}
+	
+	@PostMapping("approval")
+	@ResponseBody
+	public void approval(MemberVO memberVO)throws Exception {
+		int result = reviewService.approval(memberVO);
+		int result2 = reviewService.rapproval(memberVO);
+	}
+	
+	@PostMapping("napproval")
+	@ResponseBody
+	public void napproval(MemberVO memberVO)throws Exception {
+		int result = reviewService.napproval(memberVO);
+		int result2 = reviewService.rnapproval(memberVO);
 	}
 	
 	
