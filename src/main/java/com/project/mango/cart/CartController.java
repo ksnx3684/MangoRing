@@ -175,7 +175,7 @@ public class CartController {
 		List<CartVO> lists = cartService.cartList(cartVO);
 		
 		// 프로모션
-		List<PromotionVO> prolist = promotionService.getList();
+		List<PromotionVO> prolist = promotionService.getList(memberVO);
 		List<PromotionVO> promotion = new ArrayList<PromotionVO>();
 		
 		for(PromotionVO p : prolist) {

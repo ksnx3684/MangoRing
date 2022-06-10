@@ -94,7 +94,7 @@
 					<div class="video justify-content-center">
 
 	<div class="reviewpicTitle">
-		<h1>ID :</h1>
+		<h1>ID :${revo.id}</h1>
 
 		<c:if test="${revo.star eq '5' }">
 			<h1 id="reviewStar">리뷰 ★★★★★</h1>

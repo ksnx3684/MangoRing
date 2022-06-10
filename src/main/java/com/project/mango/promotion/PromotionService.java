@@ -6,9 +6,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.mango.member.MemberVO;
 import com.project.mango.menu.MenuVO;
 import com.project.mango.restaurant.RestaurantVO;
-import com.project.mango.util.Pager;
 
 @Service
 public class PromotionService {
@@ -20,9 +20,9 @@ public class PromotionService {
 		return promotionMapper.setPromotionAdd(promotionVO); 
 	}
 	
-	public List<PromotionVO> getList()throws Exception{
+	public List<PromotionVO> getList(MemberVO memberVO )throws Exception{
 
-		return promotionMapper.getList();
+		return promotionMapper.getList(memberVO);
 	}
 	
 	public List<RestaurantVO> nowPro(String site) throws Exception{

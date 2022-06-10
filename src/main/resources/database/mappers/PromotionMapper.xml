@@ -10,8 +10,8 @@
 	</insert>
 
 
-	<select id="getList" resultType="PromotionVO">
-	SELECT * FROM PROMOTION 
+	<select id="getList" parameterType="MemberVO" resultType="PromotionVO">
+	SELECT * FROM PROMOTION WHERE ID = #{id}
 	</select>
 
 	<resultMap type="RestaurantVO" id="RestaurantVO">

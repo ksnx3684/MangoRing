@@ -26,9 +26,9 @@ public class PromotionController {
 	private PromotionService promotionService;
 	
 	@GetMapping("list")
-	public ModelAndView getList()throws Exception{
+	public ModelAndView getList(MemberVO memberVO)throws Exception{
 		ModelAndView mv = new ModelAndView();
-		List<PromotionVO> ar = promotionService.getList();
+		List<PromotionVO> ar = promotionService.getList(memberVO);
 		mv.addObject("list",ar);
 		
 		mv.setViewName("promotion/list");
@@ -36,12 +36,12 @@ public class PromotionController {
 	}
 	
 	@GetMapping("ajaxList")
-	public ModelAndView getAjaxList(HttpSession session)throws Exception{
+	public ModelAndView getAjaxList(HttpSession session, MemberVO memberVO)throws Exception{
 		ModelAndView mv = new ModelAndView();
 		System.out.println("AjaxList");
 	//	MemberVO memberVO =(MemberVO)session.getAttribute("member");
 		
-		List<PromotionVO> ar = promotionService.getList();
+		List<PromotionVO> ar = promotionService.getList(memberVO);
 		mv.addObject("list",ar);
 		
 		mv.setViewName("common/promotionList");

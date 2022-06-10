@@ -132,7 +132,7 @@
 						
 						<input name="restaurantNum" type="hidden" value="${vo.restaurantNum }">
 			작성자 : <input type="text" value="${member.id }" readonly="readonly" name="id">
-			<button type="submit" id="btnReview" class="btn btn-primary py-3 px-5">리뷰 등록${vo.restaurantNum } </button>
+			<button type="submit" id="btnReview" class="btn btn-primary py-3 px-5">리뷰 등록</button>
 							
 						</div>
 

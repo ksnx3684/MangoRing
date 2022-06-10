@@ -36,14 +36,14 @@
 		<div class="input-group mb-3">
 <input type="hidden" name="restaurantNum" value="${pVo.restaurantNum }" id="restaurantNum">
 			<input type="hidden" name="promotionNum"> <span
-				class="input-group-text" id="basic-addon1">쿠폰이름</span> <input
+				class="input-group-text" id="basic-addon1">프로모션 이름</span> <input
 				id="promotionName" type="text" name="promotionName"
 				class="form-control" placeholder="Promotion Name"
 				aria-label="Username" aria-describedby="basic-addon1">
 		</div>
 
 		<div class="input-group mb-3">
-			<span class="input-group-text" id="basic-addon1">쿠폰내용</span> <input
+			<span class="input-group-text" id="basic-addon1">프로모션 내용</span> <input
 				id="promotionDetail" type="text" name="promotionDetail"
 				class="form-control" placeholder="Promotion Contents"
 				aria-label="Username" aria-describedby="basic-addon1">

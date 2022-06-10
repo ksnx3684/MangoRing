@@ -20,6 +20,7 @@ public class OwnerInterceptor implements HandlerInterceptor{
 		boolean check = false;
 		
 		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("member");
+		System.out.println("유저 등급 출력 : " + memberVO.getUserType());
 		if(memberVO != null && memberVO.getUserType() == 2) {
 			check = true;
 		}

@@ -5,16 +5,16 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.project.mango.member.MemberVO;
 import com.project.mango.menu.MenuVO;
 import com.project.mango.restaurant.RestaurantVO;
-import com.project.mango.util.Pager;
 
 @Mapper
 public interface PromotionMapper {
 	
 	public int setPromotionAdd(PromotionVO promotionVO)throws Exception;	
 	
-	public List<PromotionVO> getList()throws Exception;
+	public List<PromotionVO> getList(MemberVO memberVO)throws Exception;
 	
 	public List<RestaurantVO> nowPro(String site) throws Exception;
 	

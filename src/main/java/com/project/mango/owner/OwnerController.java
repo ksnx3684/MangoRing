@@ -414,7 +414,7 @@ public class OwnerController {
 		reviewVO.setId(memberVO.getId());
 		List<ReviewVO> ar= reviewService.getListReview(reviewVO);
 		
-		List<PromotionVO> arPromo = promotionService.getList();
+		List<PromotionVO> arPromo = promotionService.getList(memberVO);
 		mv.setViewName("owner/shop/ownerPage");
 		mv.addObject("rest",restaurantVO);
 		mv.addObject("list",ar);
