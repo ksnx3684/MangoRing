@@ -69,60 +69,60 @@
 
  
     <section class="home-slider owl-carousel js-fullheight">
-      <div class="slider-item js-fullheight" style="background-image: url(images/KakaoTalk_20220609_152501189.png);">
+      <div class="slider-item js-fullheight" style="background-image: url(images/siyuan-g_V2rt6iG7A-unsplash.jpg);">
       	<div class="overlay"></div>
         <div class="container">
           <div class="row slider-text js-fullheight justify-content-center align-items-center" data-scrollax-parent="true">
 
             <div class="col-md-12 col-sm-12 text-center ftco-animate">
-              <!-- <h1 class="mb-4 mt-5"> yuum </h1>
-              <p><a href="#" class="btn btn-primary p-3 px-xl-4 py-xl-3">Order Now</a> <a href="#" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">View Menu</a></p> -->
+              <h1 class="mb-4 mt-5">There is no love sincerer than the love of food</h1>
+              <!-- <p><a href="#" class="btn btn-primary p-3 px-xl-4 py-xl-3">Order Now</a> <a href="#" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">View Menu</a></p> -->
             </div>
 
           </div>
         </div>
       </div>
 
-      <div class="slider-item js-fullheight" style="background-image: url(images/KakaoTalk_20220609_151544556.png);">
+      <div class="slider-item js-fullheight" style="background-image: url(images/luisa-brimble-aFzg83dvnAI-unsplash.jpg);">
+      	<div class="overlay"></div>
+        <div class="container">
+          <div class="row slider-text js-fullheight justify-content-center align-items-center" data-scrollax-parent="true">
+			
+            <div class="col-md-12 col-sm-12 text-center ftco-animate">
+              <h1 class="mb-4 mt-5">Life is a combination of magic and pasta</h1>
+              <!-- <p><a href="#" class="btn btn-primary p-3 px-xl-4 py-xl-3">Order Now</a> <a href="#" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">View Menu</a></p> -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="slider-item js-fullheight" style="background-image: url(images/edward-howell-vvUy1hWVYEA-unsplash.jpg);">
       	<div class="overlay"></div>
         <div class="container">
           <div class="row slider-text js-fullheight justify-content-center align-items-center" data-scrollax-parent="true">
 
             <div class="col-md-12 col-sm-12 text-center ftco-animate">
+              <h1 class="mb-4 mt-5">People who love to eat are always the best people</h1>
+              <!-- <p><a href="#" class="btn btn-primary p-3 px-xl-4 py-xl-3">Order Now</a> <a href="#" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">View Menu</a></p> -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- <div class="slider-item js-fullheight" style="background-image: url(images/img.gif);">
+      	<div class="overlay"></div>
+        <div class="container">
+          <div class="row slider-text js-fullheight justify-content-center align-items-center" data-scrollax-parent="true">
+
+            <div class="col-md-12 col-sm-12 text-center ftco-animate"> -->
               <!-- <h1 class="mb-4 mt-5">The Best Place to Kick of Your Day</h1>
               <p><a href="#" class="btn btn-primary p-3 px-xl-4 py-xl-3">Order Now</a> <a href="#" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">View Menu</a></p> -->
-            </div>
+            <!-- </div>
 
           </div>
         </div>
-      </div>
-
-      <div class="slider-item js-fullheight" style="background-image: url(images/KakaoTalk_20220609_152038276.png);">
-      	<div class="overlay"></div>
-        <div class="container">
-          <div class="row slider-text js-fullheight justify-content-center align-items-center" data-scrollax-parent="true">
-
-            <div class="col-md-12 col-sm-12 text-center ftco-animate">
-              <!-- <h1 class="mb-4 mt-5">Creamy Hot and Ready to Serve</h1>
-              <p><a href="#" class="btn btn-primary p-3 px-xl-4 py-xl-3">Order Now</a> <a href="#" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">View Menu</a></p> -->
-            </div>
-
-          </div>
-        </div>
-      </div>
-      <div class="slider-item js-fullheight" style="background-image: url(images/img.gif);">
-      	<div class="overlay"></div>
-        <div class="container">
-          <div class="row slider-text js-fullheight justify-content-center align-items-center" data-scrollax-parent="true">
-
-            <div class="col-md-12 col-sm-12 text-center ftco-animate">
-              <!-- <h1 class="mb-4 mt-5">The Best Place to Kick of Your Day</h1>
-              <p><a href="#" class="btn btn-primary p-3 px-xl-4 py-xl-3">Order Now</a> <a href="#" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">View Menu</a></p> -->
-            </div>
-
-          </div>
-        </div>
-      </div>
+      </div> -->
     </section>
     
     <div class="row d-flex justify-content-center mt-100">
@@ -160,7 +160,8 @@
         		<c:forEach items="${seoul}" var="list">
         			<a href="./restaurant/detail?restaurantNum=${list.restaurantNum}">
 		        		<div class="menus d-flex ftco-animate">
-			              <div class="menu-img img" style="background-image: url(images/breakfast-1.jpg);"></div>
+			              <%-- <div class="menu-img img" style="background-image: url(images/${list.restaurantFileVO.oriName});"></div> --%>
+			              <div class="menu-img img" style="background-image: url(../resources/upload/restaurant/${list.restaurantFileVO.oriName});"></div>
 			              <div class="text">
 			              	<div class="d-flex">
 				                <div class="one-half">
@@ -184,7 +185,7 @@
         		<c:forEach items="${busan}" var="list">
         			<a href="./restaurant/detail?restaurantNum=${list.restaurantNum}">
 		        		<div class="menus d-flex ftco-animate">
-			              <div class="menu-img img" style="background-image: url(images/lunch-1.jpg);"></div>
+			              <div class="menu-img img" style="background-image: url(../resources/upload/restaurant/${list.restaurantFileVO.oriName});"></div>
 			              <div class="text">
 			              	<div class="d-flex">
 				                <div class="one-half">
@@ -208,7 +209,7 @@
         		<c:forEach items="${incheon}" var="list">
         			<a href="./restaurant/detail?restaurantNum=${list.restaurantNum}">
 		        		<div class="menus d-flex ftco-animate">
-			              <div class="menu-img img" style="background-image: url(images/dinner-1.jpg);"></div>
+			              <div class="menu-img img" style="background-image: url(../resources/upload/restaurant/${list.restaurantFileVO.oriName});"></div>
 			              <div class="text">
 			              	<div class="d-flex">
 				                <div class="one-half">
@@ -233,7 +234,7 @@
         		<c:forEach items="${daegu}" var="list">
         			<a href="./restaurant/detail?restaurantNum=${list.restaurantNum}">
 		        		<div class="menus d-flex ftco-animate">
-			              <div class="menu-img img" style="background-image: url(images/dessert-1.jpg);"></div>
+			              <div class="menu-img img" style="background-image: url(../resources/upload/restaurant/${list.restaurantFileVO.oriName});"></div>
 			              <div class="text">
 			              	<div class="d-flex">
 				                <div class="one-half">
@@ -257,7 +258,7 @@
         		<c:forEach items="${daejeon}" var="list">
         			<a href="./restaurant/detail?restaurantNum=${list.restaurantNum}">
 		        		<div class="menus d-flex ftco-animate">
-			              <div class="menu-img img" style="background-image: url(images/wine-1.jpg);"></div>
+			              <div class="menu-img img" style="background-image: url(../resources/upload/restaurant/${list.restaurantFileVO.oriName});"></div>
 			              <div class="text">
 			              	<div class="d-flex">
 				                <div class="one-half">
@@ -281,7 +282,7 @@
         		<c:forEach items="${gwangju}" var="list">
         			<a href="./restaurant/detail?restaurantNum=${list.restaurantNum}">
 	        			<div class="menus d-flex ftco-animate">
-			              <div class="menu-img img" style="background-image: url(images/drink-1.jpg);"></div>
+			              <div class="menu-img img" style="background-image: url(../resources/upload/restaurant/${list.restaurantFileVO.oriName});"></div>
 			              <div class="text">
 			              	<div class="d-flex">
 				                <div class="one-half">
@@ -302,13 +303,13 @@
 	   </section>
     
     
-<footer class="ftco-footer ftco-bg-dark ftco-section">
+	<footer class="ftco-footer ftco-bg-dark ftco-section">
       <div class="container-fluid px-md-5 px-3">
         <div class="row mb-5">
           <div class="col-md-6 col-lg-3">
             <div class="ftco-footer-widget mb-4">
               <h2 class="ftco-heading-2">MangoRing</h2>
-              <p>이건 맛집 검색 사이트인가 맛집 예약 사이트인가?
+              <p>맛집 검색 및 예약 사이트
               	</p>
               <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-3">
                 <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>

@@ -49,77 +49,34 @@ public class CartController {
 	@Autowired
 	private PromotionService promotionService;
 	
-	// 무통장 입금은 결제 진행과 동시에 DB에 결제 내용이 들어가지만,
-	// 카카오 및 토스페이는 결제 진행 후 결제 완료페이지로 정상적으로 넘어가야만 DB에 결제 내용이 들어갑니다.
-	
-	// 가게 > 포장 주문 > 장바구니 > 주문 > 주문 처리 로직에서 장바구니 기능을 삭제 후 아래와 같이 로직을 변경합니다.
-	// 가게 > 포장 주문 > 주문 > 주문 처리
-	// 기존의 장바구니 기능은 주문 페이지에서 jstl로 데이터를 불러올 때 필요한 jstl 전용 임시저장소 용도로 사용합니다.
+	/*
+	 * 무통장 입금은 결제 진행과 동시에 DB에 결제 내용이 들어가지만,
+	 * 카카오 및 토스페이는 결제 진행 후 결제 완료페이지로 정상적으로 넘어가야만 DB에 결제 내용이 들어갑니다.
+	 * 
+	 * 가게 > 포장 주문 > 장바구니 > 주문 > 주문 처리 로직에서 장바구니 기능을 삭제 후 아래와 같이 로직을 변경합니다. 
+	 * 가게 > 포장 주문 > 주문 > 주문 처리
+	 * 기존의 장바구니 기능은 주문 페이지에서 jstl로 데이터를 불러올 때 필요한 jstl 전용 임시저장소 용도로 사용합니다.
+	 */
 	
 	// 전역변수
 	List<CartVO> lists = new ArrayList<CartVO>(); // 카트(임시저장소)에 담을 수 있는 전역변수 lists
 	int totalsize = 0;
 	PaymentVO data = new PaymentVO(); // 카카오페이 및 토스페이 전용 전역변수 (결제 테이블)
 	List<PaymentDetailVO> detailDatas = new ArrayList<PaymentDetailVO>(); // 카카오페이 및 토스페이 전용 전역변수 (결제 상세 테이블)
-//	List<Long> kacaNum = new ArrayList<Long>(); // 카카오페이 및 토스페이 진행 후 카트 리스트 삭제를 위한 전역변수
 
-	
-//	// 장바구니 보기 (카트 목록 불러오기)
-//	@GetMapping("cartList")
-//	public void cartList(Model model, HttpSession httpSession) throws Exception{
-//		MemberVO memberVO = (MemberVO)httpSession.getAttribute("member");
-//		CartVO cartVO = new CartVO();
-//		cartVO.setId(memberVO.getId());
-//		List<CartVO> list = cartService.cartList(cartVO);
-//		//System.out.println(list.get(2).getMenuVOs().getRestaurantVO().getRestaurantName());
-//		model.addAttribute("cartList", list);
-//	}
-//	
-	// 장바구니 수량 증가
+	// 메뉴 수량 증가
 	@PostMapping("cartCountPlus")
 	@ResponseBody
 	public void cartCountPlus(CartVO cartVO) throws Exception{
 		int result = cartService.cartCountPlus(cartVO);
 	}
 	
-	// 장바구니 수량 감소
+	// 메뉴 수량 감소
 	@PostMapping("cartCountMinus")
 	@ResponseBody
 	public void cartCountMinus(CartVO cartVO) throws Exception{
 		int result = cartService.cartCountMinus(cartVO);
 	}
-//	
-//	// 장바구니에서 선택 상품 제거
-//	@PostMapping("cartListDelete")
-//	@ResponseBody
-//	public void cartListDelete(HttpServletRequest request) throws Exception {
-//		String[] cartNum = request.getParameterValues("checkbox");
-//		List<String> cart = Arrays.asList(cartNum);
-//	
-//		int size = 1;
-//		size = cart.size();
-//		
-//		for(int i = 0; i < size; i++) {
-//			Long caNum = Long.parseLong(cart.get(i));
-//			int result = cartService.cartListDelete(caNum);
-//		}
-//	}
-//
-//	//장바구니에서 주문 폼으로 보내주기
-//	@PostMapping("cartList")
-//	public String cartOrder(String[] cartNum) throws Exception {
-//
-//		int size = 1;
-//		size = cartNum.length;
-//		lists.clear(); // 초기화
-//		
-//		for(int i = 0; i < size; i++) {
-//			Long result = Long.parseLong(cartNum[i]);
-//			lists.add(cartService.cartOrder(result)); // lists에 담아서 주문 폼으로 전송
-//		}
-//		
-//		return "redirect:./order";
-//	}
 	
 	// 카트 테이블에 data를 insert 해주기 위한 선행 작업 메서드
 	@GetMapping("pre")
@@ -226,22 +183,6 @@ public class CartController {
 			Long result = Long.parseLong(cartNum[i]);
 			lists.add(cartService.cartOrder(result)); // lists에 담아서 주문 폼으로 전송
 		}
-		
-//		MemberVO memberVO = (MemberVO)session.getAttribute("member");
-//		String id = memberVO.getId();
-//		cartService.clear(memberVO); // 초기화
-//		
-//		for(int i = 0; i < size; i++) {
-//			Long meNum = Long.parseLong(menuNum[i]);
-//			Long meCount = Long.parseLong(menuCount[i]);
-//			cartVO.setId(id);
-//			cartVO.setMenuNum(meNum);
-//			cartVO.setMenuCount(meCount);
-//			cartService.cartAdd(cartVO);
-//			
-//			lists.add(cartService.packingOrder(meNum)); // lists에 담아서 주문 폼으로 전송
-//
-//		}
 		
 		return "redirect:./order";
 	}
@@ -411,9 +352,11 @@ public class CartController {
 		    .build();
 		HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 		System.out.println(response.body());
+		System.out.println("{" + '"' + "code" + '"' + ':' + '"' + "NOT_FOUND_PAYMENT" + '"' + ','
+						+ '"' + "message" + '"' + ':' + '"' + "존재하지 않는 결제 정보 입니다." + '"' + '}');
 		
-		if(!response.body().equals("{" + '"' + "code" + '"' + ':' + '"' + "NOT_FOUND_PAYMENT_SESSION" + '"' + ','
-		+ '"' + "message" + '"' + ':' + '"' + "결제 시간이 만료되어 결제 진행 데이터가 존재하지 않습니다." + '"' + '}')) {
+		if(!response.body().equals("{" + '"' + "code" + '"' + ':' + '"' + "NOT_FOUND_PAYMENT" + '"' + ','
+						+ '"' + "message" + '"' + ':' + '"' + "존재하지 않는 결제 정보 입니다." + '"' + '}')) {
 			
 			model.addAttribute("message", "잘못된 접근 경로입니다");
 			model.addAttribute("path", "../");
