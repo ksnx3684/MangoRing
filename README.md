@@ -58,6 +58,11 @@
 ![wireframe](https://user-images.githubusercontent.com/84880772/180792079-c98650a5-ee86-45a2-93df-bd14eb93f6f0.jpg)
 https://miro.com/app/board/uXjVO2wWYqs=/?share_link_id=416286603373
 
+<br>
+
+## 웹 애플리케이션 아키텍처
+![웹 애플리케이션 아키텍처](https://user-images.githubusercontent.com/84880772/192285861-7c90bde2-8768-40d4-872f-70d79afa895a.png)
+
 <br><br>
 
 ---
