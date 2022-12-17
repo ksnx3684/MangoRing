@@ -3,7 +3,12 @@
 
 ## 쌍용교육센터 파이널프로젝트 (위치 기반 맛집 검색 및 예약 사이트)
 - Spring Boot를 이용한 맛집 검색 및 예약 사이트를 구현했습니다.
-- 일반 사용자는 맛집을 검색하여 예약, 또는 포장 주문을 진행 할 수 있으며, 음식점 관리자는 매장의 메뉴를 등록하거나 예약, 포장 주문을 관리할 수 있습니다. 
+- 일반 사용자는 맛집을 검색하여 예약, 또는 포장 주문을 진행 할 수 있으며, 음식점 관리자는 매장의 메뉴를 등록하거나 예약, 포장 주문을 관리할 수 있습니다.
+
+<br>
+
+## URL
+https://mangoring.link
 
 <br>
 
@@ -33,6 +38,7 @@
 - Web Server : Apache Tomcat 9.0.58
 - DataBase : MySQL 8.0.28
 - RDS : AWS RDS
+- 호스팅 및 배포 : AWS EC2 / Amazon Route 53 / AWS Certificate Manager
 
 **Front-End**
 - Languages : HTML5, CSS, JavaScript, Ajax, JSON, jQuery, Bootstrap
@@ -57,13 +63,14 @@
 <br>
 
 ## 와이어프레임
-![wireframe](https://user-images.githubusercontent.com/84880772/180792079-c98650a5-ee86-45a2-93df-bd14eb93f6f0.jpg)
 https://miro.com/app/board/uXjVO2wWYqs=/?share_link_id=416286603373
+
+![wireframe](https://user-images.githubusercontent.com/84880772/180792079-c98650a5-ee86-45a2-93df-bd14eb93f6f0.jpg)
 
 <br>
 
 ## 웹 애플리케이션 아키텍처
-![웹 애플리케이션 아키텍처](https://user-images.githubusercontent.com/84880772/192285861-7c90bde2-8768-40d4-872f-70d79afa895a.png)
+![웹 애플리케이션 아키텍처](https://user-images.githubusercontent.com/84880772/208247977-b6ac5b2c-3d88-43e8-980e-b4e8cb9a1652.png)
 
 <br><br>
 
