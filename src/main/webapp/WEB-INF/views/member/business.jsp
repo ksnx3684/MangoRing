@@ -184,7 +184,7 @@
 <c:import url="../template/cdn_script.jsp"></c:import>
 <!-- KaKaoMap -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f0302b66d0992062d842011c6439a7b9&libraries=services"></script>
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f927ec8d2f1aa0fb9dcced47b0904408&libraries=services"></script>
 </body>
 <script type="text/javascript" src="../resources/js/map_search.js"></script>
 <script type="text/javascript" src="../resources/js/categoryCheck.js"></script>

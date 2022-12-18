@@ -88,7 +88,7 @@
 		</div>
 		<div id="map" style="width: 500px; height: 400px;"></div>
 		<script type="text/javascript"
-			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=25a21d9d0fb4d0a44acbb535edeba07e"></script>
+			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f927ec8d2f1aa0fb9dcced47b0904408&libraries=services"></script>
 		<script>
 			var container = document.getElementById('map');
 			var options = {
