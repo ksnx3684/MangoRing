@@ -6,79 +6,36 @@
 <configuration>
 
 	<typeAliases>
-
 		<typeAlias type="java.util.List" alias="List" />
 		<typeAlias type="java.lang.Long" alias="Long" />
 		<typeAlias type="java.util.Map" alias="Map" />
 		<typeAlias type="java.lang.String" alias="String" />
 
-
 		<typeAlias type="com.project.mango.promotion.PromotionVO" alias="PromotionVO"/>
-		<typeAlias type="com.project.mango.review.ReviewVO"
-			alias="ReviewVO" />
-		<typeAlias type="com.project.mango.review.ReviewFilesVO"
-			alias="ReviewFilesVO" />
-
-		<typeAlias type="com.project.mango.restaurant.RestaurantVO"
-			alias="RestaurantVO" />
-		<typeAlias
-			type="com.project.mango.restaurant.RestaurantFileVO"
-			alias="RestaurantFileVO" />
-
-		<typeAlias type="com.project.mango.restaurant.CategoryVO"
-			alias="CategoryVO" />
-
-		<typeAlias type="com.project.mango.menu.MenuVO"
-			alias="MenuVO" />
-		<typeAlias type="com.project.mango.menu.MenuFileVO"
-			alias="MenuFileVO" />
-
-		<typeAlias type="com.project.mango.hashtag.HashtagVO"
-			alias="HashtagVO" />
-
-		<typeAlias
-			type="com.project.mango.reservation.ReservationVO"
-			alias="ReservationVO" />
-
-		<typeAlias type="com.project.mango.member.MemberVO"
-			alias="MemberVO" />
-
-		<typeAlias type="com.project.mango.member.MemberFileVO"
-				alias="MemberFileVO"/>
-	
-		<typeAlias type="com.project.mango.search.SearchVO"
-				alias="SearchVO"/>
-				
-	  	<typeAlias type="com.project.mango.cart.CartVO"
-	  			alias="CartVO"/>
-	  			
-	  	<typeAlias type="com.project.mango.wishlist.WishlistVO" 
-	  			alias="WishlistVO"/>
-
-
-		<typeAlias type="com.project.mango.notice.NoticeVO"
-			alias="NoticeVO" />
-		<typeAlias type="com.project.mango.notice.NoticeFilesVO"
-			alias="NoticeFilesVO" />
-		<typeAlias type="com.project.mango.board.BoardVO"
-			alias="BoardVO" />
-		<typeAlias
-			type="com.project.mango.notice.restaurant.ResNoticeVO"
-			alias="ResNoticeVO" />
-		<typeAlias
-			type="com.project.mango.notice.restaurant.ResFilesVO"
-			alias="ResFilesVO" />
+		<typeAlias type="com.project.mango.review.ReviewVO" alias="ReviewVO" />
+		<typeAlias type="com.project.mango.review.ReviewFilesVO" alias="ReviewFilesVO" />
+		<typeAlias type="com.project.mango.restaurant.RestaurantVO" alias="RestaurantVO" />
+		<typeAlias type="com.project.mango.restaurant.RestaurantFileVO" alias="RestaurantFileVO" />
+		<typeAlias type="com.project.mango.restaurant.CategoryVO" alias="CategoryVO" />
+		<typeAlias type="com.project.mango.menu.MenuVO" alias="MenuVO" />
+		<typeAlias type="com.project.mango.menu.MenuFileVO" alias="MenuFileVO" />
+		<typeAlias type="com.project.mango.hashtag.HashtagVO" alias="HashtagVO" />
+		<typeAlias type="com.project.mango.reservation.ReservationVO" alias="ReservationVO" />
+		<typeAlias type="com.project.mango.member.MemberVO" alias="MemberVO" />
+		<typeAlias type="com.project.mango.member.MemberFileVO" alias="MemberFileVO"/>
+		<typeAlias type="com.project.mango.search.SearchVO" alias="SearchVO"/>		
+	  	<typeAlias type="com.project.mango.cart.CartVO" alias="CartVO"/>	
+	  	<typeAlias type="com.project.mango.wishlist.WishlistVO" alias="WishlistVO"/>
+		<typeAlias type="com.project.mango.notice.NoticeVO" alias="NoticeVO" />
+		<typeAlias type="com.project.mango.notice.NoticeFilesVO" alias="NoticeFilesVO" />
+		<typeAlias type="com.project.mango.board.BoardVO" alias="BoardVO" />
+		<typeAlias type="com.project.mango.notice.restaurant.ResNoticeVO" alias="ResNoticeVO" />
+		<typeAlias type="com.project.mango.notice.restaurant.ResFilesVO" alias="ResFilesVO" />
 		<typeAlias type="com.project.mango.util.Pager" alias="Pager" />
-
-  		<typeAlias type="com.project.mango.util.ReservationPager" alias="ReservationPager"/>
+		<typeAlias type="com.project.mango.util.ReservationPager" alias="ReservationPager"/>
   		<typeAlias type="com.project.mango.util.PackagePager" alias="PackagePager"/>
   		<typeAlias type="com.project.mango.order.PaymentVO" alias="PaymentVO"/>
   		<typeAlias type="com.project.mango.order.PaymentDetailVO" alias="PaymentDetailVO"/>
 	</typeAliases>
 
-
-
 </configuration>
-
-  	
-
