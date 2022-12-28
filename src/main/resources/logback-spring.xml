@@ -21,11 +21,11 @@
     <property name="LOG_PATTERN" value="%-5level %d{yy-MM-dd HH:mm:ss}[%thread] [%logger{0}:%line] - %msg%n"/>
 
     <!-- Console Appender -->
-    <!-- <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>${LOG_PATTERN}</pattern>
         </encoder>
-    </appender> -->
+    </appender>
 
     <!-- File Appender -->
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -75,6 +75,23 @@
             <maxHistory>60</maxHistory>
         </rollingPolicy>
     </appender>
+    
+    <!-- Log4jdbc 설정 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+	    <encoder>
+	      <pattern>%d{yyyyMMdd HH:mm:ss.SSS} [%thread] %-3level %logger{5} - %msg %n</pattern>
+	    </encoder>
+  	</appender>
+  
+  	<logger name="jdbc" level="OFF"/>
+  
+  	<logger name="jdbc.sqlonly" level="OFF"/>
+  	<logger name="jdbc.sqltiming" level="INFO"/>
+  	<logger name="jdbc.audit" level="OFF"/>
+  	<logger name="jdbc.resultset" level="OFF"/>
+  	<logger name="jdbc.resultsettable" level="INFO"/>
+  	<logger name="jdbc.connection" level="OFF"/>
+  
 
     <!-- root레벨 설정 -->
     <!-- <root level="${LOG_LEVEL}"> -->
@@ -82,6 +99,7 @@
         <!-- <appender-ref ref="CONSOLE"/> -->
         <appender-ref ref="FILE"/>
         <appender-ref ref="Error"/>
+        <appender-ref ref="STDOUT" />
     </root>
 
     <!-- 특정패키지 로깅레벨 설정 -->
@@ -89,6 +107,7 @@
         <!-- <appender-ref ref="CONSOLE"/> -->
         <appender-ref ref="FILE"/>
         <appender-ref ref="Error"/>
+        <appender-ref ref="STDOUT" />
     </logger>
     
 </configuration>
